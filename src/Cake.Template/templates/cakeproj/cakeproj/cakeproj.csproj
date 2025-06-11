@@ -1,0 +1,6 @@
+<Project Sdk="Cake.Sdk">
+  <PropertyGroup>
+    <TargetFramework Condition="$(TargetFrameworks) == ''">TargetFrameworkValue</TargetFramework>
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)/..</RunWorkingDirectory>
+  </PropertyGroup>
+</Project> 

@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>false</IncludeSymbols>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    
+    <!-- NuGet Package Metadata -->
+    <PackageId>Cake.Sdk</PackageId>
+    <Product>Cake SDK</Product>
+    <Description>A custom SDK that provides a convenient way to create Cake projects with minimal configuration. Automatically sets up common properties and references the Cake.Generator for source generation capabilities.</Description>
+    <PackageTags>Cake;SDK;Build;Automation;Generator</PackageTags>
+  </PropertyGroup>
+
+  <!-- Generate SDK files with actual version during build -->
+  <Target Name="GenerateSdkFiles" BeforeTargets="GenerateNuspec">
+    <PropertyGroup>
+      <SdkPropsContent><![CDATA[<Project>
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+  
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Optimize>true</Optimize>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Cake.Generator" VersionOverride="__VERSION__" />
+  </ItemGroup>
+
+</Project>]]></SdkPropsContent>
+      <SdkTargetsContent><![CDATA[<Project>
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+</Project>]]></SdkTargetsContent>
+    </PropertyGroup>
+    
+          <!-- Replace placeholders with actual values and MSBuild properties -->
+      <PropertyGroup>
+        <DollarSign>$</DollarSign>
+        <PropertyReference>$(DollarSign)(ManagePackageVersionsCentrally)</PropertyReference>
+        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)'))</SdkPropsContentWithVersion>
+      </PropertyGroup>
+    
+    <!-- Ensure directories exist -->
+    <MakeDir Directories="$(MSBuildProjectDirectory)/Generated/Sdk" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)/Generated/build" />
+    
+    <!-- Write generated files -->
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/Sdk/Sdk.props" Lines="$(SdkPropsContentWithVersion)" Overwrite="true" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/Sdk/Sdk.targets" Lines="$(SdkTargetsContent)" Overwrite="true" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/build/Cake.Sdk.props" Lines="$(SdkPropsContentWithVersion)" Overwrite="true" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/build/Cake.Sdk.targets" Lines="$(SdkTargetsContent)" Overwrite="true" />
+  </Target>
+
+  <!-- Include generated SDK files -->
+  <ItemGroup>
+    <None Include="Generated/Sdk/Sdk.props" Pack="true" PackagePath="Sdk/Sdk.props" />
+    <None Include="Generated/Sdk/Sdk.targets" Pack="true" PackagePath="Sdk/Sdk.targets" />
+  </ItemGroup>
+
+  <!-- Include generated MSBuild files for each target framework -->
+  <ItemGroup>
+    <None Include="Generated/build/Cake.Sdk.props" Pack="true" PackagePath="build/Cake.Sdk.props" />
+    <None Include="Generated/build/Cake.Sdk.targets" Pack="true" PackagePath="build/Cake.Sdk.targets" />
+  </ItemGroup>
+
+</Project> 

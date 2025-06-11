@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Cake.Generator.TestApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--target=\"Build\""
+    }
+  }
+}

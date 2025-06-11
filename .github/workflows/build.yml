@@ -1,0 +1,39 @@
+name: Build
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET SDK 8.0.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+
+      - name: Install .NET SDK 9.0.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+
+      - name: Install .NET Core SDK (global.json)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Run Cake CS
+        uses: devlead/cake-action@feature/cakecs
+        with:
+          project-path: src/Cake.Generator.TestApp/Cake.Generator.TestApp.csproj
+          target: GitHubActions

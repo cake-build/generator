@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="IntegrationTest" />
+    <BuildType Name="Release" />
+  </Configurations>
+  <Project Path="Cake.Generator.Core.Tests/Cake.Generator.Core.Tests.csproj" />
+  <Project Path="Cake.Generator.Core/Cake.Generator.Core.csproj" />
+  <Project Path="Cake.Generator.TestApp/Cake.Generator.TestApp.csproj" />
+  <Project Path="Cake.Generator/Cake.Generator.csproj" />
+  <Project Path="Cake.Sdk/Cake.Sdk.csproj" />
+  <Project Path="Cake.Template/Cake.Template.csproj" />
+</Solution>

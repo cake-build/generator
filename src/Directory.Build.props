@@ -1,0 +1,45 @@
+<Project>
+  <PropertyGroup>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <CodeAnalysisRuleSet Condition="$(IsCakeTestProject) == ''">$(MSBuildThisFileDirectory)Cake.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="$(IsCakeTestProject) == 'true'">$(MSBuildThisFileDirectory)Test.ruleset</CodeAnalysisRuleSet>
+
+    <!-- Shared NuGet Package Metadata -->
+    <PackageId>$(AssemblyName)</PackageId>
+    <Copyright>Copyright (c) .NET Foundation and contributors</Copyright>
+    <Authors>Patrik Svensson, Mattias Karlsson, Gary Ewan Park, Alistair Chapman, Martin Björkström, Dave Glick, Pascal Berger, Jérémie Desautels, Enrico Campidoglio, C. Augusto Proiete, Nils Andresen, and contributors</Authors>
+    <Company>Patrik Svensson, Mattias Karlsson, Gary Ewan Park, Alistair Chapman, Martin Björkström, Dave Glick, Pascal Berger, Jérémie Desautels, Enrico Campidoglio, C. Augusto Proiete, Nils Andresen, and contributors</Company>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>cake-medium.png</PackageIcon>
+  </PropertyGroup>
+
+  <!-- IntegrationTest configuration (copies from Release) -->
+  <PropertyGroup Condition="'$(Configuration)' == 'IntegrationTest'">
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="Exists('$(MSBuildThisFileDirectory)\$(MSBuildProjectName)\README.md')">
+      <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)\$(MSBuildProjectName)\README.md" Pack="true" PackagePath="\" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)\..\README.md" Pack="true" PackagePath="\" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)\cake-medium.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project> 

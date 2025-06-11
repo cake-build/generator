@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Cake Contributors",
+  "classifications": [
+    "Console",
+    "Cake",
+    "Build"
+  ],
+  "name": "Cake SDK File-based",
+  "description": "A Cake build script using file-based approach with Cake.Sdk",
+  "identity": "Cake.Sdk.File",
+  "groupIdentity": "Cake.Sdk.File",
+  "shortName": "cakefile",
+  "sourceName": "cakefile",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "preferNameDirectory": false,
+  "primaryOutputs": [
+    {
+      "path": "build.cs"
+    }
+  ]
+} 

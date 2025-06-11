@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeSource>false</IncludeSource>
+    <PackageType>Template</PackageType>
+    <PackageId>Cake.Template</PackageId>
+    <Title>Cake Project Templates</Title>
+    <Description>Templates for creating Cake projects using Cake.Sdk</Description>
+    <PackageTags>cake;template</PackageTags>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <PackageIcon>cake-medium.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates\**\*" Pack="true" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <Target Name="VersionBuild" BeforeTargets="PrepareForBuild" Condition="'$(TemplateVersion)'!=''">
+    <XmlPoke XmlInputPath="templates\cakeproj\cakeproj\cakeproj.csproj" Query="Project/@Sdk" Value="Cake.Sdk/$(TemplateVersion)" />
+  </Target>
+
+</Project> 

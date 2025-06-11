@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Cake Contributors",
+  "classifications": [
+    "Console",
+    "Cake",
+    "Build"
+  ],
+  "name": "Cake SDK Project-based",
+  "description": "A Cake build project using project-based approach with Cake.Sdk",
+  "identity": "Cake.Sdk.Project",
+  "groupIdentity": "Cake.Sdk.Project",
+  "shortName": "cakeproj",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "cakeproj",
+  "preferNameDirectory": true,
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net8.0",
+          "description": "Target .NET 8.0"
+        },
+        {
+          "choice": "net9.0",
+          "description": "Target .NET 9.0"
+        },
+        {
+          "choice": "net10.0",
+          "description": "Target .NET 10.0"
+        }
+      ],
+      "defaultValue": "net9.0",
+      "replaces": "TargetFrameworkValue"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "Build.csproj"
+    },
+    {
+      "path": "Program.cs"
+    }
+  ]
+} 
