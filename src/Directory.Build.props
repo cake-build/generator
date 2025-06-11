@@ -16,6 +16,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>cake-medium.png</PackageIcon>
+    <PackageProjectUrl>https://cakebuild.net</PackageProjectUrl>
   </PropertyGroup>
 
   <!-- IntegrationTest configuration (copies from Release) -->
