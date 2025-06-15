@@ -45,15 +45,34 @@ public record IntegrationTestData(
                 Version: context.Argument("integration-test-version", "Missing")
             ));
 
+            Task("Install-Tool")
+                .Does(() =>
+                    {
+                        InstallTools(
+                           "dotnet:https://api.nuget.org/v3/index.json?package=DPI&version=2025.6.11.198",
+                           "dotnet:https://api.nuget.org/v3/index.json?package=DPI&version=2025.6.11.205");
+
+                        Command(
+                            [
+                                "dpi",
+                                "dpi.exe"
+                            ],
+                            out var standardOutput,
+                            "--version");
+
+                        Assert.Equal("2025.6.11.205+f9d70966eb517e4cc0e0177aecfa1416e6374998", standardOutput);
+                    });
+
             Task("Assert-Version")
+                .IsDependentOn("Install-Tool")
                 .Does<BuildData>((ctx, data) =>
-                {
-                    Information("Expected: {0}", data.ExpectedVersion);
-                    Information("Version: {0}", data.Version);
-                    Information("CakeGeneratorNuGetVersion: {0}", CakeGeneratorNuGetVersion);
-                    Assert.Equal(data.ExpectedVersion, data.Version);
-                    Assert.Equal(data.ExpectedVersion, CakeGeneratorNuGetVersion);
-                });
+                    {
+                        Information("Expected: {0}", data.ExpectedVersion);
+                        Information("Version: {0}", data.Version);
+                        Information("CakeGeneratorNuGetVersion: {0}", CakeGeneratorNuGetVersion);
+                        Assert.Equal(data.ExpectedVersion, data.Version);
+                        Assert.Equal(data.ExpectedVersion, CakeGeneratorNuGetVersion);
+                    });
 
             await RunTargetAsync("Assert-Version");
 

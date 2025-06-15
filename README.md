@@ -193,6 +193,37 @@ Task("Version-Info")
 
 This will output the version information when you run the `Version-Info` task.
 
+### Installing Tools
+
+The generator provides methods to install tools that can be used in your Cake script. Here are examples of how to use them:
+
+```csharp
+// Install a single tool using a package reference string
+InstallTool("dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0");
+
+// Install multiple tools at once
+InstallTools(
+    "dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0",
+    "dotnet:https://api.nuget.org/v3/index.json?package=GitReleaseManager.Tool&version=0.20.0"
+);
+```
+
+The `InstallTool` and `InstallTools` methods return the paths where the tools were installed, which can be useful for verification or direct tool execution.
+
+Tools installed using these methods are automatically registered with Cake's tool resolution system, meaning you can use them directly in your tasks without specifying their full paths. For example:
+
+```csharp
+Task("Use-Registered-Tools")
+    .Does(() =>
+    {
+        // GitVersion is automatically available in PATH
+        var version = GitVersion();
+        
+        // GitReleaseManager is automatically available
+        GitReleaseManagerCreate("token", "owner", "repo");
+    });
+```
+
 ## Features
 
 - [x] Scans all referenced assemblies for Cake method aliases
@@ -204,6 +235,7 @@ This will output the version information when you run the `Version-Info` task.
 - [x] Supports `CakeNamespaceImport` attribute for importing global static namespaces
 - [x] Supports Cake modules with automatic registration
 - [x] Generates code in a partial static `Program` class with no namespace
+- [x] Provides helper methods for installing .NET / NuGet tools
 
 ## Building
 

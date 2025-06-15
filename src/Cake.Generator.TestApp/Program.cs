@@ -7,21 +7,34 @@
 Setup(
     context =>
     {
+        InstallTools(
+            "dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0",
+            "dotnet:https://api.nuget.org/v3/index.json?package=GitReleaseManager.Tool&version=0.20.0",
+            "dotnet:https://api.nuget.org/v3/index.json?package=sign&version=0.9.1-beta.25264.1&prerelease");
+
         var buildDate = DateTime.UtcNow;
         var baseVersion = typeof(ICakeContext).Assembly.GetName().Version?.ToString(2) ?? "1.0";
+
+        var branchName = GitVersion(new GitVersionSettings { }).BranchName;
+        var isMain = StringComparer.OrdinalIgnoreCase.Equals("main", branchName);
 
         var runNumber = GitHubActions.IsRunningOnGitHubActions
                     ? GitHubActions.Environment.Workflow.RunNumber
                     : (short)((buildDate - buildDate.Date).TotalSeconds / 3);
 
         var suffix = GitHubActions.IsRunningOnGitHubActions
-                    ? "alpha"
+                    ? (isMain ? string.Empty : "alpha")
                     : "local";
 
         var version = FormattableString
-                    .Invariant($"{baseVersion}.{buildDate:yy}{buildDate.DayOfYear:000}.{runNumber}-{suffix}");
+                    .Invariant($"{baseVersion}.{buildDate:yy}{buildDate.DayOfYear:000}.{runNumber}-{suffix}")
+                    .TrimEnd('-');
 
-        Information($"Version: {version}");
+        Information(
+            "Branch: {0} (IsMain: {1}), Version: {2}",
+            branchName,
+            isMain,
+            version);
 
         var msBuildSettings = new DotNetMSBuildSettings()
                 .SetConfiguration("IntegrationTest")
@@ -36,8 +49,10 @@ Setup(
 
         return new BuildData(
             version,
-            MakeAbsolute(Directory("../artifacts")),
-            MakeAbsolute(File("Cake.Generator.slnx")),
+            branchName,
+            isMain,
+            MakeAbsolute(Directory("artifacts")),
+            GetFiles("./src/Cake.Generator.slnx").FirstOrDefault() ?? throw new CakeException("Failed to find solution"),
             msBuildSettings);
     });
 

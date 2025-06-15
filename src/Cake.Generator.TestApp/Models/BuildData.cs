@@ -4,6 +4,8 @@ namespace Cake.Generator.TestApp.Models;
 #pragma warning disable SA1313 // Parameter names should begin with lower-case letter
 public record BuildData(
     string Version,
+    string BranchName,
+    bool IsMainBranch,
     DirectoryPath ArtifactsDirectory,
     FilePath SolutionPath,
     DotNetMSBuildSettings MSBuildSettings)

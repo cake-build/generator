@@ -8,14 +8,26 @@ public static partial class Program
     /// <summary>
     /// Gets the configured service provider instance.
     /// </summary>
-    public static IServiceProvider ServiceProvider => Helper.ServiceProvider.Value;
+    public static IServiceProvider ServiceProvider => Helper.ServiceProvider;
 
     private static partial class Helper
     {
+        private static object _providerLock = new object();
+        private static ServiceProvider? _serviceProvider;
+
         /// <summary>
         /// Gets the configured service provider instance.
         /// </summary>
-        public static Lazy<ServiceProvider> ServiceProvider => new(GetServiceProvider);
+        public static ServiceProvider ServiceProvider
+        {
+            get
+            {
+                lock(_providerLock)
+                {
+                    return _serviceProvider ??= GetServiceProvider();
+                }
+            }
+        }
 
         private static ServiceProvider GetServiceProvider()
         {
@@ -24,6 +36,7 @@ public static partial class Program
             AddCakeCore(services);
             AddCakeCli(services);
             AddCakeGenerator(services);
+            AddCakeToolInstaller(services);
             RegisterModules(services);
             RegisterServices(services);
 

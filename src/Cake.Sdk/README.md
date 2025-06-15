@@ -62,6 +62,40 @@ RunTarget(target);
 
 The Cake.Generator package is included by default with Cake.Sdk, providing automatic source generation capabilities without any additional configuration needed.
 
+### Tool Installation
+
+Install tools using the provided methods:
+
+```csharp
+// Install a single tool
+InstallTool("dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0");
+
+// Install multiple tools
+InstallTools(
+    "dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0",
+    "dotnet:https://api.nuget.org/v3/index.json?package=GitReleaseManager.Tool&version=0.20.0"
+);
+```
+
+### IoC Container
+
+Register and resolve services using the IoC container:
+
+```csharp
+// Register services
+static partial void RegisterServices(IServiceCollection services)
+{
+    services.AddSingleton<IMyService, MyService>();
+}
+
+// Resolve services in tasks
+Task("MyTask")
+    .Does(() => {
+        var service = ServiceProvider.GetRequiredService<IMyService>();
+        service.DoSomething();
+    });
+```
+
 ## What's Included
 
 The Cake.Sdk automatically configures the following properties:
