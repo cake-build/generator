@@ -5,6 +5,7 @@
                 ]);
 
 Setup(
+    Verbosity.Diagnostic,
     context =>
     {
         InstallTools(
