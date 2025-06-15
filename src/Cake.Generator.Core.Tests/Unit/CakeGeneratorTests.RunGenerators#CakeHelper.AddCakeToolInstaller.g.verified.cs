@@ -83,7 +83,7 @@ public static partial class Program
                 IEnumerable<IPackageInstaller> installers)
             : IToolInstaller
         {
-            private DirectoryPath ToolPath { get; } = configuration.GetToolPath(".", environment);
+            private DirectoryPath ToolPath { get; } = configuration.GetToolPath(environment.WorkingDirectory, environment);
 
             private IPackageInstaller[] Installers { get; } =
                 [
