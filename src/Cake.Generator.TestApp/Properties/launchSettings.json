@@ -2,7 +2,7 @@
   "profiles": {
     "Cake.Generator.TestApp": {
       "commandName": "Project",
-      "commandLineArgs": "--target=\"Build\""
+      "commandLineArgs": "--target=\"Build\" --paths_tools='\"tools\"'"
     }
   }
 }

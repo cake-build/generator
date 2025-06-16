@@ -45,7 +45,7 @@ public static partial class Program
             services.AddSingleton(interceptor.CakeAppSettings);
             services.AddSingleton<Spectre.Console.Cli.CommandSettings>(provider => provider.GetRequiredService<CakeAppSettings>());
             
-            var arguments = global::Cake.Cli.Infrastructure.IRemainingArgumentsExtensions.ToCakeArguments(interceptor.Context.Remaining, interceptor.CakeAppSettings.Targets);
+            var arguments = global::Cake.Cli.Infrastructure.IRemainingArgumentsExtensions.ToCakeArguments(ToUnQuotedRemainingArguments(interceptor.Context.Remaining), interceptor.CakeAppSettings.Targets);
             services.AddSingleton(arguments);
             services.AddSingleton<ICakeArguments>(arguments);
 
@@ -81,5 +81,98 @@ public static partial class Program
             public string GetVersion() => CakeGeneratorVersion;
             public string GetProductVersion() => CakeGeneratorInformationalVersion;
         }
+
+        /// <summary>
+        /// Removes surrounding quotes from a string if they exist, otherwise returns the original string.
+        /// Handles both single and double quotes, and preserves escaped quotes within the string.
+        /// </summary>
+        /// <param name="value">The string to unquote.</param>
+        /// <returns>The unquoted string, or the original string if not quoted.</returns>
+        private static string? UnQuote(string? value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            // Check if string starts and ends with the same quote type
+            char startQuote = value[0];
+            if (startQuote != '"' && startQuote != '\'')
+            {
+                return value;
+            }
+
+            if (value[^1] != startQuote)
+            {
+                return value;
+            }
+
+            // Use span to avoid allocations
+            ReadOnlySpan<char> span = value.AsSpan(1, value.Length - 2);
+            if (span.IsEmpty)
+            {
+                return string.Empty;
+            }
+
+            // If no escaped quotes, we can return the substring directly
+            if (!span.Contains('\\'))
+            {
+                return span.ToString();
+            }
+
+            // Handle escaped quotes
+            var result = new char[span.Length];
+            int writeIndex = 0;
+            bool escaped = false;
+
+            for (int i = 0; i < span.Length; i++)
+            {
+                char c = span[i];
+                if (escaped)
+                {
+                    result[writeIndex++] = c;
+                    escaped = false;
+                }
+                else if (c == '\\')
+                {
+                    escaped = true;
+                }
+                else
+                {
+                    result[writeIndex++] = c;
+                }
+            }
+
+            return new string(result, 0, writeIndex);
+        }
+
+        /// <summary>
+        /// Creates a new lookup where all values have been unquoted using the UnQuote extension method.
+        /// </summary>
+        /// <param name="lookup">The source lookup containing quoted strings.</param>
+        /// <returns>A new lookup with unquoted values.</returns>
+        private static ILookup<string, string?> ToUnQuotedLookup(ILookup<string, string?> lookup)
+        {
+            return lookup
+                .SelectMany(g => g.Select(v => new { g.Key, Value = UnQuote(v) }))
+                .ToLookup(x => x.Key, x => x.Value);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Spectre.Console.Cli.IRemainingArguments"/> where all parsed values have been unquoted.
+        /// </summary>
+        /// <param name="argument">The source remaining arguments containing quoted strings.</param>
+        /// <returns>A new remaining arguments instance with unquoted values.</returns>
+        private static Spectre.Console.Cli.IRemainingArguments ToUnQuotedRemainingArguments(Spectre.Console.Cli.IRemainingArguments argument)
+        {
+            return new RemainingArgumentsAdapter(
+                ToUnQuotedLookup(argument.Parsed),
+                argument.Raw);
+        }
+
+        private record RemainingArgumentsAdapter(
+            ILookup<string, string?> Parsed,
+            IReadOnlyList<string> Raw)
+            : Spectre.Console.Cli.IRemainingArguments;
     }
 }
