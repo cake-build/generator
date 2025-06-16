@@ -5,8 +5,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <IsPackable>false</IsPackable>
-    <RunWorkingDirectory>$(MSBuildProjectDirectory)/..</RunWorkingDirectory>
+    <IsPackable>false</IsPackable>
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)/../..</RunWorkingDirectory>
   </PropertyGroup>
 
   <!-- IntegrationTest configuration (copies from Release) -->
@@ -24,9 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Cake.Generator\Cake.Generator.csproj" />
-    <ProjectReference Include="..\..\src\Cake.Generator.Core\Cake.Generator.Core.csproj"
-                      OutputItemType="Analyzer" 
-                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\src\Cake.Generator.Core\Cake.Generator.Core.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 
   </ItemGroup>
 

@@ -115,4 +115,31 @@ public static partial class Program
             }
         });
     }
+
+    /// <summary>
+    /// Executes a setup action with a specific verbosity level, restoring the original verbosity afterwards.
+    /// </summary>
+    /// <typeparam name="TData">The type of data to pass to the action.</typeparam>
+    /// <param name="builder">The task builder.</param>
+    /// <param name="verbosity">The verbosity level to use during execution.</param>
+    /// <param name="setup">The setup to execute.</param>
+    public static void Setup<TData>(
+        Verbosity verbosity,
+        Func<ISetupContext, TData> setup)
+        where TData : class
+    {
+        Setup(context =>
+        {
+            var originalVerbosity = context.Log.Verbosity;
+            try
+            {
+                context.Log.Verbosity = verbosity;
+                return setup(context);
+            }
+            finally
+            {
+                context.Log.Verbosity = originalVerbosity;
+            }
+        });
+    }
 }

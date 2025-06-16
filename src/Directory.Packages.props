@@ -10,6 +10,8 @@
     <PackageVersion Include="Cake.Core" Version="5.0.0" />
     <PackageVersion Include="Cake.Common" Version="5.0.0" />
     <PackageVersion Include="Cake.Cli" Version="5.0.0" />
+    <PackageVersion Include="Cake.DotNetTool.Module" Version="5.0.0" />
+    <PackageVersion Include="Cake.NuGet" Version="5.0.0" />
     <PackageVersion Include="Cake.Twitter" Version="5.0.0" />
     <PackageVersion Include="Cake.BuildSystems.Module" Version="7.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.11.0" />

@@ -16,8 +16,10 @@
 
   <ItemGroup>
     <PackageReference Include="Cake.Core" />
-    <PackageReference Include="Cake.Cli"  />
+    <PackageReference Include="Cake.Cli" />
     <PackageReference Include="Cake.Common" />
+    <PackageReference Include="Cake.DotNetTool.Module" />
+    <PackageReference Include="Cake.NuGet" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" VersionOverride="8.0.1" Condition="'$(TargetFramework)' == 'net8.0'" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Condition="'$(TargetFramework)' == 'net9.0'" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" VersionOverride="10.0.0-preview.5.25277.114" Condition="'$(TargetFramework)' == 'net10.0'" />
@@ -25,18 +27,13 @@
 
   <!-- Reference the core source generator project -->
   <ItemGroup>
-    <ProjectReference Include="..\Cake.Generator.Core\Cake.Generator.Core.csproj" 
-                      PrivateAssets="all" 
-                      IncludeAssets="none" />
+    <ProjectReference Include="..\Cake.Generator.Core\Cake.Generator.Core.csproj" PrivateAssets="all" IncludeAssets="none" />
   </ItemGroup>
 
 
   <!-- Explicitly include the analyzer DLL from the core project -->
   <ItemGroup>
-    <None Include="..\Cake.Generator.Core\bin\$(Configuration)\netstandard2.0\Cake.Generator.Core.dll" 
-          Pack="true" 
-          PackagePath="analyzers\dotnet\Cake.Generator.Core.dll" 
-          Visible="false" />
+    <None Include="..\Cake.Generator.Core\bin\$(Configuration)\netstandard2.0\Cake.Generator.Core.dll" Pack="true" PackagePath="analyzers\dotnet\Cake.Generator.Core.dll" Visible="false" />
   </ItemGroup>
 
 </Project> 
