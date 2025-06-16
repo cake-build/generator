@@ -106,6 +106,12 @@ Task("Pack")
             OutputDirectory = data.OutputDirectory
         }));
 
+Task("UploadArtifact")
+    .IsDependentOn("Pack")
+    .Does<BuildData>((ctx, data) => GitHubActions.Commands.UploadArtifact(
+        data.OutputDirectory,
+        $"Cake.Generator-{Context.Environment.Platform.Family}"));
+
 Task("IntegrationTest-Setup")
     .IsDependentOn("Pack")
     .Does<BuildData>(
@@ -217,8 +223,15 @@ Task("IntegrationTest-PrepareTemplate")
         data.DotNet($"sln {data.IntegrationTest.CakeTemplateSrc} add {data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests")}");
     });
 
-Task("IntegrationTest-Execute")
+Task("IntegrationTest-UploadTestCases-Artifacts")
     .IsDependentOn("IntegrationTest-PrepareTemplate")
+    .WithCriteria(GitHubActions.IsRunningOnGitHubActions, nameof(GitHubActions.IsRunningOnGitHubActions))
+    .Does<BuildData>((ctx, data) => GitHubActions.Commands.UploadArtifact(
+        data.IntegrationTestDirectory,
+        $"IntegrationTest-{Context.Environment.Platform.Family}"));
+
+Task("IntegrationTest-Execute")
+    .IsDependentOn("IntegrationTest-UploadTestCases-Artifacts")
     .Does<BuildData>(
         Verbosity.Diagnostic,
         (ctx, data) =>
@@ -249,12 +262,6 @@ Task("IntegrationTest-IoC")
 Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Execute");
-
-Task("UploadArtifact")
-    .IsDependentOn("Pack")
-    .Does<BuildData>((ctx, data) => GitHubActions.Commands.UploadArtifact(
-        data.OutputDirectory,
-        "Cake.Generator"));
 
 Task("Default")
     .IsDependentOn("Build");
