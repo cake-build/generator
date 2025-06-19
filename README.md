@@ -1,3 +1,11 @@
+[![Build](https://github.com/cake-build/generator/actions/workflows/build.yml/badge.svg)](https://github.com/cake-build/generator/actions/workflows/build.yml)
+
+| Package                                       | Latest Release                                                                                                |
+|-----------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Cake.Generator                                | [![NuGet](https://img.shields.io/nuget/v/Cake.Generator.svg)](https://www.nuget.org/packages/Cake.Generator) |
+| [Cake.Sdk](src/Cake.Sdk/README.md)            | [![NuGet](https://img.shields.io/nuget/v/Cake.Sdk.svg)](https://www.nuget.org/packages/Cake.Sdk)             |
+| [Cake.Template](src/Cake.Template/README.md)  | [![NuGet](https://img.shields.io/nuget/v/Cake.Generator.svg)](https://www.nuget.org/packages/Cake.Template)  |
+
 # Cake Method / Property Alias Generator
 
 A .NET source generator that creates proxy methods for Cake build system extensions, eliminating the need to pass `ICakeContext` explicitly.
