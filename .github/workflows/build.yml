@@ -36,8 +36,8 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Run Cake CS
-        uses: devlead/cake-action@feature/cakecs
+      - name: Build Cake Generator & SDK
+        uses: cake-build/cake-action@master
         with:
           project-path: src/Cake.Generator.TestApp/Cake.Generator.TestApp.csproj
           target: GitHubActions
