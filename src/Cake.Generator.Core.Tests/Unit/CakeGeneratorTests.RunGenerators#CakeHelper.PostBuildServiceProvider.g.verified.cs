@@ -10,7 +10,7 @@ public static partial class Program
             IServiceProvider provider
             )
         {
-            if(provider.GetService<CakeAppSettings>() is CakeAppSettings settings)
+            if (provider.GetService<CakeAppSettings>() is CakeAppSettings settings)
             {
                 if (settings.Version)
                 {
