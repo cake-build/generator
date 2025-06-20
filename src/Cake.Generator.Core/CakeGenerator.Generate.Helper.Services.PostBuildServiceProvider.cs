@@ -23,7 +23,7 @@ public partial class CakeGenerator
                         IServiceProvider provider
                         )
                     {
-                        if(provider.GetService<CakeAppSettings>() is CakeAppSettings settings)
+                        if (provider.GetService<CakeAppSettings>() is CakeAppSettings settings)
                         {
                             if (settings.Version)
                             {
