@@ -26,6 +26,13 @@ public record IntegrationTestData(
     public FilePath CakeTemplateBuildCsproj { get; } = BaseDirectory.Combine("cake.template").Combine("build").CombineWithFilePath("build.csproj");
     public DirectoryPath CakeTemplateSrc { get; } = BaseDirectory.Combine("cake.template").Combine("src");
 
+    // New multi-file test properties
+    public FilePath CakeSdkFilesCs { get; } = BaseDirectory.CombineWithFilePath("cake.sdk.files.cs");
+    public DirectoryPath CakeSdkFilesFolder { get; } = BaseDirectory.Combine("cake.sdk.files");
+    public FilePath CakeSdkFilesModelsCs { get; } = BaseDirectory.Combine("cake.sdk.files").CombineWithFilePath("Models.cs");
+    public FilePath CakeSdkFilesUtilitiesCs { get; } = BaseDirectory.Combine("cake.sdk.files").CombineWithFilePath("Utilities.cs");
+    public FilePath CakeSdkFilesExcludedCs { get; } = BaseDirectory.Combine("cake.sdk.files").CombineWithFilePath("Excluded.cs");
+
     public FilePath[] TestFiles =>
         [
             CakeCs,
@@ -33,7 +40,8 @@ public record IntegrationTestData(
             CakeSdkProjectCsproj,
             CakeSdkCpmProjectCsproj,
             CakeTemplateBuildCs,
-            CakeTemplateBuildCsproj
+            CakeTemplateBuildCsproj,
+            CakeSdkFilesCs
         ];
 
     public string BaseCode =>
@@ -114,5 +122,83 @@ public record IntegrationTestData(
             <ItemGroup>
             </ItemGroup>
         </Project>
+        """;
+
+    public string CakeSdkFilesCsCode =>
+        $$"""
+        #:sdk Cake.Sdk
+        #:property IncludeAdditionalFiles cake.sdk.files/**/*.cs
+        #:property ExcludeAdditionalFiles cake.sdk.files/**/Excluded.cs
+        #:package {{XunitAssertPackage}}
+
+        using Xunit;
+        using System.Linq;
+        using System.Reflection;
+
+        Setup(static context => new MultiFileBuildData(
+            ExpectedVersion: "{{Version}}",
+            Version: context.Argument("integration-test-version", "Missing")
+        ));
+
+        Task("Test-MultiFile")
+            .Does<MultiFileBuildData>((ctx, data) =>
+                {
+                    Information("Expected: {0}", data.ExpectedVersion);
+                    Information("Version: {0}", data.Version);
+                    Information("CakeGeneratorNuGetVersion: {0}", CakeGeneratorNuGetVersion);
+                    
+                    // Test that the BuildConfiguration class is available (from Models.cs)
+                    var config = new BuildConfiguration 
+                    { 
+                        ProjectName = "MultiFileTest",
+                        Version = data.Version 
+                    };
+                    
+                    // Test that the utility method is available (from Utilities.cs)
+                    LogInfo($"Testing {config.ProjectName} v{config.Version}");
+                    
+                    // Verify version assertions
+                    Assert.Equal(data.ExpectedVersion, data.Version);
+                    Assert.Equal(data.ExpectedVersion, CakeGeneratorNuGetVersion);
+                    
+                    // Verify that the excluded class is not available using reflection
+                    var assembly = typeof(BuildConfiguration).Assembly;
+                    var typeExists = assembly.GetTypes().Any(t => t.Name == "ExcludedClass");
+
+                    Assert.False(typeExists, "The type 'ExcludedClass' should not exist in the assembly.");
+                });
+
+        await RunTargetAsync("Test-MultiFile");
+
+        public record MultiFileBuildData(string ExpectedVersion, string Version);
+        """;
+
+    public string CakeSdkFilesModelsCsCode =>
+        """
+        public class BuildConfiguration
+        {
+            public string ProjectName { get; set; } = "";
+            public string Version { get; set; } = "";
+        }
+        """;
+
+    public string CakeSdkFilesUtilitiesCsCode =>
+        """
+        public static partial class Program
+        {
+            public static void LogInfo(string message)
+            {
+                Information($"INFO: {message}");
+            }
+        }
+        """;
+
+    public string CakeSdkFilesExcludedCsCode =>
+        """
+        // This class should not be compiled due to ExcludeAdditionalFiles pattern
+        public class ExcludedClass
+        {
+            public string Message { get; set; } = "This should not be available";
+        }
         """;
 }
