@@ -42,9 +42,12 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-
   <ItemGroup>
     <PackageReference Include="Cake.Generator" VersionOverride="__VERSION__" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'__IncludeAdditionalFiles__' != ''">
+    <Compile Include="__IncludeAdditionalFiles__" Exclude="__ExcludeAdditionalFiles__" />
   </ItemGroup>
 
 </Project>]]></SdkPropsContent>
@@ -56,8 +59,7 @@
           <!-- Replace placeholders with actual values and MSBuild properties -->
       <PropertyGroup>
         <DollarSign>$</DollarSign>
-        <PropertyReference>$(DollarSign)(ManagePackageVersionsCentrally)</PropertyReference>
-        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)'))</SdkPropsContentWithVersion>
+        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)').Replace('__IncludeAdditionalFiles__', '$(DollarSign)(IncludeAdditionalFiles)').Replace('__ExcludeAdditionalFiles__', '$(DollarSign)(ExcludeAdditionalFiles)'))</SdkPropsContentWithVersion>
       </PropertyGroup>
     
     <!-- Ensure directories exist -->
