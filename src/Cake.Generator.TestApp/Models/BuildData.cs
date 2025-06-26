@@ -1,16 +1,25 @@
 namespace Cake.Generator.TestApp.Models;
 
-#pragma warning disable SA1011 // Closing square brackets should be spaced correctly
-#pragma warning disable SA1313 // Parameter names should begin with lower-case letter
 public record BuildData(
     string Version,
     string BranchName,
+    bool IsPullRequest,
     bool IsMainBranch,
+    bool IsDevelopmentBranch,
+    bool IsFork,
+    bool IsRunningOnGitHubActions,
+    bool IsRunningOnWindows,
     DirectoryPath ArtifactsDirectory,
     FilePath SolutionPath,
-    DotNetMSBuildSettings MSBuildSettings)
+    DotNetMSBuildSettings MSBuildSettings,
+    NuGetPublishSettings NuGetPublishSettings)
     : IToolSettings
 {
+    public bool ShouldPushNuGet { get; } = IsRunningOnGitHubActions
+                                            && IsRunningOnWindows
+                                            && !IsPullRequest
+                                            && !IsFork
+                                            && (IsMainBranch || IsDevelopmentBranch);
     public DirectoryPath OutputDirectory { get; } = ArtifactsDirectory.Combine(Version);
     public DirectoryPath IntegrationTestDirectory { get; } = ArtifactsDirectory.Combine(Version).Combine("IntegrationTest");
 

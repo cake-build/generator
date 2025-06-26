@@ -18,7 +18,7 @@ public partial class CakeGenerator : IIncrementalGenerator
     {
         // Create a provider that collects all compilation data we need
         var compilationProvider = context.CompilationProvider
-            .Select<Compilation, (Compilation compilation, ImmutableArray<MethodInfo>? methods, ImmutableArray<ModuleInfo>? modules)>((compilation, cancellationToken) =>
+            .Select<Compilation, (Compilation Compilation, ImmutableArray<MethodInfo>? Methods, ImmutableArray<ModuleInfo>? Modules)>((compilation, cancellationToken) =>
             {
                 var extensionAttributeSymbol = compilation.GetTypeByMetadataName(ExtensionAttributeFullName);
                 var cakeMethodAliasAttributeSymbol = compilation.GetTypeByMetadataName(CakeMethodAliasAttributeFullName);

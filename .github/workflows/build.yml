@@ -38,6 +38,9 @@ jobs:
 
       - name: Build Cake Generator & SDK
         uses: cake-build/cake-action@master
+        env:
+          AZURE_DEVOPS_NUGET_API_KEY: ${{ secrets.AZURE_DEVOPS_NUGET_API_KEY }}
+          AZURE_DEVOPS_NUGET_API_URL: ${{ secrets.AZURE_DEVOPS_NUGET_API_URL }}
         with:
           project-path: src/Cake.Generator.TestApp/Cake.Generator.TestApp.csproj
           target: GitHubActions

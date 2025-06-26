@@ -1,4 +1,6 @@
-﻿var targets = Arguments(
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+var targets = Arguments(
                 "target",
                 [
                     "Default"
@@ -18,6 +20,9 @@ Setup(
 
         var branchName = GitVersion(new GitVersionSettings { }).BranchName;
         var isMain = StringComparer.OrdinalIgnoreCase.Equals("main", branchName);
+        var isDevelopment = StringComparer.OrdinalIgnoreCase.Equals("develop", branchName);
+        var isPullRequest = GitHubActions.IsRunningOnGitHubActions && GitHubActions.Environment.PullRequest.IsPullRequest;
+        var isFork = GitHubActions.IsRunningOnGitHubActions && !StringComparer.OrdinalIgnoreCase.Equals("cake-build", GitHubActions.Environment.Workflow.RepositoryOwner);
 
         var runNumber = GitHubActions.IsRunningOnGitHubActions
                     ? GitHubActions.Environment.Workflow.RunNumber
@@ -32,9 +37,12 @@ Setup(
                     .TrimEnd('-');
 
         Information(
-            "Branch: {0} (IsMain: {1}), Version: {2}",
+            "Branch: {0} (Main: {1}, Development: {2}, Pull Request: {3}, Fork: {4}), Version: {5}",
             branchName,
             isMain,
+            isDevelopment,
+            isPullRequest,
+            isFork,
             version);
 
         var msBuildSettings = new DotNetMSBuildSettings()
@@ -49,12 +57,20 @@ Setup(
         }
 
         return new BuildData(
-            version,
-            branchName,
-            isMain,
-            MakeAbsolute(Directory("artifacts")),
-            GetFiles("./src/Cake.Generator.slnx").FirstOrDefault() ?? throw new CakeException("Failed to find solution"),
-            msBuildSettings);
+            Version: version,
+            BranchName: branchName,
+            IsPullRequest: isPullRequest,
+            IsMainBranch: isMain,
+            IsDevelopmentBranch: isDevelopment,
+            IsFork: isFork,
+            IsRunningOnGitHubActions: GitHubActions.IsRunningOnGitHubActions,
+            IsRunningOnWindows: IsRunningOnWindows(),
+            ArtifactsDirectory: MakeAbsolute(Directory("artifacts")),
+            SolutionPath: GetFiles("./src/Cake.Generator.slnx").FirstOrDefault() ?? throw new CakeException("Failed to find solution"),
+            MSBuildSettings: msBuildSettings,
+            NuGetPublishSettings: new NuGetPublishSettings(
+                                    isMain,
+                                    Context.Environment));
     });
 
 Task("Clean")
@@ -108,6 +124,7 @@ Task("Pack")
 
 Task("UploadArtifact")
     .IsDependentOn("Pack")
+    .WithCriteria(GitHubActions.IsRunningOnGitHubActions, nameof(GitHubActions.IsRunningOnGitHubActions))
     .Does<BuildData>((ctx, data) => GitHubActions.Commands.UploadArtifact(
         data.OutputDirectory,
         $"Cake.Generator-{Context.Environment.Platform.Family}"));
@@ -128,7 +145,7 @@ Task("IntegrationTest-Setup")
 
                 currentConfig.AddOrUpdate(
                     "msbuild-sdks",
-                    add => new ()
+                    add => new()
                         {
                             { "Cake.Sdk", data.Version }
                         },
@@ -143,7 +160,7 @@ Task("IntegrationTest-Setup")
                 await JsonSerializer.SerializeAsync(
                     globalJsonStream,
                     currentConfig,
-                    options: new ()
+                    options: new()
                     {
                         WriteIndented = true,
                     });
@@ -291,12 +308,34 @@ Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Execute");
 
+Task("Publish-NuGet-Packages")
+    .IsDependentOn("IntegrationTest")
+    .Does<BuildData>((ctx, data) =>
+    {
+        var packages = GetFiles($"{data.OutputDirectory}/Cake.*.{data.Version}.nupkg").ToArray();
+        foreach (var package in packages)
+        {
+            if (!data.ShouldPushNuGet)
+            {
+                Information("Skipping package push for {0} as ShouldPushNuGet is false.", package);
+                continue;
+            }
+
+            foreach (var dotNetNuGetPushSettings in data.NuGetPublishSettings.Settings)
+            {
+                Information("Pushing package: {0}", package);
+                DotNetNuGetPush(package, dotNetNuGetPushSettings);
+            }
+        }
+    });
+
 Task("Default")
     .IsDependentOn("Build");
 
 Task("GitHubActions")
     .IsDependentOn("UploadArtifact")
-    .IsDependentOn("IntegrationTest");
+    .IsDependentOn("IntegrationTest")
+    .IsDependentOn("Publish-NuGet-Packages");
 
 await RunTargetsAsync(targets);
 
