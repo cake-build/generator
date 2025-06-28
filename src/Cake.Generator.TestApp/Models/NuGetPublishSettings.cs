@@ -4,30 +4,39 @@ public class NuGetPublishSettings(
     bool isMainBranch,
     ICakeEnvironment environment)
 {
-    public DotNetNuGetPushSettings[] Settings { get; } =
+    public NuGetSource[] Sources { get;  } =
+            [
+                ..
+                new NuGetSource[]
+                {
+                        new(
+                            Name: "NuGet.org",
+                            OnlyMain: true,
+                            ApiKey: environment.GetEnvironmentVariable("NUGET_API_KEY"),
+                            Source: environment.GetEnvironmentVariable("NUGET_API_URL")),
+                        new(
+                            Name: "AzureDevOps",
+                            OnlyMain: false,
+                            UserName: "AzureDevOps",
+                            Password: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_KEY"),
+                            Source: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_URL"),
+                            OnlyPush: true)
+                }
+                .Where(x => x.OnlyMain == isMainBranch || !x.OnlyMain)
+            ];
+
+    private DotNetNuGetPushSettings[]? settings;
+    public DotNetNuGetPushSettings[] Settings => settings ??=
         [
             ..
-            new (string Name, bool OnlyMain, string? ApiKey, string? Source)[]
-            {
-                (
-                    Name: "NuGet.org",
-                    OnlyMain: true,
-                    ApiKey: environment.GetEnvironmentVariable("NUGET_API_KEY"),
-                    Source: environment.GetEnvironmentVariable("NUGET_API_URL")),
-                (
-                    Name: "Azure DevOps",
-                    OnlyMain: false,
-                    ApiKey: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_KEY"),
-                    Source: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_URL"))
-            }
-            .Where(x => x.OnlyMain == isMainBranch || !x.OnlyMain)
+            Sources
             .Select(x =>
                 {
                     if (isMainBranch)
                     {
-                        if (string.IsNullOrWhiteSpace(x.ApiKey))
+                        if (string.IsNullOrWhiteSpace(x.ApiKey) && string.IsNullOrEmpty(x.Password))
                         {
-                            throw new InvalidOperationException($"API key for {x.Name} is not set. Please set the environment variable for {x.Name}.");
+                            throw new InvalidOperationException($"API / Password key for {x.Name} is not set. Please set the environment variable for {x.Name}.");
                         }
                         if (string.IsNullOrWhiteSpace(x.Source))
                         {
@@ -43,4 +52,17 @@ public class NuGetPublishSettings(
                     };
                 })
         ];
+}
+
+public record struct NuGetSource(
+    string Name,
+    bool OnlyMain,
+    string? Source,
+    string? ApiKey = null,
+    string? UserName = null,
+    string? Password = null,
+    bool OnlyPush = false)
+{
+    public bool IsApiKey { get; } = !string.IsNullOrWhiteSpace(ApiKey);
+    public bool IsPassword { get; } = !string.IsNullOrWhiteSpace(Password);
 }

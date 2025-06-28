@@ -308,8 +308,46 @@ Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Execute");
 
+Task("Auth-NuGet-Feeds")
+    .WithCriteria<BuildData>(data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
+    .Does<BuildData>((ctx, data) =>
+    {
+        foreach (var source in data.NuGetPublishSettings.Sources)
+        {
+            if (source.IsApiKey)
+            {
+                Information("Skipping feed Auth for NuGet feed: {0} (using API key).", source.Name);
+                continue;
+            }
+            Information("Authenticating to NuGet feed: {0}", source.Name);
+
+            if (source.OnlyPush)
+            {
+                DotNetNuGetAddSource(
+                    source.Name,
+                    new DotNetNuGetAddSourceSettings
+                    {
+                        UserName = source.UserName,
+                        Password = source.Password
+                    });
+            }
+            else
+            {
+                DotNetNuGetUpdateSource(
+                    source.Name,
+                    new DotNetNuGetUpdateSourceSettings
+                    {
+                        UserName = source.UserName,
+                        Password = source.Password,
+                        Source = source.Source
+                    });
+            }
+        }
+    });
+
 Task("Publish-NuGet-Packages")
     .IsDependentOn("IntegrationTest")
+    .IsDependentOn("Auth-NuGet-Feeds")
     .Does<BuildData>((ctx, data) =>
     {
         var packages = GetFiles($"{data.OutputDirectory}/Cake.*.{data.Version}.nupkg").ToArray();
