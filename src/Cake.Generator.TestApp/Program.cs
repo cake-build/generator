@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-var targets = Arguments(
+﻿var targets = Arguments(
                 "target",
                 [
                     "Default"
@@ -310,11 +308,11 @@ Task("IntegrationTest")
 
 Task("Auth-NuGet-Feeds")
     .WithCriteria<BuildData>(data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
-    .Does<BuildData>((ctx, data) =>
+    .Does((Action<ICakeContext, BuildData>)((ctx, data) =>
     {
         foreach (var source in data.NuGetPublishSettings.Sources)
         {
-            if (source.IsApiKey)
+            if (!source.HasPassword && source.HasApiKey)
             {
                 Information("Skipping feed Auth for NuGet feed: {0} (using API key).", source.Name);
                 continue;
@@ -344,7 +342,7 @@ Task("Auth-NuGet-Feeds")
                     });
             }
         }
-    });
+    }));
 
 Task("Publish-NuGet-Packages")
     .IsDependentOn("IntegrationTest")
