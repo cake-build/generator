@@ -328,7 +328,8 @@ Task("Auth-NuGet-Feeds")
                     new DotNetNuGetAddSourceSettings
                     {
                         UserName = source.UserName,
-                        Password = source.Password
+                        Password = source.Password,
+                        Source = source.Source
                     });
             }
             else
