@@ -17,6 +17,7 @@ public class NuGetPublishSettings(
                         new(
                             Name: "AzureDevOps",
                             OnlyMain: false,
+                            ApiKey: "AzureDevOps",
                             UserName: "AzureDevOps",
                             Password: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_KEY"),
                             Source: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_URL"),
@@ -34,7 +35,7 @@ public class NuGetPublishSettings(
                 {
                     if (isMainBranch)
                     {
-                        if (string.IsNullOrWhiteSpace(x.ApiKey) && string.IsNullOrEmpty(x.Password))
+                        if (!x.HasApiKey && !x.HasPassword)
                         {
                             throw new InvalidOperationException($"API / Password key for {x.Name} is not set. Please set the environment variable for {x.Name}.");
                         }
@@ -63,6 +64,6 @@ public record struct NuGetSource(
     string? Password = null,
     bool OnlyPush = false)
 {
-    public bool IsApiKey { get; } = !string.IsNullOrWhiteSpace(ApiKey);
-    public bool IsPassword { get; } = !string.IsNullOrWhiteSpace(Password);
+    public bool HasApiKey { get; } = !string.IsNullOrWhiteSpace(ApiKey);
+    public bool HasPassword { get; } = !string.IsNullOrWhiteSpace(Password);
 }
