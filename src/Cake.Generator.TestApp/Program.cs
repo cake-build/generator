@@ -144,6 +144,7 @@ Task("Pack")
 
 Task("UploadArtifact")
     .IsDependentOn("Pack")
+    .IsDependentOn("Sign-Binaries")
     .WithCriteria(GitHubActions.IsRunningOnGitHubActions, nameof(GitHubActions.IsRunningOnGitHubActions))
     .Does<BuildData>((ctx, data) => GitHubActions.Commands.UploadArtifact(
         data.OutputDirectory,
