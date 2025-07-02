@@ -422,6 +422,7 @@ Task("Sign-Binaries")
                 .AppendSwitchQuoted("--publisher-name", "Cake")
                 .AppendSwitchQuoted("--description", "Cake (C# Make) is a cross platform build automation system.")
                 .AppendSwitchQuoted("--description-url", "https://cakebuild.net")
+                .AppendSwitchQuoted("--azure-credential-type", "azure-cli")
                 .AppendSwitchQuotedSecret("--azure-key-vault-certificate", data.CodeSigningCredentials.SignKeyVaultCertificate)
                 .AppendSwitchQuotedSecret("--azure-key-vault-url", data.CodeSigningCredentials.SignKeyVaultUrl);
 
