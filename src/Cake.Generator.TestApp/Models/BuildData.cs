@@ -21,7 +21,7 @@ public record BuildData(
                                             && IsRunningOnWindows
                                             && !IsPullRequest
                                             && !IsFork
-                                            && (IsMainBranch || IsDevelopmentBranch);
+                                            && (IsMainBranch || IsDevelopmentBranch || IsTagged);
     public DirectoryPath OutputDirectory { get; } = ArtifactsDirectory.Combine(Version);
     public DirectoryPath IntegrationTestDirectory { get; } = ArtifactsDirectory.Combine(Version).Combine("IntegrationTest");
 
