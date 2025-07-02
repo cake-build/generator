@@ -11,7 +11,7 @@ Setup(
         InstallTools(
             "dotnet:https://api.nuget.org/v3/index.json?package=GitVersion.Tool&version=5.12.0",
             "dotnet:https://api.nuget.org/v3/index.json?package=GitReleaseManager.Tool&version=0.20.0",
-            "dotnet:https://api.nuget.org/v3/index.json?package=sign&version=0.9.1-beta.25264.1&prerelease");
+            "dotnet:https://api.nuget.org/v3/index.json?package=sign&version=0.9.1-beta.25330.2&prerelease");
 
         var buildDate = DateTime.UtcNow;
         var baseVersion = typeof(ICakeContext).Assembly.GetName().Version?.ToString(2) ?? "1.0";
@@ -21,6 +21,7 @@ Setup(
         var isDevelopment = StringComparer.OrdinalIgnoreCase.Equals("develop", branchName);
         var isPullRequest = GitHubActions.IsRunningOnGitHubActions && GitHubActions.Environment.PullRequest.IsPullRequest;
         var isFork = GitHubActions.IsRunningOnGitHubActions && !StringComparer.OrdinalIgnoreCase.Equals("cake-build", GitHubActions.Environment.Workflow.RepositoryOwner);
+        var isTagged = GitHubActions.IsRunningOnGitHubActions && GitHubActions.Environment.Workflow.RefType == GitHubActionsRefType.Tag;
 
         var runNumber = GitHubActions.IsRunningOnGitHubActions
                     ? GitHubActions.Environment.Workflow.RunNumber
@@ -30,9 +31,13 @@ Setup(
                     ? (isMain ? string.Empty : "alpha")
                     : "local";
 
-        var version = FormattableString
-                    .Invariant($"{baseVersion}.{buildDate:yy}{buildDate.DayOfYear:000}.{runNumber}-{suffix}")
-                    .TrimEnd('-');
+        var version = isTagged
+                        ? (SemVersion.TryParse(GitHubActions.Environment.Workflow.RefName.TrimStart('v'), out var semVersion)
+                            ? semVersion.VersionString
+                            : throw new CakeException($"Failed to parse tagged ref name: {GitHubActions.Environment.Workflow.RefName}"))
+                        : FormattableString
+                                    .Invariant($"{baseVersion}.{buildDate:yy}{buildDate.DayOfYear:000}.{runNumber}-{suffix}")
+                                    .TrimEnd('-');
 
         Information(
             "Branch: {0} (Main: {1}, Development: {2}, Pull Request: {3}, Fork: {4}), Version: {5}",
@@ -54,13 +59,14 @@ Setup(
             msBuildSettings.WithProperty("TemplateVersion", version);
         }
 
-        return new BuildData(
+        var buildData = new BuildData(
             Version: version,
             BranchName: branchName,
             IsPullRequest: isPullRequest,
             IsMainBranch: isMain,
             IsDevelopmentBranch: isDevelopment,
             IsFork: isFork,
+            IsTagged: isTagged,
             IsRunningOnGitHubActions: GitHubActions.IsRunningOnGitHubActions,
             IsRunningOnWindows: IsRunningOnWindows(),
             ArtifactsDirectory: MakeAbsolute(Directory("artifacts")),
@@ -68,7 +74,23 @@ Setup(
             MSBuildSettings: msBuildSettings,
             NuGetPublishSettings: new NuGetPublishSettings(
                                     isMain,
-                                    Context.Environment));
+                                    Context.Environment),
+            CodeSigningCredentials: CodeSigningCredentials.GetCodeSigningCredentials(context));
+
+        if (buildData.ShouldSignPackages)
+        {
+            Information("Code signing is enabled for this build.");
+            if (!buildData.CodeSigningCredentials.HasCredentials)
+            {
+                throw new CakeException("Code signing credentials are not set. Please set the environment variables for code signing.");
+            }
+        }
+        else
+        {
+            Information("Code signing is disabled for this build.");
+        }
+
+        return buildData;
     });
 
 Task("Clean")
@@ -345,6 +367,7 @@ Task("Auth-NuGet-Feeds")
     }));
 
 Task("Publish-NuGet-Packages")
+    .IsDependentOn("Sign-Binaries")
     .IsDependentOn("IntegrationTest")
     .IsDependentOn("Auth-NuGet-Feeds")
     .Does<BuildData>((ctx, data) =>
@@ -364,6 +387,49 @@ Task("Publish-NuGet-Packages")
                 DotNetNuGetPush(package, dotNetNuGetPushSettings);
             }
         }
+    });
+
+Task("Sign-Binaries")
+    .IsDependentOn("Pack")
+    .WithCriteria<BuildData>(static (context, parameters) => parameters.ShouldSignPackages)
+    .Does<BuildData>(static (context, data) =>
+    {
+        // Get the files to sign.
+        var files = GetFiles($"{data.OutputDirectory}/Cake.*.{data.Version}.nupkg").ToArray();
+        var commandSettings = new CommandSettings
+        {
+            ToolExecutableNames =
+            [
+                "sign", "sign.exe"
+            ],
+            ToolName = "sign",
+            ToolPath = data.CodeSigningCredentials.SignClientPath
+        };
+
+        Parallel.ForEach(
+            files,
+            file =>
+            {
+                context.Information("Signing {0}...", file.FullPath);
+
+                // Build the argument list.
+                var arguments = new ProcessArgumentBuilder()
+                .Append("code")
+                .Append("azure-key-vault")
+                .AppendQuoted(file.FullPath)
+                .AppendSwitchQuoted("--file-list", data.CodeSigningCredentials.SignFilterPath.FullPath)
+                .AppendSwitchQuoted("--publisher-name", "Cake")
+                .AppendSwitchQuoted("--description", "Cake (C# Make) is a cross platform build automation system.")
+                .AppendSwitchQuoted("--description-url", "https://cakebuild.net")
+                .AppendSwitchQuotedSecret("--azure-key-vault-certificate", data.CodeSigningCredentials.SignKeyVaultCertificate)
+                .AppendSwitchQuotedSecret("--azure-key-vault-url", data.CodeSigningCredentials.SignKeyVaultUrl);
+
+                context.Command(
+                commandSettings,
+                arguments);
+
+                context.Information("Done signing {0}.", file.FullPath);
+            });
     });
 
 Task("Default")

@@ -9,10 +9,12 @@ public record BuildData(
     bool IsFork,
     bool IsRunningOnGitHubActions,
     bool IsRunningOnWindows,
+    bool IsTagged,
     DirectoryPath ArtifactsDirectory,
     FilePath SolutionPath,
     DotNetMSBuildSettings MSBuildSettings,
-    NuGetPublishSettings NuGetPublishSettings)
+    NuGetPublishSettings NuGetPublishSettings,
+    CodeSigningCredentials CodeSigningCredentials)
     : IToolSettings
 {
     public bool ShouldPushNuGet { get; } = IsRunningOnGitHubActions
@@ -43,4 +45,10 @@ public record BuildData(
     // IToolSettings interface implementation
     public DirectoryPath WorkingDirectory { get; init; } = ArtifactsDirectory.Combine(Version).Combine("IntegrationTest");
     DirectoryPath IToolSettings.ArtifactDirectory => OutputDirectory;
+
+    private bool? shouldSignPackages;
+    public bool ShouldSignPackages => shouldSignPackages ??=
+                                        ShouldPushNuGet
+                                        &&
+                                        IsTagged;
 }
