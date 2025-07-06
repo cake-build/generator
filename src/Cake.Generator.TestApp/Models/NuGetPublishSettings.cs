@@ -5,15 +5,15 @@ public class NuGetPublishSettings(
     bool isTagged,
     ICakeEnvironment environment)
 {
-    public NuGetSource[] Sources { get;  } =
+    public NuGetSource[] Sources { get; } =
             [
                 ..
                 new NuGetSource[]
                 {
                         new(
-                            Name: "NuGet.org",
+                            Name: "nuget",
                             OnlyMain: false,
-                            OnlyTagged:  true,
+                            OnlyTagged: true,
                             ApiKey: environment.GetEnvironmentVariable("NUGET_API_KEY"),
                             Source: environment.GetEnvironmentVariable("NUGET_API_URL")),
                         new(
@@ -28,8 +28,7 @@ public class NuGetPublishSettings(
                 }
                 .Where(x => x.OnlyMain == isMainBranch
                 || x.OnlyTagged == isTagged
-                || (!x.OnlyMain && !x.OnlyTagged)
-                )
+                || (!x.OnlyMain && !x.OnlyTagged))
             ];
 
     private DotNetNuGetPushSettings[]? settings;
