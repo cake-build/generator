@@ -74,6 +74,7 @@ Setup(
             MSBuildSettings: msBuildSettings,
             NuGetPublishSettings: new NuGetPublishSettings(
                                     isMain,
+                                    isTagged,
                                     Context.Environment),
             CodeSigningCredentials: CodeSigningCredentials.GetCodeSigningCredentials(context));
 

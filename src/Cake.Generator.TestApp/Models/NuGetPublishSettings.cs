@@ -2,6 +2,7 @@ namespace Cake.Generator.TestApp.Models;
 
 public class NuGetPublishSettings(
     bool isMainBranch,
+    bool isTagged,
     ICakeEnvironment environment)
 {
     public NuGetSource[] Sources { get;  } =
@@ -11,19 +12,24 @@ public class NuGetPublishSettings(
                 {
                         new(
                             Name: "NuGet.org",
-                            OnlyMain: true,
+                            OnlyMain: false,
+                            OnlyTagged:  true,
                             ApiKey: environment.GetEnvironmentVariable("NUGET_API_KEY"),
                             Source: environment.GetEnvironmentVariable("NUGET_API_URL")),
                         new(
                             Name: "AzureDevOps",
                             OnlyMain: false,
+                            OnlyTagged: false,
                             ApiKey: "AzureDevOps",
                             UserName: "AzureDevOps",
                             Password: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_KEY"),
                             Source: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_URL"),
                             OnlyPush: true)
                 }
-                .Where(x => x.OnlyMain == isMainBranch || !x.OnlyMain)
+                .Where(x => x.OnlyMain == isMainBranch
+                || x.OnlyTagged == isTagged
+                || (!x.OnlyMain && !x.OnlyTagged)
+                )
             ];
 
     private DotNetNuGetPushSettings[]? settings;
@@ -33,7 +39,7 @@ public class NuGetPublishSettings(
             Sources
             .Select(x =>
                 {
-                    if (isMainBranch)
+                    if (isMainBranch || isTagged)
                     {
                         if (!x.HasApiKey && !x.HasPassword)
                         {
@@ -58,6 +64,7 @@ public class NuGetPublishSettings(
 public record struct NuGetSource(
     string Name,
     bool OnlyMain,
+    bool OnlyTagged,
     string? Source,
     string? ApiKey = null,
     string? UserName = null,
