@@ -77,7 +77,7 @@ Task("IntegrationTest")
 
 Task("Auth-NuGet-Feeds")
     .WithCriteria<BuildData>(data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
-    .Does((Action<ICakeContext, BuildData>)((ctx, data) => AuthNuGetFeeds(ctx, data)));
+    .Does<BuildData>(AuthNuGetFeeds);
 
 Task("Publish-NuGet-Packages")
     .IsDependentOn("Sign-Binaries")
