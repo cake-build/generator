@@ -75,9 +75,9 @@ Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Execute");
 
-Task("Auth-NuGet-Feeds")
-    .WithCriteria<BuildData>(static data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
-    .Does<BuildData>(AuthNuGetFeeds);
+TaskOf<BuildData>("Auth-NuGet-Feeds")
+    .WithCriteria(static (context, data) => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
+    .Does(AuthNuGetFeeds);
 
 Task("Publish-NuGet-Packages")
     .IsDependentOn("Sign-Binaries")
@@ -85,10 +85,10 @@ Task("Publish-NuGet-Packages")
     .IsDependentOn("Auth-NuGet-Feeds")
     .Does<BuildData>(PublishNuGetPackages);
 
-Task("Sign-Binaries")
+TaskOf<BuildData>("Sign-Binaries")
     .IsDependentOn("Pack")
-    .WithCriteria<BuildData>(static (context, parameters) => parameters.ShouldSignPackages)
-    .Does<BuildData>(SignBinaries);
+    .WithCriteria(static (context, parameters) => parameters.ShouldSignPackages)
+    .Does(SignBinaries);
 
 Task("Default")
     .IsDependentOn("Build");
