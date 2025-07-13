@@ -9,35 +9,35 @@ Setup(
     SetupTask);
 
 Task("Clean")
-    .Does<BuildData>((ctx, data) => Clean(ctx, data));
+    .Does<BuildData>(Clean);
 
 Task("Restore")
     .IsDependentOn("Clean")
-    .Does<BuildData>((ctx, data) => Restore(ctx, data));
+    .Does<BuildData>(Restore);
 
 Task("Build")
     .IsDependentOn("Restore")
-    .Does<BuildData>((ctx, data) => Build(ctx, data));
+    .Does<BuildData>(Build);
 
 Task("Test")
-    .Does<BuildData>((ctx, data) => Test(ctx, data))
+    .Does<BuildData>(Test)
     .IsDependentOn("Build");
 
 Task("Pack")
     .IsDependentOn("Test")
-    .Does<BuildData>((ctx, data) => Pack(ctx, data));
+    .Does<BuildData>(Pack);
 
 Task("UploadArtifact")
     .IsDependentOn("Pack")
     .IsDependentOn("Sign-Binaries")
     .WithCriteria(GitHubActions.IsRunningOnGitHubActions, nameof(GitHubActions.IsRunningOnGitHubActions))
-    .Does<BuildData>((ctx, data) => UploadArtifact(ctx, data));
+    .Does<BuildData>(UploadArtifact);
 
 Task("IntegrationTest-Setup")
     .IsDependentOn("Pack")
     .Does<BuildData>(
         Verbosity.Diagnostic,
-        async (ctx, data) => await IntegrationTestSetup(ctx, data));
+        IntegrationTestSetup);
 
 Task("IntegrationTest-PrepareAppCs")
     .IsDependentOn("IntegrationTest-Setup")
