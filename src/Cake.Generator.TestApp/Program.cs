@@ -76,7 +76,7 @@ Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-Execute");
 
 Task("Auth-NuGet-Feeds")
-    .WithCriteria<BuildData>(data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
+    .WithCriteria<BuildData>(static data => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))
     .Does<BuildData>(AuthNuGetFeeds);
 
 Task("Publish-NuGet-Packages")
