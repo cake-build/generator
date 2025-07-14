@@ -12,13 +12,11 @@ public class NuGetPublishSettings(
                 {
                         new(
                             Name: "nuget",
-                            OnlyMain: false,
                             OnlyTagged: true,
                             ApiKey: environment.GetEnvironmentVariable("NUGET_API_KEY"),
                             Source: environment.GetEnvironmentVariable("NUGET_API_URL")),
                         new(
                             Name: "AzureDevOps",
-                            OnlyMain: false,
                             OnlyTagged: false,
                             ApiKey: "AzureDevOps",
                             UserName: "AzureDevOps",
@@ -26,9 +24,8 @@ public class NuGetPublishSettings(
                             Source: environment.GetEnvironmentVariable("AZURE_DEVOPS_NUGET_API_URL"),
                             OnlyPush: true)
                 }
-                .Where(x => x.OnlyMain == isMainBranch
-                || x.OnlyTagged == isTagged
-                || (!x.OnlyMain && !x.OnlyTagged))
+                .Where(x => x.OnlyTagged == isTagged
+                            || !x.OnlyTagged)
             ];
 
     private DotNetNuGetPushSettings[]? settings;
@@ -62,7 +59,6 @@ public class NuGetPublishSettings(
 
 public record struct NuGetSource(
     string Name,
-    bool OnlyMain,
     bool OnlyTagged,
     string? Source,
     string? ApiKey = null,
