@@ -187,6 +187,7 @@ The Cake.Sdk automatically configures the following properties:
 - `DebugSymbols`: true
 - `LangVersion`: latest
 - `PublishAot`: false 
+- `JsonSerializerIsReflectionEnabledByDefault`: true
 
 ## Requirements
 
