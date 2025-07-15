@@ -86,8 +86,8 @@ For larger file-based Cake apps, you can organize your code into multiple files.
 **build.cs**
 ```csharp
 #:sdk Cake.Sdk
-#:property IncludeAdditionalFiles build/**/*.cs
-#:property ExcludeAdditionalFiles build/**/Except*.cs
+#:property IncludeAdditionalFiles=build/**/*.cs
+#:property ExcludeAdditionalFiles=build/**/Except*.cs
 
 var target = Argument("target", "Default");
 var config = new BuildConfiguration 

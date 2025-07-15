@@ -25,6 +25,7 @@ public record IntegrationTestData(
     public DirectoryPath CakeTemplateBuild { get; } = BaseDirectory.Combine("cake.template").Combine("cake");
     public FilePath CakeTemplateBuildCsproj { get; } = BaseDirectory.Combine("cake.template").Combine("cake").CombineWithFilePath("cake.csproj");
     public DirectoryPath CakeTemplateSrc { get; } = BaseDirectory.Combine("cake.template").Combine("src");
+    public FilePath CakeTemplateBuildMultiCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("cakemultifile.cs");
 
     // New multi-file test properties
     public FilePath CakeSdkFilesCs { get; } = BaseDirectory.CombineWithFilePath("cake.sdk.files.cs");
@@ -41,6 +42,7 @@ public record IntegrationTestData(
             CakeSdkCpmProjectCsproj,
             CakeTemplateBuildCs,
             CakeTemplateBuildCsproj,
+            CakeTemplateBuildMultiCs,
             CakeSdkFilesCs
         ];
 

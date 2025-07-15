@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Cake Contributors",
+  "classifications": [
+    "Console",
+    "Cake",
+    "Build"
+  ],
+  "name": "Cake SDK Multi-file File-based",
+  "description": "A Cake build script using multi-file structure with Cake.Sdk",
+  "identity": "Cake.Sdk.File.Multifile",
+  "groupIdentity": "Cake.Sdk.File.Multifile",
+  "shortName": "cakemultifile",
+  "sourceName": "cakemultifile",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "preferNameDirectory": false,
+  "primaryOutputs": [
+    {
+      "path": "build.cs"
+    },
+    {
+      "path": "build/Models.cs"
+    },
+    {
+      "path": "build/Utilities.cs"
+    }
+  ]
+} 
