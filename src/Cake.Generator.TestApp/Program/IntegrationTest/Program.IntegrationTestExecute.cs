@@ -9,12 +9,12 @@ public static partial class Program
                 file,
                 System.IO.File.ReadAllText(file.FullPath));
 
-            var mode = file.GetExtension() == ".csproj" ? "--project " : string.Empty;
+            var mode = file.GetExtension() == ".csproj" ? "run --project " : string.Empty;
             DotNet(
                 data with {
                     WorkingDirectory = file.GetDirectory()
                 },
-                $"run {mode}{file} -- --integration-test-version={data.Version}");
+                $"{mode}{file} -- --integration-test-version={data.Version}");
         }
     }
 }

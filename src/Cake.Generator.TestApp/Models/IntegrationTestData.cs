@@ -21,9 +21,9 @@ public record IntegrationTestData(
     public FilePath CakeSdkCpmProjectProgramCs { get; } = BaseDirectory.Combine("cake.cpm").CombineWithFilePath("Program.cs");
 
     public DirectoryPath CakeTemplate { get; } = BaseDirectory.Combine("cake.template");
-    public FilePath CakeTemplateBuildCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("build.cs");
-    public DirectoryPath CakeTemplateBuild { get; } = BaseDirectory.Combine("cake.template").Combine("build");
-    public FilePath CakeTemplateBuildCsproj { get; } = BaseDirectory.Combine("cake.template").Combine("build").CombineWithFilePath("build.csproj");
+    public FilePath CakeTemplateBuildCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("cake.cs");
+    public DirectoryPath CakeTemplateBuild { get; } = BaseDirectory.Combine("cake.template").Combine("cake");
+    public FilePath CakeTemplateBuildCsproj { get; } = BaseDirectory.Combine("cake.template").Combine("cake").CombineWithFilePath("cake.csproj");
     public DirectoryPath CakeTemplateSrc { get; } = BaseDirectory.Combine("cake.template").Combine("src");
 
     // New multi-file test properties
@@ -127,8 +127,8 @@ public record IntegrationTestData(
     public string CakeSdkFilesCsCode =>
         $$"""
         #:sdk Cake.Sdk
-        #:property IncludeAdditionalFiles cake.sdk.files/**/*.cs
-        #:property ExcludeAdditionalFiles cake.sdk.files/**/Excluded.cs
+        #:property IncludeAdditionalFiles=cake.sdk.files/**/*.cs
+        #:property ExcludeAdditionalFiles=cake.sdk.files/**/Excluded.cs
         #:package {{XunitAssertPackage}}
 
         using Xunit;

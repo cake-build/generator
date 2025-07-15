@@ -25,6 +25,7 @@ public static partial class Program
 
         private sealed class ServiceRegistration : ICakeRegistrationBuilder
         {
+            [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)]
             public Type ImplementationType { get; }
             public object? Instance { get; set; }
             public Type? ServiceType { get; set; }

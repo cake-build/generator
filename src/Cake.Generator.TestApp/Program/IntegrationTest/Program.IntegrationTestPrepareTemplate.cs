@@ -3,8 +3,8 @@ public static partial class Program
     private static void IntegrationTestPrepareTemplate(ICakeContext ctx, BuildData data)
     {
         data.DotNet($"new install {data.OutputDirectory.CombineWithFilePath($"Cake.Template.{data.Version}.nupkg")} --force");
-        data.DotNet($"new cakefile --name build --output {data.IntegrationTest.CakeTemplate}");
-        data.DotNet($"new cakeproj --name build --output {data.IntegrationTest.CakeTemplate}");
+        data.DotNet($"new cakefile --name cake --output {data.IntegrationTest.CakeTemplate}");
+        data.DotNet($"new cakeproj --name cake --output {data.IntegrationTest.CakeTemplate}");
         data.DotNet($"new uninstall Cake.Template");
 
         data.DotNet($"new sln --name Example --output {data.IntegrationTest.CakeTemplateSrc}");
