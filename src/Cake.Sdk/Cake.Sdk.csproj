@@ -40,6 +40,7 @@
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>latest</LangVersion>
+    <PublishAot>false</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>

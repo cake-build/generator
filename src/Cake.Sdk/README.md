@@ -186,6 +186,7 @@ The Cake.Sdk automatically configures the following properties:
 - `DebugType`: portable
 - `DebugSymbols`: true
 - `LangVersion`: latest
+- `PublishAot`: false 
 
 ## Requirements
 
