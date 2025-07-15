@@ -41,6 +41,7 @@
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>latest</LangVersion>
     <PublishAot>false</PublishAot>
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
 
   <ItemGroup>
