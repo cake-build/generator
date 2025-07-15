@@ -9,6 +9,11 @@ This package contains templates for creating Cake build scripts and projects usi
 - **Description**: Creates a Cake build script using the file-based approach with `#:sdk Cake.Sdk` directive
 - **Usage**: `dotnet new cakefile`
 
+### Cake SDK Multi-file File-based
+- **Short name**: `cakemultifile`
+- **Description**: Creates a Cake build script using the multi-file structure approach with `#:sdk Cake.Sdk` directive
+- **Usage**: `dotnet new cakemultifile`
+
 ### Cake SDK Project-based
 - **Short name**: `cakeproj`
 - **Description**: Creates a Cake build project using the project-based approach with Cake.Sdk
@@ -18,9 +23,14 @@ This package contains templates for creating Cake build scripts and projects usi
 
 #### Examples
 
-Create a file-based build script:
+Create a file-based build script (requires .NET 10):
 ```bash
 dotnet new cakefile
+```
+
+Create a multi-file file-based build script (requires .NET 10):
+```bash
+dotnet new cakemultifile
 ```
 
 Create a project-based build targeting .NET 8.0:
