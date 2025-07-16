@@ -24,4 +24,53 @@
     <XmlPoke XmlInputPath="templates\cakeproj\cakeproj\cakeproj.csproj" Query="Project/@Sdk" Value="Cake.Sdk/$(TemplateVersion)" />
   </Target>
 
+  <Target Name="UpdateCakeGlobalJsonTemplate" BeforeTargets="PrepareForBuild">
+    <!-- Generate the template.json content with replaced placeholders -->
+    <PropertyGroup>
+      <TemplateJsonContent><![CDATA[{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Cake Contributors",
+  "classifications": [
+    "Config",
+    "Cake",
+    "Build"
+  ],
+  "name": "Cake SDK Global.json",
+  "description": "A global.json file for Cake projects using Cake.Sdk with version placeholders",
+  "identity": "Cake.Sdk.GlobalJson",
+  "groupIdentity": "Cake.Sdk.GlobalJson",
+  "shortName": "cakeglobaljson",
+  "sourceName": "cakeglobaljson",
+  "tags": {
+    "language": "JSON",
+    "type": "item"
+  },
+  "preferNameDirectory": false,
+  "primaryOutputs": [
+    {
+      "path": "global.json"
+    }
+  ],
+  "symbols": {
+    "SdkVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The .NET SDK version to use",
+      "defaultValue": "$(SdkVersion)",
+      "replaces": "SdkVersion"
+    },
+    "CakeSdkVersion": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The Cake.Sdk version to use",
+      "defaultValue": "$(Version)",
+      "replaces": "CakeSdkVersion"
+    }
+  }
+}]]></TemplateJsonContent>
+    </PropertyGroup>
+    <!-- Write the updated template.json -->
+    <WriteLinesToFile File="templates\cakeglobaljson\.template.config\template.json" Lines="$(TemplateJsonContent)" Overwrite="true" />
+  </Target>
+
 </Project> 

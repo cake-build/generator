@@ -33,20 +33,24 @@ public static partial class Program
                                     .Invariant($"{baseVersion}.{buildDate:yy}{buildDate.DayOfYear:000}.{runNumber}-{suffix}")
                                     .TrimEnd('-');
 
+        var sdkVersion = ReadSdkVersionFromGlobalJson();
+
         Information(
-            "Branch: {0} (Main: {1}, Development: {2}, Pull Request: {3}, Fork: {4}), Version: {5}",
+            "Branch: {0} (Main: {1}, Development: {2}, Pull Request: {3}, Fork: {4}), Version: {5} (SDK: {6})",
             branchName,
             isMain,
             isDevelopment,
             isPullRequest,
             isFork,
-            version);
+            version,
+            sdkVersion);
 
         var msBuildSettings = new DotNetMSBuildSettings()
                 .SetConfiguration("IntegrationTest")
                 .SetVersion(version)
                 .WithProperty("WarningAsError", "true")
-                .WithProperty("NoWarn", "NU5104;NU5128;NETSDK1057");
+                .WithProperty("NoWarn", "NU5104;NU5128;NETSDK1057")
+                .WithProperty("SdkVersion", sdkVersion);
 
         if (GitHubActions.IsRunningOnGitHubActions)
         {
@@ -86,5 +90,34 @@ public static partial class Program
         }
 
         return buildData;
+    }
+
+    private static string ReadSdkVersionFromGlobalJson()
+    {
+        FilePath globalJsonPath = "./global.json";
+        if (!FileExists(globalJsonPath))
+        {
+            throw new CakeException($"global.json file not found at {globalJsonPath}");
+        }
+
+        using var globalJsonContentStream = Context.FileSystem.GetFile(globalJsonPath).OpenRead();
+
+        try
+        {
+            using var document = JsonDocument.Parse(globalJsonContentStream);
+            var root = document.RootElement;
+
+            if (root.TryGetProperty("sdk", out var sdkElement) &&
+                sdkElement.TryGetProperty("version", out var versionElement))
+            {
+                return versionElement.GetString() ?? throw new CakeException("SDK version is null in global.json");
+            }
+
+            throw new CakeException("Failed to find SDK version in global.json");
+        }
+        catch (JsonException ex)
+        {
+            throw new CakeException($"Failed to parse global.json: {ex.Message}");
+        }
     }
 }
