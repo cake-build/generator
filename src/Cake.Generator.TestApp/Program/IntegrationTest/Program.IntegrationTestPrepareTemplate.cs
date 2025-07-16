@@ -3,6 +3,9 @@ public static partial class Program
     private static void IntegrationTestPrepareTemplate(ICakeContext ctx, BuildData data)
     {
         data.DotNet($"new install {data.OutputDirectory.CombineWithFilePath($"Cake.Template.{data.Version}.nupkg")} --force");
+
+        data.DotNet("new cakeglobaljson");
+
         data.DotNet($"new cakefile --name cake --output {data.IntegrationTest.CakeTemplate}");
         data.DotNet($"new cakemultifile --name cakemultifile --output {data.IntegrationTest.CakeTemplate}");
         data.DotNet($"new cakeproj --name cake --output {data.IntegrationTest.CakeTemplate}");

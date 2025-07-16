@@ -1,0 +1,8 @@
+{
+  "sdk": {
+    "version": "SdkVersion"
+  },
+  "msbuild-sdks": {
+    "Cake.Sdk": "CakeSdkVersion"
+  }
+}

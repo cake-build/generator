@@ -39,8 +39,12 @@ Task("IntegrationTest-Setup")
         Verbosity.Diagnostic,
         IntegrationTestSetup);
 
-Task("IntegrationTest-PrepareAppCs")
+Task("IntegrationTest-PrepareTemplate")
     .IsDependentOn("IntegrationTest-Setup")
+    .Does<BuildData>(IntegrationTestPrepareTemplate);
+
+Task("IntegrationTest-PrepareAppCs")
+    .IsDependentOn("IntegrationTest-PrepareTemplate")
     .Does<BuildData>(IntegrationTestPrepareAppCs);
 
 Task("IntegrationTest-PrepareMultiFile")
@@ -53,12 +57,8 @@ Task("IntegrationTest-PrepareProjects")
         Verbosity.Diagnostic,
         IntegrationTestPrepareProjects);
 
-Task("IntegrationTest-PrepareTemplate")
-    .IsDependentOn("IntegrationTest-PrepareProjects")
-    .Does<BuildData>(IntegrationTestPrepareTemplate);
-
 Task("IntegrationTest-UploadTestCases-Artifacts")
-    .IsDependentOn("IntegrationTest-PrepareTemplate")
+    .IsDependentOn("IntegrationTest-PrepareProjects")
     .WithCriteria(GitHubActions.IsRunningOnGitHubActions, nameof(GitHubActions.IsRunningOnGitHubActions))
     .Does<BuildData>(IntegrationTestUploadTestCasesArtifacts);
 
