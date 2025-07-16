@@ -12,6 +12,7 @@
     <Product>Cake SDK</Product>
     <Description>A custom SDK that provides a convenient way to create Cake projects with minimal configuration. Automatically sets up common properties and references the Cake.Generator for source generation capabilities.</Description>
     <PackageTags>Cake;SDK;Build;Automation;Generator</PackageTags>
+    <PackageType>MSBuildSdk</PackageType>
   </PropertyGroup>
 
   <ItemGroup>
