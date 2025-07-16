@@ -11,7 +11,7 @@
   "identity": "Cake.Sdk.File.Multifile",
   "groupIdentity": "Cake.Sdk.File.Multifile",
   "shortName": "cakemultifile",
-  "sourceName": "cakemultifile",
+  "sourceName": "cake",
   "tags": {
     "language": "C#",
     "type": "item"
@@ -19,7 +19,7 @@
   "preferNameDirectory": false,
   "primaryOutputs": [
     {
-      "path": "build.cs"
+      "path": "cake.cs"
     },
     {
       "path": "build/Models.cs"

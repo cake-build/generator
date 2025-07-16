@@ -11,7 +11,7 @@
   "identity": "Cake.Sdk.File",
   "groupIdentity": "Cake.Sdk.File",
   "shortName": "cakefile",
-  "sourceName": "cakefile",
+  "sourceName": "cake",
   "tags": {
     "language": "C#",
     "type": "item"
@@ -19,7 +19,7 @@
   "preferNameDirectory": false,
   "primaryOutputs": [
     {
-      "path": "build.cs"
+      "path": "cake.cs"
     }
   ]
 } 

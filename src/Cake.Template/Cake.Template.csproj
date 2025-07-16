@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <Target Name="VersionBuild" BeforeTargets="PrepareForBuild" Condition="'$(TemplateVersion)'!=''">
-    <XmlPoke XmlInputPath="templates\cakeproj\cakeproj\cakeproj.csproj" Query="Project/@Sdk" Value="Cake.Sdk/$(TemplateVersion)" />
+    <XmlPoke XmlInputPath="templates\cakeproj\cake\cake.csproj" Query="Project/@Sdk" Value="Cake.Sdk/$(TemplateVersion)" />
   </Target>
 
   <Target Name="UpdateCakeGlobalJsonTemplate" BeforeTargets="PrepareForBuild">
