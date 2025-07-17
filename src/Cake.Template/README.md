@@ -10,6 +10,7 @@ This package contains templates for creating Cake build scripts and projects usi
 - **Usage**: `dotnet new cakefile`
 - **Parameters**:
   - `--name` or `-n`: The name for the generated cake.cs file. Default: folder name
+  - `--IncludeExampleProject`: Include example project structure with solution, main project and test project. Default: false
 
 ### Cake SDK Multi-file File-based (Requires .NET 10)
 - **Short name**: `cakemultifile`
@@ -44,6 +45,16 @@ dotnet new cakefile
 Create a file-based build script with custom name:
 ```bash
 dotnet new cakefile --name build
+```
+
+Create a file-based build script with example project structure:
+```bash
+dotnet new cakefile --IncludeExampleProject true
+```
+
+Create a file-based build script with custom name and example project structure:
+```bash
+dotnet new cakefile --name build --IncludeExampleProject true
 ```
 
 Create a multi-file file-based build script (requires .NET 10):
