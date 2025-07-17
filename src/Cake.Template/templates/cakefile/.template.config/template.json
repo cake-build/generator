@@ -21,5 +21,25 @@
     {
       "path": "cake.cs"
     }
+  ],
+  "symbols": {
+    "IncludeExampleProject": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Include example project structure with solution, main project and test project",
+      "defaultValue": "false"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "!(IncludeExampleProject)",
+          "exclude": [
+            "src/**/*"
+          ]
+        }
+      ]
+    }
   ]
 } 

@@ -27,6 +27,12 @@ public record IntegrationTestData(
     public DirectoryPath CakeTemplateSrc { get; } = BaseDirectory.Combine("cake.template").Combine("src");
     public FilePath CakeTemplateBuildMultiCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("cakemultifile.cs");
 
+    // New cakefile template with example project test properties
+    public DirectoryPath CakeTemplateWithExample { get; } = BaseDirectory.Combine("cake.template").Combine("with-example");
+    public FilePath CakeTemplateWithExampleCs { get; } = BaseDirectory.Combine("cake.template").Combine("with-example").CombineWithFilePath("cake-with-example.cs");
+    public DirectoryPath CakeTemplateWithExampleSrc { get; } = BaseDirectory.Combine("cake.template").Combine("with-example").Combine("src");
+    public FilePath CakeTemplateWithExampleSln { get; } = BaseDirectory.Combine("cake.template").Combine("with-example").Combine("src").CombineWithFilePath("Example.sln");
+
     // New multi-file test properties
     public FilePath CakeSdkFilesCs { get; } = BaseDirectory.CombineWithFilePath("cake.sdk.files.cs");
     public DirectoryPath CakeSdkFilesFolder { get; } = BaseDirectory.Combine("cake.sdk.files");
@@ -43,7 +49,8 @@ public record IntegrationTestData(
             CakeTemplateBuildCs,
             CakeTemplateBuildCsproj,
             CakeTemplateBuildMultiCs,
-            CakeSdkFilesCs
+            CakeSdkFilesCs,
+            CakeTemplateWithExampleCs
         ];
 
     public string BaseCode =>
@@ -148,21 +155,21 @@ public record IntegrationTestData(
                     Information("Expected: {0}", data.ExpectedVersion);
                     Information("Version: {0}", data.Version);
                     Information("CakeGeneratorNuGetVersion: {0}", CakeGeneratorNuGetVersion);
-                    
+
                     // Test that the BuildConfiguration class is available (from Models.cs)
-                    var config = new BuildConfiguration 
-                    { 
+                    var config = new BuildConfiguration
+                    {
                         ProjectName = "MultiFileTest",
-                        Version = data.Version 
+                        Version = data.Version
                     };
-                    
+
                     // Test that the utility method is available (from Utilities.cs)
                     LogInfo($"Testing {config.ProjectName} v{config.Version}");
-                    
+
                     // Verify version assertions
                     Assert.Equal(data.ExpectedVersion, data.Version);
                     Assert.Equal(data.ExpectedVersion, CakeGeneratorNuGetVersion);
-                    
+
                     // Verify that the excluded class is not available using reflection
                     var assembly = typeof(BuildConfiguration).Assembly;
                     var typeExists = assembly.GetTypes().Any(t => t.Name == "ExcludedClass");
