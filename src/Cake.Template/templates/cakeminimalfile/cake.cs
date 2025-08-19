@@ -1,9 +1,9 @@
-﻿# :sdk Cake.Sdk
+﻿#:sdk Cake.Sdk
 
 Task("TrivialTask")
-	.Does(() =>
+    .Does(() =>
 {
-	Information("Hello, World!");
+    Information("Hello, World!");
 });
 
-RunTarget("TrivialTask");
+RunTarget("TrivialTask"); 
