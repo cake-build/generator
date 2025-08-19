@@ -8,9 +8,9 @@
 	],
 	"name": "Trivial Cake SDK File-based",
 	"description": "A trivial Cake build script using file-based approach with Cake.Sdk",
-	"identity": "Cake.Sdk.TrivialFile",
-	"groupIdentity": "Cake.Sdk.TrivialFile",
-	"shortName": "trivialcakefile",
+	"identity": "Cake.Sdk.MinimalFile",
+	"groupIdentity": "Cake.Sdk.MinimalFile",
+	"shortName": "cakeminimalfile",
 	"sourceName": "cake",
 	"tags": {
 		"language": "C#",

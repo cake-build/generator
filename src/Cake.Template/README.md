@@ -4,10 +4,10 @@ This package contains templates for creating Cake build scripts and projects usi
 
 ## Templates
 
-### Trivial Cake SDK File-based (Requires .NET 10)
-- **Short name**: `trivialcakefile`
+### Minimal Cake SDK File-based (Requires .NET 10)
+- **Short name**: `cakeminimalfile`
 - **Description**: Creates a trivial Cake build script using the file-based approach with `#:sdk Cake.Sdk` directive
-- **Usage**: `dotnet new trivialcakefile`
+- **Usage**: `dotnet new cakeminimalfile`
 
 ### Cake SDK File-based (Requires .NET 10)
 - **Short name**: `cakefile`
@@ -44,7 +44,7 @@ This package contains templates for creating Cake build scripts and projects usi
 
 Create a trivial file-based build script (requires .NET 10). This example will simply print 'Hello World!' to the screen at run time. The goal of this example is to demonstrate that `dotnet` can run a cake script with the help of the Cake SDK:
 ```bash
-dotnet new trivialcakefile
+dotnet new cakeminimalfile
 ```
 
 Create a file-based build script (requires .NET 10):
