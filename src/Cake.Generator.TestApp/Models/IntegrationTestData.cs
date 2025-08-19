@@ -26,6 +26,7 @@ public record IntegrationTestData(
     public FilePath CakeTemplateBuildCsproj { get; } = BaseDirectory.Combine("cake.template").Combine("cake").CombineWithFilePath("cake.csproj");
     public DirectoryPath CakeTemplateSrc { get; } = BaseDirectory.Combine("cake.template").Combine("src");
     public FilePath CakeTemplateBuildMultiCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("cakemultifile.cs");
+    public FilePath CakeTemplateBuildMinimalCs { get; } = BaseDirectory.Combine("cake.template").CombineWithFilePath("cakeminimalfile.cs");
 
     // New cakefile template with example project test properties
     public DirectoryPath CakeTemplateWithExample { get; } = BaseDirectory.Combine("cake.template").Combine("with-example");
@@ -50,7 +51,8 @@ public record IntegrationTestData(
             CakeTemplateBuildCsproj,
             CakeTemplateBuildMultiCs,
             CakeSdkFilesCs,
-            CakeTemplateWithExampleCs
+            CakeTemplateWithExampleCs,
+            CakeTemplateBuildMinimalCs
         ];
 
     public string BaseCode =>
