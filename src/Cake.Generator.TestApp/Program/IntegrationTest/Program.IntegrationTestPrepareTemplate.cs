@@ -7,7 +7,7 @@ public static partial class Program
         data.DotNet("new cakeglobaljson");
 
         // Test cakeminimalfile template
-        data.DotNet($"new cakeminimalfile --name cake --output {data.IntegrationTest.CakeTemplate}");
+        data.DotNet($"new cakeminimalfile --name cakeminimal --output {data.IntegrationTest.CakeTemplate}");
 
         // Test cakefile template without example project (default behavior)
         data.DotNet($"new cakefile --name cake --output {data.IntegrationTest.CakeTemplate}");
