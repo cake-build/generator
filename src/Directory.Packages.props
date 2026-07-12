@@ -13,6 +13,7 @@
     <PackageVersion Include="Cake.NuGet" Version="6.3.0-alpha0050" />
     <PackageVersion Include="Cake.Twitter" Version="6.0.0" />
     <PackageVersion Include="Cake.BuildSystems.Module" Version="9.0.0" />
+    <PackageVersion Include="Cake.Docker" Version="1.5.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.11.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.3.0" />

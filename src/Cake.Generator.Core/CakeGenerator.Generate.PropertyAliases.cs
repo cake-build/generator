@@ -32,7 +32,7 @@ public partial class CakeGenerator
         GenerateXmlDocumentation(sb, method, indent);
 
         // Property signature
-        var returnType = method.ReturnType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        var returnType = FormatReturnType(method);
         sb.AppendLine($"{indent}public static {returnType} {method.Name}");
 
         // Property body

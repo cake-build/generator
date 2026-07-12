@@ -30,8 +30,8 @@ public partial class CakeGenerator
                     {
                         var method = prop.Symbol;
                         var fieldName = $"_{method.Name}";
-                        var returnType = method.ReturnType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-                        sb.AppendLine($"{indent}    private static {returnType}? {fieldName};");
+                        var returnType = FormatCachedBackingFieldType(method);
+                        sb.AppendLine($"{indent}    private static {returnType} {fieldName};");
                     }
 
                     sb.AppendLine();
