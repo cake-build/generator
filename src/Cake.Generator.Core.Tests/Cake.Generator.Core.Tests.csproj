@@ -18,6 +18,7 @@
     <PackageReference Include="Cake.BuildSystems.Module" GeneratePathProperty="true" />
     <PackageReference Include="Cake.NuGet" GeneratePathProperty="true" />
     <PackageReference Include="Cake.DotNetTool.Module" GeneratePathProperty="true" />
+    <PackageReference Include="Cake.Docker" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
     <PackageReference Include="TUnit" />
     <PackageReference Include="Verify.DiffPlex" />
@@ -32,6 +33,11 @@
     </None>
 
     <None Include="$(PkgCake_Common)\lib\net8.0\Cake.Common.xml" Visible="false">
+      <Link>%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Include="$(PkgCake_Docker)\lib\net8.0\Cake.Docker.xml" Visible="false">
       <Link>%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -62,6 +68,7 @@
     <Using Include="VerifyTests" />
     <Using Include="VerifyTUnit" />
     <Using Include="Cake.Generator" />
+    <Using Include="Cake.Docker" />
     <Using Include="System.ComponentModel" />
   </ItemGroup>
 

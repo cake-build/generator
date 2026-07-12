@@ -36,7 +36,7 @@ public partial class CakeGenerator
         GenerateXmlDocumentation(sb, method, indent);
 
         // Method signature
-        var returnType = method.ReturnType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        var returnType = FormatReturnType(method);
         var parameters = method.Parameters.Skip(1); // Skip context parameter
 
         // Handle naming conflicts where method name equals containing class name
@@ -59,7 +59,7 @@ public partial class CakeGenerator
         sb.Append("(");
         sb.Append(string.Join(", ", parameters.Select(p =>
         {
-            var paramType = p.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+            var paramType = FormatParameterType(p);
             var paramName = p.Name;
 
             var result = new StringBuilder();

@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp" />
     <Using Include="Microsoft.CodeAnalysis.Text" />
     <Using Include="System" />
     <Using Include="System.Collections.Immutable" />

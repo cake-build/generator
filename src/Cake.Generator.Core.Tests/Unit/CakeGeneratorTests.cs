@@ -78,4 +78,21 @@ public sealed class CakeGeneratorTests
         var generatedCode = string.Join("\n", runResult.Results.SelectMany(r => r.GeneratedSources).Select(s => s.SourceText.ToString()));
         await Verify(runResult);
     }
+
+    [Test]
+    public async Task RunGenerators_WithDockerAddin(CancellationToken cancellationToken)
+    {
+        // Given
+        var source = CakeGeneratorTestsBase.CommonSources.Program;
+        var dockerLocation = typeof(DockerAliases).Assembly.Location;
+        var dockerReference = MetadataReference.CreateFromFile(
+            dockerLocation,
+            documentation: XmlDocumentationProvider.CreateFromFile(Path.ChangeExtension(dockerLocation, ".xml")));
+        var compilation = CakeGeneratorTestsBase.CreateCompilation(source, dockerReference);
+        // When
+        var driver = CSharpGeneratorDriver.Create(new CakeGenerator());
+        var result = driver.RunGenerators(compilation, cancellationToken);
+        // Then
+        await Verify(result.GetRunResult());
+    }
 }
