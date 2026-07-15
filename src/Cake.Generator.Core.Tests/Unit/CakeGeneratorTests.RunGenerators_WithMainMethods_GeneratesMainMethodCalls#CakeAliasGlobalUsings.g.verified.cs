@@ -1,4 +1,4 @@
-﻿//HintName: CakeAliasGlobalUsings.g.cs
+//HintName: CakeAliasGlobalUsings.g.cs
 // Global usings for all Cake method aliases
 
 global using global::Cake.Cli;

@@ -1,4 +1,4 @@
-﻿//HintName: CakePropertyAliases.g.cs
+//HintName: CakePropertyAliases.g.cs
 
 public static partial class Program
 {

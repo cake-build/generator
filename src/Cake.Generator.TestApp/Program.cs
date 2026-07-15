@@ -102,4 +102,7 @@ Task("GitHubActions")
     .IsDependentOn("IntegrationTest")
     .IsDependentOn("Publish-NuGet-Packages");
 
+Task("Test-Exception-Handling")
+    .Does(TestExceptionHandling);
+
 await RunTargetsAsync(targets);

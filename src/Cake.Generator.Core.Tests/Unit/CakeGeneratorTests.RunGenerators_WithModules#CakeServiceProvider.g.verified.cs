@@ -1,4 +1,4 @@
-﻿//HintName: CakeServiceProvider.g.cs
+//HintName: CakeServiceProvider.g.cs
 
 /// <summary>
 /// Main program class that provides access to the service provider and Cake context.
@@ -31,6 +31,8 @@ public static partial class Program
 
         private static ServiceProvider GetServiceProvider()
         {
+            RegisterExceptionHandlers();
+
             var services = new ServiceCollection();
 
             AddCakeCore(services);

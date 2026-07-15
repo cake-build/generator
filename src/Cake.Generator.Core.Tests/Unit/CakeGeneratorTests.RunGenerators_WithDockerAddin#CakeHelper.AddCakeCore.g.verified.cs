@@ -1,4 +1,4 @@
-﻿//HintName: CakeHelper.AddCakeCore.g.cs
+//HintName: CakeHelper.AddCakeCore.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 

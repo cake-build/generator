@@ -42,6 +42,8 @@ public partial class CakeGenerator
 
                 private static ServiceProvider GetServiceProvider()
                 {
+                    RegisterExceptionHandlers();
+
                     var services = new ServiceCollection();
 
                     AddCakeCore(services);

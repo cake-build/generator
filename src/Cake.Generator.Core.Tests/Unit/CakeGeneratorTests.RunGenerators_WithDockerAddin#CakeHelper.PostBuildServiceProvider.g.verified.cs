@@ -1,4 +1,4 @@
-﻿//HintName: CakeHelper.PostBuildServiceProvider.g.cs
+//HintName: CakeHelper.PostBuildServiceProvider.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 

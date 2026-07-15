@@ -1,4 +1,4 @@
-﻿//HintName: CakeHelper.AddCakeGenerator.g.cs
+//HintName: CakeHelper.AddCakeGenerator.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 

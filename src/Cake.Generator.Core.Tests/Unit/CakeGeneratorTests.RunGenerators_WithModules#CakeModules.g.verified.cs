@@ -1,4 +1,4 @@
-﻿//HintName: CakeModules.g.cs
+//HintName: CakeModules.g.cs
 
 using Cake.Core.Composition;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,4 @@
-﻿//HintName: CakeScriptHost.g.cs
+//HintName: CakeScriptHost.g.cs
 
 /// <summary>
 /// Static proxy methods and properties for IScriptHost.
