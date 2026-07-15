@@ -1,4 +1,4 @@
-﻿//HintName: CakeHelper.AddCakeToolInstaller.g.cs
+//HintName: CakeHelper.AddCakeToolInstaller.g.cs
 
 using Cake.Core.Packaging;
 

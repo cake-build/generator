@@ -1,4 +1,4 @@
-﻿//HintName: CakeMethodAliases.g.cs
+//HintName: CakeMethodAliases.g.cs
 
 public static partial class Program
 {

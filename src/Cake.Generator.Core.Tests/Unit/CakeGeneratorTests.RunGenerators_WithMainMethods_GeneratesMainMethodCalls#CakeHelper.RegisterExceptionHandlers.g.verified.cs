@@ -1,0 +1,67 @@
+//HintName: CakeHelper.RegisterExceptionHandlers.g.cs
+
+public static partial class Program
+{
+    private static partial class Helper
+    {
+        private static bool _exceptionHandlersRegistered;
+
+        /// <summary>
+        /// Registers global exception handlers for unhandled and unobserved task exceptions.
+        /// </summary>
+        private static void RegisterExceptionHandlers()
+        {
+            if (_exceptionHandlersRegistered)
+            {
+                return;
+            }
+
+            _exceptionHandlersRegistered = true;
+
+            AppDomain.CurrentDomain.UnhandledException += static (sender, e) =>
+            {
+                UnhandledException(e);
+                static void UnhandledException(UnhandledExceptionEventArgs e)
+                {
+                    if (e.ExceptionObject is Exception ex)
+                    {
+                        LogCriticalException(ex);
+                    }
+                }
+            };
+
+            TaskScheduler.UnobservedTaskException += static (sender, e) =>
+            {
+                UnobservedTaskException(e);
+                static void UnobservedTaskException(UnobservedTaskExceptionEventArgs e)
+                {
+                    LogCriticalException(e.Exception);
+                    e.SetObserved();
+                }
+            };
+        }
+
+        /// <summary>
+        /// Logs a critical exception to the console and terminates the process.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "The assmbly as been marked as non-AOT compatible.")]
+        private static void LogCriticalException(Exception exception)
+        {
+            if (exception == null)
+            {
+                return;
+            }
+
+            if (exception is CakeReportException { InnerException: { } innerException })
+            {
+                exception = innerException;
+            }
+
+            AnsiConsole.WriteException(
+                exception,
+                ExceptionFormats.ShortenEverything | ExceptionFormats.ShowLinks);
+            Environment.Exit(1);
+        }
+    }
+}

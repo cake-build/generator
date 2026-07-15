@@ -1,4 +1,4 @@
-﻿//HintName: CakeHelper.AddCakeCli.g.cs
+//HintName: CakeHelper.AddCakeCli.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;

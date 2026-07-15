@@ -1,4 +1,4 @@
-﻿//HintName: CakeCakeAppSettings.g.cs
+//HintName: CakeCakeAppSettings.g.cs
 using System.ComponentModel;
 using Spectre.Console.Cli;
 

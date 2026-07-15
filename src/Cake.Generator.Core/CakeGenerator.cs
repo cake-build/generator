@@ -131,6 +131,7 @@ public partial class CakeGenerator : IIncrementalGenerator
             sourceProductionContext.AddSource("CakeHelper.AddCakeGenerator.g.cs", SourceText.From(Helper.AddCakeGenerator, Encoding.UTF8));
             sourceProductionContext.AddSource("CakeHelper.AddCakeToolInstaller.g.cs", SourceText.From(Helper.AddCakeToolInstaller, Encoding.UTF8));
             sourceProductionContext.AddSource("CakeHelper.PostBuildServiceProvider.g.cs", SourceText.From(Helper.PostBuildServiceProvider, Encoding.UTF8));
+            sourceProductionContext.AddSource("CakeHelper.RegisterExceptionHandlers.g.cs", SourceText.From(Helper.RegisterExceptionHandlers, Encoding.UTF8));
 
             // Generate cake app settings
             sourceProductionContext.AddSource("CakeCakeAppSettings.g.cs", SourceText.From(CakeAppSettings, Encoding.UTF8));
