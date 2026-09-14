@@ -6,6 +6,18 @@ public static partial class Program
     /// <param name="toolSettings">The tool settings to use.</param>
     /// <param name="action">The action to configure the command arguments.</param>
     public static void DotNet(this IToolSettings toolSettings, Func<ProcessArgumentBuilder, ProcessArgumentBuilder> action)
+        => DotNet(toolSettings, new Dictionary<string, string>(), action);
+
+    /// <summary>
+    /// Executes a .NET command with the specified action to configure arguments.
+    /// </summary>
+    /// <param name="toolSettings">The tool settings to use.</param>
+    /// <param name="environmentVariables">Additional environment variables, applied on top of the defaults.</param>
+    /// <param name="action">The action to configure the command arguments.</param>
+    public static void DotNet(
+        this IToolSettings toolSettings,
+        IReadOnlyDictionary<string, string> environmentVariables,
+        Func<ProcessArgumentBuilder, ProcessArgumentBuilder> action)
     {
         var dotnet = new CommandSettings
         {
@@ -25,6 +37,11 @@ public static partial class Program
             }
         };
 
+        foreach (var environmentVariable in environmentVariables)
+        {
+            dotnet.EnvironmentVariables[environmentVariable.Key] = environmentVariable.Value;
+        }
+
         var args = new ProcessArgumentBuilder();
 
         Command(
@@ -39,6 +56,18 @@ public static partial class Program
     /// <param name="args">The command arguments as a string.</param>
     public static void DotNet(this IToolSettings toolSettings, string args)
          => DotNet(toolSettings, _ => args);
+
+    /// <summary>
+    /// Executes a .NET command with the specified arguments.
+    /// </summary>
+    /// <param name="toolSettings">The tool settings to use.</param>
+    /// <param name="environmentVariables">Additional environment variables, applied on top of the defaults.</param>
+    /// <param name="args">The command arguments as a string.</param>
+    public static void DotNet(
+        this IToolSettings toolSettings,
+        IReadOnlyDictionary<string, string> environmentVariables,
+        string args)
+         => DotNet(toolSettings, environmentVariables, _ => args);
 
     /// <summary>
     /// Executes a .NET command with the specified formatted arguments.

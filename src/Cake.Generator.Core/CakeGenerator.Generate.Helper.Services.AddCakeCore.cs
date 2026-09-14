@@ -36,10 +36,11 @@ public partial class CakeGenerator
                         services.AddSingleton<ICakeConfiguration>(
                             provider => {
                                 var configProvider = provider.GetRequiredService<CakeConfigurationProvider>();
+                                var environment = provider.GetRequiredService<ICakeEnvironment>();
                                 var arguments = provider.GetRequiredService<ICakeArguments>();
                                 var args = arguments.GetArguments().ToDictionary(x => x.Key, x => x.Value?.FirstOrDefault() ?? string.Empty);
 
-                                return configProvider.CreateConfiguration(Environment.CurrentDirectory, args);
+                                return configProvider.CreateConfiguration(environment.WorkingDirectory, args);
                             }
                         );
 

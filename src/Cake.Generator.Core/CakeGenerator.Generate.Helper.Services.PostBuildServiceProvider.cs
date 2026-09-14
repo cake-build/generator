@@ -40,8 +40,10 @@ public partial class CakeGenerator
                                 Environment.Exit(0);
                             }
 
+                            // Set verbosity from the command line first, so failures while setting
+                            // the working directory are logged accordingly.
                             var log = provider.GetRequiredService<ICakeLog>();
-                            log.Verbosity = settings.Verbosity;
+                            log.Verbosity = settings.Verbosity ?? Verbosity.Normal;
 
                             if (settings.WorkingDirectory is DirectoryPath workingDirectory)
                             {
@@ -56,6 +58,10 @@ public partial class CakeGenerator
 
                                 environment.WorkingDirectory = directory;
                             }
+
+                            // Working directory is final, so configuration can now contribute.
+                            var configuration = provider.GetRequiredService<ICakeConfiguration>();
+                            log.Verbosity = configuration.GetVerbosity(settings.Verbosity);
 
                             // Execute any registered script host actions
                             var scriptHost = provider.GetRequiredService<IScriptHost>();

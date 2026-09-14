@@ -68,6 +68,12 @@ Task("IntegrationTest-Execute")
         Verbosity.Diagnostic,
         IntegrationTestExecute);
 
+Task("IntegrationTest-Verbosity")
+    .IsDependentOn("IntegrationTest-UploadTestCases-Artifacts")
+    .Does<BuildData>(
+        Verbosity.Diagnostic,
+        IntegrationTestVerbosity);
+
 Task("IntegrationTest-IoC")
     .Does<BuildData>(IntegrationTestIoC);
 
@@ -77,6 +83,7 @@ Task("IntegrationTest-Tool")
 Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Tool")
+    .IsDependentOn("IntegrationTest-Verbosity")
     .IsDependentOn("IntegrationTest-Execute");
 
 TaskOf<BuildData>("Auth-NuGet-Feeds")
