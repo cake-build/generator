@@ -24,10 +24,9 @@ public partial class CakeGenerator
             public DirectoryPath? WorkingDirectory { get; set; }
 
             [CommandOption("--verbosity|-v <VERBOSITY>")]
-            [Description("Specifies the amount of information to be displayed.\n(Quiet, Minimal, Normal, Verbose, Diagnostic)")]
+            [Description("Specifies the amount of information to be displayed.\n(Quiet, Minimal, Normal, Verbose, Diagnostic).\nWhen omitted, taken from configuration (defaults to Normal).")]
             [TypeConverter(typeof(Cake.Cli.VerbosityConverter))]
-            [DefaultValue(Verbosity.Normal)]
-            public Verbosity Verbosity { get; set; }
+            public Verbosity? Verbosity { get; set; }
 
             [CommandOption("--description|--descriptions|--showdescription|--showdescriptions")]
             [Description("Shows description for each task.")]

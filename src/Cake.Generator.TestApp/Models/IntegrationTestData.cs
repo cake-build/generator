@@ -34,6 +34,11 @@ public record IntegrationTestData(
     public DirectoryPath CakeTemplateWithExampleSrc { get; } = BaseDirectory.Combine("cake.template").Combine("with-example").Combine("src");
     public FilePath CakeTemplateWithExampleSlnx { get; } = BaseDirectory.Combine("cake.template").Combine("with-example").Combine("src").CombineWithFilePath("Example.slnx");
 
+    // Verbosity precedence test properties
+    public FilePath CakeVerbosityCs { get; } = BaseDirectory.CombineWithFilePath("cake.verbosity.cs");
+    public DirectoryPath CakeVerbosityConfigDirectory { get; } = BaseDirectory.Combine("verbosity-config");
+    public FilePath CakeVerbosityConfigFile { get; } = BaseDirectory.Combine("verbosity-config").CombineWithFilePath("cake.config");
+
     // New multi-file test properties
     public FilePath CakeSdkFilesCs { get; } = BaseDirectory.CombineWithFilePath("cake.sdk.files.cs");
     public DirectoryPath CakeSdkFilesFolder { get; } = BaseDirectory.Combine("cake.sdk.files");
@@ -115,6 +120,34 @@ public record IntegrationTestData(
         #:sdk Cake.Sdk
         #:package {{XunitAssertPackage}}
         {{BaseCode}}
+        """;
+
+    /// <summary>
+    /// Gets a script that asserts the resolved log verbosity against the expected-verbosity argument,
+    /// used to exercise the command line / configuration / default precedence chain.
+    /// </summary>
+    public string CakeVerbosityCsCode =>
+        $$"""
+        #!/usr/bin/env dotnet
+        #:sdk Cake.Sdk
+        #:package {{XunitAssertPackage}}
+
+        using Xunit;
+
+        Task("Assert-Verbosity")
+            .Does(context =>
+                {
+                    var expected = Enum.Parse<Verbosity>(context.Argument<string>("expected-verbosity"), true);
+                    Assert.Equal(expected, context.Log.Verbosity);
+                });
+
+        await RunTargetAsync("Assert-Verbosity");
+        """;
+
+    public string CakeVerbosityConfigCode =>
+        """
+        [Settings]
+        Verbosity=Diagnostic
         """;
 
     public string CakeSdkProjectCsprojCode =>

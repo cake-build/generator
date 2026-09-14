@@ -9,5 +9,15 @@ public static partial class Program
         System.IO.File.WriteAllText(
             data.IntegrationTest.CakeSdkCs.FullPath,
             data.IntegrationTest.CakeSdkCsCode);
+
+        System.IO.File.WriteAllText(
+            data.IntegrationTest.CakeVerbosityCs.FullPath,
+            data.IntegrationTest.CakeVerbosityCsCode);
+
+        EnsureDirectoryExists(data.IntegrationTest.CakeVerbosityConfigDirectory);
+
+        System.IO.File.WriteAllText(
+            data.IntegrationTest.CakeVerbosityConfigFile.FullPath,
+            data.IntegrationTest.CakeVerbosityConfigCode);
     }
 }
