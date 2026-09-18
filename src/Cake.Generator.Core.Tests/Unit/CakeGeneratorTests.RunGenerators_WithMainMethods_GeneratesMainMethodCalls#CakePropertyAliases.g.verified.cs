@@ -1,4 +1,4 @@
-//HintName: CakePropertyAliases.g.cs
+﻿//HintName: CakePropertyAliases.g.cs
 
 public static partial class Program
 {
@@ -21,6 +21,7 @@ public static partial class Program
         private static global::Cake.Common.Build.AzurePipelines.IAzurePipelinesProvider? _AzurePipelines;
         private static global::Cake.Common.Build.WoodpeckerCI.IWoodpeckerCIProvider? _WoodpeckerCI;
         private static global::Cake.Common.Build.Rwx.IRwxProvider? _Rwx;
+        private static global::Cake.Core.Tooling.IToolInstaller? _ToolInstaller;
 
         /// <member name="M:Cake.Common.Build.BuildSystemAliases.BuildSystem(Cake.Core.ICakeContext)">
         /// <summary>
@@ -261,6 +262,20 @@ public static partial class Program
         /// </member>
         public static global::Cake.Common.Build.Rwx.IRwxProvider Rwx
             => _Rwx ??= global::Cake.Common.Build.BuildSystemAliases.Rwx(Context);
+
+        /// <member name="M:Cake.Common.Tools.ToolAliases.ToolInstaller(Cake.Core.ICakeContext)">
+        /// <summary>
+        /// Gets the tool installer instance.
+        /// </summary>
+        /// <returns>The tool installer.</returns>
+        /// <example>
+        /// <code>
+        /// var paths = ToolInstaller.Install(new PackageReference("nuget:?package=xunit.runner.console&amp;version=2.9.3"));
+        /// </code>
+        /// </example>
+        /// </member>
+        public static global::Cake.Core.Tooling.IToolInstaller ToolInstaller
+            => _ToolInstaller ??= global::Cake.Common.Tools.ToolAliases.ToolInstaller(Context);
 
     }
 

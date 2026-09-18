@@ -1,4 +1,4 @@
-//HintName: CakeAliasGlobalUsings.g.cs
+﻿//HintName: CakeAliasGlobalUsings.g.cs
 // Global usings for all Cake method aliases
 
 global using global::Cake.Cli;
@@ -41,6 +41,7 @@ global using global::Cake.Common.Solution.Project;
 global using global::Cake.Common.Solution.Project.Properties;
 global using global::Cake.Common.Solution.Project.XmlDoc;
 global using global::Cake.Common.Text;
+global using global::Cake.Common.Tools;
 global using global::Cake.Common.Tools.Cake;
 global using global::Cake.Common.Tools.Chocolatey;
 global using global::Cake.Common.Tools.Chocolatey.ApiKey;
@@ -159,6 +160,7 @@ global using global::Cake.Core.Configuration;
 global using global::Cake.Core.Diagnostics;
 global using global::Cake.Core.IO;
 global using global::Cake.Core.IO.NuGet;
+global using global::Cake.Core.Packaging;
 global using global::Cake.Core.Reflection;
 global using global::Cake.Core.Scripting;
 global using global::Cake.Core.Tooling;

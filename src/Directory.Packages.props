@@ -8,11 +8,11 @@
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
     <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
-    <PackageVersion Include="Cake.Core" Version="6.3.0" />
-    <PackageVersion Include="Cake.Common" Version="6.3.0" />
-    <PackageVersion Include="Cake.Cli" Version="6.3.0" />
-    <PackageVersion Include="Cake.DotNetTool.Module" Version="6.3.0" />
-    <PackageVersion Include="Cake.NuGet" Version="6.3.0" />
+    <PackageVersion Include="Cake.Core" Version="7.0.0-alpha0009" />
+    <PackageVersion Include="Cake.Common" Version="7.0.0-alpha0009" />
+    <PackageVersion Include="Cake.Cli" Version="7.0.0-alpha0009" />
+    <PackageVersion Include="Cake.DotNetTool.Module" Version="7.0.0-alpha0009" />
+    <PackageVersion Include="Cake.NuGet" Version="7.0.0-alpha0009" />
     <PackageVersion Include="Cake.Twitter" Version="6.0.0" />
     <PackageVersion Include="Cake.BuildSystems.Module" Version="9.0.0" />
     <PackageVersion Include="Cake.Docker" Version="1.5.0" />

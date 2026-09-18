@@ -143,7 +143,7 @@ The Cake.Generator package is included by default with Cake.Sdk, providing autom
 
 ### Tool Installation
 
-Install tools using the provided methods:
+Install tools using the Cake.Common `InstallTool` / `InstallTools` aliases (generated as `Program` proxies):
 
 ```csharp
 // Install a single tool
