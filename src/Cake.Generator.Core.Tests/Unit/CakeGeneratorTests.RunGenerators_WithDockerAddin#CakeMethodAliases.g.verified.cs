@@ -1,4 +1,4 @@
-//HintName: CakeMethodAliases.g.cs
+﻿//HintName: CakeMethodAliases.g.cs
 
 public static partial class Program
 {
@@ -2766,6 +2766,86 @@ public static partial class Program
         /// </member>
         public static global::Cake.Common.Text.TextTransformation<global::Cake.Core.Text.TextTransformationTemplate> TransformTextFile(global::Cake.Core.IO.FilePath path, string leftPlaceholder, string rightPlaceholder)
             => global::Cake.Common.Text.TextTransformationAliases.TransformTextFile(Context, path, leftPlaceholder, rightPlaceholder);
+
+        /// <member name="M:Cake.Common.Tools.ToolAliases.InstallTool(Cake.Core.ICakeContext,Cake.Core.Packaging.PackageReference)">
+        /// <summary>
+        /// Installs a tool using the specified package reference.
+        /// </summary>
+        /// <param name="tool">The package reference for the tool to install.</param>
+        /// <returns>An array of file paths where the tool was installed.</returns>
+        /// <example>
+        /// <code>
+        /// Task("Load-JMeter")
+        /// .Does(() =&gt;
+        /// {
+        /// InstallTool(new PackageReference("nuget:?package=JMeter&amp;version=5.6.3"));
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static global::Cake.Core.IO.FilePath[] InstallTool(global::Cake.Core.Packaging.PackageReference tool)
+            => global::Cake.Common.Tools.ToolAliases.InstallTool(Context, tool);
+
+        /// <member name="M:Cake.Common.Tools.ToolAliases.InstallTool(Cake.Core.ICakeContext,System.String)">
+        /// <summary>
+        /// Installs a tool using the specified tool string.
+        /// </summary>
+        /// <param name="tool">The tool string to install.</param>
+        /// <returns>An array of file paths where the tool was installed.</returns>
+        /// <example>
+        /// <code>
+        /// Task("Load-JMeter")
+        /// .Does(() =&gt;
+        /// {
+        /// InstallTool("nuget:?package=JMeter&amp;version=5.6.3");
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static global::Cake.Core.IO.FilePath[] InstallTool(string tool)
+            => global::Cake.Common.Tools.ToolAliases.InstallTool(Context, tool);
+
+        /// <member name="M:Cake.Common.Tools.ToolAliases.InstallTools(Cake.Core.ICakeContext,Cake.Core.Packaging.PackageReference[])">
+        /// <summary>
+        /// Installs multiple tools using the specified package references.
+        /// </summary>
+        /// <param name="tools">The package references for the tools to install.</param>
+        /// <returns>An array of tuples containing the package reference and installed file paths for each tool.</returns>
+        /// <example>
+        /// <code>
+        /// Task("Restore-Tools")
+        /// .Does(() =&gt;
+        /// {
+        /// InstallTools(
+        /// new PackageReference("nuget:?package=xunit.runner.console&amp;version=2.9.3"),
+        /// new PackageReference("dotnet:?package=GitVersion.Tool&amp;version=6.8.2"));
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static (global::Cake.Core.Packaging.PackageReference, global::Cake.Core.IO.FilePath[])[] InstallTools(params global::Cake.Core.Packaging.PackageReference[] tools)
+            => global::Cake.Common.Tools.ToolAliases.InstallTools(Context, tools);
+
+        /// <member name="M:Cake.Common.Tools.ToolAliases.InstallTools(Cake.Core.ICakeContext,System.String[])">
+        /// <summary>
+        /// Installs multiple tools using the specified tool strings.
+        /// </summary>
+        /// <param name="tools">The tool strings to install.</param>
+        /// <returns>An array of tuples containing the package reference and installed file paths for each tool.</returns>
+        /// <example>
+        /// <code>
+        /// Task("Restore-Tools")
+        /// .Does(() =&gt;
+        /// {
+        /// InstallTools(
+        /// "nuget:?package=xunit.runner.console&amp;version=2.9.3",
+        /// "dotnet:?package=GitVersion.Tool&amp;version=6.8.2");
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static (global::Cake.Core.Packaging.PackageReference, global::Cake.Core.IO.FilePath[])[] InstallTools(params string[] tools)
+            => global::Cake.Common.Tools.ToolAliases.InstallTools(Context, tools);
 
         /// <member name="M:Cake.Common.Tools.Cake.CakeAliases.CakeExecuteScript(Cake.Core.ICakeContext,Cake.Core.IO.FilePath)">
         /// <summary>

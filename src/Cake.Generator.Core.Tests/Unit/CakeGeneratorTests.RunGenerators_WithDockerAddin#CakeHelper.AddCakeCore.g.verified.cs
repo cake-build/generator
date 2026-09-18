@@ -1,4 +1,4 @@
-//HintName: CakeHelper.AddCakeCore.g.cs
+﻿//HintName: CakeHelper.AddCakeCore.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -51,6 +51,7 @@ public static partial class Program
             services.AddSingleton<IToolRepository, ToolRepository>();
             services.AddSingleton<IToolResolutionStrategy, ToolResolutionStrategy>();
             services.AddSingleton<IToolLocator, ToolLocator>();
+            services.AddSingleton<IToolInstaller, ToolInstaller>();
 
             // Logging
             services.AddSingleton<IConsole, CakeConsole>();

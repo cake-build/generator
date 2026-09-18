@@ -49,7 +49,6 @@ public partial class CakeGenerator
                     AddCakeCore(services);
                     AddCakeCli(services);
                     AddCakeGenerator(services);
-                    AddCakeToolInstaller(services);
                     RegisterModules(services);
                     RegisterServices(services);
 

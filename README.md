@@ -249,7 +249,7 @@ This will output the version information when you run the `Version-Info` task.
 
 ### Installing Tools
 
-The generator provides methods to install tools that can be used in your Cake script. Here are examples of how to use them:
+Cake.Common aliases (`InstallTool` / `InstallTools`) are generated as `Program` proxies so you can install tools from your Cake script. Here are examples of how to use them:
 
 ```csharp
 // Install a single tool using a package reference string

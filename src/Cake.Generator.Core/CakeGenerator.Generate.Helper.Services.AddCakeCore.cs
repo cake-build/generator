@@ -64,6 +64,7 @@ public partial class CakeGenerator
                         services.AddSingleton<IToolRepository, ToolRepository>();
                         services.AddSingleton<IToolResolutionStrategy, ToolResolutionStrategy>();
                         services.AddSingleton<IToolLocator, ToolLocator>();
+                        services.AddSingleton<IToolInstaller, ToolInstaller>();
 
                         // Logging
                         services.AddSingleton<IConsole, CakeConsole>();
