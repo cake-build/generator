@@ -157,7 +157,7 @@ public static partial class Program
 
 ### Resolving services from IoC
 
-Services can be resolved from the IoC container using the static `ServiceProvider` property. Here's how to use it in your tasks:
+Services are resolved through the Cake.Common `ServiceProvider` property alias (`ICakeContext.ServiceProvider`), not a generator-specific `Program.ServiceProvider`. The alias is imported via `global using static Program.Cake_Common` and brings in `Microsoft.Extensions.DependencyInjection` so `GetRequiredService` / `GetService` work in scripts:
 
 ```csharp
 Task("MyTask")
@@ -174,7 +174,7 @@ Task("MyTask")
     });
 ```
 
-The `ServiceProvider` is available throughout your build script, making it easy to access your registered services wherever needed.
+The `ServiceProvider` alias is available throughout your build script, making it easy to access your registered services wherever needed.
 
 ### Multiple Main Entry Points and IoC Script Host Integration
 

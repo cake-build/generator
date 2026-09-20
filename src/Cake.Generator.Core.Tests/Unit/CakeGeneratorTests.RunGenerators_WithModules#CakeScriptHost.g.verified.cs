@@ -1,4 +1,4 @@
-//HintName: CakeScriptHost.g.cs
+﻿//HintName: CakeScriptHost.g.cs
 
 /// <summary>
 /// Static proxy methods and properties for IScriptHost.
@@ -24,7 +24,7 @@ public static partial class Program
         {
             lock(_scriptHostLock)
             {
-                _scriptHost = ServiceProvider.GetRequiredService<IScriptHost>();
+                _scriptHost = Helper.ServiceProvider.GetRequiredService<IScriptHost>();
             }
             
             PostScriptHost();

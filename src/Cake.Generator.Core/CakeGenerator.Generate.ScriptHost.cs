@@ -54,7 +54,7 @@ public partial class CakeGenerator
                     {
                         lock(_scriptHostLock)
                         {
-                            _scriptHost = ServiceProvider.GetRequiredService<IScriptHost>();
+                            _scriptHost = Helper.ServiceProvider.GetRequiredService<IScriptHost>();
                         }
                         
                         PostScriptHost();

@@ -5,6 +5,7 @@ public static partial class Program
     public static partial class Cake_Common
     {
         // Backing fields for cached properties
+        private static global::System.IServiceProvider? _ServiceProvider;
         private static global::Cake.Common.Build.BuildSystem? _BuildSystem;
         private static global::Cake.Common.Build.AppVeyor.IAppVeyorProvider? _AppVeyor;
         private static global::Cake.Common.Build.TeamCity.ITeamCityProvider? _TeamCity;
@@ -22,6 +23,28 @@ public static partial class Program
         private static global::Cake.Common.Build.WoodpeckerCI.IWoodpeckerCIProvider? _WoodpeckerCI;
         private static global::Cake.Common.Build.Rwx.IRwxProvider? _Rwx;
         private static global::Cake.Core.Tooling.IToolInstaller? _ToolInstaller;
+
+        /// <member name="M:Cake.Common.ServiceProviderAliases.ServiceProvider(Cake.Core.ICakeContext)">
+        /// <summary>
+        /// Gets the service provider.
+        /// </summary>
+        /// <returns>The service provider.</returns>
+        /// <example>
+        /// <code>
+        /// #module nuget:?package=Cake.MyService.Module&amp;version=1.0.0
+        /// Task("MyTask")
+        /// .Does(() =&gt;
+        /// {
+        /// var log = ServiceProvider.GetRequiredService&lt;ICakeLog&gt;();
+        /// log.Information("Hello from IoC");
+        /// var myService = ServiceProvider.GetRequiredService&lt;IMyService&gt;();
+        /// myService.DoSomething();
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static global::System.IServiceProvider ServiceProvider
+            => _ServiceProvider ??= global::Cake.Common.ServiceProviderAliases.ServiceProvider(Context);
 
         /// <member name="M:Cake.Common.Build.BuildSystemAliases.BuildSystem(Cake.Core.ICakeContext)">
         /// <summary>

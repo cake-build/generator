@@ -158,7 +158,7 @@ InstallTools(
 
 ### IoC Container
 
-Register and resolve services using the IoC container:
+Register services with `RegisterServices(IServiceCollection)`. Resolve them through the Cake.Common `ServiceProvider` property alias (`ICakeContext.ServiceProvider`), not a generator-specific `Program.ServiceProvider`:
 
 ```csharp
 // Register services
