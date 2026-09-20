@@ -165,7 +165,6 @@ global using global::Cake.Core.Reflection;
 global using global::Cake.Core.Scripting;
 global using global::Cake.Core.Tooling;
 global using global::Cake.Docker;
-global using global::Microsoft.Extensions.DependencyInjection;
 global using global::Spectre.Console;
 global using global::System;
 global using global::System.Collections.Concurrent;
@@ -175,6 +174,12 @@ global using global::System.Linq;
 global using global::System.Text;
 global using global::System.Text.Json;
 global using global::System.Threading.Tasks;
+
+global using IServiceCollection = global::Microsoft.Extensions.DependencyInjection.IServiceCollection;
+global using ServiceCollection = global::Microsoft.Extensions.DependencyInjection.ServiceCollection;
+global using static global::Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions;
+global using static global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions;
+global using static global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions;
 
 global using static global::Program;
 // Global static usings for generated Cake alias classes

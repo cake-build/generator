@@ -1,5 +1,6 @@
 ﻿//HintName: CakeHelper.AddCakeCore.g.cs
 
+using Cake.Cli;
 using Microsoft.Extensions.DependencyInjection;
 
 public static partial class Program
@@ -10,15 +11,11 @@ public static partial class Program
             IServiceCollection services
             )
         {
-            // Execution
-            services.AddSingleton<ICakeContext, CakeContext>();
+            // Shared Cake.Cli composition (filtered — not UseCakeDefaultModules)
+            services.AddCakeDiagnostics();
+            services.UseModule<global::Cake.Core.Modules.CoreModule>();
 
-            var cakeDataService = new CakeDataService();
-
-            services.AddSingleton<ICakeDataResolver>(cakeDataService);
-            services.AddSingleton<ICakeDataService>(cakeDataService);
-
-            // Utilities
+            // Sdk-specific extras CoreModule / diagnostics do not provide
             services.AddSingleton<CakeConfigurationProvider>();
             services.AddSingleton<ICakeConfiguration>(
                 provider => {
@@ -30,38 +27,7 @@ public static partial class Program
                     return configProvider.CreateConfiguration(environment.WorkingDirectory, args);
                 }
             );
-
-            // Environment
-            services.AddSingleton<ICakeEnvironment, CakeEnvironment>();
-            services.AddSingleton<ICakeRuntime, CakeRuntime>();
-            services.AddSingleton<ICakePlatform, CakePlatform>();
-
-            // IO
-            services.AddSingleton<IFileSystem, FileSystem>();
-            services.AddSingleton<IGlobber, Globber>();
-            services.AddSingleton<IProcessRunner, ProcessRunner>();
-            services.AddSingleton<INuGetToolResolver, NuGetToolResolver>();
-            services.AddSingleton<IRegistry, WindowsRegistry>();
-
-            // Reflection
-            services.AddSingleton<IAssemblyLoader, AssemblyLoader>();
-            services.AddSingleton<IAssemblyVerifier, AssemblyVerifier>();
-
-            // Tooling
-            services.AddSingleton<IToolRepository, ToolRepository>();
-            services.AddSingleton<IToolResolutionStrategy, ToolResolutionStrategy>();
-            services.AddSingleton<IToolLocator, ToolLocator>();
-            services.AddSingleton<IToolInstaller, ToolInstaller>();
-
-            // Logging
-            services.AddSingleton<IConsole, CakeConsole>();
-            services.AddSingleton<ICakeLog, CakeBuildLog>();
-            services.AddSingleton(AnsiConsole.Console);
-
-            // Scripting
             services.AddSingleton<ICakeReportPrinter, global::Cake.Cli.CakeSpectreReportPrinter>();
-            services.AddSingleton<IExecutionStrategy, DefaultExecutionStrategy>();
-            services.AddSingleton<ICakeEngine, CakeEngine>();
 
             return services;
         }

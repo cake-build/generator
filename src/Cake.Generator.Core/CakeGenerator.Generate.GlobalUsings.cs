@@ -10,7 +10,9 @@ public partial class CakeGenerator
     {
         var excludedNamespaces = new HashSet<string>(StringComparer.Ordinal)
         {
-            "Cake.Common.Build" // Exclude Cake.Common.Build to avoid conflicts with BuildSystem property and class.
+            "Cake.Common.Build", // Exclude Cake.Common.Build to avoid conflicts with BuildSystem property and class.
+            // Importing this namespace would collide with the Cake.Common ServiceProvider alias.
+            "Microsoft.Extensions.DependencyInjection"
         };
 
         var foundNamespaces = new HashSet<string>(StringComparer.Ordinal)
@@ -23,7 +25,6 @@ public partial class CakeGenerator
             "System.Text.Json",
             "System.Threading.Tasks",
             "System.IO",
-            "Microsoft.Extensions.DependencyInjection",
             "Cake.Core",
             "Cake.Core.Configuration",
             "Cake.Core.Diagnostics",
@@ -64,6 +65,13 @@ public partial class CakeGenerator
                                     .OrderBy(x => x)
                                     .Select(ns => $"global using global::{ns};"));
         sb.StringBuilder.AppendLine(globalUsings);
+        sb.StringBuilder.AppendLine();
+
+        sb.StringBuilder.AppendLine("global using IServiceCollection = global::Microsoft.Extensions.DependencyInjection.IServiceCollection;");
+        sb.StringBuilder.AppendLine("global using ServiceCollection = global::Microsoft.Extensions.DependencyInjection.ServiceCollection;");
+        sb.StringBuilder.AppendLine("global using static global::Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions;");
+        sb.StringBuilder.AppendLine("global using static global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions;");
+        sb.StringBuilder.AppendLine("global using static global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions;");
         sb.StringBuilder.AppendLine();
 
         sb.StringBuilder.AppendLine($"global using static global::Program;");

@@ -1,6 +1,6 @@
-//HintName: CakeModules.g.cs
+﻿//HintName: CakeModules.g.cs
 
-using Cake.Core.Composition;
+using Cake.Cli;
 using Microsoft.Extensions.DependencyInjection;
 
 public static partial class Program
@@ -9,119 +9,20 @@ public static partial class Program
     {
         /// <summary>
         /// Registers all discovered Cake modules with the service collection.
-        /// This method is called between AddCakeCore calls in GetServiceProvider.
+        /// This method is called from GetServiceProvider after AddCakeCore.
         /// </summary>
         /// <param name="services">The service collection to register modules with.</param>
         static partial void RegisterModules(IServiceCollection services)
         {
-            var adapter = new ServiceCollectionAdapter();
-
             // Register GitHubActionsModule
-            new global::Cake.GitHubActions.Module.GitHubActionsModule().Register(adapter);
+            services.UseModule<global::Cake.GitHubActions.Module.GitHubActionsModule>();
 
             // Register NuGetModule
-            new global::Cake.NuGet.NuGetModule().Register(adapter);
+            services.UseModule<global::Cake.NuGet.NuGetModule>();
 
             // Register DotNetToolModule
-            new global::Cake.DotNetTool.Module.DotNetToolModule().Register(adapter);
+            services.UseModule<global::Cake.DotNetTool.Module.DotNetToolModule>();
 
-            // Transfer all registered services to the IoC container
-            adapter.Transfer(services);
-        }
-
-        private sealed class ServiceRegistration : ICakeRegistrationBuilder
-        {
-            [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)]
-            public Type ImplementationType { get; }
-            public object? Instance { get; set; }
-            public Type? ServiceType { get; set; }
-            public ServiceLifetime Lifetime { get; set; }
-
-            public ServiceRegistration([System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
-            {
-                ImplementationType = implementationType;
-            }
-
-            public ICakeRegistrationBuilder As(Type type)
-            {
-                ServiceType = type;
-                return this;
-            }
-
-            public ICakeRegistrationBuilder AsSelf()
-            {
-                ServiceType = ImplementationType;
-                return this;
-            }
-
-            public ICakeRegistrationBuilder Singleton()
-            {
-                Lifetime = ServiceLifetime.Singleton;
-                return this;
-            }
-
-            public ICakeRegistrationBuilder Transient()
-            {
-                Lifetime = ServiceLifetime.Transient;
-                return this;
-            }
-        }
-
-        private sealed class ServiceCollectionAdapter : ICakeContainerRegistrar
-        {
-            private readonly List<ServiceRegistration> _registrations;
-
-            public ServiceCollectionAdapter()
-            {
-                _registrations = new List<ServiceRegistration>();
-            }
-
-            public ICakeRegistrationBuilder RegisterInstance<TImplementation>(TImplementation instance)
-                where TImplementation : class
-            {
-#pragma warning disable IL2087 // 'TImplementation' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicConstructors' in call to 'ServiceRegistration.ServiceRegistration(Type)'
-                var registration = new ServiceRegistration(typeof(TImplementation))
-                {
-                    Instance = instance,
-                    Lifetime = ServiceLifetime.Singleton,
-                    ServiceType = typeof(TImplementation),
-                };
-#pragma warning restore IL2087
-
-                _registrations.Add(registration);
-                return registration;
-            }
-
-            public ICakeRegistrationBuilder RegisterType(Type type)
-            {
-#pragma warning disable IL2067 // 'type' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicConstructors' in call to 'ServiceRegistration.ServiceRegistration(Type)'
-                var registration = new ServiceRegistration(type)
-                {
-                    Lifetime = ServiceLifetime.Transient,
-                    ServiceType = type,
-                };
-#pragma warning restore IL2067
-
-                _registrations.Add(registration);
-                return registration;
-            }
-
-            public void Transfer(IServiceCollection services)
-            {
-                foreach (var registration in _registrations)
-                {
-                    if (registration.Instance != null)
-                    {
-                        var descriptor = ServiceDescriptor.Describe(registration.ServiceType!, f => registration.Instance, registration.Lifetime);
-                        services.Add(descriptor);
-                    }
-                    else
-                    {
-                        var descriptor = ServiceDescriptor.Describe(registration.ServiceType!, registration.ImplementationType, registration.Lifetime);
-                        services.Add(descriptor);
-                    }
-                }
-            }
         }
     }
 }
