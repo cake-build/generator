@@ -95,6 +95,15 @@ public static partial class Program
     /// </summary>
     /// <param name="name">The name of the task.</param>
     /// <returns>A <see cref="T:Cake.Core.CakeTaskBuilder" />.</returns>
+    /// <example>
+    /// <code>
+    /// Task("Hello")
+    /// .Does(() =&gt;
+    /// {
+    /// Information("Hello World");
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static global::Cake.Core.CakeTaskBuilder Task(string name)
         => ScriptHost.Task(name);
@@ -106,6 +115,15 @@ public static partial class Program
     /// <param name="name">The name of the task.</param>
     /// <returns>A <see cref="T:Cake.Core.CakeTaskBuilder" />.</returns>
     /// <typeparam name="TData">The type of the data context.</typeparam>
+    /// <example>
+    /// <code>
+    /// TaskOf&lt;Foo&gt;("Hello")
+    /// .Does(data =&gt;
+    /// {
+    /// Information("Hello {0}", data.Place);
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static global::Cake.Core.CakeTaskBuilder<TData> TaskOf<TData>(string name)
         where TData : class
@@ -189,6 +207,14 @@ public static partial class Program
     /// If the task setup fails, its task will not be executed but the task teardown will be performed.
     /// </summary>
     /// <param name="action">The action to be executed.</param>
+    /// <example>
+    /// <code>
+    /// TaskSetup(context =&gt;
+    /// {
+    /// Information("Starting {0}", context.Task.Name);
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static void TaskSetup(global::System.Action<global::Cake.Core.ITaskSetupContext> action)
         => ScriptHost.TaskSetup(action);
@@ -200,6 +226,14 @@ public static partial class Program
     /// </summary>
     /// <typeparam name="TData">The data type.</typeparam>
     /// <param name="action">The action to be executed.</param>
+    /// <example>
+    /// <code>
+    /// TaskSetup&lt;Foo&gt;((context, data) =&gt;
+    /// {
+    /// Information("Starting {0} for {1}", context.Task.Name, data.Place);
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static void TaskSetup<TData>(global::System.Action<global::Cake.Core.ITaskSetupContext, TData> action)
         where TData : class
@@ -211,6 +245,14 @@ public static partial class Program
     /// If a task setup action or a task fails with or without recovery, the specified task teardown action will still be executed.
     /// </summary>
     /// <param name="action">The action to be executed.</param>
+    /// <example>
+    /// <code>
+    /// TaskTeardown(context =&gt;
+    /// {
+    /// Information("Finished {0}", context.Task.Name);
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static void TaskTeardown(global::System.Action<global::Cake.Core.ITaskTeardownContext> action)
         => ScriptHost.TaskTeardown(action);
@@ -222,6 +264,14 @@ public static partial class Program
     /// </summary>
     /// <typeparam name="TData">The data type.</typeparam>
     /// <param name="action">The action to be executed.</param>
+    /// <example>
+    /// <code>
+    /// TaskTeardown&lt;Foo&gt;((context, data) =&gt;
+    /// {
+    /// Information("Finished {0} for {1}", context.Task.Name, data.Place);
+    /// });
+    /// </code>
+    /// </example>
     /// </member>
     public static void TaskTeardown<TData>(global::System.Action<global::Cake.Core.ITaskTeardownContext, TData> action)
         where TData : class
@@ -233,6 +283,12 @@ public static partial class Program
     /// </summary>
     /// <param name="target">The target to run.</param>
     /// <returns>The resulting report.</returns>
+    /// <example>
+    /// <code>
+    /// var target = Argument("target", "Default");
+    /// RunTarget(target);
+    /// </code>
+    /// </example>
     /// </member>
     public static global::Cake.Core.CakeReport RunTarget(string target)
         => ScriptHost.RunTarget(target);
@@ -243,6 +299,12 @@ public static partial class Program
     /// </summary>
     /// <param name="target">The target to run.</param>
     /// <returns>The resulting report.</returns>
+    /// <example>
+    /// <code>
+    /// var target = Argument("target", "Default");
+    /// await RunTargetAsync(target);
+    /// </code>
+    /// </example>
     /// </member>
     public static global::System.Threading.Tasks.Task<global::Cake.Core.CakeReport> RunTargetAsync(string target)
         => ScriptHost.RunTargetAsync(target);
@@ -253,6 +315,11 @@ public static partial class Program
     /// </summary>
     /// <param name="targets">The targets to run.</param>
     /// <returns>The resulting report.</returns>
+    /// <example>
+    /// <code>
+    /// RunTargets(["Clean", "Build"]);
+    /// </code>
+    /// </example>
     /// </member>
     public static global::Cake.Core.CakeReport RunTargets(global::System.Collections.Generic.IEnumerable<string> targets)
         => ScriptHost.RunTargets(targets);
@@ -263,6 +330,11 @@ public static partial class Program
     /// </summary>
     /// <param name="targets">The targets to run.</param>
     /// <returns>The resulting report.</returns>
+    /// <example>
+    /// <code>
+    /// await RunTargetsAsync(["Clean", "Build"]);
+    /// </code>
+    /// </example>
     /// </member>
     public static global::System.Threading.Tasks.Task<global::Cake.Core.CakeReport> RunTargetsAsync(global::System.Collections.Generic.IEnumerable<string> targets)
         => ScriptHost.RunTargetsAsync(targets);

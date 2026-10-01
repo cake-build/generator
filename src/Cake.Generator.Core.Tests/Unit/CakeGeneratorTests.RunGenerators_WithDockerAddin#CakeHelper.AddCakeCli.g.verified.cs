@@ -1,4 +1,4 @@
-//HintName: CakeHelper.AddCakeCli.g.cs
+﻿//HintName: CakeHelper.AddCakeCli.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
@@ -71,7 +71,7 @@ public static partial class Program
 
         private class CakeArgumentsCommand : Command<CakeAppSettings>
         {
-            protected override int Execute(Spectre.Console.Cli.CommandContext context, CakeAppSettings settings, CancellationToken cancelationToken)
+            public override int Execute(Spectre.Console.Cli.CommandContext context, CakeAppSettings settings, CancellationToken cancelationToken)
             {
                 return 0;
             }

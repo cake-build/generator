@@ -313,7 +313,7 @@ dotnet run --project src/Cake.Generator.TestApp/Cake.Generator.TestApp.csproj
 
 - .NET 10 SDK
 - .NET Standard 2.0+ (for the source generator)
-- .NET 8.0+ (for the test application)
+- .NET 10.0+ (for the test application)
 - Cake.Core package for ICakeContext and annotations
 
 ## License
