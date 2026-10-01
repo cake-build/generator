@@ -27,8 +27,6 @@ public partial class CakeGenerator
 
     private static void GenerateMethod(StringBuilder sb, MethodInfo methodInfo, int indentLevel)
     {
-        const string TrueValue = "true";
-        const string FalseValue = "false";
         var method = methodInfo.Symbol;
         var indent = new string(' ', indentLevel * 4);
 
@@ -95,21 +93,7 @@ public partial class CakeGenerator
             if (p.HasExplicitDefaultValue)
             {
                 result.Append(" = ");
-                switch (p.ExplicitDefaultValue)
-                {
-                    case null:
-                        result.Append("null");
-                        break;
-                    case string str:
-                        result.Append($"\"{str}\"");
-                        break;
-                    case bool b:
-                        result.Append(b ? TrueValue : FalseValue);
-                        break;
-                    default:
-                        result.Append(p.ExplicitDefaultValue);
-                        break;
-                }
+                result.Append(FormatExplicitDefaultValue(p.ExplicitDefaultValue));
             }
 
             return result.ToString();
