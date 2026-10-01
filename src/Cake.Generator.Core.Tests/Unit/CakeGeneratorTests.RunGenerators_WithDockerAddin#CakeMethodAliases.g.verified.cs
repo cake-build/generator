@@ -18,12 +18,12 @@ public static partial class Program
         /// // Cake.exe .\hasargument.cake -myArgument="is specified"
         /// if (HasArgument(argumentName))
         /// {
-        /// Information("{0} is specified", argumentName);
+        ///     Information("{0} is specified", argumentName);
         /// }
         /// // Cake.exe .\hasargument.cake
         /// else
         /// {
-        /// Warning("{0} not specified", argumentName);
+        ///     Warning("{0} not specified", argumentName);
         /// }
         /// </code>
         /// </example>
@@ -45,7 +45,7 @@ public static partial class Program
         /// var loopCount = Argument&lt;int&gt;("loopCount");
         /// for(var index = 0;index&lt;loopCount; index++)
         /// {
-        /// Information("Index {0}", index);
+        ///     Information("Index {0}", index);
         /// }
         /// </code>
         /// </example>
@@ -148,7 +148,7 @@ public static partial class Program
         /// var loopCount = Argument&lt;int&gt;("loopCount", 10);
         /// for(var index = 0;index&lt;loopCount; index++)
         /// {
-        /// Information("Index {0}", index);
+        ///     Information("Index {0}", index);
         /// }
         /// </code>
         /// </example>
@@ -165,15 +165,15 @@ public static partial class Program
         /// var args = context.Arguments();
         /// if (args.ContainsKey("verbose"))
         /// {
-        /// Information("Verbose output enabled");
+        ///     Information("Verbose output enabled");
         /// }
         /// foreach (var arg in args)
         /// {
-        /// Information(
-        /// "Key: {0}\tValue: \"{1}\"",
-        /// arg.Key,
-        /// string.Join(";", arg.Value)
-        /// );
+        ///     Information(
+        ///         "Key: {0}\tValue: \"{1}\"",
+        ///         arg.Key,
+        ///         string.Join(";", arg.Value)
+        ///         );
         /// }
         /// </code>
         /// </example>
@@ -191,11 +191,11 @@ public static partial class Program
         /// <code>
         /// Setup(context =&gt;
         /// {
-        /// if (!context.IsDryRun())
-        /// {
-        /// // Do things that you don't want to
-        /// // do during a dry run.
-        /// }
+        ///     if (!context.IsDryRun())
+        ///     {
+        ///         // Do things that you don't want to
+        ///         // do during a dry run.
+        ///     }
         /// });
         /// </code>
         /// </example>
@@ -245,15 +245,15 @@ public static partial class Program
         /// string path;
         /// if (envVars.TryGetValue("PATH", out path))
         /// {
-        /// Information("Path: {0}", path);
+        ///     Information("Path: {0}", path);
         /// }
         /// foreach (var envVar in envVars)
         /// {
-        /// Information(
-        /// "Key: {0}\tValue: \"{1}\"",
-        /// envVar.Key,
-        /// envVar.Value
-        /// );
+        ///     Information(
+        ///         "Key: {0}\tValue: \"{1}\"",
+        ///         envVar.Key,
+        ///         envVar.Value
+        ///         );
         /// }
         /// </code>
         /// </example>
@@ -270,13 +270,13 @@ public static partial class Program
         /// <code>
         /// if (HasEnvironmentVariable("SOME_ENVIRONMENT_VARIABLE"))
         /// {
-        /// Information("The environment variable was present.");
+        ///     Information("The environment variable was present.");
         /// }
         /// </code>
         /// </example>
         /// <param name="variable">The environment variable.</param>
         /// <returns>
-        /// <c>true</c> if the environment variable exist; otherwise <c>false</c>.
+        ///   <c>true</c> if the environment variable exist; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool HasEnvironmentVariable(string variable)
@@ -290,12 +290,12 @@ public static partial class Program
         /// <code>
         /// if (IsRunningOnWindows())
         /// {
-        /// Information("Windows!");
+        ///     Information("Windows!");
         /// }
         /// </code>
         /// </example>
         /// <returns>
-        /// <c>true</c> if the build script is running on Windows; otherwise <c>false</c>.
+        ///   <c>true</c> if the build script is running on Windows; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool IsRunningOnWindows()
@@ -309,12 +309,12 @@ public static partial class Program
         /// <code>
         /// if (IsRunningOnUnix())
         /// {
-        /// Information("Not Windows!");
+        ///     Information("Not Windows!");
         /// }
         /// </code>
         /// </example>
         /// <returns>
-        /// <c>true</c> if the build script running on a Unix or Linux based system; otherwise <c>false</c>.
+        ///   <c>true</c> if the build script running on a Unix or Linux based system; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool IsRunningOnUnix()
@@ -328,12 +328,12 @@ public static partial class Program
         /// <code>
         /// if (IsRunningOnMacOs())
         /// {
-        /// Information("macOS!");
+        ///     Information("macOS!");
         /// }
         /// </code>
         /// </example>
         /// <returns>
-        /// <c>true</c> if the build script running on a macOS based system; otherwise <c>false</c>.
+        ///   <c>true</c> if the build script running on a macOS based system; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool IsRunningOnMacOs()
@@ -347,12 +347,12 @@ public static partial class Program
         /// <code>
         /// if (IsRunningOnFreeBSD())
         /// {
-        /// Information("FreeBSD!");
+        ///     Information("FreeBSD!");
         /// }
         /// </code>
         /// </example>
         /// <returns>
-        /// <c>true</c> if the build script running on a FreeBSD based system; otherwise <c>false</c>.
+        ///   <c>true</c> if the build script running on a FreeBSD based system; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool IsRunningOnFreeBSD()
@@ -366,12 +366,12 @@ public static partial class Program
         /// <code>
         /// if (IsRunningOnLinux())
         /// {
-        /// Information("Linux!");
+        ///     Information("Linux!");
         /// }
         /// </code>
         /// </example>
         /// <returns>
-        /// <c>true</c> if the build script running on a Linux based system; otherwise <c>false</c>.
+        ///   <c>true</c> if the build script running on a Linux based system; otherwise <c>false</c>.
         /// </returns>
         /// </member>
         public static bool IsRunningOnLinux()
@@ -443,14 +443,14 @@ public static partial class Program
         /// <code>
         /// IEnumerable&lt;string&gt; redirectedStandardOutput;
         /// var exitCodeWithArgument =
-        /// StartProcess(
-        /// "ping",
-        /// new ProcessSettings {
-        /// Arguments = "localhost",
-        /// RedirectStandardOutput = true
-        /// },
-        /// out redirectedStandardOutput
-        /// );
+        ///     StartProcess(
+        ///         "ping",
+        ///         new ProcessSettings {
+        ///             Arguments = "localhost",
+        ///             RedirectStandardOutput = true
+        ///         },
+        ///         out redirectedStandardOutput
+        ///     );
         /// // Output last line of process output.
         /// Information("Last line of output: {0}", redirectedStandardOutput.LastOrDefault());
         /// // This should output 0 as valid arguments supplied
@@ -477,25 +477,25 @@ public static partial class Program
         /// IEnumerable&lt;string&gt; redirectedStandardOutput;
         /// IEnumerable&lt;string&gt; redirectedErrorOutput;
         /// var exitCodeWithArgument =
-        /// StartProcess(
-        /// "ping",
-        /// new ProcessSettings {
-        /// Arguments = "localhost",
-        /// RedirectStandardOutput = true,
-        /// RedirectStandardError = true
-        /// },
-        /// out redirectedStandardOutput,
-        /// out redirectedErrorOutput
-        /// );
+        ///     StartProcess(
+        ///         "ping",
+        ///         new ProcessSettings {
+        ///             Arguments = "localhost",
+        ///             RedirectStandardOutput = true,
+        ///             RedirectStandardError = true
+        ///         },
+        ///         out redirectedStandardOutput,
+        ///         out redirectedErrorOutput
+        ///     );
         /// // Output last line of process output.
         /// Information("Last line of output: {0}", redirectedStandardOutput.LastOrDefault());
         /// // Throw exception if anything was written to the standard error.
         /// if (redirectedErrorOutput.Any())
         /// {
-        /// throw new Exception(
-        /// string.Format(
-        /// "Errors occurred: {0}",
-        /// string.Join(", ", redirectedErrorOutput)));
+        ///     throw new Exception(
+        ///         string.Format(
+        ///             "Errors occurred: {0}",
+        ///             string.Join(", ", redirectedErrorOutput)));
         /// }
         /// // This should output 0 as valid arguments supplied
         /// Information("Exit code: {0}", exitCodeWithArgument);
@@ -516,9 +516,9 @@ public static partial class Program
         /// <code>
         /// using (var process = StartAndReturnProcess("ping", new ProcessSettings{ Arguments = "localhost" }))
         /// {
-        /// process.WaitForExit();
-        /// // This should output 0 as valid arguments supplied
-        /// Information("Exit code: {0}", process.GetExitCode());
+        ///     process.WaitForExit();
+        ///     // This should output 0 as valid arguments supplied
+        ///     Information("Exit code: {0}", process.GetExitCode());
         /// }
         /// </code>
         /// </example>
@@ -537,9 +537,9 @@ public static partial class Program
         /// <code>
         /// using (var process = StartAndReturnProcess("ping"))
         /// {
-        /// process.WaitForExit();
-        /// // This should output 0 as valid arguments supplied
-        /// Information("Exit code: {0}", process.GetExitCode());
+        ///     process.WaitForExit();
+        ///     // This should output 0 as valid arguments supplied
+        ///     Information("Exit code: {0}", process.GetExitCode());
         /// }
         /// </code>
         /// </example>
@@ -559,11 +559,11 @@ public static partial class Program
         /// var releaseNotes = ParseAllReleaseNotes("./ReleaseNotes.md");
         /// foreach (var releaseNote in releaseNotes)
         /// {
-        /// Information("Version: {0}", releaseNote.Version);
-        /// foreach (var note in releaseNote.Notes)
-        /// {
-        /// Information("\t{0}", note);
-        /// }
+        ///     Information("Version: {0}", releaseNote.Version);
+        ///     foreach (var note in releaseNote.Notes)
+        ///     {
+        ///         Information("\t{0}", note);
+        ///     }
         /// }
         /// </code>
         /// </example>
@@ -583,7 +583,7 @@ public static partial class Program
         /// Information("Version: {0}", releaseNote.Version);
         /// foreach (var note in releaseNote.Notes)
         /// {
-        /// Information("\t{0}", note);
+        ///     Information("\t{0}", note);
         /// }
         /// </code>
         /// </example>
@@ -890,11 +890,11 @@ public static partial class Program
         /// <code>
         /// using (QuietVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Hide me.");
-        /// Information("Hide me.");
-        /// Verbose("Hide me.");
-        /// Debug("Hide me.");
+        ///     Error("Show me.");
+        ///     Warning("Hide me.");
+        ///     Information("Hide me.");
+        ///     Verbose("Hide me.");
+        ///     Debug("Hide me.");
         /// }
         /// </code>
         /// </example>
@@ -911,11 +911,11 @@ public static partial class Program
         /// <code>
         /// using (MinimalVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Show me.");
-        /// Information("Hide me.");
-        /// Verbose("Hide me.");
-        /// Debug("Hide me.");
+        ///     Error("Show me.");
+        ///     Warning("Show me.");
+        ///     Information("Hide me.");
+        ///     Verbose("Hide me.");
+        ///     Debug("Hide me.");
         /// }
         /// </code>
         /// </example>
@@ -932,11 +932,11 @@ public static partial class Program
         /// <code>
         /// using (NormalVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Show me.");
-        /// Information("Show me.");
-        /// Verbose("Hide me.");
-        /// Debug("Hide me.");
+        ///     Error("Show me.");
+        ///     Warning("Show me.");
+        ///     Information("Show me.");
+        ///     Verbose("Hide me.");
+        ///     Debug("Hide me.");
         /// }
         /// </code>
         /// </example>
@@ -953,11 +953,11 @@ public static partial class Program
         /// <code>
         /// using (VerboseVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Show me.");
-        /// Information("Show me.");
-        /// Verbose("Show me.");
-        /// Debug("Hide me.");
+        ///     Error("Show me.");
+        ///     Warning("Show me.");
+        ///     Information("Show me.");
+        ///     Verbose("Show me.");
+        ///     Debug("Hide me.");
         /// }
         /// </code>
         /// </example>
@@ -974,11 +974,11 @@ public static partial class Program
         /// <code>
         /// using (DiagnosticVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Show me.");
-        /// Information("Show me.");
-        /// Verbose("Show me.");
-        /// Debug("Show me.");
+        ///     Error("Show me.");
+        ///     Warning("Show me.");
+        ///     Information("Show me.");
+        ///     Verbose("Show me.");
+        ///     Debug("Show me.");
         /// }
         /// </code>
         /// </example>
@@ -996,11 +996,11 @@ public static partial class Program
         /// <code>
         /// using (DiagnosticVerbosity())
         /// {
-        /// Error("Show me.");
-        /// Warning("Show me.");
-        /// Information("Show me.");
-        /// Verbose("Show me.");
-        /// Debug("Show me.");
+        ///     Error("Show me.");
+        ///     Warning("Show me.");
+        ///     Information("Show me.");
+        ///     Verbose("Show me.");
+        ///     Debug("Show me.");
         /// }
         /// </code>
         /// </example>
@@ -1160,9 +1160,9 @@ public static partial class Program
         /// <code>
         /// var caller = GetCallerInfo();
         /// Information("Called from {0} at {1}:{2}",
-        /// caller.MemberName,
-        /// caller.SourceFilePath,
-        /// caller.SourceLineNumber);
+        ///     caller.MemberName,
+        ///     caller.SourceFilePath,
+        ///     caller.SourceLineNumber);
         /// </code>
         /// </example>
         /// </member>
@@ -1195,12 +1195,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var directoriesToDelete = new DirectoryPath[]{
-        /// Directory("be"),
-        /// Directory("gone")
+        ///     Directory("be"),
+        ///     Directory("gone")
         /// };
         /// DeleteDirectories(directoriesToDelete, new DeleteDirectorySettings {
-        /// Recursive = true,
-        /// Force = true
+        ///     Recursive = true,
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1217,12 +1217,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var directoriesToDelete = new []{
-        /// "be",
-        /// "gone"
+        ///     "be",
+        ///     "gone"
         /// };
         /// DeleteDirectories(directoriesToDelete, new DeleteDirectorySettings {
-        /// Recursive = true,
-        /// Force = true
+        ///     Recursive = true,
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1239,8 +1239,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DeleteDirectory("./be/gone", new DeleteDirectorySettings {
-        /// Recursive = true,
-        /// Force = true
+        ///     Recursive = true,
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1290,8 +1290,8 @@ public static partial class Program
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
         /// fileSystemInfo=&gt;!fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules",
-        /// StringComparison.OrdinalIgnoreCase);
+        ///                 "node_modules",
+        ///                 StringComparison.OrdinalIgnoreCase);
         /// CleanDirectories("./src/**/bin/debug", exclude_node_modules);
         /// </code>
         /// </example>
@@ -1310,8 +1310,8 @@ public static partial class Program
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
         /// fileSystemInfo=&gt;!fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules",
-        /// StringComparison.OrdinalIgnoreCase);
+        ///                 "node_modules",
+        ///                 StringComparison.OrdinalIgnoreCase);
         /// CleanDirectories("./src/**/bin/debug", exclude_node_modules, new CleanDirectorySettings() { Force = true });
         /// </code>
         /// </example>
@@ -1363,8 +1363,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var directoriesToClean = new []{
-        /// "./src/Cake/obj",
-        /// "./src/Cake.Common/obj"
+        ///     "./src/Cake/obj",
+        ///     "./src/Cake.Common/obj"
         /// };
         /// CleanDirectories(directoriesToClean);
         /// </code>
@@ -1382,8 +1382,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var directoriesToClean = new []{
-        /// "./src/Cake/obj",
-        /// "./src/Cake.Common/obj"
+        ///     "./src/Cake/obj",
+        ///     "./src/Cake.Common/obj"
         /// };
         /// CleanDirectories(directoriesToClean, new CleanDirectorySettings() { Force = true });
         /// </code>
@@ -1415,7 +1415,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// CleanDirectory("./src/Cake.Common/obj", new CleanDirectorySettings {
-        /// Force = true
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1447,7 +1447,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// CleanDirectory("./src/Cake.Common/obj", fileSystemInfo=&gt;!fileSystemInfo.Hidden, new CleanDirectorySettings {
-        /// Force = true
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1507,8 +1507,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// EnsureDirectoryDoesNotExist("./be/gone", new DeleteDirectorySettings {
-        /// Recursive = true,
-        /// Force = true
+        ///     Recursive = true,
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1525,8 +1525,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// EnsureDirectoryDoesNotExist("./be/gone", new EnsureDirectoryDoesNotExistSettings {
-        /// Recursive = true,
-        /// Force = true
+        ///     Recursive = true,
+        ///     Force = true
         /// });
         /// </code>
         /// </example>
@@ -1560,7 +1560,7 @@ public static partial class Program
         /// var dir = "publish";
         /// if (!DirectoryExists(dir))
         /// {
-        /// CreateDirectory(dir);
+        ///     CreateDirectory(dir);
         /// }
         /// </code>
         /// </example>
@@ -1757,8 +1757,8 @@ public static partial class Program
         /// <code>
         /// CreateDirectory("destination");
         /// var files = new [] {
-        /// "Cake.exe",
-        /// "Cake.pdb"
+        ///     "Cake.exe",
+        ///     "Cake.pdb"
         /// };
         /// CopyFiles(files, "destination");
         /// </code>
@@ -1811,8 +1811,8 @@ public static partial class Program
         /// <code>
         /// CreateDirectory("destination");
         /// var files = new [] {
-        /// "Cake.exe",
-        /// "Cake.pdb"
+        ///     "Cake.exe",
+        ///     "Cake.pdb"
         /// };
         /// CopyFiles(files, "destination");
         /// </code>
@@ -1937,7 +1937,7 @@ public static partial class Program
         /// <code>
         /// if (FileExists("findme.txt"))
         /// {
-        /// Information("File exists!");
+        ///     Information("File exists!");
         /// }
         /// </code>
         /// </example>
@@ -2000,7 +2000,7 @@ public static partial class Program
         /// var files = GetFiles("./**/Cake.*.dll");
         /// foreach (var file in files)
         /// {
-        /// Information("File: {0}", file);
+        ///     Information("File: {0}", file);
         /// }
         /// </code>
         /// </example>
@@ -2017,12 +2017,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
-        /// fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules", StringComparison.OrdinalIgnoreCase);
+        ///     fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
+        ///         "node_modules", StringComparison.OrdinalIgnoreCase);
         /// var files = GetFiles("./**/Cake.*.dll", new GlobberSettings { Predicate = exclude_node_modules });
         /// foreach (var file in files)
         /// {
-        /// Information("File: {0}", file);
+        ///     Information("File: {0}", file);
         /// }
         /// </code>
         /// </example>
@@ -2042,7 +2042,7 @@ public static partial class Program
         /// var directories = GetDirectories("./src/**/obj/*");
         /// foreach (var directory in directories)
         /// {
-        /// Information("Directory: {0}", directory);
+        ///     Information("Directory: {0}", directory);
         /// }
         /// </code>
         /// </example>
@@ -2059,12 +2059,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
-        /// fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules", StringComparison.OrdinalIgnoreCase);
+        ///     fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
+        ///         "node_modules", StringComparison.OrdinalIgnoreCase);
         /// var directories = GetDirectories("./src/**/obj/*", new GlobberSettings { Predicate = exclude_node_modules });
         /// foreach (var directory in directories)
         /// {
-        /// Information("Directory: {0}", directory);
+        ///     Information("Directory: {0}", directory);
         /// }
         /// </code>
         /// </example>
@@ -2086,7 +2086,7 @@ public static partial class Program
         /// var entries = GetFileSystemInfos("./artifacts/*");
         /// foreach (var entry in entries)
         /// {
-        /// Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
+        ///     Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
         /// }
         /// </code>
         /// </example>
@@ -2105,12 +2105,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
-        /// fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules", StringComparison.OrdinalIgnoreCase);
+        ///     fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
+        ///         "node_modules", StringComparison.OrdinalIgnoreCase);
         /// var entries = GetFileSystemInfos("./src/**/*", new GlobberSettings { Predicate = exclude_node_modules });
         /// foreach (var entry in entries)
         /// {
-        /// Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
+        ///     Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
         /// }
         /// </code>
         /// </example>
@@ -2130,7 +2130,7 @@ public static partial class Program
         /// var paths = GetPaths("./src/**/obj/*");
         /// foreach (var path in paths)
         /// {
-        /// Information("Path: {0}", path);
+        ///     Information("Path: {0}", path);
         /// }
         /// </code>
         /// </example>
@@ -2147,12 +2147,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
-        /// fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
-        /// "node_modules", StringComparison.OrdinalIgnoreCase);
+        ///     fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
+        ///         "node_modules", StringComparison.OrdinalIgnoreCase);
         /// var paths = GetPaths("./src/**/obj/*", new GlobberSettings { Predicate = exclude_node_modules });
         /// foreach (var path in paths)
         /// {
-        /// Information("Path: {0}", path);
+        ///     Information("Path: {0}", path);
         /// }
         /// </code>
         /// </example>
@@ -2221,10 +2221,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var files = new [] {
-        /// "./src/Cake/bin/Debug/Autofac.dll",
-        /// "./src/Cake/bin/Debug/Cake.Common.dll",
-        /// "./src/Cake/bin/Debug/Cake.Core.dll",
-        /// "./src/Cake/bin/Debug/Cake.exe"
+        ///     "./src/Cake/bin/Debug/Autofac.dll",
+        ///     "./src/Cake/bin/Debug/Cake.Common.dll",
+        ///     "./src/Cake/bin/Debug/Cake.Core.dll",
+        ///     "./src/Cake/bin/Debug/Cake.exe"
         /// };
         /// Zip("./", "CakeBinaries.zip", files);
         /// </code>
@@ -2287,8 +2287,8 @@ public static partial class Program
         /// <code>
         /// var resource = DownloadFile("http://www.example.org/index.html", new DownloadFileSettings()
         /// {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// });
         /// </code>
         /// </example>
@@ -2324,8 +2324,8 @@ public static partial class Program
         /// var address = new Uri("http://www.example.org/index.html");
         /// var resource = DownloadFile(address, new DownloadFileSettings()
         /// {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// });
         /// </code>
         /// </example>
@@ -2361,8 +2361,8 @@ public static partial class Program
         /// var outputPath = File("./index.html");
         /// DownloadFile("http://www.example.org/index.html", outputPath, new DownloadFileSettings()
         /// {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// });
         /// </code>
         /// </example>
@@ -2383,8 +2383,8 @@ public static partial class Program
         /// var outputPath = File("./index.html");
         /// DownloadFile(address, outputPath, new DownloadFileSettings()
         /// {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// });
         /// </code>
         /// </example>
@@ -2404,8 +2404,8 @@ public static partial class Program
         /// var address = new Uri("http://www.example.org/upload");
         /// UploadFile(address, @"path/to/file.txt", new UploadFileSettings()
         /// {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// }
         /// </code>
         /// </example>
@@ -2440,8 +2440,8 @@ public static partial class Program
         /// <code>
         /// var address = new Uri("http://www.example.org/upload");
         /// UploadFile(address, @"path/to/file.txt", new UploadFileSettings() {
-        /// Username = "bob",
-        /// Password = "builder"
+        ///     Username = "bob",
+        ///     Password = "builder"
         /// });
         /// </code>
         /// </example>
@@ -2479,8 +2479,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake executable file SHA256 hash: {0}",
-        /// CalculateFileHash("Cake.exe").ToHex());
+        ///    "Cake executable file SHA256 hash: {0}",
+        ///    CalculateFileHash("Cake.exe").ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2497,8 +2497,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake executable file MD5 hash: {0}",
-        /// CalculateFileHash("Cake.exe", HashAlgorithm.MD5).ToHex());
+        ///     "Cake executable file MD5 hash: {0}",
+        ///     CalculateFileHash("Cake.exe", HashAlgorithm.MD5).ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2515,8 +2515,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake It calculates the hashes from all cs files in all subdirectories using a SHA256 hash: {0}",
-        /// CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs").ToHex());
+        ///     "Cake It calculates the hashes from all cs files in all subdirectories using a SHA256 hash: {0}",
+        ///     CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs").ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2534,8 +2534,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake It calculates the hashes from all cs files in all subdirectories using a MD5 hash: {0}",
-        /// CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs", HashAlgorithm.MD5).ToHex());
+        ///     "Cake It calculates the hashes from all cs files in all subdirectories using a MD5 hash: {0}",
+        ///     CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs", HashAlgorithm.MD5).ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2552,8 +2552,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake It calculates the hashes from all cs files in all subdirectories using a SHA256 hash: {0}",
-        /// CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs").ToHex());
+        ///     "Cake It calculates the hashes from all cs files in all subdirectories using a SHA256 hash: {0}",
+        ///     CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs").ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2571,8 +2571,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Information(
-        /// "Cake It calculates the hashes from all cs files in all subdirectories using a MD5 hash: {0}",
-        /// CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs", HashAlgorithm.MD5).ToHex());
+        ///     "Cake It calculates the hashes from all cs files in all subdirectories using a MD5 hash: {0}",
+        ///     CalculateDirectoryHash("C:\directoryToHash", "./**/*.cs", HashAlgorithm.MD5).ToHex());
         /// </code>
         /// </example>
         /// </member>
@@ -2592,17 +2592,17 @@ public static partial class Program
         /// var parsedSolution = ParseSolution(solutionPath);
         /// foreach (var project in parsedSolution.Projects)
         /// {
-        /// Information(
-        /// @"Solution project file:
-        /// Name: {0}
-        /// Path: {1}
-        /// Id  : {2}
-        /// Type: {3}",
-        /// project.Name,
-        /// project.Path,
-        /// project.Id,
-        /// project.Type
-        /// );
+        ///     Information(
+        ///         @"Solution project file:
+        ///     Name: {0}
+        ///     Path: {1}
+        ///     Id  : {2}
+        ///     Type: {3}",
+        ///         project.Name,
+        ///         project.Path,
+        ///         project.Id,
+        ///         project.Type
+        ///     );
         /// }
         /// </code>
         /// </example>
@@ -2620,32 +2620,32 @@ public static partial class Program
         /// <code>
         /// var parsedProject = ParseProject("./src/Cake/Cake.csproj");
         /// Information(
-        /// @"    Parsed project file:
-        /// Configuration         : {0}
-        /// Platform              : {1}
-        /// OutputType            : {2}
-        /// OutputPath            : {3}
-        /// RootNameSpace         : {4}
-        /// AssemblyName          : {5}
-        /// TargetFrameworkVersion: {6}
-        /// Files                 : {7}",
-        /// parsedProject.Configuration,
-        /// parsedProject.Platform,
-        /// parsedProject.OutputType,
-        /// parsedProject.OutputPath,
-        /// parsedProject.RootNameSpace,
-        /// parsedProject.AssemblyName,
-        /// parsedProject.TargetFrameworkVersion,
-        /// string.Concat(
-        /// parsedProject
-        /// .Files
-        /// .Select(
-        /// file=&gt;  string.Format(
-        /// "\r\n            {0}",
-        /// file.FilePath
-        /// )
-        /// )
-        /// )
+        ///     @"    Parsed project file:
+        ///     Configuration         : {0}
+        ///     Platform              : {1}
+        ///     OutputType            : {2}
+        ///     OutputPath            : {3}
+        ///     RootNameSpace         : {4}
+        ///     AssemblyName          : {5}
+        ///     TargetFrameworkVersion: {6}
+        ///     Files                 : {7}",
+        ///     parsedProject.Configuration,
+        ///     parsedProject.Platform,
+        ///     parsedProject.OutputType,
+        ///     parsedProject.OutputPath,
+        ///     parsedProject.RootNameSpace,
+        ///     parsedProject.AssemblyName,
+        ///     parsedProject.TargetFrameworkVersion,
+        ///     string.Concat(
+        ///         parsedProject
+        ///             .Files
+        ///             .Select(
+        ///                 file=&gt;  string.Format(
+        ///                             "\r\n            {0}",
+        ///                             file.FilePath
+        ///                         )
+        ///             )
+        ///     )
         /// );
         /// </code>
         /// </example>
@@ -2666,11 +2666,11 @@ public static partial class Program
         /// var buildNo = "123";
         /// var semVersion = string.Concat(version + "-" + buildNo);
         /// CreateAssemblyInfo(file, new AssemblyInfoSettings {
-        /// Product = "SampleProject",
-        /// Version = version,
-        /// FileVersion = version,
-        /// InformationalVersion = semVersion,
-        /// Copyright = string.Format("Copyright (c) Contoso 2014 - {0}", DateTime.Now.Year)
+        ///     Product = "SampleProject",
+        ///     Version = version,
+        ///     FileVersion = version,
+        ///     InformationalVersion = semVersion,
+        ///     Copyright = string.Format("Copyright (c) Contoso 2014 - {0}", DateTime.Now.Year)
         /// });
         /// </code>
         /// </example>
@@ -2707,11 +2707,11 @@ public static partial class Program
         /// var exampleCodes = ParseXmlDocExampleCode("./Cake.Common.xml");
         /// foreach (var exampleCode in exampleCodes)
         /// {
-        /// Information(
-        /// "{0}\r\n{1}",
-        /// exampleCode.Name,
-        /// exampleCode.Code
-        /// );
+        ///     Information(
+        ///         "{0}\r\n{1}",
+        ///         exampleCode.Name,
+        ///         exampleCode.Code
+        ///     );
         /// }
         /// </code>
         /// </example>
@@ -2730,11 +2730,11 @@ public static partial class Program
         /// var filesExampleCodes = ParseXmlDocFilesExampleCode("./Cake.*.xml");
         /// foreach (var exampleCode in filesExampleCodes)
         /// {
-        /// Information(
-        /// "{0}\r\n{1}",
-        /// exampleCode.Name,
-        /// exampleCode.Code
-        /// );
+        ///     Information(
+        ///         "{0}\r\n{1}",
+        ///         exampleCode.Name,
+        ///         exampleCode.Code
+        ///     );
         /// }
         /// </code>
         /// </example>
@@ -2753,8 +2753,8 @@ public static partial class Program
         /// the specified template.
         /// <code>
         /// string text = TransformText("Hello &lt;%subject%&gt;!")
-        /// .WithToken("subject", "world")
-        /// .ToString();
+        ///    .WithToken("subject", "world")
+        ///    .ToString();
         /// </code>
         /// </example>
         /// </member>
@@ -2774,8 +2774,8 @@ public static partial class Program
         /// the specified template and placeholder.
         /// <code>
         /// string text = TransformText("Hello {subject}!", "{", "}")
-        /// .WithToken("subject", "world")
-        /// .ToString();
+        ///    .WithToken("subject", "world")
+        ///    .ToString();
         /// </code>
         /// </example>
         /// </member>
@@ -2793,8 +2793,8 @@ public static partial class Program
         /// the specified template file with the placeholder format <c>&lt;%key%&gt;</c>.
         /// <code>
         /// string text = TransformTextFile("./template.txt")
-        /// .WithToken("subject", "world")
-        /// .ToString();
+        ///    .WithToken("subject", "world")
+        ///    .ToString();
         /// </code>
         /// </example>
         /// </member>
@@ -2814,8 +2814,8 @@ public static partial class Program
         /// the specified template file and placeholder.
         /// <code>
         /// string text = TransformTextFile("./template.txt", "{", "}")
-        /// .WithToken("subject", "world")
-        /// .ToString();
+        ///    .WithToken("subject", "world")
+        ///    .ToString();
         /// </code>
         /// </example>
         /// </member>
@@ -2831,9 +2831,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Load-JMeter")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// InstallTool(new PackageReference("nuget:?package=JMeter&amp;version=5.6.3"));
+        ///     InstallTool(new PackageReference("nuget:?package=JMeter&amp;version=5.6.3"));
         /// });
         /// </code>
         /// </example>
@@ -2850,9 +2850,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Load-JMeter")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// InstallTool("nuget:?package=JMeter&amp;version=5.6.3");
+        ///     InstallTool("nuget:?package=JMeter&amp;version=5.6.3");
         /// });
         /// </code>
         /// </example>
@@ -2869,11 +2869,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Restore-Tools")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// InstallTools(
-        /// new PackageReference("nuget:?package=xunit.runner.console&amp;version=2.9.3"),
-        /// new PackageReference("dotnet:?package=GitVersion.Tool&amp;version=6.8.2"));
+        ///     InstallTools(
+        ///         new PackageReference("nuget:?package=xunit.runner.console&amp;version=2.9.3"),
+        ///         new PackageReference("dotnet:?package=GitVersion.Tool&amp;version=6.8.2"));
         /// });
         /// </code>
         /// </example>
@@ -2890,11 +2890,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Restore-Tools")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// InstallTools(
-        /// "nuget:?package=xunit.runner.console&amp;version=2.9.3",
-        /// "dotnet:?package=GitVersion.Tool&amp;version=6.8.2");
+        ///     InstallTools(
+        ///         "nuget:?package=xunit.runner.console&amp;version=2.9.3",
+        ///         "dotnet:?package=GitVersion.Tool&amp;version=6.8.2");
         /// });
         /// </code>
         /// </example>
@@ -2954,11 +2954,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// CakeExecuteExpression(
-        /// "Information(\"Hello {0}!\", Argument&lt;string&gt;(\"name\"));",
-        /// new CakeSettings {
-        /// ToolPath="./Cake.exe" ,
-        /// Arguments = new Dictionary&lt;string, string&gt;{{"name", "World"}}
-        /// });
+        ///     "Information(\"Hello {0}!\", Argument&lt;string&gt;(\"name\"));",
+        ///     new CakeSettings {
+        ///         ToolPath="./Cake.exe" ,
+        ///         Arguments = new Dictionary&lt;string, string&gt;{{"name", "World"}}
+        ///         });
         /// </code>
         /// </example>
         /// </member>
@@ -2973,39 +2973,39 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var chocolateyPackSettings   = new ChocolateyPackSettings {
-        /// Id                      = "TestChocolatey",
-        /// Title                   = "The tile of the package",
-        /// Version                 = "0.0.0.1",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Summary                 = "Excellent summary of what the package does",
-        /// Description             = "The description of the package",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// Copyright               = "Some company 2015",
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
-        /// RequireLicenseAcceptance= false,
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Files                   = new [] {
-        /// new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
-        /// },
-        /// Debug                   = false,
-        /// Verbose                 = false,
-        /// Force                   = false,
-        /// Noop                    = false,
-        /// LimitOutput             = false,
-        /// ExecutionTimeout        = 13,
-        /// CacheLocation           = @"C:\temp",
-        /// AllowUnofficial          = false
-        /// };
-        /// ChocolateyPack("./nuspec/TestChocolatey.nuspec", chocolateyPackSettings);
+        ///     var chocolateyPackSettings   = new ChocolateyPackSettings {
+        ///                                     Id                      = "TestChocolatey",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     Description             = "The description of the package",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Files                   = new [] {
+        ///                                                                          new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     Debug                   = false,
+        ///                                     Verbose                 = false,
+        ///                                     Force                   = false,
+        ///                                     Noop                    = false,
+        ///                                     LimitOutput             = false,
+        ///                                     ExecutionTimeout        = 13,
+        ///                                     CacheLocation           = @"C:\temp",
+        ///                                     AllowUnofficial          = false
+        ///                                 };
+        ///     ChocolateyPack("./nuspec/TestChocolatey.nuspec", chocolateyPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -3020,40 +3020,40 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var chocolateyPackSettings   = new ChocolateyPackSettings {
-        /// Id                      = "TestChocolatey",
-        /// Title                   = "The tile of the package",
-        /// Version                 = "0.0.0.1",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Summary                 = "Excellent summary of what the package does",
-        /// Description             = "The description of the package",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// Copyright               = "Some company 2015",
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
-        /// RequireLicenseAcceptance= false,
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Files                   = new [] {
-        /// new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
-        /// },
-        /// Debug                   = false,
-        /// Verbose                 = false,
-        /// Force                   = false,
-        /// Noop                    = false,
-        /// LimitOutput             = false,
-        /// ExecutionTimeout        = 13,
-        /// CacheLocation           = @"C:\temp",
-        /// AllowUnofficial          = false
-        /// };
-        /// var nuspecFiles = GetFiles("./**/*.nuspec");
-        /// ChocolateyPack(nuspecFiles, chocolateyPackSettings);
+        ///     var chocolateyPackSettings   = new ChocolateyPackSettings {
+        ///                                     Id                      = "TestChocolatey",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     Description             = "The description of the package",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Files                   = new [] {
+        ///                                                                          new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     Debug                   = false,
+        ///                                     Verbose                 = false,
+        ///                                     Force                   = false,
+        ///                                     Noop                    = false,
+        ///                                     LimitOutput             = false,
+        ///                                     ExecutionTimeout        = 13,
+        ///                                     CacheLocation           = @"C:\temp",
+        ///                                     AllowUnofficial          = false
+        ///                                 };
+        ///     var nuspecFiles = GetFiles("./**/*.nuspec");
+        ///     ChocolateyPack(nuspecFiles, chocolateyPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -3067,39 +3067,39 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var chocolateyPackSettings   = new ChocolateyPackSettings {
-        /// Id                      = "TestChocolatey",
-        /// Title                   = "The tile of the package",
-        /// Version                 = "0.0.0.1",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Summary                 = "Excellent summary of what the package does",
-        /// Description             = "The description of the package",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// Copyright               = "Some company 2015",
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
-        /// RequireLicenseAcceptance= false,
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Files                   = new [] {
-        /// new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
-        /// },
-        /// Debug                   = false,
-        /// Verbose                 = false,
-        /// Force                   = false,
-        /// Noop                    = false,
-        /// LimitOutput             = false,
-        /// ExecutionTimeout        = 13,
-        /// CacheLocation           = @"C:\temp",
-        /// AllowUnofficial          = false
-        /// };
-        /// ChocolateyPack(chocolateyPackSettings);
+        ///     var chocolateyPackSettings   = new ChocolateyPackSettings {
+        ///                                     Id                      = "TestChocolatey",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     Description             = "The description of the package",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     PackageSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     ProjectSourceUrl        = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     DocsUrl                 = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     MailingListUrl          = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     BugTrackerUrl           = new Uri("https://github.com/SomeUser/TestChocolatey/"),
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestChocolatey/blob/master/LICENSE.md"),
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestChocolatey/master/icons/testchocolatey.png"),
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Files                   = new [] {
+        ///                                                                          new ChocolateyNuSpecContent {Source = "bin/TestChocolatey.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     Debug                   = false,
+        ///                                     Verbose                 = false,
+        ///                                     Force                   = false,
+        ///                                     Noop                    = false,
+        ///                                     LimitOutput             = false,
+        ///                                     ExecutionTimeout        = 13,
+        ///                                     CacheLocation           = @"C:\temp",
+        ///                                     AllowUnofficial          = false
+        ///                                 };
+        ///     ChocolateyPack(chocolateyPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -3129,31 +3129,31 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyInstall("MyChocolateyPackage", new ChocolateyInstallSettings {
-        /// Source                = true,
-        /// Version               = "1.2.3",
-        /// Prerelease            = false,
-        /// Forcex86              = false,
-        /// InstallArguments      = "arg1",
-        /// OverrideArguments     = false,
-        /// NotSilent             = false,
-        /// PackageParameters     = "param1",
-        /// AllowDowngrade        = false,
-        /// SideBySide            = false,
-        /// IgnoreDependencies    = false,
-        /// ForceDependencies     = false,
-        /// SkipPowerShell        = false,
-        /// User                  = "user",
-        /// Password              = "password",
-        /// IgnoreChecksums       = false,
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
-        /// });
+        ///     Source                = true,
+        ///     Version               = "1.2.3",
+        ///     Prerelease            = false,
+        ///     Forcex86              = false,
+        ///     InstallArguments      = "arg1",
+        ///     OverrideArguments     = false,
+        ///     NotSilent             = false,
+        ///     PackageParameters     = "param1",
+        ///     AllowDowngrade        = false,
+        ///     SideBySide            = false,
+        ///     IgnoreDependencies    = false,
+        ///     ForceDependencies     = false,
+        ///     SkipPowerShell        = false,
+        ///     User                  = "user",
+        ///     Password              = "password",
+        ///     IgnoreChecksums       = false,
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3183,31 +3183,31 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyInstallFromConfig("./tools/packages.config", new ChocolateyInstallSettings {
-        /// Source                = true,
-        /// Version               = "1.2.3",
-        /// Prerelease            = false,
-        /// Forcex86              = false,
-        /// InstallArguments      = "arg1",
-        /// OverrideArguments     = false,
-        /// NotSilent             = false,
-        /// PackageParameters     = "param1",
-        /// AllowDowngrade        = false,
-        /// SideBySide            = false,
-        /// IgnoreDependencies    = false,
-        /// ForceDependencies     = false,
-        /// SkipPowerShell        = false,
-        /// User                  = "user",
-        /// Password              = "password",
-        /// IgnoreChecksums       = false,
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
-        /// });
+        ///     Source                = true,
+        ///     Version               = "1.2.3",
+        ///     Prerelease            = false,
+        ///     Forcex86              = false,
+        ///     InstallArguments      = "arg1",
+        ///     OverrideArguments     = false,
+        ///     NotSilent             = false,
+        ///     PackageParameters     = "param1",
+        ///     AllowDowngrade        = false,
+        ///     SideBySide            = false,
+        ///     IgnoreDependencies    = false,
+        ///     ForceDependencies     = false,
+        ///     SkipPowerShell        = false,
+        ///     User                  = "user",
+        ///     Password              = "password",
+        ///     IgnoreChecksums       = false,
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3237,36 +3237,36 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyUninstall("MyChocolateyPackage", new ChocolateyUninstallSettings {
-        /// Source                  = true,
-        /// Version                 = "1.2.3",
-        /// UninstallArguments      = "arg1",
-        /// OverrideArguments       = false,
-        /// NotSilent               = false,
-        /// PackageParameters       = "param1",
-        /// SideBySide              = false,
-        /// IgnoreDependencies      = false,
-        /// ForceDependencies       = false,
-        /// SkipPowerShell          = false,
-        /// Debug                   = false,
-        /// Verbose                 = false,
-        /// FailOnStandardError     = false,
-        /// UseSystemPowershell     = false,
-        /// AllVersions             = false,
-        /// Force                   = false,
-        /// Noop                    = false,
-        /// LimitOutput             = false,
-        /// ExecutionTimeout        = 13,
-        /// CacheLocation           = @"C:\temp",
-        /// AllowUnofficial         = false,
-        /// GlobalArguments         = false,
-        /// GlobalPackageParameters = false,
-        /// IgnorePackageExitCodes  = false,
-        /// UsePackageExitCodes     = false,
-        /// UseAutoUninstaller      = false,
-        /// SkipAutoUninstaller     = false,
-        /// FailOnAutoUninstaller   = false,
-        /// IgnoreAutoUninstaller   = false
-        /// });
+        ///     Source                  = true,
+        ///     Version                 = "1.2.3",
+        ///     UninstallArguments      = "arg1",
+        ///     OverrideArguments       = false,
+        ///     NotSilent               = false,
+        ///     PackageParameters       = "param1",
+        ///     SideBySide              = false,
+        ///     IgnoreDependencies      = false,
+        ///     ForceDependencies       = false,
+        ///     SkipPowerShell          = false,
+        ///     Debug                   = false,
+        ///     Verbose                 = false,
+        ///     FailOnStandardError     = false,
+        ///     UseSystemPowershell     = false,
+        ///     AllVersions             = false,
+        ///     Force                   = false,
+        ///     Noop                    = false,
+        ///     LimitOutput             = false,
+        ///     ExecutionTimeout        = 13,
+        ///     CacheLocation           = @"C:\temp",
+        ///     AllowUnofficial         = false,
+        ///     GlobalArguments         = false,
+        ///     GlobalPackageParameters = false,
+        ///     IgnorePackageExitCodes  = false,
+        ///     UsePackageExitCodes     = false,
+        ///     UseAutoUninstaller      = false,
+        ///     SkipAutoUninstaller     = false,
+        ///     FailOnAutoUninstaller   = false,
+        ///     IgnoreAutoUninstaller   = false
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3296,36 +3296,36 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyUninstall("MyChocolateyPackage", new ChocolateyUninstallSettings {
-        /// Source                  = true,
-        /// Version                 = "1.2.3",
-        /// UninstallArguments      = "arg1",
-        /// OverrideArguments       = false,
-        /// NotSilent               = false,
-        /// PackageParameters       = "param1",
-        /// SideBySide              = false,
-        /// IgnoreDependencies      = false,
-        /// ForceDependencies       = false,
-        /// SkipPowerShell          = false,
-        /// Debug                   = false,
-        /// Verbose                 = false,
-        /// FailOnStandardError     = false,
-        /// UseSystemPowershell     = false,
-        /// AllVersions             = false,
-        /// Force                   = false,
-        /// Noop                    = false,
-        /// LimitOutput             = false,
-        /// ExecutionTimeout        = 13,
-        /// CacheLocation           = @"C:\temp",
-        /// AllowUnofficial         = false,
-        /// GlobalArguments         = false,
-        /// GlobalPackageParameters = false,
-        /// IgnorePackageExitCodes  = false,
-        /// UsePackageExitCodes     = false,
-        /// UseAutoUninstaller      = false,
-        /// SkipAutoUninstaller     = false,
-        /// FailOnAutoUninstaller   = false,
-        /// IgnoreAutoUninstaller   = false
-        /// });
+        ///     Source                  = true,
+        ///     Version                 = "1.2.3",
+        ///     UninstallArguments      = "arg1",
+        ///     OverrideArguments       = false,
+        ///     NotSilent               = false,
+        ///     PackageParameters       = "param1",
+        ///     SideBySide              = false,
+        ///     IgnoreDependencies      = false,
+        ///     ForceDependencies       = false,
+        ///     SkipPowerShell          = false,
+        ///     Debug                   = false,
+        ///     Verbose                 = false,
+        ///     FailOnStandardError     = false,
+        ///     UseSystemPowershell     = false,
+        ///     AllVersions             = false,
+        ///     Force                   = false,
+        ///     Noop                    = false,
+        ///     LimitOutput             = false,
+        ///     ExecutionTimeout        = 13,
+        ///     CacheLocation           = @"C:\temp",
+        ///     AllowUnofficial         = false,
+        ///     GlobalArguments         = false,
+        ///     GlobalPackageParameters = false,
+        ///     IgnorePackageExitCodes  = false,
+        ///     UsePackageExitCodes     = false,
+        ///     UseAutoUninstaller      = false,
+        ///     SkipAutoUninstaller     = false,
+        ///     FailOnAutoUninstaller   = false,
+        ///     IgnoreAutoUninstaller   = false
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3341,15 +3341,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyPin("MyChocolateyPackage", new ChocolateyPinSettings {
-        /// Version               = "1.2.3",
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Version               = "1.2.3",
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3366,15 +3366,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyApiKey("http://www.mysource.com", new ChocolateyApiKeySettings {
-        /// ApiKey                = "myApiKey",
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     ApiKey                = "myApiKey",
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3392,14 +3392,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyConfig("cacheLocation", @"c:\temp", new ChocolateyConfigSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3430,14 +3430,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyEnableFeature("checkSumFiles", new ChocolateyFeatureSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3468,14 +3468,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyDisableFeature("checkSumFiles", new ChocolateyFeatureSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3508,17 +3508,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyAddSource("MySource", "http://www.mysource.com", new ChocolateySourcesSettings {
-        /// UserName              = "user",
-        /// Password              = "password",
-        /// Priority              = 13,
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     UserName              = "user",
+        ///     Password              = "password",
+        ///     Priority              = 13,
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3549,14 +3549,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyRemoveSource("MySource", new ChocolateySourcesSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3587,14 +3587,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyEnableSource("MySource", new ChocolateySourcesSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3625,14 +3625,14 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyDisableSource("MySource", new ChocolateySourcesSettings {
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3652,17 +3652,17 @@ public static partial class Program
         /// var package = "./chocolatey/MyChocolateyPackage.0.0.1.nupkg";
         /// // Push the package.
         /// ChocolateyPush(package, new ChocolateyPushSettings {
-        /// Source                = "http://example.com/chocolateyfeed",
-        /// ApiKey                = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
-        /// Timeout               = 300
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Source                = "http://example.com/chocolateyfeed",
+        ///     ApiKey                = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Timeout               = 300
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3682,17 +3682,17 @@ public static partial class Program
         /// var packages = GetFiles("./**/*.nupkg");
         /// // Push the package.
         /// ChocolateyPush(packages, new ChocolateyPushSettings {
-        /// Source                = "http://example.com/chocolateyfeed",
-        /// ApiKey                = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
-        /// Timeout               = 300
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Source                = "http://example.com/chocolateyfeed",
+        ///     ApiKey                = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Timeout               = 300
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3723,31 +3723,31 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyUpgrade("MyChocolateyPackage", new ChocolateyUpgradeSettings {
-        /// Source                = true,
-        /// Version               = "1.2.3",
-        /// Prerelease            = false,
-        /// Forcex86              = false,
-        /// InstallArguments      = "arg1",
-        /// OverrideArguments     = false,
-        /// NotSilent             = false,
-        /// PackageParameters     = "param1",
-        /// AllowDowngrade        = false,
-        /// SideBySide            = false,
-        /// IgnoreDependencies    = false,
-        /// SkipPowerShell        = false,
-        /// FailOnUnfound        = false,
-        /// FailOnNotInstalled        = false,
-        /// User                  = "user",
-        /// Password              = "password",
-        /// IgnoreChecksums       = false,
-        /// Debug                 = false,
-        /// Verbose               = false,
-        /// Force                 = false,
-        /// Noop                  = false,
-        /// LimitOutput           = false,
-        /// ExecutionTimeout      = 13,
-        /// CacheLocation         = @"C:\temp",
-        /// AllowUnofficial        = false
+        ///     Source                = true,
+        ///     Version               = "1.2.3",
+        ///     Prerelease            = false,
+        ///     Forcex86              = false,
+        ///     InstallArguments      = "arg1",
+        ///     OverrideArguments     = false,
+        ///     NotSilent             = false,
+        ///     PackageParameters     = "param1",
+        ///     AllowDowngrade        = false,
+        ///     SideBySide            = false,
+        ///     IgnoreDependencies    = false,
+        ///     SkipPowerShell        = false,
+        ///     FailOnUnfound        = false,
+        ///     FailOnNotInstalled        = false,
+        ///     User                  = "user",
+        ///     Password              = "password",
+        ///     IgnoreChecksums       = false,
+        ///     Debug                 = false,
+        ///     Verbose               = false,
+        ///     Force                 = false,
+        ///     Noop                  = false,
+        ///     LimitOutput           = false,
+        ///     ExecutionTimeout      = 13,
+        ///     CacheLocation         = @"C:\temp",
+        ///     AllowUnofficial        = false
         /// });
         /// </code>
         /// </example>
@@ -3778,16 +3778,16 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ChocolateyNew("MyChocolateyPackage", new ChocolateyNewSettings {
-        /// PackageVersion = "1.2.3",
-        /// MaintainerName = "John Doe",
-        /// MaintainerRepo = "johndoe"
+        ///     PackageVersion = "1.2.3",
+        ///     MaintainerName = "John Doe",
+        ///     MaintainerRepo = "johndoe"
         /// });
         /// </code>
         /// </example>
         /// <example>
         /// <code>
         /// var settings = new ChocolateyNewSettings {
-        /// MaintainerName = "John Doe"
+        ///     MaintainerName = "John Doe"
         /// }
         /// settings.AdditionalPropertyValues("Tags", "CustomPackage");
         /// ChocolateyNew("MyChocolateyPackage", settings);
@@ -3825,18 +3825,18 @@ public static partial class Program
         /// <para>Download a package to a specific folder:</para>
         /// <code>
         /// ChocolateyDownload(
-        /// "MyChocolateyPackage",
-        /// new ChocolateyDownloadSettings {
-        /// OutputDirectory = @"C:\download\"
-        /// });
+        ///     "MyChocolateyPackage",
+        ///     new ChocolateyDownloadSettings {
+        ///         OutputDirectory = @"C:\download\"
+        ///     });
         /// </code>
         /// <para>Download and internalize a package:</para>
         /// <code>
         /// ChocolateyDownload(
-        /// "MyChocolateyPackage",
-        /// new ChocolateyDownloadSettings {
-        /// Internalize = true
-        /// });
+        ///     "MyChocolateyPackage",
+        ///     new ChocolateyDownloadSettings {
+        ///         Internalize = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3865,9 +3865,9 @@ public static partial class Program
         /// <para>Exported information should contain the package version numbers:</para>
         /// <code>
         /// ChocolateyExport(
-        /// new ChocolateyExportSettings {
-        /// IncludeVersionNumbers = true
-        /// });
+        ///     new ChocolateyExportSettings {
+        ///         IncludeVersionNumbers = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -3888,30 +3888,30 @@ public static partial class Program
         /// // Example with ProcessArgumentBuilder
         /// #tool dotnet:?package=DPI&amp;version=2022.8.21.54
         /// Command(
-        /// new []{ "dpi", "dpi.exe"},
-        /// new ProcessArgumentBuilder()
-        /// .Append("nuget")
-        /// .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
-        /// .AppendSwitch("--output", " ", "TABLE")
-        /// .Append("analyze")
+        ///     new []{ "dpi", "dpi.exe"},
+        ///     new ProcessArgumentBuilder()
+        ///         .Append("nuget")
+        ///         .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
+        ///         .AppendSwitch("--output", " ", "TABLE")
+        ///         .Append("analyze")
         /// );
         /// // Example with implicit ProcessArgumentBuilder
         /// Command(
-        /// new []{ "dotnet", "dotnet.exe"},
-        /// "--version"
+        ///     new []{ "dotnet", "dotnet.exe"},
+        ///     "--version"
         /// );
         /// // Example specify expected exit code
         /// Command(
-        /// new []{ "dotnet", "dotnet.exe"},
-        /// expectedExitCode: -2147450751
+        ///     new []{ "dotnet", "dotnet.exe"},
+        ///     expectedExitCode: -2147450751
         /// );
         /// // Example settings customization
         /// Command(
-        /// new []{ "dotnet", "dotnet.exe"},
-        /// settingsCustomization: settings =&gt; settings
-        /// .WithToolName(".NET tool")
-        /// .WithExpectedExitCode(1)
-        /// .WithArgumentCustomization(args =&gt; args.Append("tool"))
+        ///     new []{ "dotnet", "dotnet.exe"},
+        ///     settingsCustomization: settings =&gt; settings
+        ///                                             .WithToolName(".NET tool")
+        ///                                             .WithExpectedExitCode(1)
+        ///                                             .WithArgumentCustomization(args =&gt; args.Append("tool"))
         /// );
         /// </code>
         /// </example>
@@ -3931,22 +3931,22 @@ public static partial class Program
         /// #tool dotnet:?package=DPI&amp;version=2022.8.21.54
         /// // Reusable tools settings i.e. created in setup.
         /// var settings = new CommandSettings {
-        /// ToolName = "DPI",
-        /// ToolExecutableNames =  new []{ "dpi", "dpi.exe"},
-        /// };
+        ///         ToolName = "DPI",
+        ///         ToolExecutableNames =  new []{ "dpi", "dpi.exe"},
+        ///      };
         /// // Example with ProcessArgumentBuilder
         /// Command(
-        /// settings,
-        /// new ProcessArgumentBuilder()
-        /// .Append("nuget")
-        /// .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
-        /// .AppendSwitch("--output", " ", "TABLE")
-        /// .Append("analyze")
+        ///     settings,
+        ///     new ProcessArgumentBuilder()
+        ///          .Append("nuget")
+        ///          .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
+        ///          .AppendSwitch("--output", " ", "TABLE")
+        ///          .Append("analyze")
         /// );
         /// // Example with implicit ProcessArgumentBuilder
         /// Command(
-        /// settings,
-        /// $"nuget --output TABLE analyze"
+        ///      settings,
+        ///      $"nuget --output TABLE analyze"
         /// );
         /// </code>
         /// </example>
@@ -3972,48 +3972,48 @@ public static partial class Program
         /// #tool dotnet:?package=DPI&amp;version=2022.8.21.54
         /// // Example with ProcessArgumentBuilder
         /// var exitCode = Command(
-        /// new []{ "dpi", "dpi.exe"},
-        /// out var standardOutput,
-        /// new ProcessArgumentBuilder()
-        /// .Append("nuget")
-        /// .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
-        /// .AppendSwitch("--output", " ", "JSON")
-        /// .Append("analyze")
+        ///     new []{ "dpi", "dpi.exe"},
+        ///     out var standardOutput,
+        ///     new ProcessArgumentBuilder()
+        ///          .Append("nuget")
+        ///          .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
+        ///          .AppendSwitch("--output", " ", "JSON")
+        ///          .Append("analyze")
         /// );
         /// var packageReferences =  JsonSerializer.Deserialize&lt;DPIPackageReference[]&gt;(
-        /// standardOutput
+        ///     standardOutput
         /// );
         /// // Example with implicit ProcessArgumentBuilder
         /// var implicitExitCode = Command(
-        /// new []{ "dpi", "dpi.exe"},
-        /// out var implicitStandardOutput,
-        /// $"nuget --output JSON analyze"
+        ///      new []{ "dpi", "dpi.exe"},
+        ///      out var implicitStandardOutput,
+        ///      $"nuget --output JSON analyze"
         /// );
         /// var implicitPackageReferences =  JsonSerializer.Deserialize&lt;DPIPackageReference[]&gt;(
-        /// implicitStandardOutput
+        ///     implicitStandardOutput
         /// );
         /// // Example settings customization
         /// var settingsCustomizationExitCode = Command(
-        /// new []{ "dpi", "dpi.exe"},
-        /// out var settingsCustomizationStandardOutput,
-        /// $"nuget --output JSON analyze",
-        /// settingsCustomization: settings =&gt; settings
-        /// .WithToolName("DPI")
-        /// .WithArgumentCustomization(args =&gt; args.AppendSwitchQuoted("--buildversion", " ", "1.0.0"))
+        ///     new []{ "dpi", "dpi.exe"},
+        ///     out var settingsCustomizationStandardOutput,
+        ///     $"nuget --output JSON analyze",
+        ///     settingsCustomization: settings =&gt; settings
+        ///                                             .WithToolName("DPI")
+        ///                                             .WithArgumentCustomization(args =&gt; args.AppendSwitchQuoted("--buildversion", " ", "1.0.0"))
         /// );
         /// var settingsCustomizationPackageReferences =  JsonSerializer.Deserialize&lt;DPIPackageReference[]&gt;(
-        /// settingsCustomizationStandardOutput
+        ///     settingsCustomizationStandardOutput
         /// );
         /// // Record used in example above
         /// public record DPIPackageReference(
-        /// [property: JsonPropertyName("source")]
-        /// string Source,
-        /// [property: JsonPropertyName("sourceType")]
-        /// string SourceType,
-        /// [property: JsonPropertyName("packageId")]
-        /// string PackageId,
-        /// [property: JsonPropertyName("version")]
-        /// string Version
+        ///     [property: JsonPropertyName("source")]
+        ///     string Source,
+        ///     [property: JsonPropertyName("sourceType")]
+        ///     string SourceType,
+        ///     [property: JsonPropertyName("packageId")]
+        ///     string PackageId,
+        ///     [property: JsonPropertyName("version")]
+        ///     string Version
         /// );
         /// </code>
         /// </example>
@@ -4037,41 +4037,41 @@ public static partial class Program
         /// #tool dotnet:?package=DPI&amp;version=2022.8.21.54
         /// // Reusable tools settings i.e. created in setup.
         /// var settings = new CommandSettings {
-        /// ToolName = "DPI",
-        /// ToolExecutableNames =  new []{ "dpi", "dpi.exe" },
-        /// };
+        ///         ToolName = "DPI",
+        ///         ToolExecutableNames =  new []{ "dpi", "dpi.exe" },
+        ///      };
         /// // Example with ProcessArgumentBuilder
         /// var exitCode = Command(
-        /// settings,
-        /// out var standardOutput,
-        /// new ProcessArgumentBuilder()
-        /// .Append("nuget")
-        /// .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
-        /// .AppendSwitch("--output", " ", "JSON")
-        /// .Append("analyze")
+        ///     settings,
+        ///     out var standardOutput,
+        ///     new ProcessArgumentBuilder()
+        ///          .Append("nuget")
+        ///          .AppendQuoted(Context.Environment.WorkingDirectory.FullPath)
+        ///          .AppendSwitch("--output", " ", "JSON")
+        ///          .Append("analyze")
         /// );
         /// var packageReferences =  JsonSerializer.Deserialize&lt;DPIPackageReference[]&gt;(
-        /// standardOutput
+        ///     standardOutput
         /// );
         /// // Example with implicit ProcessArgumentBuilder
         /// var implicitExitCode = Command(
-        /// settings,
-        /// out var implicitStandardOutput,
-        /// $"nuget --output JSON analyze"
+        ///      settings,
+        ///      out var implicitStandardOutput,
+        ///      $"nuget --output JSON analyze"
         /// );
         /// var implicitPackageReferences =  JsonSerializer.Deserialize&lt;DPIPackageReference[]&gt;(
-        /// implicitStandardOutput
+        ///     implicitStandardOutput
         /// );
         /// // Record used in example above
         /// public record DPIPackageReference(
-        /// [property: JsonPropertyName("source")]
-        /// string Source,
-        /// [property: JsonPropertyName("sourceType")]
-        /// string SourceType,
-        /// [property: JsonPropertyName("packageId")]
-        /// string PackageId,
-        /// [property: JsonPropertyName("version")]
-        /// string Version
+        ///     [property: JsonPropertyName("source")]
+        ///     string Source,
+        ///     [property: JsonPropertyName("sourceType")]
+        ///     string SourceType,
+        ///     [property: JsonPropertyName("packageId")]
+        ///     string PackageId,
+        ///     [property: JsonPropertyName("version")]
+        ///     string Version
         /// );
         /// </code>
         /// </example>
@@ -4095,36 +4095,36 @@ public static partial class Program
         /// <code>
         /// // Example with ProcessArgumentBuilder
         /// var exitCode = Command(
-        /// new []{ "dotnet", "dotnet.exe" },
-        /// out var standardOutput,
-        /// out var standardError,
-        /// new ProcessArgumentBuilder()
-        /// .Append("tool"),
-        /// expectedExitCode:1
+        ///     new []{ "dotnet", "dotnet.exe" },
+        ///     out var standardOutput,
+        ///     out var standardError,
+        ///     new ProcessArgumentBuilder()
+        ///         .Append("tool"),
+        ///     expectedExitCode:1
         /// );
         /// Verbose("Exit code: {0}", exitCode);
         /// Information("Output: {0}", standardOutput);
         /// Error("Error: {0}", standardError);
         /// // Example with implicit ProcessArgumentBuilder
         /// var implicitExitCode = Command(
-        /// new []{ "dotnet", "dotnet.exe" },
-        /// out var implicitStandardOutput,
-        /// out var implicitStandardError,
-        /// "tool",
-        /// expectedExitCode:1
+        ///     new []{ "dotnet", "dotnet.exe" },
+        ///     out var implicitStandardOutput,
+        ///     out var implicitStandardError,
+        ///     "tool",
+        ///     expectedExitCode:1
         /// );
         /// Verbose("Exit code: {0}", implicitExitCode);
         /// Information("Output: {0}", implicitStandardOutput);
         /// Error("Error: {0}", implicitStandardError);
         /// // Example settings customization
         /// var settingsCustomizationExitCode = Command(
-        /// new []{ "dotnet", "dotnet.exe" },
-        /// out var settingsCustomizationStandardOutput,
-        /// out var settingsCustomizationStandardError,
-        /// settingsCustomization: settings =&gt; settings
-        /// .WithToolName(".NET Tool")
-        /// .WithArgumentCustomization(args =&gt; args.Append("tool"))
-        /// .WithExpectedExitCode(1)
+        ///     new []{ "dotnet", "dotnet.exe" },
+        ///     out var settingsCustomizationStandardOutput,
+        ///     out var settingsCustomizationStandardError,
+        ///     settingsCustomization: settings =&gt; settings
+        ///                                         .WithToolName(".NET Tool")
+        ///                                         .WithArgumentCustomization(args =&gt; args.Append("tool"))
+        ///                                         .WithExpectedExitCode(1)
         /// );
         /// Verbose("Exit code: {0}", settingsCustomizationExitCode);
         /// Information("Output: {0}", settingsCustomizationStandardOutput);
@@ -4149,26 +4149,26 @@ public static partial class Program
         /// <code>
         /// // Reusable tools settings i.e. created in setup.
         /// var settings = new CommandSettings {
-        /// ToolName = ".NET CLI",
-        /// ToolExecutableNames =  new []{ "dotnet", "dotnet.exe" },
-        /// }.WithExpectedExitCode(1);
+        ///         ToolName = ".NET CLI",
+        ///         ToolExecutableNames =  new []{ "dotnet", "dotnet.exe" },
+        ///      }.WithExpectedExitCode(1);
         /// // Example with ProcessArgumentBuilder
         /// var exitCode = Command(
-        /// settings,
-        /// out var standardOutput,
-        /// out var standardError,
-        /// new ProcessArgumentBuilder()
-        /// .Append("tool")
+        ///     settings,
+        ///     out var standardOutput,
+        ///     out var standardError,
+        ///     new ProcessArgumentBuilder()
+        ///         .Append("tool")
         /// );
         /// Verbose("Exit code: {0}", exitCode);
         /// Information("Output: {0}", standardOutput);
         /// Error("Error: {0}", standardError);
         /// // Example with implicit ProcessArgumentBuilder
         /// var implicitExitCode = Command(
-        /// settings,
-        /// out var implicitStandardOutput,
-        /// out var implicitStandardError,
-        /// "tool"
+        ///     settings,
+        ///     out var implicitStandardOutput,
+        ///     out var implicitStandardError,
+        ///     "tool"
         /// );
         /// Verbose("Exit code: {0}", implicitExitCode);
         /// Information("Output: {0}", implicitStandardOutput);
@@ -4190,15 +4190,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotCoverAnalyse(tool =&gt; {
-        /// tool.XUnit2("./**/App.Tests.dll",
-        /// new XUnit2Settings {
-        /// ShadowCopy = false
-        /// });
-        /// },
-        /// new FilePath("./result.xml"),
-        /// new DotCoverAnalyseSettings()
-        /// .WithFilter("+:App")
-        /// .WithFilter("-:App.Tests"));
+        ///   tool.XUnit2("./**/App.Tests.dll",
+        ///     new XUnit2Settings {
+        ///       ShadowCopy = false
+        ///     });
+        ///   },
+        ///   new FilePath("./result.xml"),
+        ///   new DotCoverAnalyseSettings()
+        ///     .WithFilter("+:App")
+        ///     .WithFilter("-:App.Tests"));
         /// </code>
         /// </example>
         /// </member>
@@ -4216,15 +4216,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotCoverCover(tool =&gt; {
-        /// tool.XUnit2("./**/App.Tests.dll",
-        /// new XUnit2Settings {
-        /// ShadowCopy = false
-        /// });
-        /// },
-        /// new FilePath("./result.dcvr"),
-        /// new DotCoverCoverSettings()
-        /// .WithFilter("+:App")
-        /// .WithFilter("-:App.Tests"));
+        ///   tool.XUnit2("./**/App.Tests.dll",
+        ///     new XUnit2Settings {
+        ///       ShadowCopy = false
+        ///     });
+        ///   },
+        ///   new FilePath("./result.dcvr"),
+        ///   new DotCoverCoverSettings()
+        ///     .WithFilter("+:App")
+        ///     .WithFilter("-:App.Tests"));
         /// </code>
         /// </example>
         /// </member>
@@ -4242,10 +4242,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotCoverReport(new FilePath("./result.dcvr"),
-        /// new FilePath("./result.html"),
-        /// new DotCoverReportSettings {
-        /// ReportType = DotCoverReportType.HTML
-        /// });
+        ///   new FilePath("./result.html"),
+        ///   new DotCoverReportSettings {
+        ///     ReportType = DotCoverReportType.HTML
+        ///   });
         /// </code>
         /// </example>
         /// </member>
@@ -4262,10 +4262,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotCoverMerge(new[] {
-        /// new FilePath("./result1.dcvr"),
-        /// new FilePath("./result2.dcvr")
-        /// },
-        /// new FilePath("./merged.dcvr"));
+        ///     new FilePath("./result1.dcvr"),
+        ///     new FilePath("./result2.dcvr")
+        ///   },
+        ///   new FilePath("./merged.dcvr"));
         /// </code>
         /// </example>
         /// </member>
@@ -4283,13 +4283,13 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotCoverMerge(new[] {
-        /// new FilePath("./result1.dcvr"),
-        /// new FilePath("./result2.dcvr")
-        /// },
-        /// new FilePath("./merged.dcvr"),
-        /// new DotCoverMergeSettings {
-        /// LogFile = new FilePath("./log.txt")
-        /// });
+        ///     new FilePath("./result1.dcvr"),
+        ///     new FilePath("./result2.dcvr")
+        ///   },
+        ///   new FilePath("./merged.dcvr"),
+        ///   new DotCoverMergeSettings {
+        ///     LogFile = new FilePath("./log.txt")
+        ///   });
         /// </code>
         /// </example>
         /// </member>
@@ -4320,9 +4320,9 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetBuildSettings
         /// {
-        /// Framework = "netcoreapp2.0",
-        /// Configuration = "Debug",
-        /// OutputDirectory = "./artifacts/"
+        ///     Framework = "netcoreapp2.0",
+        ///     Configuration = "Debug",
+        ///     OutputDirectory = "./artifacts/"
         /// };
         /// DotNetBuild("./src/*", settings);
         /// </code>
@@ -4353,7 +4353,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetBuildServerShutdownSettings
         /// {
-        /// MSBuild = true
+        ///     MSBuild = true
         /// };
         /// DotNetBuildServerShutdown(settings);
         /// </code>
@@ -4386,9 +4386,9 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetCleanSettings
         /// {
-        /// Framework = "netcoreapp2.0",
-        /// Configuration = "Debug",
-        /// OutputDirectory = "./artifacts/"
+        ///     Framework = "netcoreapp2.0",
+        ///     Configuration = "Debug",
+        ///     OutputDirectory = "./artifacts/"
         /// };
         /// DotNetClean("./src/project", settings);
         /// </code>
@@ -4437,7 +4437,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetExecuteSettings
         /// {
-        /// FrameworkVersion = "1.0.3"
+        ///     FrameworkVersion = "1.0.3"
         /// };
         /// DotNetExecute("./bin/Debug/app.dll", "--arg", settings);
         /// </code>
@@ -4470,9 +4470,9 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetFormatSettings
         /// {
-        /// NoRestore = true,
-        /// Include = "Program.cs Utility\Logging.cs",
-        /// Severity = DotNetFormatSeverity.Error
+        ///     NoRestore = true,
+        ///     Include = "Program.cs Utility\Logging.cs",
+        ///     Severity = DotNetFormatSeverity.Error
         /// };
         /// DotNetFormat("./src/project", settings);
         /// </code>
@@ -4505,8 +4505,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetFormatSettings
         /// {
-        /// NoRestore = true,
-        /// Include = "Program.cs Utility\Logging.cs"
+        ///     NoRestore = true,
+        ///     Include = "Program.cs Utility\Logging.cs"
         /// };
         /// DotNetFormatWhitespace("./src/*", settings);
         /// </code>
@@ -4539,8 +4539,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetFormatSettings
         /// {
-        /// NoRestore = true,
-        /// Include = "Program.cs Utility\Logging.cs"
+        ///     NoRestore = true,
+        ///     Include = "Program.cs Utility\Logging.cs"
         /// };
         /// DotNetFormatStyle("./src/*", settings);
         /// </code>
@@ -4573,8 +4573,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetFormatSettings
         /// {
-        /// NoRestore = true,
-        /// Include = "Program.cs Utility\Logging.cs"
+        ///     NoRestore = true,
+        ///     Include = "Program.cs Utility\Logging.cs"
         /// };
         /// DotNetFormatAnalyzers("./src/*", settings);
         /// </code>
@@ -4622,8 +4622,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetMSBuildSettings
         /// {
-        /// NoLogo = true,
-        /// MaxCpuCount = -1
+        ///     NoLogo = true,
+        ///     MaxCpuCount = -1
         /// };
         /// DotNetMSBuild(settings);
         /// </code>
@@ -4642,11 +4642,11 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetMSBuildSettings
         /// {
-        /// NoLogo = true,
-        /// MaxCpuCount = -1
+        ///     NoLogo = true,
+        ///     MaxCpuCount = -1
         /// };
         /// DotNetMSBuild(settings,
-        /// output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
+        ///     output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
         /// </code>
         /// </example>
         /// </member>
@@ -4663,8 +4663,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetMSBuildSettings
         /// {
-        /// NoLogo = true,
-        /// MaxCpuCount = -1
+        ///     NoLogo = true,
+        ///     MaxCpuCount = -1
         /// };
         /// DotNetMSBuild("foobar.proj", settings);
         /// </code>
@@ -4688,11 +4688,11 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetMSBuildSettings
         /// {
-        /// NoLogo = true,
-        /// MaxCpuCount = -1
+        ///     NoLogo = true,
+        ///     MaxCpuCount = -1
         /// };
         /// DotNetMSBuild("foobar.proj", settings,
-        /// output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
+        ///     output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
         /// </code>
         /// </example>
         /// <remarks>
@@ -4755,8 +4755,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetDeleteSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// NonInteractive = true
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     NonInteractive = true
         /// };
         /// DotNetNuGetDelete("Microsoft.AspNetCore.Mvc", settings);
         /// </code>
@@ -4774,8 +4774,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetDeleteSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// NonInteractive = true
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     NonInteractive = true
         /// };
         /// DotNetNuGetDelete(settings);
         /// </code>
@@ -4795,8 +4795,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetDeleteSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// NonInteractive = true
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     NonInteractive = true
         /// };
         /// DotNetNuGetDelete("Microsoft.AspNetCore.Mvc", "1.0", settings);
         /// </code>
@@ -4833,8 +4833,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetPushSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
         /// };
         /// // With FilePath instance
         /// var packageFilePath = GetFiles("foo*.nupkg").Single();
@@ -4857,11 +4857,11 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// UserName = "username",
-        /// Password = "password",
-        /// StorePasswordInClearText = true,
-        /// ValidAuthenticationTypes = "basic,negotiate"
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     UserName = "username",
+        ///     Password = "password",
+        ///     StorePasswordInClearText = true,
+        ///     ValidAuthenticationTypes = "basic,negotiate"
         /// };
         /// DotNetNuGetAddSource("example", settings);
         /// </code>
@@ -4894,7 +4894,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// ConfigFile = "NuGet.config"
+        ///     ConfigFile = "NuGet.config"
         /// };
         /// DotNetNuGetDisableSource("example", settings);
         /// </code>
@@ -4927,7 +4927,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// ConfigFile = "NuGet.config"
+        ///     ConfigFile = "NuGet.config"
         /// };
         /// DotNetNuGetEnableSource("example", settings);
         /// </code>
@@ -4962,7 +4962,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// ConfigFile = "NuGet.config"
+        ///     ConfigFile = "NuGet.config"
         /// };
         /// var exists = DotNetNuGetHasSource("example", settings);
         /// </code>
@@ -4995,7 +4995,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// ConfigFile = "NuGet.config"
+        ///     ConfigFile = "NuGet.config"
         /// };
         /// DotNetNuGetRemoveSource("example", settings);
         /// </code>
@@ -5014,11 +5014,11 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetNuGetSourceSettings
         /// {
-        /// Source = "https://www.example.com/nugetfeed",
-        /// UserName = "username",
-        /// Password = "password",
-        /// StorePasswordInClearText = true,
-        /// ValidAuthenticationTypes = "basic,negotiate"
+        ///     Source = "https://www.example.com/nugetfeed",
+        ///     UserName = "username",
+        ///     Password = "password",
+        ///     StorePasswordInClearText = true,
+        ///     ValidAuthenticationTypes = "basic,negotiate"
         /// };
         /// DotNetNuGetUpdateSource("example", settings);
         /// </code>
@@ -5051,8 +5051,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetPackSettings
         /// {
-        /// Configuration = "Release",
-        /// OutputDirectory = "./artifacts/"
+        ///     Configuration = "Release",
+        ///     OutputDirectory = "./artifacts/"
         /// };
         /// DotNetPack("./src/*", settings);
         /// </code>
@@ -5100,8 +5100,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetPackageAddSettings
         /// {
-        /// NoRestore = true,
-        /// Version = "6.1.3"
+        ///     NoRestore = true,
+        ///     Version = "6.1.3"
         /// };
         /// DotNetAddPackage("Cake.FileHelper", settings);
         /// </code>
@@ -5121,8 +5121,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetPackageAddSettings
         /// {
-        /// NoRestore = true,
-        /// Version = "6.1.3"
+        ///     NoRestore = true,
+        ///     Version = "6.1.3"
         /// };
         /// DotNetAddPackage("Cake.FileHelper", "ToDo.csproj", settings);
         /// </code>
@@ -5170,9 +5170,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// DotNetRemovePackage(
-        /// "Cake.FileHelper",
-        /// "ToDo.csproj",
-        /// new DotNetPackageRemoveSettings { WorkingDirectory = "./src" });
+        ///     "Cake.FileHelper",
+        ///     "ToDo.csproj",
+        ///     new DotNetPackageRemoveSettings { WorkingDirectory = "./src" });
         /// </code>
         /// </example>
         /// </member>
@@ -5189,12 +5189,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var packageList = DotNetPackageSearch("Cake", new DotNetPackageSearchSettings {
-        /// AllVersions = false,
-        /// Prerelease = false
-        /// });
+        ///     AllVersions = false,
+        ///     Prerelease = false
+        ///     });
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -5211,12 +5211,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var packageList = DotNetPackageSearch("Cake", new DotNetPackageSearchSettings {
-        /// AllVersions = false,
-        /// Prerelease = false
-        /// });
+        ///     AllVersions = false,
+        ///     Prerelease = false
+        ///     });
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -5233,12 +5233,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var packageList = DotNetPackageSearch("Cake", new DotNetPackageSearchSettings {
-        /// AllVersions = false,
-        /// Prerelease = false
-        /// });
+        ///     AllVersions = false,
+        ///     Prerelease = false
+        ///     });
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -5286,7 +5286,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetPackageListSettings
         /// {
-        /// Outdated = true
+        ///     Outdated = true
         /// };
         /// DotNetPackageList output = DotNetListPackage("./src/MyProject/MyProject.csproj", settings);
         /// </code>
@@ -5319,9 +5319,9 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetPublishSettings
         /// {
-        /// Framework = "netcoreapp2.0",
-        /// Configuration = "Release",
-        /// OutputDirectory = "./artifacts/"
+        ///     Framework = "netcoreapp2.0",
+        ///     Configuration = "Release",
+        ///     OutputDirectory = "./artifacts/"
         /// };
         /// DotNetPublish("./src/*", settings);
         /// </code>
@@ -5354,7 +5354,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceAddSettings
         /// {
-        /// Framework = "net10.0"
+        ///     Framework = "net10.0"
         /// };
         /// DotNetAddReference(GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5389,7 +5389,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceAddSettings
         /// {
-        /// Framework = "net10.0"
+        ///     Framework = "net10.0"
         /// };
         /// DotNetAddReference("./app/app.csproj", GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5422,7 +5422,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceRemoveSettings
         /// {
-        /// Framework = "net10.0"
+        ///     Framework = "net10.0"
         /// };
         /// DotNetRemoveReference(GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5457,7 +5457,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceRemoveSettings
         /// {
-        /// Framework = "net10.0"
+        ///     Framework = "net10.0"
         /// };
         /// DotNetRemoveReference("./app/app.csproj", GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5476,7 +5476,7 @@ public static partial class Program
         /// var references = DotNetListReference();
         /// foreach (var reference in references)
         /// {
-        /// Information(reference);
+        ///      Information(reference);
         /// }
         /// </code>
         /// </example>
@@ -5495,7 +5495,7 @@ public static partial class Program
         /// var references = DotNetListReference("./app/app.csproj");
         /// foreach (var reference in references)
         /// {
-        /// Information(reference);
+        ///      Information(reference);
         /// }
         /// </code>
         /// </example>
@@ -5514,12 +5514,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceListSettings
         /// {
-        /// Verbosity = DotNetVerbosity.Diagnostic
+        ///     Verbosity = DotNetVerbosity.Diagnostic
         /// };
         /// var references = DotNetListReference("./app/app.csproj", settings);
         /// foreach (var reference in references)
         /// {
-        /// Information(reference);
+        ///      Information(reference);
         /// }
         /// </code>
         /// </example>
@@ -5563,12 +5563,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetRestoreSettings
         /// {
-        /// Sources = new[] {"https://www.example.com/nugetfeed", "https://www.example.com/nugetfeed2"},
-        /// FallbackSources = new[] {"https://www.example.com/fallbacknugetfeed"},
-        /// PackagesDirectory = "./packages",
-        /// DotNetVerbosity.Information,
-        /// DisableParallel = true,
-        /// InferRuntimes = new[] {"runtime1", "runtime2"}
+        ///     Sources = new[] {"https://www.example.com/nugetfeed", "https://www.example.com/nugetfeed2"},
+        ///     FallbackSources = new[] {"https://www.example.com/fallbacknugetfeed"},
+        ///     PackagesDirectory = "./packages",
+        ///     DotNetVerbosity.Information,
+        ///     DisableParallel = true,
+        ///     InferRuntimes = new[] {"runtime1", "runtime2"}
         /// };
         /// DotNetRestore(settings);
         /// </code>
@@ -5587,12 +5587,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetRestoreSettings
         /// {
-        /// Sources = new[] {"https://www.example.com/nugetfeed", "https://www.example.com/nugetfeed2"},
-        /// FallbackSources = new[] {"https://www.example.com/fallbacknugetfeed"},
-        /// PackagesDirectory = "./packages",
-        /// DotNetVerbosity.Information,
-        /// DisableParallel = true,
-        /// InferRuntimes = new[] {"runtime1", "runtime2"}
+        ///     Sources = new[] {"https://www.example.com/nugetfeed", "https://www.example.com/nugetfeed2"},
+        ///     FallbackSources = new[] {"https://www.example.com/fallbacknugetfeed"},
+        ///     PackagesDirectory = "./packages",
+        ///     DotNetVerbosity.Information,
+        ///     DisableParallel = true,
+        ///     InferRuntimes = new[] {"runtime1", "runtime2"}
         /// };
         /// DotNetRestore("./src/MyProject/MyProject.csproj", settings);
         /// </code>
@@ -5654,8 +5654,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetRunSettings
         /// {
-        /// Framework = "netcoreapp2.0",
-        /// Configuration = "Release"
+        ///     Framework = "netcoreapp2.0",
+        ///     Configuration = "Release"
         /// };
         /// DotNetRun("./src/Project", "--args", settings);
         /// </code>
@@ -5674,8 +5674,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetRunSettings
         /// {
-        /// Framework = "netcoreapp2.0",
-        /// Configuration = "Release"
+        ///     Framework = "netcoreapp2.0",
+        ///     Configuration = "Release"
         /// };
         /// DotNetRun("./src/Project", settings);
         /// </code>
@@ -5707,7 +5707,7 @@ public static partial class Program
         /// var projects = DotNetSlnList();
         /// foreach (var project in projects)
         /// {
-        /// Information(project);
+        ///      Information(project);
         /// }
         /// </code>
         /// </example>
@@ -5726,7 +5726,7 @@ public static partial class Program
         /// var projects = DotNetSlnList("./app/app.sln");
         /// foreach (var project in projects)
         /// {
-        /// Information(project);
+        ///      Information(project);
         /// }
         /// </code>
         /// </example>
@@ -5745,12 +5745,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetSlnListSettings
         /// {
-        /// Verbosity = DotNetVerbosity.Diagnostic
+        ///     Verbosity = DotNetVerbosity.Diagnostic
         /// };
         /// var projects = DotNetSlnList("./app/app.sln");
         /// foreach (var project in projects)
         /// {
-        /// Information(project);
+        ///      Information(project);
         /// }
         /// </code>
         /// </example>
@@ -5797,7 +5797,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetSlnAddSettings
         /// {
-        /// SolutionFolder = "libs/math"
+        ///     SolutionFolder = "libs/math"
         /// };
         /// DotNetSlnAdd(GetFiles("./*.csproj"), settings);
         /// </code>
@@ -5817,7 +5817,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetSlnAddSettings
         /// {
-        /// SolutionFolder = "libs/math"
+        ///     SolutionFolder = "libs/math"
         /// };
         /// DotNetSlnAdd("app.sln", GetFiles("./*.csproj"), settings);
         /// </code>
@@ -5866,7 +5866,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetSlnRemoveSettings
         /// {
-        /// Verbosity = DotNetVerbosity.Diagnostic
+        ///     Verbosity = DotNetVerbosity.Diagnostic
         /// };
         /// DotNetSlnRemove("app.sln", GetFiles("./*.csproj"), settings);
         /// </code>
@@ -5902,13 +5902,13 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// Task("Test")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// var projectFiles = GetFiles("./test/**/*.csproj");
-        /// foreach (var file in projectFiles)
-        /// {
-        /// DotNetTest(file.FullPath);
-        /// }
+        ///     var projectFiles = GetFiles("./test/**/*.csproj");
+        ///     foreach (var file in projectFiles)
+        ///     {
+        ///         DotNetTest(file.FullPath);
+        ///     }
         /// });
         /// </code>
         /// <para>If your test project is using project.json, the project parameter should just be the directory path.</para>
@@ -5930,7 +5930,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetTestSettings
         /// {
-        /// Configuration = "Release"
+        ///     Configuration = "Release"
         /// };
         /// DotNetTest("./test/Project.Tests/Project.Tests.csproj", settings);
         /// </code>
@@ -5938,24 +5938,24 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// Task("Test")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// var settings = new DotNetTestSettings
-        /// {
-        /// Configuration = "Release"
-        /// };
-        /// var projectFiles = GetFiles("./test/**/*.csproj");
-        /// foreach (var file in projectFiles)
-        /// {
-        /// DotNetTest(file.FullPath, settings);
-        /// }
+        ///     var settings = new DotNetTestSettings
+        ///     {
+        ///         Configuration = "Release"
+        ///     };
+        ///     var projectFiles = GetFiles("./test/**/*.csproj");
+        ///     foreach (var file in projectFiles)
+        ///     {
+        ///         DotNetTest(file.FullPath, settings);
+        ///     }
         /// });
         /// </code>
         /// <para>If your test project is using project.json, the project parameter should just be the directory path.</para>
         /// <code>
         /// var settings = new DotNetTestSettings
         /// {
-        /// Configuration = "Release"
+        ///     Configuration = "Release"
         /// };
         /// DotNetTest("./test/Project.Tests/", settings);
         /// </code>
@@ -5975,7 +5975,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetTestSettings
         /// {
-        /// Configuration = "Release"
+        ///     Configuration = "Release"
         /// };
         /// DotNetTest("./test/Project.Tests/Project.Tests.csproj", settings);
         /// </code>
@@ -5983,24 +5983,24 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// Task("Test")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// var settings = new DotNetTestSettings
-        /// {
-        /// Configuration = "Release"
-        /// };
-        /// var projectFiles = GetFiles("./test/**/*.csproj");
-        /// foreach (var file in projectFiles)
-        /// {
-        /// DotNetTest(file.FullPath, "MSTest.MapInconclusiveToFailed=true", settings);
-        /// }
+        ///     var settings = new DotNetTestSettings
+        ///     {
+        ///         Configuration = "Release"
+        ///     };
+        ///     var projectFiles = GetFiles("./test/**/*.csproj");
+        ///     foreach (var file in projectFiles)
+        ///     {
+        ///         DotNetTest(file.FullPath, "MSTest.MapInconclusiveToFailed=true", settings);
+        ///     }
         /// });
         /// </code>
         /// <para>If your test project is using project.json, the project parameter should just be the directory path.</para>
         /// <code>
         /// var settings = new DotNetTestSettings
         /// {
-        /// Configuration = "Release"
+        ///     Configuration = "Release"
         /// };
         /// DotNetTest("./test/Project.Tests/", "MSTest.MapInconclusiveToFailed=true", settings);
         /// </code>
@@ -6039,8 +6039,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetVSTestSettings
         /// {
-        /// Framework = "FrameworkCore10",
-        /// Platform = "x64"
+        ///     Framework = "FrameworkCore10",
+        ///     Platform = "x64"
         /// };
         /// DotNetTest("./test/Project.Tests/bin/Release/netcoreapp2.1/Project.Tests.dll", settings);
         /// </code>
@@ -6048,9 +6048,9 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetVSTestSettings
         /// {
-        /// Framework = "FrameworkCore10",
-        /// Platform = "x64",
-        /// Parallel = true
+        ///     Framework = "FrameworkCore10",
+        ///     Platform = "x64",
+        ///     Parallel = true
         /// };
         /// DotNetVSTest("./**/bin/Release/netcoreapp2.1/*.Tests.dll", settings);
         /// </code>
@@ -6069,8 +6069,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetVSTestSettings
         /// {
-        /// Framework = "FrameworkCore10",
-        /// Platform = "x64"
+        ///     Framework = "FrameworkCore10",
+        ///     Platform = "x64"
         /// };
         /// DotNetVSTest(new[] { (FilePath)"./test/Project.Tests/bin/Release/netcoreapp2.1/Project.Tests.dll" }, settings);
         /// </code>
@@ -6078,16 +6078,16 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// Task("Test")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// var settings = new DotNetVSTestSettings
-        /// {
-        /// Framework = "FrameworkCore10",
-        /// Platform = "x64",
-        /// Parallel = true
-        /// };
-        /// var testFiles = GetFiles("./test/**/bin/Release/netcoreapp2.1/*.Test.dll");
-        /// DotNetVSTest(testFiles, settings);
+        ///     var settings = new DotNetVSTestSettings
+        ///     {
+        ///         Framework = "FrameworkCore10",
+        ///         Platform = "x64",
+        ///         Parallel = true
+        ///     };
+        ///     var testFiles = GetFiles("./test/**/bin/Release/netcoreapp2.1/*.Test.dll");
+        ///     DotNetVSTest(testFiles, settings);
         /// });
         /// </code>
         /// </example>
@@ -6119,7 +6119,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetToolSettings
         /// {
-        /// DiagnosticOutput = true
+        ///     DiagnosticOutput = true
         /// };
         /// DotNetTool("cake", settings);
         /// </code>
@@ -6217,7 +6217,7 @@ public static partial class Program
         /// var arguments = new ProcessArgumentBuilder().Append("--version");
         /// DotNetToolExecute("DPI", arguments, new DotNetToolExecuteSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6234,7 +6234,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolExecute("DPI", new DotNetToolExecuteSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6266,7 +6266,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolInstall("DPI", new DotNetToolInstallSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6296,8 +6296,8 @@ public static partial class Program
         /// <code>
         /// DotNetToolList(new DotNetToolListSettings
         /// {
-        /// InstallationScope = DotNetToolInstallationScope.Local,
-        /// WorkingDirectory = "./src"
+        ///     InstallationScope = DotNetToolInstallationScope.Local,
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6329,8 +6329,8 @@ public static partial class Program
         /// <code>
         /// DotNetToolList("DPI", new DotNetToolListSettings
         /// {
-        /// InstallationScope = DotNetToolInstallationScope.Local,
-        /// WorkingDirectory = "./src"
+        ///     InstallationScope = DotNetToolInstallationScope.Local,
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6360,7 +6360,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolRestore(new DotNetToolRestoreSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6408,7 +6408,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolRun("DPI", "--version", new DotNetToolRunSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6425,7 +6425,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolRun("DPI", new DotNetToolRunSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6457,7 +6457,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolSearch("DPI", new DotNetToolSearchSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6489,7 +6489,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolUninstall("DPI", new DotNetToolUninstallSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6543,7 +6543,7 @@ public static partial class Program
         /// <code>
         /// DotNetToolUpdate("DPI", new DotNetToolUpdateSettings
         /// {
-        /// WorkingDirectory = "./src"
+        ///     WorkingDirectory = "./src"
         /// });
         /// </code>
         /// </example>
@@ -6561,7 +6561,7 @@ public static partial class Program
         /// var workloads = DotNetWorkloadSearch();
         /// foreach (var workload in workloads)
         /// {
-        /// Information($"Id: {workload.Id}, Description: {workload.Description}");
+        ///      Information($"Id: {workload.Id}, Description: {workload.Description}");
         /// }
         /// </code>
         /// </example>
@@ -6580,7 +6580,7 @@ public static partial class Program
         /// var workloads = DotNetWorkloadSearch("maui");
         /// foreach (var workload in workloads)
         /// {
-        /// Information($"Id: {workload.Id}, Description: {workload.Description}");
+        ///      Information($"Id: {workload.Id}, Description: {workload.Description}");
         /// }
         /// </code>
         /// </example>
@@ -6599,12 +6599,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadSearchSettings
         /// {
-        /// DotNetVerbosity.Detailed
+        ///     DotNetVerbosity.Detailed
         /// };
         /// var workloads = DotNetWorkloadSearch("maui", settings);
         /// foreach (var workload in workloads)
         /// {
-        /// Information($"Id: {workload.Id}, Description: {workload.Description}");
+        ///      Information($"Id: {workload.Id}, Description: {workload.Description}");
         /// }
         /// </code>
         /// </example>
@@ -6664,8 +6664,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadInstallSettings
         /// {
-        /// IncludePreviews = true,
-        /// NoCache = true
+        ///     IncludePreviews = true,
+        ///     NoCache = true
         /// };
         /// DotNetWorkloadInstall("maui", settings);
         /// </code>
@@ -6698,8 +6698,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadInstallSettings
         /// {
-        /// IncludePreviews = true,
-        /// NoCache = true
+        ///     IncludePreviews = true,
+        ///     NoCache = true
         /// };
         /// DotNetWorkloadInstall(new string[] { "maui", "maui-desktop", "maui-mobile" }, settings);
         /// </code>
@@ -6718,7 +6718,7 @@ public static partial class Program
         /// var workloadIds = DotNetWorkloadList();
         /// foreach (var workloadId in workloadIds)
         /// {
-        /// Information($"Installed Workload Id: {workloadId}");
+        ///      Information($"Installed Workload Id: {workloadId}");
         /// }
         /// </code>
         /// </example>
@@ -6736,12 +6736,12 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadListSettings
         /// {
-        /// Verbosity = DotNetVerbosity.Detailed
+        ///     Verbosity = DotNetVerbosity.Detailed
         /// };
         /// var workloads = DotNetWorkloadList(settings);
         /// foreach (var workload in workloads)
         /// {
-        /// Information($"Installed Workload Id: {workload.Id}\t Manifest Version: {workload.ManifestVersion}\t Installation Source: {workload.InstallationSource}");
+        ///      Information($"Installed Workload Id: {workload.Id}\t Manifest Version: {workload.ManifestVersion}\t Installation Source: {workload.InstallationSource}");
         /// }
         /// </code>
         /// </example>
@@ -6771,8 +6771,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadRepairSettings
         /// {
-        /// IncludePreviews = true,
-        /// NoCache = true
+        ///     IncludePreviews = true,
+        ///     NoCache = true
         /// };
         /// DotNetWorkloadRepair(settings);
         /// </code>
@@ -6803,8 +6803,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadUpdateSettings
         /// {
-        /// IncludePreviews = true,
-        /// NoCache = true
+        ///     IncludePreviews = true,
+        ///     NoCache = true
         /// };
         /// DotNetWorkloadUpdate(settings);
         /// </code>
@@ -6837,8 +6837,8 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetWorkloadRestoreSettings
         /// {
-        /// IncludePreviews = true,
-        /// NoCache = true
+        ///     IncludePreviews = true,
+        ///     NoCache = true
         /// };
         /// DotNetWorkloadRestore("./src/project", settings);
         /// </code>
@@ -6875,14 +6875,14 @@ public static partial class Program
         /// var resharperReportsDirectory = buildOutputDirectory + Directory("_ReSharperReports");
         /// var rootDirectoryPath = MakeAbsolute(Context.Environment.WorkingDirectory);
         /// DupFinder("./src/MySolution.sln", new DupFinderSettings {
-        /// ShowStats = true,
-        /// ShowText = true,
-        /// ExcludePattern = new String[]
-        /// {
-        /// rootDirectoryPath + "/**/*Designer.cs",
-        /// },
-        /// OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
-        /// ThrowExceptionOnFindingDuplicates = true
+        ///     ShowStats = true,
+        ///     ShowText = true,
+        ///     ExcludePattern = new String[]
+        ///     {
+        ///         rootDirectoryPath + "/**/*Designer.cs",
+        ///     },
+        ///     OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
+        ///     ThrowExceptionOnFindingDuplicates = true
         /// });
         /// </code>
         /// </example>
@@ -6920,14 +6920,14 @@ public static partial class Program
         /// var rootDirectoryPath = MakeAbsolute(Context.Environment.WorkingDirectory);
         /// var projects = GetFiles("./src/**/*.csproj");
         /// DupFinder(projects, new DupFinderSettings {
-        /// ShowStats = true,
-        /// ShowText = true,
-        /// ExcludePattern = new String[]
-        /// {
-        /// rootDirectoryPath + "/**/*Designer.cs",
-        /// },
-        /// OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
-        /// ThrowExceptionOnFindingDuplicates = true
+        ///     ShowStats = true,
+        ///     ShowText = true,
+        ///     ExcludePattern = new String[]
+        ///     {
+        ///         rootDirectoryPath + "/**/*Designer.cs",
+        ///     },
+        ///     OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
+        ///     ThrowExceptionOnFindingDuplicates = true
         /// });
         /// </code>
         /// </example>
@@ -6961,7 +6961,7 @@ public static partial class Program
         /// var buildOutputDirectory = Directory("./.build");
         /// var resharperReportsDirectory = buildOutputDirectory + Directory("_ReSharperReports");
         /// DupFinder("*.cs", new DupFinderSettings {
-        /// OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
+        ///     OutputFile = resharperReportsDirectory + File("dupfinder-output.xml"),
         /// });
         /// </code>
         /// </example>
@@ -7005,8 +7005,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Fixie("./src/UnitTests/*.dll", new FixieSettings {
-        /// NUnitXml = TestResult.xml
-        /// });
+        ///     NUnitXml = TestResult.xml
+        ///     });
         /// </code>
         /// </example>
         /// <param name="pattern">The pattern.</param>
@@ -7022,8 +7022,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var assemblies = new [] {
-        /// "UnitTests1.dll",
-        /// "UnitTests2.dll"
+        ///     "UnitTests1.dll",
+        ///     "UnitTests2.dll"
         /// };
         /// Fixie(assemblies);
         /// </code>
@@ -7056,12 +7056,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var assemblies = new [] {
-        /// "UnitTests1.dll",
-        /// "UnitTests2.dll"
+        ///     "UnitTests1.dll",
+        ///     "UnitTests2.dll"
         /// };
         /// Fixie(assemblies, new FixieSettings {
-        /// NUnitXml = TestResult.xml
-        /// });
+        ///     NUnitXml = TestResult.xml
+        ///     });
         /// </code>
         /// </example>
         /// <param name="assemblies">The assemblies.</param>
@@ -7079,8 +7079,8 @@ public static partial class Program
         /// <code>
         /// var assemblies = GetFiles("./src/UnitTests/*.dll");
         /// Fixie(assemblies, new FixieSettings {
-        /// NUnitXml = TestResult.xml
-        /// });
+        ///     NUnitXml = TestResult.xml
+        ///     });
         /// </code>
         /// </example>
         /// <param name="assemblies">The assemblies.</param>
@@ -7114,8 +7114,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitLink3("C:/temp/solution/bin/my.pdb", new GitLink3Settings {
-        /// RepositoryUrl = "http://mydomain.com",
-        /// ShaHash       = "abcdef"
+        ///     RepositoryUrl = "http://mydomain.com",
+        ///     ShaHash       = "abcdef"
         /// });
         /// </code>
         /// </example>
@@ -7148,8 +7148,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitLink3("C:/temp/solution/bin/**/*.pdb", new GitLink3Settings {
-        /// RepositoryUrl = "http://mydomain.com",
-        /// ShaHash       = "abcdef"
+        ///     RepositoryUrl = "http://mydomain.com",
+        ///     ShaHash       = "abcdef"
         /// });
         /// </code>
         /// </example>
@@ -7182,9 +7182,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitLink("C:/temp/solution", new GitLinkSettings {
-        /// RepositoryUrl = "http://mydomain.com",
-        /// Branch        = "master",
-        /// ShaHash       = "abcdef",
+        ///     RepositoryUrl = "http://mydomain.com",
+        ///     Branch        = "master",
+        ///     ShaHash       = "abcdef",
         /// });
         /// </code>
         /// </example>
@@ -7219,25 +7219,25 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerCreate("token", "owner", "repo", new GitReleaseManagerCreateSettings {
-        /// Milestone         = "0.1.0",
-        /// Prerelease        = false,
-        /// Assets            = "c:/temp/asset1.txt,c:/temp/asset2.txt",
-        /// TargetCommitish   = "master",
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     Milestone         = "0.1.0",
+        ///     Prerelease        = false,
+        ///     Assets            = "c:/temp/asset1.txt,c:/temp/asset2.txt",
+        ///     TargetCommitish   = "master",
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
         /// <example>
         /// <code>
         /// GitReleaseManagerCreate("token", "owner", "repo", new GitReleaseManagerCreateSettings {
-        /// Name              = "0.1.0",
-        /// InputFilePath     = "c:/repo/releasenotes.md",
-        /// Prerelease        = false,
-        /// Assets            = "c:/temp/asset1.txt,c:/temp/asset2.txt",
-        /// TargetCommitish   = "master",
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     Name              = "0.1.0",
+        ///     InputFilePath     = "c:/repo/releasenotes.md",
+        ///     Prerelease        = false,
+        ///     Assets            = "c:/temp/asset1.txt,c:/temp/asset2.txt",
+        ///     TargetCommitish   = "master",
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7276,8 +7276,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerAddAssets("token", "owner", "repo", "0.1.0", "c:/temp/asset1.txt,c:/temp/asset2.txt", new GitReleaseManagerAddAssetsSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7314,8 +7314,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerClose("token", "owner", "repo", "0.1.0", new GitReleaseManagerCloseMilestoneSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7352,8 +7352,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerPublish("token", "owner", "repo", "0.1.0", new GitReleaseManagerPublishSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7391,9 +7391,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerExport("token", "owner", "repo", "c:/temp/releasenotes.md", new GitReleaseManagerExportSettings {
-        /// TagName           = "0.1.0",
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TagName           = "0.1.0",
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7428,7 +7428,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerLabel("token", "owner", "repo", new GitReleaseManagerLabelSettings {
-        /// LogFilePath = "c:/temp/grm.log"
+        ///     LogFilePath = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7465,8 +7465,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerOpen("token", "owner", "repo", "0.1.0", new GitReleaseManagerOpenMilestoneSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7503,16 +7503,16 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseManagerDiscard("token", "owner", "repo", "0.1.0", new GitReleaseManagerDiscardSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
         /// <example>
         /// <code>
         /// GitReleaseManagerDiscard("token", "owner", "repo", "0.1.0", new GitReleaseManagerDiscardSettings {
-        /// TargetDirectory   = "c:/repo",
-        /// LogFilePath       = "c:/temp/grm.log"
+        ///     TargetDirectory   = "c:/repo",
+        ///     LogFilePath       = "c:/temp/grm.log"
         /// });
         /// </code>
         /// </example>
@@ -7529,21 +7529,21 @@ public static partial class Program
         /// <example>
         /// <code>
         /// GitReleaseNotes("c:/temp/releasenotes.md", new GitReleaseNotesSettings {
-        /// WorkingDirectory         = "c:/temp",
-        /// Verbose                  = true,
-        /// IssueTracker             = IssueTracker.GitHub,
-        /// AllTags                  = true,
-        /// RepoUserName             = "bob",
-        /// RepoPassword             = "password",
-        /// RepoUrl                  = "http://myrepo.co.uk",
-        /// RepoBranch               = "master",
-        /// IssueTrackerUrl          = "http://myissuetracker.co.uk",
-        /// IssueTrackerUserName     = "bob",
-        /// IssueTrackerPassword     = "password",
-        /// IssueTrackerProjectId    = "1234",
-        /// Categories               = "Category1",
-        /// Version                  = "1.2.3.4",
-        /// AllLabels                = true
+        ///     WorkingDirectory         = "c:/temp",
+        ///     Verbose                  = true,
+        ///     IssueTracker             = IssueTracker.GitHub,
+        ///     AllTags                  = true,
+        ///     RepoUserName             = "bob",
+        ///     RepoPassword             = "password",
+        ///     RepoUrl                  = "http://myrepo.co.uk",
+        ///     RepoBranch               = "master",
+        ///     IssueTrackerUrl          = "http://myissuetracker.co.uk",
+        ///     IssueTrackerUserName     = "bob",
+        ///     IssueTrackerPassword     = "password",
+        ///     IssueTrackerProjectId    = "1234",
+        ///     Categories               = "Category1",
+        ///     Version                  = "1.2.3.4",
+        ///     AllLabels                = true
         /// });
         /// </code>
         /// </example>
@@ -7562,11 +7562,11 @@ public static partial class Program
         /// <code>
         /// <![CDATA[
         /// Task("UpdateAssemblyInfo")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// GitVersion(new GitVersionSettings {
-        /// UpdateAssemblyInfo = true
-        /// });
+        ///     GitVersion(new GitVersionSettings {
+        ///         UpdateAssemblyInfo = true
+        ///     });
         /// });
         /// ]]>
         /// </code>
@@ -7575,16 +7575,16 @@ public static partial class Program
         /// <code>
         /// <![CDATA[
         /// Task("GetVersionInfo")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = GitVersion(new GitVersionSettings {
-        /// UserName = "MyUser",
-        /// Password = "MyPassword,
-        /// Url = "http://git.myhost.com/myproject.git"
-        /// Branch = "develop"
-        /// Commit = EnvironmentVariable("MY_COMMIT")
-        /// });
-        /// // Use result for building NuGet packages, setting build server version, etc...
+        ///     var result = GitVersion(new GitVersionSettings {
+        ///         UserName = "MyUser",
+        ///         Password = "MyPassword,
+        ///         Url = "http://git.myhost.com/myproject.git"
+        ///         Branch = "develop"
+        ///         Commit = EnvironmentVariable("MY_COMMIT")
+        ///     });
+        ///     // Use result for building NuGet packages, setting build server version, etc...
         /// });
         /// ]]>
         /// </code>
@@ -7605,11 +7605,11 @@ public static partial class Program
         /// <code>
         /// <![CDATA[
         /// Task("UpdateAssemblyInfo")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// GitVersion(new GitVersionSettings {
-        /// UpdateAssemblyInfo = true
-        /// });
+        ///     GitVersion(new GitVersionSettings {
+        ///         UpdateAssemblyInfo = true
+        ///     });
         /// });
         /// ]]>
         /// </code>
@@ -7618,16 +7618,16 @@ public static partial class Program
         /// <code>
         /// <![CDATA[
         /// Task("GetVersionInfo")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = GitVersion(new GitVersionSettings {
-        /// UserName = "MyUser",
-        /// Password = "MyPassword,
-        /// Url = "http://git.myhost.com/myproject.git"
-        /// Branch = "develop"
-        /// Commit = EnvironmentVariable("MY_COMMIT")
-        /// });
-        /// // Use result for building NuGet packages, setting build server version, etc...
+        ///     var result = GitVersion(new GitVersionSettings {
+        ///         UserName = "MyUser",
+        ///         Password = "MyPassword,
+        ///         Url = "http://git.myhost.com/myproject.git"
+        ///         Branch = "develop"
+        ///         Commit = EnvironmentVariable("MY_COMMIT")
+        ///     });
+        ///     // Use result for building NuGet packages, setting build server version, etc...
         /// });
         /// ]]>
         /// </code>
@@ -7665,10 +7665,10 @@ public static partial class Program
         /// <code>
         /// var assemblyPaths = GetFiles("./**/Cake.*.dll");
         /// ILMerge(
-        /// "./MergedCake.exe",
-        /// "./Cake.exe",
-        /// assemblyPaths,
-        /// new ILMergeSettings { Internalize = true });
+        ///     "./MergedCake.exe",
+        ///     "./Cake.exe",
+        ///     assemblyPaths,
+        ///     new ILMergeSettings { Internalize = true });
         /// </code>
         /// </example>
         /// </member>
@@ -7704,10 +7704,10 @@ public static partial class Program
         /// <code>
         /// var assemblyPaths = GetFiles("./**/Cake.*.dll");
         /// ILRepack(
-        /// "./MergedCake.exe",
-        /// "./Cake.exe",
-        /// assemblyPaths,
-        /// new ILRepackSettings { Internalize = true });
+        ///     "./MergedCake.exe",
+        ///     "./Cake.exe",
+        ///     assemblyPaths,
+        ///     new ILRepackSettings { Internalize = true });
         /// </code>
         /// </example>
         /// </member>
@@ -7737,8 +7737,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// InnoSetup("./src/Cake.iss", new InnoSetupSettings {
-        /// OutputDirectory = outputDirectory
-        /// });
+        ///     OutputDirectory = outputDirectory
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -7774,11 +7774,11 @@ public static partial class Program
         /// msBuildProperties.Add("configuration", configuration);
         /// msBuildProperties.Add("platform", "AnyCPU");
         /// InspectCode("./MySolution.sln", new InspectCodeSettings {
-        /// SolutionWideAnalysis = true,
-        /// Profile = "./MySolution.sln.DotSettings",
-        /// MsBuildProperties = msBuildProperties,
-        /// OutputFile = resharperReportsDirectory + File("inspectcode-output.xml"),
-        /// ThrowExceptionOnFindingViolations = true
+        ///     SolutionWideAnalysis = true,
+        ///     Profile = "./MySolution.sln.DotSettings",
+        ///     MsBuildProperties = msBuildProperties,
+        ///     OutputFile = resharperReportsDirectory + File("inspectcode-output.xml"),
+        ///     ThrowExceptionOnFindingViolations = true
         /// });
         /// </code>
         /// </example>
@@ -7823,7 +7823,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSBuild("./src/Cake.sln",
-        /// output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
+        ///     output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
         /// </code>
         /// </example>
         /// </member>
@@ -7839,11 +7839,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSBuild("./src/Cake.sln", configurator =&gt;
-        /// configurator.SetConfiguration("Debug")
-        /// .SetVerbosity(Verbosity.Minimal)
-        /// .UseToolVersion(MSBuildToolVersion.VS2015)
-        /// .SetMSBuildPlatform(MSBuildPlatform.x86)
-        /// .SetPlatformTarget(PlatformTarget.MSIL));
+        ///     configurator.SetConfiguration("Debug")
+        ///         .SetVerbosity(Verbosity.Minimal)
+        ///         .UseToolVersion(MSBuildToolVersion.VS2015)
+        ///         .SetMSBuildPlatform(MSBuildPlatform.x86)
+        ///         .SetPlatformTarget(PlatformTarget.MSIL));
         /// </code>
         /// </example>
         /// </member>
@@ -7861,12 +7861,12 @@ public static partial class Program
         /// <code>
         /// var outputBuilder = new StringBuilder();
         /// MSBuild("./src/Cake.sln", configurator =&gt;
-        /// configurator.SetConfiguration("Debug")
-        /// .SetVerbosity(Verbosity.Minimal)
-        /// .UseToolVersion(MSBuildToolVersion.VS2015)
-        /// .SetMSBuildPlatform(MSBuildPlatform.x86)
-        /// .SetPlatformTarget(PlatformTarget.MSIL),
-        /// output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
+        ///     configurator.SetConfiguration("Debug")
+        ///         .SetVerbosity(Verbosity.Minimal)
+        ///         .UseToolVersion(MSBuildToolVersion.VS2015)
+        ///         .SetMSBuildPlatform(MSBuildPlatform.x86)
+        ///         .SetPlatformTarget(PlatformTarget.MSIL),
+        ///     output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
         /// </code>
         /// </example>
         /// </member>
@@ -7882,11 +7882,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSBuild("./src/Cake.sln", new MSBuildSettings {
-        /// Verbosity = Verbosity.Minimal,
-        /// ToolVersion = MSBuildToolVersion.VS2015,
-        /// Configuration = "Release",
-        /// PlatformTarget = PlatformTarget.MSIL
-        /// });
+        ///     Verbosity = Verbosity.Minimal,
+        ///     ToolVersion = MSBuildToolVersion.VS2015,
+        ///     Configuration = "Release",
+        ///     PlatformTarget = PlatformTarget.MSIL
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -7904,12 +7904,12 @@ public static partial class Program
         /// <code>
         /// var outputBuilder = new StringBuilder();
         /// MSBuild("./src/Cake.sln", new MSBuildSettings {
-        /// Verbosity = Verbosity.Minimal,
-        /// ToolVersion = MSBuildToolVersion.VS2015,
-        /// Configuration = "Release",
-        /// PlatformTarget = PlatformTarget.MSIL
-        /// },
-        /// output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
+        ///     Verbosity = Verbosity.Minimal,
+        ///     ToolVersion = MSBuildToolVersion.VS2015,
+        ///     Configuration = "Release",
+        ///     PlatformTarget = PlatformTarget.MSIL
+        ///     },
+        ///     output =&gt; foreach (var line in output) outputBuilder.AppendLine(line));
         /// </code>
         /// </example>
         /// </member>
@@ -7999,12 +7999,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSpec("./src/**/bin/Release/*.Tests.dll",
-        /// new MSpecSettings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new MSpecSettings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8019,11 +8019,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSpec(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8054,17 +8054,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MSpec(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// },
-        /// new MSpecSettings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///      },
+        ///      new MSpecSettings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8081,12 +8081,12 @@ public static partial class Program
         /// <code>
         /// var testAssemblies = GetFiles("./src/**/bin/Release/*.Tests.dll");
         /// MSpec(testAssemblies,
-        /// new MSpecSettings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new MSpecSettings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8116,8 +8116,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// MakeNSIS("./src/Cake.nsi", new MakeNSISSettings {
-        /// NoConfig = true
-        /// });
+        ///     NoConfig = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8148,8 +8148,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NUnit3("./src/**/bin/Release/*.Tests.dll", new NUnit3Settings {
-        /// NoResults = true
-        /// });
+        ///     NoResults = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8195,8 +8195,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NUnit3(new [] { "./src/Example.Tests/bin/Release/Example.Tests.dll" }, new NUnit3Settings {
-        /// NoResults = true
-        /// });
+        ///     NoResults = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8214,8 +8214,8 @@ public static partial class Program
         /// <code>
         /// var testAssemblies = GetFiles("./src/**/bin/Release/*.Tests.dll");
         /// NUnit3(testAssemblies, new NUnit3Settings {
-        /// NoResults = true
-        /// });
+        ///     NoResults = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8244,9 +8244,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NUnit("./src/UnitTests/*.dll", new NUnitSettings {
-        /// Timeout = 4000,
-        /// StopOnError = true
-        /// });
+        ///     Timeout = 4000,
+        ///     StopOnError = true
+        ///     });
         /// </code>
         /// </example>
         /// <param name="pattern">The pattern.</param>
@@ -8262,8 +8262,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var assemblies = new [] {
-        /// "UnitTests1.dll",
-        /// "UnitTests2.dll"
+        ///     "UnitTests1.dll",
+        ///     "UnitTests2.dll"
         /// };
         /// NUnit(assemblies);
         /// </code>
@@ -8296,13 +8296,13 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var assemblies = new [] {
-        /// "UnitTests1.dll",
-        /// "UnitTests2.dll"
+        ///     "UnitTests1.dll",
+        ///     "UnitTests2.dll"
         /// };
         /// NUnit(assemblies, new NUnitSettings {
-        /// Timeout = 4000,
-        /// StopOnError = true
-        /// });
+        ///     Timeout = 4000,
+        ///     StopOnError = true
+        ///     });
         /// </code>
         /// </example>
         /// <param name="assemblies">The assemblies.</param>
@@ -8320,9 +8320,9 @@ public static partial class Program
         /// <code>
         /// var assemblies = GetFiles(""./src/UnitTests/*.dll"");
         /// NUnit(assemblies, new NUnitSettings {
-        /// Timeout = 4000,
-        /// StopOnError = true
-        /// });
+        ///     Timeout = 4000,
+        ///     StopOnError = true
+        ///     });
         /// </code>
         /// </example>
         /// <param name="assemblies">The assemblies.</param>
@@ -8339,30 +8339,30 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var nuGetPackSettings   = new NuGetPackSettings {
-        /// Id                      = "TestNuGet",
-        /// Version                 = "0.0.0.1",
-        /// Title                   = "The tile of the package",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Description             = "The description of the package",
-        /// Summary                 = "Excellent summary of what the package does",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
-        /// Copyright               = "Some company 2015",
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// RequireLicenseAcceptance= false,
-        /// Symbols                 = false,
-        /// NoPackageAnalysis       = true,
-        /// Files                   = new [] {
-        /// new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
-        /// },
-        /// BasePath                = "./src/TestNuGet/bin/release",
-        /// OutputDirectory         = "./NuGet"
-        /// };
-        /// NuGetPack("./nuspec/TestNuGet.nuspec", nuGetPackSettings);
+        ///     var nuGetPackSettings   = new NuGetPackSettings {
+        ///                                     Id                      = "TestNuGet",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Description             = "The description of the package",
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     Symbols                 = false,
+        ///                                     NoPackageAnalysis       = true,
+        ///                                     Files                   = new [] {
+        ///                                                                          new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     BasePath                = "./src/TestNuGet/bin/release",
+        ///                                     OutputDirectory         = "./NuGet"
+        ///                                 };
+        ///     NuGetPack("./nuspec/TestNuGet.nuspec", nuGetPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -8377,31 +8377,31 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var nuGetPackSettings   = new NuGetPackSettings {
-        /// Id                      = "TestNuGet",
-        /// Version                 = "0.0.0.1",
-        /// Title                   = "The tile of the package",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Description             = "The description of the package",
-        /// Summary                 = "Excellent summary of what the package does",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
-        /// Copyright               = "Some company 2015",
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// RequireLicenseAcceptance= false,
-        /// Symbols                 = false,
-        /// NoPackageAnalysis       = true,
-        /// Files                   = new [] {
-        /// new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
-        /// },
-        /// BasePath                = "./src/TestNuGet/bin/release",
-        /// OutputDirectory         = "./NuGet"
-        /// };
-        /// var nuspecFiles = GetFiles("./**/*.nuspec");
-        /// NuGetPack(nuspecFiles, nuGetPackSettings);
+        ///     var nuGetPackSettings   = new NuGetPackSettings {
+        ///                                     Id                      = "TestNuGet",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Description             = "The description of the package",
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     Symbols                 = false,
+        ///                                     NoPackageAnalysis       = true,
+        ///                                     Files                   = new [] {
+        ///                                                                          new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     BasePath                = "./src/TestNuGet/bin/release",
+        ///                                     OutputDirectory         = "./NuGet"
+        ///                                 };
+        ///     var nuspecFiles = GetFiles("./**/*.nuspec");
+        ///     NuGetPack(nuspecFiles, nuGetPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -8415,30 +8415,30 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var nuGetPackSettings   = new NuGetPackSettings {
-        /// Id                      = "TestNuGet",
-        /// Version                 = "0.0.0.1",
-        /// Title                   = "The tile of the package",
-        /// Authors                 = new[] {"John Doe"},
-        /// Owners                  = new[] {"Contoso"},
-        /// Description             = "The description of the package",
-        /// Summary                 = "Excellent summary of what the package does",
-        /// ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
-        /// IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
-        /// LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
-        /// Copyright               = "Some company 2015",
-        /// ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
-        /// Tags                    = new [] {"Cake", "Script", "Build"},
-        /// RequireLicenseAcceptance= false,
-        /// Symbols                 = false,
-        /// NoPackageAnalysis       = true,
-        /// Files                   = new [] {
-        /// new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
-        /// },
-        /// BasePath                = "./src/TestNuGet/bin/release",
-        /// OutputDirectory         = "./NuGet"
-        /// };
-        /// NuGetPack(nuGetPackSettings);
+        ///     var nuGetPackSettings   = new NuGetPackSettings {
+        ///                                     Id                      = "TestNuGet",
+        ///                                     Version                 = "0.0.0.1",
+        ///                                     Title                   = "The tile of the package",
+        ///                                     Authors                 = new[] {"John Doe"},
+        ///                                     Owners                  = new[] {"Contoso"},
+        ///                                     Description             = "The description of the package",
+        ///                                     Summary                 = "Excellent summary of what the package does",
+        ///                                     ProjectUrl              = new Uri("https://github.com/SomeUser/TestNuGet/"),
+        ///                                     IconUrl                 = new Uri("http://cdn.rawgit.com/SomeUser/TestNuGet/master/icons/testNuGet.png"),
+        ///                                     LicenseUrl              = new Uri("https://github.com/SomeUser/TestNuGet/blob/master/LICENSE.md"),
+        ///                                     Copyright               = "Some company 2015",
+        ///                                     ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+        ///                                     Tags                    = new [] {"Cake", "Script", "Build"},
+        ///                                     RequireLicenseAcceptance= false,
+        ///                                     Symbols                 = false,
+        ///                                     NoPackageAnalysis       = true,
+        ///                                     Files                   = new [] {
+        ///                                                                          new NuSpecContent {Source = "bin/TestNuGet.dll", Target = "bin"},
+        ///                                                                       },
+        ///                                     BasePath                = "./src/TestNuGet/bin/release",
+        ///                                     OutputDirectory         = "./NuGet"
+        ///                                 };
+        ///     NuGetPack(nuGetPackSettings);
         /// </code>
         /// </example>
         /// </member>
@@ -8452,13 +8452,13 @@ public static partial class Program
         /// <param name="targetFilePath">The target to restore.</param>
         /// <example>
         /// <code>
-        /// var solutions = GetFiles("./**/*.sln");
-        /// // Restore all NuGet packages.
-        /// foreach (var solution in solutions)
-        /// {
-        /// Information("Restoring {0}", solution);
-        /// NuGetRestore(solution);
-        /// }
+        ///     var solutions = GetFiles("./**/*.sln");
+        ///     // Restore all NuGet packages.
+        ///     foreach (var solution in solutions)
+        ///     {
+        ///         Information("Restoring {0}", solution);
+        ///         NuGetRestore(solution);
+        ///     }
         /// </code>
         /// </example>
         /// </member>
@@ -8472,8 +8472,8 @@ public static partial class Program
         /// <param name="targetFilePaths">The targets to restore.</param>
         /// <example>
         /// <code>
-        /// var solutions = GetFiles("./**/*.sln");
-        /// NuGetRestore(solutions);
+        ///     var solutions = GetFiles("./**/*.sln");
+        ///     NuGetRestore(solutions);
         /// </code>
         /// </example>
         /// </member>
@@ -8488,13 +8488,13 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var solutions = GetFiles("./**/*.sln");
-        /// // Restore all NuGet packages.
-        /// foreach (var solution in solutions)
-        /// {
-        /// Information("Restoring {0}", solution);
-        /// NuGetRestore(solution, new NuGetRestoreSettings { NoCache = true });
-        /// }
+        ///     var solutions = GetFiles("./**/*.sln");
+        ///     // Restore all NuGet packages.
+        ///     foreach (var solution in solutions)
+        ///     {
+        ///         Information("Restoring {0}", solution);
+        ///         NuGetRestore(solution, new NuGetRestoreSettings { NoCache = true });
+        ///     }
         /// </code>
         /// </example>
         /// </member>
@@ -8509,8 +8509,8 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// var solutions = GetFiles("./**/*.sln");
-        /// NuGetRestore(solutions, new NuGetRestoreSettings { NoCache = true });
+        ///     var solutions = GetFiles("./**/*.sln");
+        ///     NuGetRestore(solutions, new NuGetRestoreSettings { NoCache = true });
         /// </code>
         /// </example>
         /// </member>
@@ -8531,8 +8531,8 @@ public static partial class Program
         /// var package = "./nuget/SlackPRTGCommander.0.0.1.nupkg";
         /// // Push the package.
         /// NuGetPush(package, new NuGetPushSettings {
-        /// Source = "http://example.com/nugetfeed",
-        /// ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Source = "http://example.com/nugetfeed",
+        ///     ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
         /// });
         /// </code>
         /// </example>
@@ -8554,8 +8554,8 @@ public static partial class Program
         /// var packages = GetFiles("./**/*.nupkg");
         /// // Push the package.
         /// NuGetPush(packages, new NuGetPushSettings {
-        /// Source = "http://example.com/nugetfeed",
-        /// ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Source = "http://example.com/nugetfeed",
+        ///     ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
         /// });
         /// </code>
         /// </example>
@@ -8572,13 +8572,13 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var feed = new
-        /// {
-        /// Name = EnvironmentVariable("PUBLIC_FEED_NAME"),
-        /// Source = EnvironmentVariable("PUBLIC_FEED_SOURCE")
-        /// };
+        ///             {
+        ///                 Name = EnvironmentVariable("PUBLIC_FEED_NAME"),
+        ///                 Source = EnvironmentVariable("PUBLIC_FEED_SOURCE")
+        ///             };
         /// NuGetAddSource(
-        /// name:feed.Name,
-        /// source:feed.Source
+        ///     name:feed.Name,
+        ///     source:feed.Source
         /// );
         /// </code>
         /// </example>
@@ -8596,21 +8596,21 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var nugetSourceSettings = new NuGetSourcesSettings
-        /// {
-        /// UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
-        /// Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
-        /// IsSensitiveSource = true,
-        /// Verbosity = NuGetVerbosity.Detailed
-        /// };
+        ///                             {
+        ///                                 UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
+        ///                                 Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
+        ///                                 IsSensitiveSource = true,
+        ///                                 Verbosity = NuGetVerbosity.Detailed
+        ///                             };
         /// var feed = new
-        /// {
-        /// Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
-        /// Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
-        /// };
+        ///             {
+        ///                 Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
+        ///                 Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
+        ///             };
         /// NuGetAddSource(
-        /// name:feed.Name,
-        /// source:feed.Source,
-        /// settings:nugetSourceSettings
+        ///     name:feed.Name,
+        ///     source:feed.Source,
+        ///     settings:nugetSourceSettings
         /// );
         /// </code>
         /// </example>
@@ -8627,13 +8627,13 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var feed = new
-        /// {
-        /// Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
-        /// Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
-        /// };
+        ///             {
+        ///                 Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
+        ///                 Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
+        ///             };
         /// NuGetRemoveSource(
-        /// name:feed.Name,
-        /// source:feed.Source
+        ///    name:feed.Name,
+        ///    source:feed.Source
         /// );
         /// </code>
         /// </example>
@@ -8651,21 +8651,21 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var nugetSourceSettings = new NuGetSourcesSettings
-        /// {
-        /// UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
-        /// Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
-        /// IsSensitiveSource = true,
-        /// Verbosity = NuGetVerbosity.Detailed
-        /// };
+        ///                             {
+        ///                                 UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
+        ///                                 Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
+        ///                                 IsSensitiveSource = true,
+        ///                                 Verbosity = NuGetVerbosity.Detailed
+        ///                             };
         /// var feed = new
-        /// {
-        /// Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
-        /// Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
-        /// };
+        ///             {
+        ///                 Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
+        ///                 Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
+        ///             };
         /// NuGetRemoveSource(
-        /// name:feed.Name,
-        /// source:feed.Source,
-        /// settings:nugetSourceSettings
+        ///    name:feed.Name,
+        ///    source:feed.Source,
+        ///    settings:nugetSourceSettings
         /// );
         /// </code>
         /// </example>
@@ -8680,19 +8680,19 @@ public static partial class Program
         /// <param name="source">Path to the package(s) source.</param>
         /// <returns>Whether or not the NuGet package source exists in the global user configuration.</returns>
         /// <example>
-        /// <code>
+        ///   <code>
         /// var feed = new
         /// {
-        /// Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
-        /// Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
+        ///     Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
+        ///     Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
         /// };
         /// if (!NuGetHasSource(source:feed.Source))
         /// {
-        /// Information("Source missing");
+        ///     Information("Source missing");
         /// }
         /// else
         /// {
-        /// Information("Source already exists");
+        ///     Information("Source already exists");
         /// }
         /// </code>
         /// </example>
@@ -8708,28 +8708,28 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <returns>Whether the specified NuGet package source exist.</returns>
         /// <example>
-        /// <code>
+        ///   <code>
         /// var nugetSourceSettings = new NuGetSourcesSettings
         /// {
-        /// UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
-        /// Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
-        /// IsSensitiveSource = true,
-        /// Verbosity = NuGetVerbosity.Detailed
+        ///     UserName = EnvironmentVariable("PRIVATE_FEED_USERNAME"),
+        ///     Password = EnvironmentVariable("PRIVATE_FEED_PASSWORD"),
+        ///     IsSensitiveSource = true,
+        ///     Verbosity = NuGetVerbosity.Detailed
         /// };
         /// var feed = new
         /// {
-        /// Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
-        /// Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
+        ///     Name = EnvironmentVariable("PRIVATE_FEED_NAME"),
+        ///     Source = EnvironmentVariable("PRIVATE_FEED_SOURCE")
         /// };
         /// if (!NuGetHasSource(
-        /// source:feed.Source,
-        /// settings:nugetSourceSettings))
+        ///     source:feed.Source,
+        ///     settings:nugetSourceSettings))
         /// {
-        /// Information("Source missing");
+        ///     Information("Source missing");
         /// }
         /// else
         /// {
-        /// Information("Source already exists");
+        ///     Information("Source already exists");
         /// }
         /// </code>
         /// </example>
@@ -8774,9 +8774,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetInstall("MyNuGetPackage", new NuGetInstallSettings {
-        /// ExcludeVersion  = true,
-        /// OutputDirectory = "./tools"
-        /// });
+        ///     ExcludeVersion  = true,
+        ///     OutputDirectory = "./tools"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8792,9 +8792,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetInstall(new[] { "MyNuGetPackage", "OtherNuGetPackage" }, new NuGetInstallSettings {
-        /// ExcludeVersion  = true,
-        /// OutputDirectory = "./tools"
-        /// });
+        ///     ExcludeVersion  = true,
+        ///     OutputDirectory = "./tools"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8839,9 +8839,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetInstallFromConfig("./tools/packages.config", new NuGetInstallSettings {
-        /// ExcludeVersion  = true,
-        /// OutputDirectory = "./tools"
-        /// });
+        ///     ExcludeVersion  = true,
+        ///     OutputDirectory = "./tools"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8858,9 +8858,9 @@ public static partial class Program
         /// <code>
         /// var packageConfigs = GetFiles("./**/packages.config");
         /// NuGetInstallFromConfig(packageConfigs, new NuGetInstallSettings {
-        /// ExcludeVersion  = true,
-        /// OutputDirectory = "./tools"
-        /// });
+        ///     ExcludeVersion  = true,
+        ///     OutputDirectory = "./tools"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -8874,8 +8874,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var setting = new NuGetSetApiKeySettings {
-        /// Verbosity = NuGetVerbosity.Detailed
-        /// };
+        ///     Verbosity = NuGetVerbosity.Detailed
+        ///     };
         /// NuGetSetApiKey("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx", "https://nuget.org/api/v2/", setting);
         /// </code>
         /// </example>
@@ -8908,8 +8908,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var setting = new NuGetSetProxySettings {
-        /// Verbosity = NuGetVerbosity.Detailed
-        /// };
+        ///     Verbosity = NuGetVerbosity.Detailed
+        ///     };
         /// NuGetSetProxy("127.0.0.1:8080", "proxyuser","Pa$$w0rd1", setting);
         /// </code>
         /// </example>
@@ -8975,7 +8975,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetUpdate("./tools/packages.config", new NuGetUpdateSettings {
-        /// Prerelease = true,
+        ///     Prerelease = true,
         /// });
         /// </code>
         /// </example>
@@ -8993,7 +8993,7 @@ public static partial class Program
         /// <code>
         /// var targets = GetFiles("./**/packages.config");
         /// NuGetUpdate(targets, new NuGetUpdateSettings {
-        /// Prerelease = true,
+        ///     Prerelease = true,
         /// });
         /// </code>
         /// </example>
@@ -9025,8 +9025,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetAdd("MyNuGetPackage", new NuGetAddSettings {
-        /// Source = "//bar/packages/"
-        /// });
+        ///     Source = "//bar/packages/"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9058,8 +9058,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// NuGetInit("//foo/packages", "//bar/packages/", new NuGetInitSettings {
-        /// Expand = true
-        /// });
+        ///     Expand = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9076,12 +9076,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var packageList = NuGetList("Cake", new NuGetListSettings {
-        /// AllVersions = false,
-        /// Prerelease = false
-        /// });
+        ///     AllVersions = false,
+        ///     Prerelease = false
+        ///     });
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -9100,7 +9100,7 @@ public static partial class Program
         /// var packageList = NuGetList("Cake");
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -9117,12 +9117,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// var packageList = NuGetList(new NuGetListSettings {
-        /// AllVersions = false,
-        /// Prerelease = false
-        /// });
+        ///     AllVersions = false,
+        ///     Prerelease = false
+        ///     });
         /// foreach (var package in packageList)
         /// {
-        /// Information("Found package {0}, version {1}", package.Name, package.Version);
+        ///     Information("Found package {0}, version {1}", package.Name, package.Version);
         /// }
         /// </code>
         /// </example>
@@ -9143,8 +9143,8 @@ public static partial class Program
         /// <code>
         /// // Delete the package.
         /// NuGetDelete("PackageName", "PackageVersion", new NuGetPushSettings {
-        /// Source = "http://example.com/nugetfeed",
-        /// ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
+        ///     Source = "http://example.com/nugetfeed",
+        ///     ApiKey = "4003d786-cc37-4004-bfdf-c4f3e8ef9b3a"
         /// });
         /// </code>
         /// </example>
@@ -9160,38 +9160,38 @@ public static partial class Program
         /// <param name="settings">The settings.</param>
         /// <example>
         /// <code>
-        /// // Minimum required
-        /// OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
-        /// Server = "http://octopus-deploy.example",
-        /// ApiKey = "API-XXXXXXXXXXXXXXXXXXXX"
-        /// });
-        /// OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
-        /// Server = "http://octopus-deploy.example",
-        /// Username = "DeployUser",
-        /// Password = "a-very-secure-password"
-        /// });
-        /// OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
-        /// ConfigurationFile = @"C:\OctopusDeploy.config"
-        /// });
-        /// // Additional Options
-        /// OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
-        /// ToolPath = "./tools/OctopusTools/Octo.exe"
-        /// EnableDebugLogging = true,
-        /// IgnoreSslErrors = true,
-        /// EnableServiceMessages = true, // Enables teamcity services messages when logging
-        /// ReleaseNumber = "1.8.2",
-        /// DefaultPackageVersion = "1.0.0.0", // All packages in the release should be 1.0.0.0
-        /// Packages = new Dictionary&lt;string, string&gt;
-        /// {
-        /// { "PackageOne", "1.0.2.3" },
-        /// { "PackageTwo", "5.2.3" }
-        /// },
-        /// PackagesFolder = @"C:\MyOtherNuGetFeed",
-        /// // One or the other
-        /// ReleaseNotes = "Version 2.0 \n What a milestone we have ...",
-        /// ReleaseNotesFile = "./ReleaseNotes.md",
-        /// IgnoreExisting = true // if this release number already exists, ignore it
-        /// });
+        ///     // Minimum required
+        ///     OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
+        ///         Server = "http://octopus-deploy.example",
+        ///         ApiKey = "API-XXXXXXXXXXXXXXXXXXXX"
+        ///     });
+        ///     OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
+        ///         Server = "http://octopus-deploy.example",
+        ///         Username = "DeployUser",
+        ///         Password = "a-very-secure-password"
+        ///     });
+        ///     OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
+        ///         ConfigurationFile = @"C:\OctopusDeploy.config"
+        ///     });
+        ///     // Additional Options
+        ///     OctoCreateRelease(projectNameOnServer, new CreateReleaseSettings {
+        ///         ToolPath = "./tools/OctopusTools/Octo.exe"
+        ///         EnableDebugLogging = true,
+        ///         IgnoreSslErrors = true,
+        ///         EnableServiceMessages = true, // Enables teamcity services messages when logging
+        ///         ReleaseNumber = "1.8.2",
+        ///         DefaultPackageVersion = "1.0.0.0", // All packages in the release should be 1.0.0.0
+        ///         Packages = new Dictionary&lt;string, string&gt;
+        ///                     {
+        ///                         { "PackageOne", "1.0.2.3" },
+        ///                         { "PackageTwo", "5.2.3" }
+        ///                     },
+        ///         PackagesFolder = @"C:\MyOtherNuGetFeed",
+        ///         // One or the other
+        ///         ReleaseNotes = "Version 2.0 \n What a milestone we have ...",
+        ///         ReleaseNotesFile = "./ReleaseNotes.md",
+        ///         IgnoreExisting = true // if this release number already exists, ignore it
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9254,26 +9254,26 @@ public static partial class Program
         /// <param name="settings">Deployment settings.</param>
         /// <example>
         /// <code>
-        /// // bare minimum
-        /// OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings());
-        /// // All of deployment arguments
-        /// OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings {
-        /// ShowProgress = true,
-        /// ForcePackageDownload = true,
-        /// WaitForDeployment = true,
-        /// DeploymentTimeout = TimeSpan.FromMinutes(1),
-        /// CancelOnTimeout = true,
-        /// DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
-        /// GuidedFailure = true,
-        /// SpecificMachines = new string[] { "Machine1", "Machine2" },
-        /// Force = true,
-        /// SkipSteps = new[] { "Step1", "Step2" },
-        /// NoRawLog = true,
-        /// RawLogFile = "someFile.txt",
-        /// DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
-        /// Tenant = new[] { "Tenant1", "Tenant2" },
-        /// TenantTags = new[] { "Tag1", "Tag2" },
-        /// });
+        ///     // bare minimum
+        ///     OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings());
+        ///     // All of deployment arguments
+        ///     OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings {
+        ///         ShowProgress = true,
+        ///         ForcePackageDownload = true,
+        ///         WaitForDeployment = true,
+        ///         DeploymentTimeout = TimeSpan.FromMinutes(1),
+        ///         CancelOnTimeout = true,
+        ///         DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
+        ///         GuidedFailure = true,
+        ///         SpecificMachines = new string[] { "Machine1", "Machine2" },
+        ///         Force = true,
+        ///         SkipSteps = new[] { "Step1", "Step2" },
+        ///         NoRawLog = true,
+        ///         RawLogFile = "someFile.txt",
+        ///         DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
+        ///         Tenant = new[] { "Tenant1", "Tenant2" },
+        ///         TenantTags = new[] { "Tag1", "Tag2" },
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9293,26 +9293,26 @@ public static partial class Program
         /// <param name="settings">Deployment settings.</param>
         /// <example>
         /// <code>
-        /// // bare minimum
-        /// OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings());
-        /// // All of deployment arguments
-        /// OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", new string[] {"Testing", "Testing2"}, "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings {
-        /// ShowProgress = true,
-        /// ForcePackageDownload = true,
-        /// WaitForDeployment = true,
-        /// DeploymentTimeout = TimeSpan.FromMinutes(1),
-        /// CancelOnTimeout = true,
-        /// DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
-        /// GuidedFailure = true,
-        /// SpecificMachines = new string[] { "Machine1", "Machine2" },
-        /// Force = true,
-        /// SkipSteps = new[] { "Step1", "Step2" },
-        /// NoRawLog = true,
-        /// RawLogFile = "someFile.txt",
-        /// DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
-        /// Tenant = new[] { "Tenant1", "Tenant2" },
-        /// TenantTags = new[] { "Tag1", "Tag2" },
-        /// });
+        ///     // bare minimum
+        ///     OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings());
+        ///     // All of deployment arguments
+        ///     OctoDeployRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", new string[] {"Testing", "Testing2"}, "2.1.15-RC" new OctopusDeployReleaseDeploymentSettings {
+        ///         ShowProgress = true,
+        ///         ForcePackageDownload = true,
+        ///         WaitForDeployment = true,
+        ///         DeploymentTimeout = TimeSpan.FromMinutes(1),
+        ///         CancelOnTimeout = true,
+        ///         DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
+        ///         GuidedFailure = true,
+        ///         SpecificMachines = new string[] { "Machine1", "Machine2" },
+        ///         Force = true,
+        ///         SkipSteps = new[] { "Step1", "Step2" },
+        ///         NoRawLog = true,
+        ///         RawLogFile = "someFile.txt",
+        ///         DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
+        ///         Tenant = new[] { "Tenant1", "Tenant2" },
+        ///         TenantTags = new[] { "Tag1", "Tag2" },
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9332,26 +9332,26 @@ public static partial class Program
         /// <param name="settings">Deployment settings.</param>
         /// <example>
         /// <code>
-        /// // bare minimum
-        /// OctoPromoteRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "Staging", new OctopusDeployPromoteReleaseSettings());
-        /// // All of deployment arguments
-        /// OctoPromoteRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "Staging", new OctopusDeployPromoteReleaseSettings {
-        /// ShowProgress = true,
-        /// ForcePackageDownload = true,
-        /// WaitForDeployment = true,
-        /// DeploymentTimeout = TimeSpan.FromMinutes(1),
-        /// CancelOnTimeout = true,
-        /// DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
-        /// GuidedFailure = true,
-        /// SpecificMachines = new string[] { "Machine1", "Machine2" },
-        /// Force = true,
-        /// SkipSteps = new[] { "Step1", "Step2" },
-        /// NoRawLog = true,
-        /// RawLogFile = "someFile.txt",
-        /// DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
-        /// Tenant = new[] { "Tenant1", "Tenant2" },
-        /// TenantTags = new[] { "Tag1", "Tag2" },
-        /// });
+        ///     // bare minimum
+        ///     OctoPromoteRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "Staging", new OctopusDeployPromoteReleaseSettings());
+        ///     // All of deployment arguments
+        ///     OctoPromoteRelease("http://octopus-deploy.example", "API-XXXXXXXXXXXXXXXXXXXX", "MyGreatProject", "Testing", "Staging", new OctopusDeployPromoteReleaseSettings {
+        ///         ShowProgress = true,
+        ///         ForcePackageDownload = true,
+        ///         WaitForDeployment = true,
+        ///         DeploymentTimeout = TimeSpan.FromMinutes(1),
+        ///         CancelOnTimeout = true,
+        ///         DeploymentChecksLeapCycle = TimeSpan.FromMinutes(77),
+        ///         GuidedFailure = true,
+        ///         SpecificMachines = new string[] { "Machine1", "Machine2" },
+        ///         Force = true,
+        ///         SkipSteps = new[] { "Step1", "Step2" },
+        ///         NoRawLog = true,
+        ///         RawLogFile = "someFile.txt",
+        ///         DeployAt = new DateTime(2010, 6, 15).AddMinutes(1),
+        ///         Tenant = new[] { "Tenant1", "Tenant2" },
+        ///         TenantTags = new[] { "Tag1", "Tag2" },
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9369,15 +9369,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// OpenCover(tool =&gt; {
-        /// tool.XUnit2("./**/App.Tests.dll",
-        /// new XUnit2Settings {
-        /// ShadowCopy = false
-        /// });
-        /// },
-        /// new FilePath("./result.xml"),
-        /// new OpenCoverSettings()
-        /// .WithFilter("+[App]*")
-        /// .WithFilter("-[App.Tests]*"));
+        ///   tool.XUnit2("./**/App.Tests.dll",
+        ///     new XUnit2Settings {
+        ///       ShadowCopy = false
+        ///     });
+        ///   },
+        ///   new FilePath("./result.xml"),
+        ///   new OpenCoverSettings()
+        ///     .WithFilter("+[App]*")
+        ///     .WithFilter("-[App.Tests]*"));
         /// </code>
         /// </example>
         /// </member>
@@ -9409,7 +9409,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ReportGenerator("c:/temp/coverage/*.xml", "c:/temp/output", new ReportGeneratorSettings(){
-        /// ToolPath = "c:/tools/reportgenerator.exe"
+        ///     ToolPath = "c:/tools/reportgenerator.exe"
         /// });
         /// </code>
         /// </example>
@@ -9442,7 +9442,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ReportGenerator("c:/temp/coverage.xml", "c:/temp/output", new ReportGeneratorSettings(){
-        /// ToolPath = "c:/tools/reportgenerator.exe"
+        ///     ToolPath = "c:/tools/reportgenerator.exe"
         /// });
         /// </code>
         /// </example>
@@ -9475,7 +9475,7 @@ public static partial class Program
         /// <example>
         /// <code>
         /// ReportGenerator(new[] { "c:/temp/coverage1.xml", "c:/temp/coverage2.xml" }, "c:/temp/output", new ReportGeneratorSettings(){
-        /// ToolPath = "c:/tools/reportgenerator.exe"
+        ///     ToolPath = "c:/tools/reportgenerator.exe"
         /// });
         /// </code>
         /// </example>
@@ -9510,7 +9510,7 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// ReportUnit("c:/temp", new ReportUnitSettings(){
-        /// ToolPath = "c:/tools/reportunit.exe"
+        ///     ToolPath = "c:/tools/reportunit.exe"
         /// });
         /// </code>
         /// </example>
@@ -9565,7 +9565,7 @@ public static partial class Program
         /// <para>Cake task:</para>
         /// <code>
         /// ReportUnit("c:/temp/input", "c:/temp/output", new ReportUnitSettings(){
-        /// ToolPath = "c:/tools/reportunit.exe"
+        ///     ToolPath = "c:/tools/reportunit.exe"
         /// });
         /// </code>
         /// </example>
@@ -9581,10 +9581,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// RoundhouseMigrate(new RoundhouseSettings{
-        /// ServerName = "Sql2008R2",
-        /// DatabaseName = "AdventureWorks2008R2",
-        /// SqlFilesDirectory = "./src/sql"
-        /// });
+        ///     ServerName = "Sql2008R2",
+        ///     DatabaseName = "AdventureWorks2008R2",
+        ///     SqlFilesDirectory = "./src/sql"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9599,9 +9599,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// RoundhouseDrop(new RoundhouseSettings{
-        /// ServerName = "Sql2008R2",
-        /// DatabaseName = "AdventureWorks2008R2"
-        /// });
+        ///     ServerName = "Sql2008R2",
+        ///     DatabaseName = "AdventureWorks2008R2"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -9617,17 +9617,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Sign")
-        /// .IsDependentOn("Clean")
-        /// .IsDependentOn("Restore")
-        /// .IsDependentOn("Build")
-        /// .Does(() =&gt;
+        ///     .IsDependentOn("Clean")
+        ///     .IsDependentOn("Restore")
+        ///     .IsDependentOn("Build")
+        ///     .Does(() =&gt;
         /// {
-        /// var file = "Core.dll";
-        /// Sign(file, new SignToolSignSettings {
-        /// TimeStampUri = new Uri("http://timestamp.digicert.com"),
-        /// CertPath = "digitalcertificate.pfx",
-        /// Password = "TopSecret"
-        /// });
+        ///     var file = "Core.dll";
+        ///     Sign(file, new SignToolSignSettings {
+        ///             TimeStampUri = new Uri("http://timestamp.digicert.com"),
+        ///             CertPath = "digitalcertificate.pfx",
+        ///             Password = "TopSecret"
+        ///     });
         /// });
         /// </code>
         /// </example>
@@ -9644,17 +9644,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Sign")
-        /// .IsDependentOn("Clean")
-        /// .IsDependentOn("Restore")
-        /// .IsDependentOn("Build")
-        /// .Does(() =&gt;
+        ///     .IsDependentOn("Clean")
+        ///     .IsDependentOn("Restore")
+        ///     .IsDependentOn("Build")
+        ///     .Does(() =&gt;
         /// {
-        /// var file = new FilePath("Core.dll");
-        /// Sign(file, new SignToolSignSettings {
-        /// TimeStampUri = new Uri("http://timestamp.digicert.com"),
-        /// CertPath = "digitalcertificate.pfx",
-        /// Password = "TopSecret"
-        /// });
+        ///     var file = new FilePath("Core.dll");
+        ///     Sign(file, new SignToolSignSettings {
+        ///             TimeStampUri = new Uri("http://timestamp.digicert.com"),
+        ///             CertPath = "digitalcertificate.pfx",
+        ///             Password = "TopSecret"
+        ///     });
         /// });
         /// </code>
         /// </example>
@@ -9671,17 +9671,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Sign")
-        /// .IsDependentOn("Clean")
-        /// .IsDependentOn("Restore")
-        /// .IsDependentOn("Build")
-        /// .Does(() =&gt;
+        ///     .IsDependentOn("Clean")
+        ///     .IsDependentOn("Restore")
+        ///     .IsDependentOn("Build")
+        ///     .Does(() =&gt;
         /// {
-        /// var files = new string[] { "Core.dll", "Common.dll" };
-        /// Sign(files, new SignToolSignSettings {
-        /// TimeStampUri = new Uri("http://timestamp.digicert.com"),
-        /// CertPath = "digitalcertificate.pfx",
-        /// Password = "TopSecret"
-        /// });
+        ///     var files = new string[] { "Core.dll", "Common.dll" };
+        ///     Sign(files, new SignToolSignSettings {
+        ///             TimeStampUri = new Uri("http://timestamp.digicert.com"),
+        ///             CertPath = "digitalcertificate.pfx",
+        ///             Password = "TopSecret"
+        ///     });
         /// });
         /// </code>
         /// </example>
@@ -9698,17 +9698,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// Task("Sign")
-        /// .IsDependentOn("Clean")
-        /// .IsDependentOn("Restore")
-        /// .IsDependentOn("Build")
-        /// .Does(() =&gt;
+        ///     .IsDependentOn("Clean")
+        ///     .IsDependentOn("Restore")
+        ///     .IsDependentOn("Build")
+        ///     .Does(() =&gt;
         /// {
-        /// var files = GetFiles(solutionDir + "/**/bin/" + configuration + "/**/*.exe");
-        /// Sign(files, new SignToolSignSettings {
-        /// TimeStampUri = new Uri("http://timestamp.digicert.com"),
-        /// CertPath = "digitalcertificate.pfx",
-        /// Password = "TopSecret"
-        /// });
+        ///     var files = GetFiles(solutionDir + "/**/bin/" + configuration + "/**/*.exe");
+        ///     Sign(files, new SignToolSignSettings {
+        ///             TimeStampUri = new Uri("http://timestamp.digicert.com"),
+        ///             CertPath = "digitalcertificate.pfx",
+        ///             Password = "TopSecret"
+        ///     });
         /// });
         /// </code>
         /// </example>
@@ -9865,7 +9865,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation path.</returns>
         /// <example>
         /// <code>
-        /// var legacyInstallationPath = VSWhereLegacy(true);
+        ///     var legacyInstallationPath = VSWhereLegacy(true);
         /// </code>
         /// </example>
         /// </member>
@@ -9880,7 +9880,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation paths.</returns>
         /// <example>
         /// <code>
-        /// var legacyInstallationPaths = VSWhereLegacy(new VSWhereLegacySettings());
+        ///      var legacyInstallationPaths = VSWhereLegacy(new VSWhereLegacySettings());
         /// </code>
         /// </example>
         /// </member>
@@ -9894,7 +9894,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation path.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPath = VSWhereLatest();
+        ///     var latestInstallationPath = VSWhereLatest();
         /// </code>
         /// </example>
         /// </member>
@@ -9909,7 +9909,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation path.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPath = VSWhereLatest(new VSWhereLatestSettings { Requires = "'Microsoft.Component.MSBuild" });
+        ///      var latestInstallationPath = VSWhereLatest(new VSWhereLatestSettings { Requires = "'Microsoft.Component.MSBuild" });
         /// </code>
         /// </example>
         /// </member>
@@ -9923,7 +9923,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation paths.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPaths = VSWhereAll();
+        ///     var latestInstallationPaths = VSWhereAll();
         /// </code>
         /// </example>
         /// </member>
@@ -9938,7 +9938,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation paths.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPaths = VSWhereAll(new VSWhereAllSettings { Requires = "'Microsoft.Component.MSBuild" });
+        ///     var latestInstallationPaths = VSWhereAll(new VSWhereAllSettings { Requires = "'Microsoft.Component.MSBuild" });
         /// </code>
         /// </example>
         /// </member>
@@ -9953,7 +9953,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation paths.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPaths = VSWhereProducts("Microsoft.VisualStudio.Product.BuildTools");
+        ///     var latestInstallationPaths = VSWhereProducts("Microsoft.VisualStudio.Product.BuildTools");
         /// </code>
         /// </example>
         /// </member>
@@ -9969,7 +9969,7 @@ public static partial class Program
         /// <returns>The Visual Studio installation paths.</returns>
         /// <example>
         /// <code>
-        /// var latestInstallationPaths = VSWhereProducts("Microsoft.VisualStudio.Product.BuildTools", new VSWhereProductSettings { Requires = "'Microsoft.Component.MSBuild" });
+        ///     var latestInstallationPaths = VSWhereProducts("Microsoft.VisualStudio.Product.BuildTools", new VSWhereProductSettings { Requires = "'Microsoft.Component.MSBuild" });
         /// </code>
         /// </example>
         /// </member>
@@ -9983,9 +9983,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// CandleSettings settings = new CandleSettings {
-        /// Architecture = Architecture.X64,
-        /// Verbose = true
-        /// };
+        ///     Architecture = Architecture.X64,
+        ///     Verbose = true
+        ///     };
         /// WiXCandle("./src/*.wxs", settings);
         /// </code>
         /// </example>
@@ -10003,9 +10003,9 @@ public static partial class Program
         /// <code>
         /// var files = GetFiles("./src/*.wxs");
         /// CandleSettings settings = new CandleSettings {
-        /// Architecture = Architecture.X64,
-        /// Verbose = true
-        /// };
+        ///     Architecture = Architecture.X64,
+        ///     Verbose = true
+        ///     };
         /// WiXCandle(files, settings);
         /// </code>
         /// </example>
@@ -10022,8 +10022,8 @@ public static partial class Program
         /// <example>
         /// <code>
         /// LightSettings settings = new LightSettings {
-        /// RawArguments = "-O1 -pedantic -v"
-        /// };
+        ///     RawArguments = "-O1 -pedantic -v"
+        ///     };
         /// WiXLight("./src/*.wixobj", settings);
         /// </code>
         /// </example>
@@ -10041,8 +10041,8 @@ public static partial class Program
         /// <code>
         /// var files = GetFiles("./src/*.wxs");
         /// LightSettings settings = new LightSettings {
-        /// RawArguments = "-O1 -pedantic -v"
-        /// };
+        ///     RawArguments = "-O1 -pedantic -v"
+        ///     };
         /// WiXLight(files, settings);
         /// </code>
         /// </example>
@@ -10185,9 +10185,9 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XBuild("./src/Cake.sln", configurator =&gt;
-        /// configurator.SetConfiguration("Debug")
-        /// .SetVerbosity(Verbosity.Minimal)
-        /// .UseToolVersion(XBuildToolVersion.NET40));
+        ///     configurator.SetConfiguration("Debug")
+        ///         .SetVerbosity(Verbosity.Minimal)
+        ///         .UseToolVersion(XBuildToolVersion.NET40));
         /// </code>
         /// </example>
         /// </member>
@@ -10203,10 +10203,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XBuild("./src/Cake.sln", new XBuildSettings {
-        /// Verbosity = Verbosity.Minimal,
-        /// ToolVersion = XBuildToolVersion.NET40,
-        /// Configuration = "Release"
-        /// });
+        ///     Verbosity = Verbosity.Minimal,
+        ///     ToolVersion = XBuildToolVersion.NET40,
+        ///     Configuration = "Release"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10236,12 +10236,12 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit2("./src/**/bin/Release/*.Tests.dll",
-        /// new XUnit2Settings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new XUnit2Settings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10256,11 +10256,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit2(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10291,17 +10291,17 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit2(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// },
-        /// new XUnit2Settings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///      },
+        ///      new XUnit2Settings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10318,12 +10318,12 @@ public static partial class Program
         /// <code>
         /// var testAssemblies = GetFiles("./src/**/bin/Release/*.Tests.dll");
         /// XUnit2(testAssemblies,
-        /// new XUnit2Settings {
-        /// Parallelism = ParallelismOption.All,
-        /// HtmlReport = true,
-        /// NoAppDomain = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new XUnit2Settings {
+        ///         Parallelism = ParallelismOption.All,
+        ///         HtmlReport = true,
+        ///         NoAppDomain = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10353,10 +10353,10 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit("./src/**/bin/Release/*.Tests.dll",
-        /// new XUnitSettings {
-        /// HtmlReport = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new XUnitSettings {
+        ///         HtmlReport = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10371,11 +10371,11 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10406,15 +10406,15 @@ public static partial class Program
         /// <example>
         /// <code>
         /// XUnit(new []{
-        /// "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
-        /// "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
-        /// "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
-        /// "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
-        /// },
-        /// new XUnitSettings {
-        /// HtmlReport = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///     "./src/Cake.Common.Tests/bin/Release/Cake.Common.Tests.dll",
+        ///     "./src/Cake.Core.Tests/bin/Release/Cake.Core.Tests.dll",
+        ///     "./src/Cake.NuGet.Tests/bin/Release/Cake.NuGet.Tests.dll",
+        ///     "./src/Cake.Tests/bin/Release/Cake.Tests.dll"
+        ///      },
+        ///      new XUnitSettings {
+        ///         HtmlReport = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10431,10 +10431,10 @@ public static partial class Program
         /// <code>
         /// var testAssemblies = GetFiles("./src/**/bin/Release/*.Tests.dll");
         /// XUnit(testAssemblies,
-        /// new XUnitSettings {
-        /// HtmlReport = true,
-        /// OutputDirectory = "./build"
-        /// });
+        ///      new XUnitSettings {
+        ///         HtmlReport = true,
+        ///         OutputDirectory = "./build"
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10471,21 +10471,21 @@ public static partial class Program
         /// <![CDATA[
         /// <?xml version="1.0" encoding="UTF-8"?>
         /// <pastery xmlns = "https://cakebuild.net/pastery" >
-        /// <cake price="1.62" />
+        ///     <cake price="1.62" />
         /// </pastery>
         /// ]]>
         /// </code>
         /// <para>XmlPeek usage:</para>
         /// <code>
         /// string version = XmlPeek("./pastry.xml", "/pastry:pastry/pastry:cake/@price",
-        /// new XmlPeekSettings {
-        /// Namespaces = new Dictionary&lt;string, string&gt; {{ "pastry", "https://cakebuild.net/pastry" }}
-        /// });
+        ///     new XmlPeekSettings {
+        ///         Namespaces = new Dictionary&lt;string, string&gt; {{ "pastry", "https://cakebuild.net/pastry" }}
+        ///     });
         /// string unknown = XmlPeek("./pastry.xml", "/pastry:pastry/pastry:cake/@recipe",
-        /// new XmlPeekSettings {
-        /// Namespaces = new Dictionary&lt;string, string&gt; {{ "pastry", "https://cakebuild.net/pastry" }},
-        /// SuppressWarning = true
-        /// });
+        ///     new XmlPeekSettings {
+        ///         Namespaces = new Dictionary&lt;string, string&gt; {{ "pastry", "https://cakebuild.net/pastry" }},
+        ///         SuppressWarning = true
+        ///     });
         /// </code>
         /// </example>
         /// </member>
@@ -10500,88 +10500,88 @@ public static partial class Program
         /// <param name="xpath">The xpath of the nodes to set.</param>
         /// <param name="value">The value to set too. Leave blank to remove the selected nodes.</param>
         /// <example>
-        /// <para>
-        /// Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
-        /// to <c>productionhost.somecompany.com</c>.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
+        ///   to <c>productionhost.somecompany.com</c>.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <Commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Path Value">
         /// </Commands>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
-        /// Namespaces = new Dictionary<string, string> {
-        /// { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
-        /// }
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
+        ///         Namespaces = new Dictionary<string, string> {
+        ///             { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
+        ///         }
+        ///     });
         /// });
-        /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Remove an app setting from a config file.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Remove an app setting from a config file.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// <add key="testing" value="true" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///         <add key="testing" value="true" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/configuration/appSettings/add[@testing]", null);
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/configuration/appSettings/add[@testing]", null);
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <para>
         /// Credit to NAnt for the original example.
@@ -10600,88 +10600,88 @@ public static partial class Program
         /// <param name="value">The value to set too. Leave blank to remove the selected nodes.</param>
         /// <param name="settings">Additional settings to tweak Xml Poke behavior.</param>
         /// <example>
-        /// <para>
-        /// Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
-        /// to <c>productionhost.somecompany.com</c>.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
+        ///   to <c>productionhost.somecompany.com</c>.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <Commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Path Value">
         /// </Commands>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
-        /// Namespaces = new Dictionary<string, string> {
-        /// { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
-        /// }
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
+        ///         Namespaces = new Dictionary<string, string> {
+        ///             { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
+        ///         }
+        ///     });
         /// });
-        /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Remove an app setting from a config file.
-        /// </para>
-        /// <para>XML file:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Remove an app setting from a config file.
+        ///   </para>
+        ///   <para>XML file:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// <add key="testing" value="true" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///         <add key="testing" value="true" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var file = File("test.xml");
-        /// XmlPoke(file, "/configuration/appSettings/add[@testing]", null);
+        ///     var file = File("test.xml");
+        ///     XmlPoke(file, "/configuration/appSettings/add[@testing]", null);
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <para>
         /// Credit to NAnt for the original example.
@@ -10700,85 +10700,85 @@ public static partial class Program
         /// <param name="value">The value to set too. Leave blank to remove the selected nodes.</param>
         /// <returns>Resulting XML.</returns>
         /// <example>
-        /// <para>
-        /// Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
-        /// to <c>productionhost.somecompany.com</c>.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
+        ///   to <c>productionhost.somecompany.com</c>.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
+        ///     var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <Commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Path Value">
         /// </Commands>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
-        /// Namespaces = new Dictionary<string, string> {
-        /// { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
-        /// }
+        ///     var result = XmlPokeString(xmlString, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
+        ///         Namespaces = new Dictionary<string, string> {
+        ///             { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
+        ///         }
+        ///     });
         /// });
-        /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Remove an app setting from a config file.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Remove an app setting from a config file.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// <add key="testing" value="true" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///         <add key="testing" value="true" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@testing]", null);
+        ///     var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@testing]", null);
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <para>
         /// Credit to NAnt for the original example.
@@ -10798,85 +10798,85 @@ public static partial class Program
         /// <param name="settings">Additional settings to tweak Xml Poke behavior.</param>
         /// <returns>Resulting XML.</returns>
         /// <example>
-        /// <para>
-        /// Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
-        /// to <c>productionhost.somecompany.com</c>.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Change the <c>server</c> setting in the configuration from <c>testhost.somecompany.com</c>
+        ///   to <c>productionhost.somecompany.com</c>.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
+        ///     var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@key = 'server']/@value", "productionhost.somecompany.com");
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Modify the <c>noNamespaceSchemaLocation</c> in an XML file.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <Commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Path Value">
         /// </Commands>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
-        /// Namespaces = new Dictionary<string, string> {
-        /// { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
-        /// }
+        ///     var result = XmlPokeString(xmlString, "/Commands/@xsi:noNamespaceSchemaLocation", "d:\\Commands.xsd", new XmlPokeSettings {
+        ///         Namespaces = new Dictionary<string, string> {
+        ///             { /* Prefix */ "xsi", /* URI */ "http://www.w3.org/2001/XMLSchema-instance" }
+        ///         }
+        ///     });
         /// });
-        /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <example>
-        /// <para>
-        /// Remove an app setting from a config file.
-        /// </para>
-        /// <para>XML string:</para>
-        /// <code>
-        /// <![CDATA[
+        ///   <para>
+        ///   Remove an app setting from a config file.
+        ///   </para>
+        ///   <para>XML string:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// <?xml version="1.0" encoding="utf-8" ?>
         /// <configuration>
-        /// <appSettings>
-        /// <add key="server" value="testhost.somecompany.com" />
-        /// <add key="testing" value="true" />
-        /// </appSettings>
+        ///     <appSettings>
+        ///         <add key="server" value="testhost.somecompany.com" />
+        ///         <add key="testing" value="true" />
+        ///     </appSettings>
         /// </configuration>
-        /// ]]>
-        /// </code>
-        /// <para>Cake Task:</para>
-        /// <code>
-        /// <![CDATA[
+        ///     ]]>
+        ///   </code>
+        ///   <para>Cake Task:</para>
+        ///   <code>
+        ///     <![CDATA[
         /// Task("Transform")
-        /// .Does(() =>
+        ///     .Does(() =>
         /// {
-        /// var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@testing]", null);
+        ///     var result = XmlPokeString(xmlString, "/configuration/appSettings/add[@testing]", null);
         /// });
-        /// ]]>
-        /// </code>
+        ///     ]]>
+        ///   </code>
         /// </example>
         /// <para>
         /// Credit to NAnt for the original example.
@@ -10898,16 +10898,16 @@ public static partial class Program
         /// <para>This example code will convert xml to a new xml structure using XmlTransform alias.</para>
         /// <![CDATA[
         /// string xsl = @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
-        /// <xsl:output method=""xml"" omit-xml-declaration=""yes"" />
-        /// <xsl:template match=""/"">
-        /// <xsl:for-each select=""pastery/cake"" >
-        /// <price><xsl:value-of select=""@price""/></price>
-        /// </xsl:for-each>
-        /// </xsl:template>
+        ///   <xsl:output method=""xml"" omit-xml-declaration=""yes"" />
+        ///   <xsl:template match=""/"">
+        ///     <xsl:for-each select=""pastery/cake"" >
+        ///         <price><xsl:value-of select=""@price""/></price>
+        ///       </xsl:for-each>
+        ///   </xsl:template>
         /// </xsl:stylesheet>";
         /// string xml = @"<?xml version=""1.0"" encoding=""UTF-8""?>
         /// <pastery>
-        /// <cake price=""1.62"" />
+        ///     <cake price=""1.62"" />
         /// </pastery>";
         /// var priceTag = XmlTransform(xsl, xml);
         /// ]]>
@@ -10933,16 +10933,16 @@ public static partial class Program
         /// <code>
         /// <para>This example code will convert specific part of xml to plaintext using XmlTransform alias.</para>
         /// <![CDATA[string xsl = @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
-        /// <xsl:output method=""text"" omit-xml-declaration=""yes"" indent=""no""/>
-        /// <xsl:strip-space elements=""*""/>
-        /// <xsl:template match=""pastery/cake""><xsl:value-of select=""@price""/></xsl:template>
+        ///   <xsl:output method=""text"" omit-xml-declaration=""yes"" indent=""no""/>
+        ///   <xsl:strip-space elements=""*""/>
+        ///   <xsl:template match=""pastery/cake""><xsl:value-of select=""@price""/></xsl:template>
         /// </xsl:stylesheet>";
         /// string xml = @"<?xml version=""1.0"" encoding=""UTF-8""?>
         /// <pastery>
-        /// <cake price=""1.62"" />
+        ///     <cake price=""1.62"" />
         /// </pastery>";
         /// var text = XmlTransform(xsl, xml, new XmlTransformationSettings {
-        /// ConformanceLevel = System.Xml.ConformanceLevel.Fragment, Encoding = Encoding.ASCII });
+        ///     ConformanceLevel = System.Xml.ConformanceLevel.Fragment, Encoding = Encoding.ASCII });
         /// ]]>
         /// </code>
         /// </example>
@@ -10964,38 +10964,38 @@ public static partial class Program
         /// <![CDATA[
         /// <?xml version="1.0" ?>
         /// <xsl:stylesheet
-        /// version="1.0"
-        /// xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        /// xmlns:p="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-        /// exclude-result-prefixes="p"
-        /// >
-        /// <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
-        /// <xsl:template match="/">
-        /// <html lang="en" class="static">
-        /// <head>
-        /// <title>
-        /// <xsl:for-each select="package/p:metadata">
-        /// <xsl:value-of select="p:id"/>
-        /// </xsl:for-each>
-        /// </title>
-        /// </head>
-        /// <body>
-        /// <xsl:for-each select="package/p:metadata">
-        /// <h1>
-        /// <xsl:value-of select="p:id"/>
-        /// </h1>
-        /// <h2>Description</h2>
-        /// <i><xsl:value-of select="p:description"/></i>
-        /// </xsl:for-each>
-        /// <h3>Files</h3>
-        /// <ul>
-        /// <xsl:for-each select="package/files/file" >
-        /// <li><xsl:value-of select="@src"/></li>
-        /// </xsl:for-each>
-        /// </ul>
-        /// </body>
-        /// </html>
-        /// </xsl:template>
+        ///   version="1.0"
+        ///   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        ///   xmlns:p="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+        ///   exclude-result-prefixes="p"
+        ///   >
+        ///   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+        ///   <xsl:template match="/">
+        ///     <html lang="en" class="static">
+        ///       <head>
+        ///         <title>
+        ///           <xsl:for-each select="package/p:metadata">
+        ///               <xsl:value-of select="p:id"/>
+        ///           </xsl:for-each>
+        ///         </title>
+        ///       </head>
+        ///       <body>
+        ///           <xsl:for-each select="package/p:metadata">
+        ///             <h1>
+        ///               <xsl:value-of select="p:id"/>
+        ///             </h1>
+        ///             <h2>Description</h2>
+        ///             <i><xsl:value-of select="p:description"/></i>
+        ///           </xsl:for-each>
+        ///         <h3>Files</h3>
+        ///         <ul>
+        ///           <xsl:for-each select="package/files/file" >
+        ///             <li><xsl:value-of select="@src"/></li>
+        ///           </xsl:for-each>
+        ///         </ul>
+        ///       </body>
+        ///     </html>
+        ///   </xsl:template>
         /// </xsl:stylesheet>
         /// ]]>
         /// </code>
@@ -11024,45 +11024,45 @@ public static partial class Program
         /// <![CDATA[
         /// <?xml version="1.0" ?>
         /// <xsl:stylesheet
-        /// version="1.0"
-        /// xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        /// xmlns:p="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-        /// exclude-result-prefixes="p"
-        /// >
-        /// <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
-        /// <xsl:template match="/">
-        /// <html lang="en" class="static">
-        /// <head>
-        /// <title>
-        /// <xsl:for-each select="package/p:metadata">
-        /// <xsl:value-of select="p:id"/>
-        /// </xsl:for-each>
-        /// </title>
-        /// </head>
-        /// <body>
-        /// <xsl:for-each select="package/p:metadata">
-        /// <h1>
-        /// <xsl:value-of select="p:id"/>
-        /// </h1>
-        /// <h2>Description</h2>
-        /// <i><xsl:value-of select="p:description"/></i>
-        /// </xsl:for-each>
-        /// <h3>Files</h3>
-        /// <ul>
-        /// <xsl:for-each select="package/files/file" >
-        /// <li><xsl:value-of select="@src"/></li>
-        /// </xsl:for-each>
-        /// </ul>
-        /// </body>
-        /// </html>
-        /// </xsl:template>
+        ///   version="1.0"
+        ///   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        ///   xmlns:p="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+        ///   exclude-result-prefixes="p"
+        ///   >
+        ///   <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+        ///   <xsl:template match="/">
+        ///     <html lang="en" class="static">
+        ///       <head>
+        ///         <title>
+        ///           <xsl:for-each select="package/p:metadata">
+        ///               <xsl:value-of select="p:id"/>
+        ///           </xsl:for-each>
+        ///         </title>
+        ///       </head>
+        ///       <body>
+        ///           <xsl:for-each select="package/p:metadata">
+        ///             <h1>
+        ///               <xsl:value-of select="p:id"/>
+        ///             </h1>
+        ///             <h2>Description</h2>
+        ///             <i><xsl:value-of select="p:description"/></i>
+        ///           </xsl:for-each>
+        ///         <h3>Files</h3>
+        ///         <ul>
+        ///           <xsl:for-each select="package/files/file" >
+        ///             <li><xsl:value-of select="@src"/></li>
+        ///           </xsl:for-each>
+        ///         </ul>
+        ///       </body>
+        ///     </html>
+        ///   </xsl:template>
         /// </xsl:stylesheet>
         /// ]]>
         /// </code>
         /// <para>XmlTransform usage:</para>
         /// <code>
         /// XmlTransform("./nuspec.xsl", "./nuspec/Cake.nuspec", "./Cake.htm",
-        /// new XmlTransformationSettings { Indent = true, Encoding = Encoding.Unicode});
+        ///     new XmlTransformationSettings { Indent = true, Encoding = Encoding.Unicode});
         /// </code>
         /// </example>
         /// </member>
