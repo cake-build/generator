@@ -23,7 +23,6 @@ public partial class CakeGenerator
                         IServiceCollection services
                         )
                     {
-                        services.AddSingleton<GeneratorScriptHost>();
                         services.AddSingleton<IScriptHost>(provider => {
                             var settings = provider.GetRequiredService<CakeAppSettings>();
                             IScriptHost scriptHost = settings switch
@@ -31,7 +30,7 @@ public partial class CakeGenerator
                                 { DryRun: true } => provider.GetRequiredService<global::Cake.Cli.DryRunScriptHost>(),
                                 { Description: true } => provider.GetRequiredService<global::Cake.Cli.DescriptionScriptHost>(),
                                 { Tree: true } => provider.GetRequiredService<global::Cake.Cli.TreeScriptHost>(),
-                                _ => provider.GetRequiredService<GeneratorScriptHost>()
+                                _ => provider.GetRequiredService<global::Cake.Cli.BuildScriptHost>()
                             };
 
                             if (settings.Exclusive)

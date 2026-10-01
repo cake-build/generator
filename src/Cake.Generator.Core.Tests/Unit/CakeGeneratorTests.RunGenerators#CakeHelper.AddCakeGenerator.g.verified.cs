@@ -1,4 +1,4 @@
-//HintName: CakeHelper.AddCakeGenerator.g.cs
+﻿//HintName: CakeHelper.AddCakeGenerator.g.cs
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +10,6 @@ public static partial class Program
             IServiceCollection services
             )
         {
-            services.AddSingleton<GeneratorScriptHost>();
             services.AddSingleton<IScriptHost>(provider => {
                 var settings = provider.GetRequiredService<CakeAppSettings>();
                 IScriptHost scriptHost = settings switch
@@ -18,7 +17,7 @@ public static partial class Program
                     { DryRun: true } => provider.GetRequiredService<global::Cake.Cli.DryRunScriptHost>(),
                     { Description: true } => provider.GetRequiredService<global::Cake.Cli.DescriptionScriptHost>(),
                     { Tree: true } => provider.GetRequiredService<global::Cake.Cli.TreeScriptHost>(),
-                    _ => provider.GetRequiredService<GeneratorScriptHost>()
+                    _ => provider.GetRequiredService<global::Cake.Cli.BuildScriptHost>()
                 };
 
                 if (settings.Exclusive)

@@ -20,6 +20,7 @@ public static partial class Program
             services.AddSingleton<global::Cake.Cli.InfoFeature>();
             services.AddSingleton<global::Cake.Cli.IVersionResolver, VersionResolver>();
 
+            services.AddSingleton<global::Cake.Cli.BuildScriptHost>();
             services.AddSingleton<global::Cake.Cli.DescriptionScriptHost>();
             services.AddSingleton<global::Cake.Cli.DryRunScriptHost>();
             services.AddSingleton<global::Cake.Cli.TreeScriptHost>();
