@@ -40,55 +40,6 @@ public static partial class Program
         }
     }
 
-    private class GeneratorScriptHost(ICakeEngine engine, ICakeContext context, IExecutionStrategy strategy, ICakeConfiguration configuration, ICakeReportPrinter reporter)
-        : ScriptHost(engine, context)
-    {
-
-        public override async Task<CakeReport> RunTargetAsync(string target)
-        {
-            Settings.SetTarget(target);
-            var report = await internalRunTargetAsync();
-            return report;
-        }
-
-        public override async Task<CakeReport> RunTargetsAsync(IEnumerable<string> targets)
-        {
-            Settings.SetTargets(targets);
-            var report = await internalRunTargetAsync();
-            return report;
-        }
-
-        private async Task<CakeReport> internalRunTargetAsync()
-        {
-            bool noReportEnabled = false;
-            try
-            {
-                noReportEnabled = bool.TrueString.Equals(configuration.GetValue("Settings_NoReport") ?? bool.FalseString, StringComparison.OrdinalIgnoreCase);
-                var report = await Engine
-                                    .RunTargetAsync(Context, strategy, Settings)
-                                    .ConfigureAwait(false);
-
-                if (report != null && !report.IsEmpty && !noReportEnabled)
-                {
-                    reporter.Write(report);
-                }
-
-                ArgumentNullException.ThrowIfNull(report);
-
-                return report;
-            }
-            catch (CakeReportException cre)
-            {
-                if (cre.Report != null && !cre.Report.IsEmpty && !noReportEnabled)
-                {
-                    reporter.Write(cre.Report);
-                }
-
-                throw;
-            }
-        }
-    }
-
     /// <member name="M:Cake.Core.Scripting.IScriptHost.Task(System.String)">
     /// <summary>
     /// Registers a new task.
