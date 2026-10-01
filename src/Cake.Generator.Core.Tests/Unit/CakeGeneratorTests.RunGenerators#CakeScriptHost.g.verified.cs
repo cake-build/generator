@@ -97,9 +97,9 @@ public static partial class Program
     /// <example>
     /// <code>
     /// Task("Hello")
-    /// .Does(() =&gt;
+    ///     .Does(() =&gt;
     /// {
-    /// Information("Hello World");
+    ///     Information("Hello World");
     /// });
     /// </code>
     /// </example>
@@ -117,9 +117,9 @@ public static partial class Program
     /// <example>
     /// <code>
     /// TaskOf&lt;Foo&gt;("Hello")
-    /// .Does(data =&gt;
+    ///     .Does(data =&gt;
     /// {
-    /// Information("Hello {0}", data.Place);
+    ///     Information("Hello {0}", data.Place);
     /// });
     /// </code>
     /// </example>
@@ -137,7 +137,7 @@ public static partial class Program
     /// <example>
     /// <code>
     /// Setup(context =&gt; {
-    /// context.Log.Information("Hello World!");
+    ///   context.Log.Information("Hello World!");
     /// });
     /// </code>
     /// </example>
@@ -155,7 +155,7 @@ public static partial class Program
     /// <example>
     /// <code>
     /// Setup&lt;Foo&gt;(context =&gt; {
-    /// return new Foo();
+    ///   return new Foo();
     /// });
     /// </code>
     /// </example>
@@ -173,7 +173,7 @@ public static partial class Program
     /// <example>
     /// <code>
     /// Teardown(context =&gt; {
-    /// context.Log.Information("Goodbye World!");
+    ///   context.Log.Information("Goodbye World!");
     /// });
     /// </code>
     /// </example>
@@ -191,7 +191,7 @@ public static partial class Program
     /// <example>
     /// <code>
     /// Teardown((context, data) =&gt; {
-    /// context.Log.Information("Goodbye {0}!", data.Place);
+    ///   context.Log.Information("Goodbye {0}!", data.Place);
     /// });
     /// </code>
     /// </example>
@@ -210,7 +210,7 @@ public static partial class Program
     /// <code>
     /// TaskSetup(context =&gt;
     /// {
-    /// Information("Starting {0}", context.Task.Name);
+    ///     Information("Starting {0}", context.Task.Name);
     /// });
     /// </code>
     /// </example>
@@ -229,7 +229,7 @@ public static partial class Program
     /// <code>
     /// TaskSetup&lt;Foo&gt;((context, data) =&gt;
     /// {
-    /// Information("Starting {0} for {1}", context.Task.Name, data.Place);
+    ///     Information("Starting {0} for {1}", context.Task.Name, data.Place);
     /// });
     /// </code>
     /// </example>
@@ -248,7 +248,7 @@ public static partial class Program
     /// <code>
     /// TaskTeardown(context =&gt;
     /// {
-    /// Information("Finished {0}", context.Task.Name);
+    ///     Information("Finished {0}", context.Task.Name);
     /// });
     /// </code>
     /// </example>
@@ -267,7 +267,7 @@ public static partial class Program
     /// <code>
     /// TaskTeardown&lt;Foo&gt;((context, data) =&gt;
     /// {
-    /// Information("Finished {0} for {1}", context.Task.Name, data.Place);
+    ///     Information("Finished {0} for {1}", context.Task.Name, data.Place);
     /// });
     /// </code>
     /// </example>

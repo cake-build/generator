@@ -33,12 +33,12 @@ public static partial class Program
         /// <code>
         /// #module nuget:?package=Cake.MyService.Module&amp;version=1.0.0
         /// Task("MyTask")
-        /// .Does(() =&gt;
+        ///     .Does(() =&gt;
         /// {
-        /// var log = ServiceProvider.GetRequiredService&lt;ICakeLog&gt;();
-        /// log.Information("Hello from IoC");
-        /// var myService = ServiceProvider.GetRequiredService&lt;IMyService&gt;();
-        /// myService.DoSomething();
+        ///     var log = ServiceProvider.GetRequiredService&lt;ICakeLog&gt;();
+        ///     log.Information("Hello from IoC");
+        ///     var myService = ServiceProvider.GetRequiredService&lt;IMyService&gt;();
+        ///     myService.DoSomething();
         /// });
         /// </code>
         /// </example>
