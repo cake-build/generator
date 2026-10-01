@@ -18,9 +18,6 @@ internal static class ModuleInit
         // Initialize source generator support
         VerifySourceGenerators.Initialize();
 
-        // Initialize DiffPlex for better diffs
-        VerifyDiffPlex.Initialize();
-
         // Set default scrubbers for generated code
         VerifierSettings.ScrubLinesContaining("GeneratedCodeAttribute");
         VerifierSettings.ScrubLinesContaining("CompilerGeneratedAttribute");
