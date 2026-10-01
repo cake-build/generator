@@ -95,4 +95,24 @@ public sealed class CakeGeneratorTests
         // Then
         await Verify(result.GetRunResult());
     }
+
+    [Test]
+    public async Task RunGenerators_WithEscapedDefaultValues(CancellationToken cancellationToken)
+    {
+        var source = CakeGeneratorTestsBase.CommonSources.Program;
+        var compilation = CakeGeneratorTestsBase.CreateCompilation(
+            source,
+            CakeGeneratorTestsBase.CreateEscapingAliasesReference());
+        var driver = CSharpGeneratorDriver.Create(new CakeGenerator());
+        var result = driver.RunGenerators(compilation, cancellationToken);
+        var aliases = result.GetRunResult().Results
+            .SelectMany(r => r.GeneratedSources)
+            .Single(s => s.HintName == "CakeMethodAliases.g.cs")
+            .SourceText
+            .ToString();
+        var methodStart = aliases.IndexOf("public static void InstallToolPath", StringComparison.Ordinal);
+        await Assert.That(methodStart).IsGreaterThanOrEqualTo(0);
+        var methodEnd = aliases.IndexOf(';', methodStart);
+        await Verify(aliases.Substring(methodStart, methodEnd - methodStart + 1));
+    }
 }

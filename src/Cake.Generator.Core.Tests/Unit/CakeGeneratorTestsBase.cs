@@ -53,6 +53,13 @@ public static class CakeGeneratorTestsBase
     }
 
     /// <summary>
+    /// Returns a metadata reference to the test assembly that contains
+    /// <see cref="Fixtures.EscapingAliases"/>. The generator only scans referenced assemblies.
+    /// </summary>
+    public static MetadataReference CreateEscapingAliasesReference()
+        => MetadataReference.CreateFromFile(typeof(Fixtures.EscapingAliases).Assembly.Location);
+
+    /// <summary>
     /// Gets common Cake-related source code for testing.
     /// </summary>
     public static class CommonSources
