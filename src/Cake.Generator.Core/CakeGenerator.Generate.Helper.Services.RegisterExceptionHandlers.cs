@@ -18,6 +18,7 @@ public partial class CakeGenerator
                 private static partial class Helper
                 {
                     private static bool _exceptionHandlersRegistered;
+                    private static Verbosity _exceptionVerbosity = Verbosity.Normal;
 
                     /// <summary>
                     /// Registers global exception handlers for unhandled and unobserved task exceptions.
@@ -71,10 +72,27 @@ public partial class CakeGenerator
                             exception = innerException;
                         }
 
-                        AnsiConsole.WriteException(
-                            exception,
-                            ExceptionFormats.ShortenEverything | ExceptionFormats.ShowLinks);
-                        Environment.Exit(global::Cake.Cli.ExceptionLogger.LogException(null!, exception));
+                        if (_exceptionVerbosity < Verbosity.Diagnostic)
+                        {
+                            AnsiConsole.MarkupLineInterpolated($"[red]Error:[/] {exception.Message}");
+                        }
+                        else
+                        {
+                            AnsiConsole.WriteException(
+                                exception,
+                                ExceptionFormats.ShortenEverything | ExceptionFormats.ShowLinks);
+                        }
+
+                        var exitCode = exception switch
+                        {
+                            CakeException { ExitCode: var cakeExitCode } => cakeExitCode,
+                            AggregateException aggregate => aggregate.InnerExceptions
+                                .OfType<CakeException>()
+                                .Select(cakeException => (int?)cakeException.ExitCode)
+                                .FirstOrDefault() ?? 1,
+                            _ => 1
+                        };
+                        Environment.Exit(exitCode);
                     }
                 }
             }
