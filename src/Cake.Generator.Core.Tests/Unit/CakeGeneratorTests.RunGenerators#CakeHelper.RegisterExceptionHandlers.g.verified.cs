@@ -1,4 +1,4 @@
-//HintName: CakeHelper.RegisterExceptionHandlers.g.cs
+﻿//HintName: CakeHelper.RegisterExceptionHandlers.g.cs
 
 public static partial class Program
 {
@@ -61,7 +61,7 @@ public static partial class Program
             AnsiConsole.WriteException(
                 exception,
                 ExceptionFormats.ShortenEverything | ExceptionFormats.ShowLinks);
-            Environment.Exit(1);
+            Environment.Exit(global::Cake.Cli.ExceptionLogger.LogException(null!, exception));
         }
     }
 }

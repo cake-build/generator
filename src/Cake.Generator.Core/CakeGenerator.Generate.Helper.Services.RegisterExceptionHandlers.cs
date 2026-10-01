@@ -74,7 +74,7 @@ public partial class CakeGenerator
                         AnsiConsole.WriteException(
                             exception,
                             ExceptionFormats.ShortenEverything | ExceptionFormats.ShowLinks);
-                        Environment.Exit(1);
+                        Environment.Exit(global::Cake.Cli.ExceptionLogger.LogException(null!, exception));
                     }
                 }
             }
