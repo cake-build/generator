@@ -19,7 +19,7 @@ Create a new project file with minimal configuration:
 ```xml
 <Project Sdk="Cake.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -216,8 +216,8 @@ The Cake.Sdk automatically configures the following properties:
 
 ## Requirements
 
-- .NET 8.0 or later
-- Compatible with .NET 8.0, 9.0, and 10.0 target frameworks
+- .NET 10.0 or later
+- Compatible with .NET 10.0 and 11.0 target frameworks
 
 ## Default Package References
 

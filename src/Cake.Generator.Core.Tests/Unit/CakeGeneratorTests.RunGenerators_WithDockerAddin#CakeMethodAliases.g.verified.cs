@@ -1155,7 +1155,16 @@ public static partial class Program
         /// <param name="memberName">The member name.</param>
         /// <param name="sourceFilePath">The source file path.</param>
         /// <param name="sourceLineNumber">The source line number.</param>
-        /// <returns>A <see cref="M:Cake.Common.Diagnostics.ScriptCallerAliases.GetCallerInfo(Cake.Core.ICakeContext,System.String,System.String,System.Int32)" /> instance representing the caller information.</returns>
+        /// <returns>A <see cref="T:Cake.Common.Diagnostics.ScriptCallerInfo" /> instance representing the caller information.</returns>
+        /// <example>
+        /// <code>
+        /// var caller = GetCallerInfo();
+        /// Information("Called from {0} at {1}:{2}",
+        /// caller.MemberName,
+        /// caller.SourceFilePath,
+        /// caller.SourceLineNumber);
+        /// </code>
+        /// </example>
         /// </member>
         public static global::Cake.Common.Diagnostics.ScriptCallerInfo GetCallerInfo(string memberName = "", string sourceFilePath = "", int sourceLineNumber = 0)
             => global::Cake.Common.Diagnostics.ScriptCallerAliases.GetCallerInfo(Context, memberName, sourceFilePath, sourceLineNumber);
@@ -2065,6 +2074,52 @@ public static partial class Program
         /// </member>
         public static global::Cake.Core.IO.DirectoryPathCollection GetDirectories(global::Cake.Core.IO.GlobPattern pattern, global::Cake.Core.IO.GlobberSettings settings)
             => global::Cake.Common.IO.GlobbingAliases.GetDirectories(Context, pattern, settings);
+
+        /// <member name="M:Cake.Common.IO.GlobbingAliases.GetFileSystemInfos(Cake.Core.ICakeContext,Cake.Core.IO.GlobPattern)">
+        /// <summary>
+        /// Gets all files and directories matching the specified pattern.
+        /// This is the entry point for scripts and Frosting, when it is not known
+        /// whether the matched paths are files or directories.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// var entries = GetFileSystemInfos("./artifacts/*");
+        /// foreach (var entry in entries)
+        /// {
+        /// Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="pattern">The glob pattern to match.</param>
+        /// <returns>The file system entries matching the specified pattern.</returns>
+        /// </member>
+        public static global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.IFileSystemInfo> GetFileSystemInfos(global::Cake.Core.IO.GlobPattern pattern)
+            => global::Cake.Common.IO.GlobbingAliases.GetFileSystemInfos(Context, pattern);
+
+        /// <member name="M:Cake.Common.IO.GlobbingAliases.GetFileSystemInfos(Cake.Core.ICakeContext,Cake.Core.IO.GlobPattern,Cake.Core.IO.GlobberSettings)">
+        /// <summary>
+        /// Gets all files and directories matching the specified pattern.
+        /// This is the entry point for scripts and Frosting, when it is not known
+        /// whether the matched paths are files or directories.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// Func&lt;IFileSystemInfo, bool&gt; exclude_node_modules =
+        /// fileSystemInfo =&gt; !fileSystemInfo.Path.FullPath.EndsWith(
+        /// "node_modules", StringComparison.OrdinalIgnoreCase);
+        /// var entries = GetFileSystemInfos("./src/**/*", new GlobberSettings { Predicate = exclude_node_modules });
+        /// foreach (var entry in entries)
+        /// {
+        /// Information("{0}: {1}", entry is IDirectory ? "Directory" : "File", entry.Path);
+        /// }
+        /// </code>
+        /// </example>
+        /// <param name="pattern">The glob pattern to match.</param>
+        /// <param name="settings">The globber settings.</param>
+        /// <returns>The file system entries matching the specified pattern.</returns>
+        /// </member>
+        public static global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.IFileSystemInfo> GetFileSystemInfos(global::Cake.Core.IO.GlobPattern pattern, global::Cake.Core.IO.GlobberSettings settings)
+            => global::Cake.Common.IO.GlobbingAliases.GetFileSystemInfos(Context, pattern, settings);
 
         /// <member name="M:Cake.Common.IO.GlobbingAliases.GetPaths(Cake.Core.ICakeContext,Cake.Core.IO.GlobPattern)">
         /// <summary>
@@ -5299,7 +5354,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceAddSettings
         /// {
-        /// Framework = "net8.0"
+        /// Framework = "net10.0"
         /// };
         /// DotNetAddReference(GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5334,7 +5389,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceAddSettings
         /// {
-        /// Framework = "net8.0"
+        /// Framework = "net10.0"
         /// };
         /// DotNetAddReference("./app/app.csproj", GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5367,7 +5422,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceRemoveSettings
         /// {
-        /// Framework = "net8.0"
+        /// Framework = "net10.0"
         /// };
         /// DotNetRemoveReference(GetFiles("./src/*.csproj"), settings);
         /// </code>
@@ -5402,7 +5457,7 @@ public static partial class Program
         /// <code>
         /// var settings = new DotNetReferenceRemoveSettings
         /// {
-        /// Framework = "net8.0"
+        /// Framework = "net10.0"
         /// };
         /// DotNetRemoveReference("./app/app.csproj", GetFiles("./src/*.csproj"), settings);
         /// </code>

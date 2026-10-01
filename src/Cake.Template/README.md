@@ -30,7 +30,7 @@ This package contains templates for creating Cake build scripts and projects usi
 - **Usage**: `dotnet new cakeproj`
 - **Parameters**:
   - `--name` or `-n`: The name for the generated project folder. Default: folder name
-  - `--Framework`: Target framework (net8.0, net9.0, net10.0). Default: net9.0
+  - `--Framework`: Target framework (net10.0, net11.0). Default: net11.0
 
 ### Cake SDK Global.json
 - **Short name**: `cakeglobaljson`
@@ -77,12 +77,12 @@ Create a multi-file file-based build script with custom name:
 dotnet new cakemultifile --name build
 ```
 
-Create a project-based build targeting .NET 8.0:
+Create a project-based build targeting .NET 10.0:
 ```bash
-dotnet new cakeproj --Framework net8.0
+dotnet new cakeproj --Framework net10.0
 ```
 
-Create a project-based build targeting .NET 9.0 (default):
+Create a project-based build targeting .NET 11.0 (default):
 ```bash
 dotnet new cakeproj
 ```

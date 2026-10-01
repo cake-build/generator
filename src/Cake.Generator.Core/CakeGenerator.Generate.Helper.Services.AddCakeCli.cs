@@ -84,7 +84,7 @@ public partial class CakeGenerator
 
                     private class CakeArgumentsCommand : Command<CakeAppSettings>
                     {
-                        protected override int Execute(Spectre.Console.Cli.CommandContext context, CakeAppSettings settings, CancellationToken cancelationToken)
+                        public override int Execute(Spectre.Console.Cli.CommandContext context, CakeAppSettings settings, CancellationToken cancelationToken)
                         {
                             return 0;
                         }

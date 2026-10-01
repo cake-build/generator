@@ -26,17 +26,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Install .NET SDK 8.0.x
+      - name: Install .NET SDK 10.0.x
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            8.0.x
-
-      - name: Install .NET SDK 9.0.x
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            9.0.x
+            10.0.x
 
       - name: Install .NET Core SDK (global.json)
         uses: actions/setup-dotnet@v4
