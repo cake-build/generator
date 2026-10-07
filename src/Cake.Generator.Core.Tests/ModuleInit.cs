@@ -18,16 +18,11 @@ internal static class ModuleInit
         // Initialize source generator support
         VerifySourceGenerators.Initialize();
 
-        Verifier.DerivePathInfo((sourceFile, projectDirectory, type, method) =>
-        {
-            var relative = Path.GetRelativePath(
-                projectDirectory,
-                Path.GetDirectoryName(sourceFile)!);
-            return new PathInfo(
-                directory: Path.Combine(projectDirectory, "Snapshots", TargetFrameworkMoniker, relative, type.Name, method.Name),
-                typeName: type.Name,
-                methodName: method.Name);
-        });
+        Verifier.DerivePathInfo((_, projectDirectory, type, method) =>
+            new PathInfo(
+                directory: Path.Combine(projectDirectory, "Snapshots", TargetFrameworkMoniker, type.Name, method.Name),
+                typeName: "_",
+                methodName: "_"));
 
         // Set default scrubbers for generated code
         VerifierSettings.ScrubLinesContaining("GeneratedCodeAttribute");
