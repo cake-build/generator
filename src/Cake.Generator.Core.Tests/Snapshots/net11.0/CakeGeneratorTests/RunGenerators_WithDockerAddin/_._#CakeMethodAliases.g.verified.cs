@@ -548,6 +548,70 @@ public static partial class Program
         public static global::Cake.Core.IO.IProcess StartAndReturnProcess(global::Cake.Core.IO.FilePath fileName)
             => global::Cake.Common.ProcessAliases.StartAndReturnProcess(Context, fileName);
 
+        /// <member name="M:Cake.Common.ProcessAliases.StartProcessAndForget(Cake.Core.ICakeContext,Cake.Core.IO.FilePath)">
+        /// <summary>
+        /// Starts the process specified by the filename and releases all associated resources immediately.
+        /// Available when targeting .NET 11 or greater.
+        /// </summary>
+        /// <param name="fileName">The file name.</param>
+        /// <returns>The process identifier.</returns>
+        /// <example>
+        /// <code>
+        /// var fileName = Context.Tools.Resolve("dotnet.exe")
+        ///                 ?? Context.Tools.Resolve("dotnet");
+        /// var processId = StartProcessAndForget(fileName, "--version");
+        /// Information("Process ID: {0}", processId);
+        /// </code>
+        /// </example>
+        /// </member>
+        public static int StartProcessAndForget(global::Cake.Core.IO.FilePath fileName)
+            => global::Cake.Common.ProcessAliases.StartProcessAndForget(Context, fileName);
+
+        /// <member name="M:Cake.Common.ProcessAliases.StartProcessAndForget(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.ProcessArgumentBuilder)">
+        /// <summary>
+        /// Starts the process specified by the filename and arguments and releases all associated resources immediately.
+        /// Available when targeting .NET 11 or greater.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="processArguments">The arguments used in the process settings.</param>
+        /// <returns>The process identifier.</returns>
+        /// <example>
+        /// <code>
+        /// var fileName = Context.Tools.Resolve("dotnet.exe")
+        ///                 ?? Context.Tools.Resolve("dotnet");
+        /// var processId = StartProcessAndForget(fileName, "--version");
+        /// Information("Process ID: {0}", processId);
+        /// </code>
+        /// </example>
+        /// </member>
+        public static int StartProcessAndForget(global::Cake.Core.IO.FilePath fileName, global::Cake.Core.IO.ProcessArgumentBuilder processArguments)
+            => global::Cake.Common.ProcessAliases.StartProcessAndForget(Context, fileName, processArguments);
+
+        /// <member name="M:Cake.Common.ProcessAliases.StartProcessAndForget(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.ProcessSettings)">
+        /// <summary>
+        /// Starts the process specified by the filename and settings and releases all associated resources immediately.
+        /// Available when targeting .NET 11 or greater. Redirected or discarded standard streams are not supported.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="settings">The settings.</param>
+        /// <returns>The process identifier.</returns>
+        /// <example>
+        /// <code>
+        /// var fileName = Context.Tools.Resolve("dotnet.exe")
+        ///                 ?? Context.Tools.Resolve("dotnet");
+        /// var processId = StartProcessAndForget(
+        ///     fileName,
+        ///     new ProcessSettings {
+        ///         Arguments = "--version"
+        ///     });
+        /// Information("Process ID: {0}", processId);
+        /// </code>
+        /// </example>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="context" />, <paramref name="fileName" />, or <paramref name="settings" /> is null.</exception>
+        /// </member>
+        public static int StartProcessAndForget(global::Cake.Core.IO.FilePath fileName, global::Cake.Core.IO.ProcessSettings settings)
+            => global::Cake.Common.ProcessAliases.StartProcessAndForget(Context, fileName, settings);
+
         /// <member name="M:Cake.Common.ReleaseNotesAliases.ParseAllReleaseNotes(Cake.Core.ICakeContext,Cake.Core.IO.FilePath)">
         /// <summary>
         /// Parses all release notes.
@@ -2162,6 +2226,257 @@ public static partial class Program
         /// </member>
         public static global::Cake.Core.IO.PathCollection GetPaths(global::Cake.Core.IO.GlobPattern pattern, global::Cake.Core.IO.GlobberSettings settings)
             => global::Cake.Common.IO.GlobbingAliases.GetPaths(Context, pattern, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath)">
+        /// <summary>
+        /// Creates a tar archive from the specified directory.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <example>
+        /// <code>
+        /// Tar("./publish", "publish.tar");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,Cake.Common.IO.TarSettings)">
+        /// <summary>
+        /// Creates a tar archive from the specified directory.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// Tar("./publish", "publish.tar.gz", new TarSettings {
+        ///     Compression = TarCompression.GZip,
+        ///     Overwrite = true
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, global::Cake.Common.IO.TarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.String)">
+        /// <summary>
+        /// Creates a tar archive from the files matching the specified pattern.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="pattern">The pattern.</param>
+        /// <example>
+        /// <code>
+        /// Tar("./", "XmlFiles.tar", "./*.xml");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, string pattern)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, pattern);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.String,Cake.Common.IO.TarSettings)">
+        /// <summary>
+        /// Creates a tar archive from the files matching the specified pattern.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="pattern">The pattern.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// Tar("./", "XmlFiles.tar.gz", "./*.xml", new TarSettings {
+        ///     Compression = TarCompression.GZip
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, string pattern, global::Cake.Common.IO.TarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, pattern, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.Collections.Generic.IEnumerable{Cake.Core.IO.FilePath})">
+        /// <summary>
+        /// Creates a tar archive from the specified files.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="filePaths">The file paths.</param>
+        /// <example>
+        /// <code>
+        /// var files = GetFiles("./**/Cake.*.dll");
+        /// Tar("./", "CakeAssemblies.tar", files);
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.FilePath> filePaths)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, filePaths);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.Collections.Generic.IEnumerable{Cake.Core.IO.FilePath},Cake.Common.IO.TarSettings)">
+        /// <summary>
+        /// Creates a tar archive from the specified files.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="filePaths">The file paths.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// var files = GetFiles("./**/Cake.*.dll");
+        /// Tar("./", "CakeAssemblies.tar.gz", files, new TarSettings {
+        ///     Compression = TarCompression.GZip
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.FilePath> filePaths, global::Cake.Common.IO.TarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, filePaths, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.Collections.Generic.IEnumerable{System.String})">
+        /// <summary>
+        /// Creates a tar archive from the specified files.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="filePaths">The file paths.</param>
+        /// <example>
+        /// <code>
+        /// var files = new [] {
+        ///     "./src/Cake/bin/Debug/Cake.Common.dll",
+        ///     "./src/Cake/bin/Debug/Cake.Core.dll"
+        /// };
+        /// Tar("./", "CakeBinaries.tar", files);
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, global::System.Collections.Generic.IEnumerable<string> filePaths)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, filePaths);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Tar(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath,System.Collections.Generic.IEnumerable{System.String},Cake.Common.IO.TarSettings)">
+        /// <summary>
+        /// Creates a tar archive from the specified files.
+        /// </summary>
+        /// <param name="rootPath">The root path.</param>
+        /// <param name="outputPath">The output path.</param>
+        /// <param name="filePaths">The file paths.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// var files = new [] {
+        ///     "./src/Cake/bin/Debug/Cake.Common.dll",
+        ///     "./src/Cake/bin/Debug/Cake.Core.dll"
+        /// };
+        /// Tar("./", "CakeBinaries.tar.gz", files, new TarSettings {
+        ///     Compression = TarCompression.GZip
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Tar(global::Cake.Core.IO.DirectoryPath rootPath, global::Cake.Core.IO.FilePath outputPath, global::System.Collections.Generic.IEnumerable<string> filePaths, global::Cake.Common.IO.TarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Tar(Context, rootPath, outputPath, filePaths, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.DirectoryPath)">
+        /// <summary>
+        /// Extracts the specified tar archive.
+        /// </summary>
+        /// <param name="archiveFile">The archive file to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <example>
+        /// <code>
+        /// Untar("publish.tar.gz", "./publish");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::Cake.Core.IO.FilePath archiveFile, global::Cake.Core.IO.DirectoryPath outputPath)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFile, outputPath);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,Cake.Core.IO.DirectoryPath,Cake.Common.IO.UntarSettings)">
+        /// <summary>
+        /// Extracts the specified tar archive.
+        /// </summary>
+        /// <param name="archiveFile">The archive file to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// Untar("publish.tar.gz", "./publish", new UntarSettings {
+        ///     SkipUnchangedFiles = true,
+        ///     OverwriteReadOnlyFiles = false
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::Cake.Core.IO.FilePath archiveFile, global::Cake.Core.IO.DirectoryPath outputPath, global::Cake.Common.IO.UntarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFile, outputPath, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{Cake.Core.IO.FilePath},Cake.Core.IO.DirectoryPath)">
+        /// <summary>
+        /// Extracts the specified tar archives.
+        /// </summary>
+        /// <param name="archiveFiles">The archive files to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <example>
+        /// <code>
+        /// Untar(new[] { "a.tar", "b.tar.gz" }, "./dependencies");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.FilePath> archiveFiles, global::Cake.Core.IO.DirectoryPath outputPath)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFiles, outputPath);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{Cake.Core.IO.FilePath},Cake.Core.IO.DirectoryPath,Cake.Common.IO.UntarSettings)">
+        /// <summary>
+        /// Extracts the specified tar archives.
+        /// </summary>
+        /// <param name="archiveFiles">The archive files to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// Untar(new[] { "a.tar", "b.tar.gz" }, "./dependencies", new UntarSettings {
+        ///     SkipUnchangedFiles = true,
+        ///     OverwriteReadOnlyFiles = false
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::System.Collections.Generic.IEnumerable<global::Cake.Core.IO.FilePath> archiveFiles, global::Cake.Core.IO.DirectoryPath outputPath, global::Cake.Common.IO.UntarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFiles, outputPath, settings);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String},Cake.Core.IO.DirectoryPath)">
+        /// <summary>
+        /// Extracts the specified tar archives.
+        /// </summary>
+        /// <param name="archiveFiles">The archive files to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <example>
+        /// <code>
+        /// Untar(new[] { "a.tar", "b.tar.gz" }, "./dependencies");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::System.Collections.Generic.IEnumerable<string> archiveFiles, global::Cake.Core.IO.DirectoryPath outputPath)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFiles, outputPath);
+
+        /// <member name="M:Cake.Common.IO.TarAliases.Untar(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String},Cake.Core.IO.DirectoryPath,Cake.Common.IO.UntarSettings)">
+        /// <summary>
+        /// Extracts the specified tar archives.
+        /// </summary>
+        /// <param name="archiveFiles">The archive files to extract.</param>
+        /// <param name="outputPath">The output path to extract into.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// Untar(new[] { "a.tar", "b.tar.gz" }, "./dependencies", new UntarSettings {
+        ///     SkipUnchangedFiles = true,
+        ///     OverwriteReadOnlyFiles = false
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void Untar(global::System.Collections.Generic.IEnumerable<string> archiveFiles, global::Cake.Core.IO.DirectoryPath outputPath, global::Cake.Common.IO.UntarSettings settings)
+            => global::Cake.Common.IO.TarAliases.Untar(Context, archiveFiles, outputPath, settings);
 
         /// <member name="M:Cake.Common.IO.ZipAliases.Zip(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath)">
         /// <summary>
@@ -5178,6 +5493,165 @@ public static partial class Program
         /// </member>
         public static void DotNetRemovePackage(string packageName, string project, global::Cake.Common.Tools.DotNet.Package.Remove.DotNetPackageRemoveSettings settings)
             => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetRemovePackage(Context, packageName, project, settings);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext)">
+        /// <summary>
+        /// Updates referenced packages in a project.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage();
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage()
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings)">
+        /// <summary>
+        /// Updates referenced packages in a project.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage(new DotNetPackageUpdateSettings {
+        ///     Project = "./src/App.csproj",
+        ///     Vulnerable = true
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(global::Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings settings)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, settings);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.String)">
+        /// <summary>
+        /// Updates a package reference in a project.
+        /// </summary>
+        /// <param name="packageName">The package to update.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage("Newtonsoft.Json");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(string packageName)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packageName);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.String,Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings)">
+        /// <summary>
+        /// Updates a package reference in a project.
+        /// </summary>
+        /// <param name="packageName">The package to update.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage("Newtonsoft.Json", new DotNetPackageUpdateSettings {
+        ///     Vulnerable = true
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(string packageName, global::Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings settings)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packageName, settings);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.String,System.String)">
+        /// <summary>
+        /// Updates a package reference in a project.
+        /// </summary>
+        /// <param name="packageName">The package to update.</param>
+        /// <param name="project">The target project file or directory.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage("Newtonsoft.Json", "ToDo.csproj");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(string packageName, string project)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packageName, project);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.String,System.String,Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings)">
+        /// <summary>
+        /// Updates a package reference in a project.
+        /// </summary>
+        /// <param name="packageName">The package to update.</param>
+        /// <param name="project">The target project file or directory.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage("Newtonsoft.Json", "ToDo.csproj", new DotNetPackageUpdateSettings {
+        ///     Interactive = true
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(string packageName, string project, global::Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings settings)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packageName, project, settings);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String})">
+        /// <summary>
+        /// Updates package references in a project.
+        /// </summary>
+        /// <param name="packages">The packages to update.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage(new[] { "Contoso.Utilities", "Fabrikam.WebApi@1.2.3" });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(global::System.Collections.Generic.IEnumerable<string> packages)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packages);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String},Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings)">
+        /// <summary>
+        /// Updates package references in a project.
+        /// </summary>
+        /// <param name="packages">The packages to update.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage(new[] { "Contoso.Utilities", "Fabrikam.WebApi@1.2.3" }, new DotNetPackageUpdateSettings {
+        ///     Vulnerable = true
+        /// });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(global::System.Collections.Generic.IEnumerable<string> packages, global::Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings settings)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packages, settings);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String},System.String)">
+        /// <summary>
+        /// Updates package references in a project.
+        /// </summary>
+        /// <param name="packages">The packages to update.</param>
+        /// <param name="project">The target project file or directory.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage(new[] { "Contoso.Utilities", "Fabrikam.WebApi@1.2.3" }, "ToDo.csproj");
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(global::System.Collections.Generic.IEnumerable<string> packages, string project)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packages, project);
+
+        /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{System.String},System.String,Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings)">
+        /// <summary>
+        /// Updates package references in a project.
+        /// </summary>
+        /// <param name="packages">The packages to update.</param>
+        /// <param name="project">The target project file or directory.</param>
+        /// <param name="settings">The settings.</param>
+        /// <example>
+        /// <code>
+        /// DotNetUpdatePackage(
+        ///     new[] { "Contoso.Utilities", "Fabrikam.WebApi@1.2.3" },
+        ///     "ToDo.csproj",
+        ///     new DotNetPackageUpdateSettings { Interactive = true });
+        /// </code>
+        /// </example>
+        /// </member>
+        public static void DotNetUpdatePackage(global::System.Collections.Generic.IEnumerable<string> packages, string project, global::Cake.Common.Tools.DotNet.Package.Update.DotNetPackageUpdateSettings settings)
+            => global::Cake.Common.Tools.DotNet.DotNetAliases.DotNetUpdatePackage(Context, packages, project, settings);
 
         /// <member name="M:Cake.Common.Tools.DotNet.DotNetAliases.DotNetSearchPackage(Cake.Core.ICakeContext,System.String,Cake.Common.Tools.DotNet.Package.Search.DotNetPackageSearchSettings)">
         /// <summary>

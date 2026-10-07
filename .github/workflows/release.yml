@@ -14,6 +14,9 @@ jobs:
     runs-on: windows-latest
     environment: Production
     steps:
+      - name: Enable Git long paths
+        run: git config --system core.longpaths true
+
       - name: Get the sources
         uses: actions/checkout@v4
         with:
