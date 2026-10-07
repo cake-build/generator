@@ -1,0 +1,2 @@
+public static void InstallToolPath(string path = "C:\\tools", char separator = '\\', string message = "say \"hi\"\n")
+            => global::Cake.Generator.Core.Tests.Fixtures.EscapingAliases.InstallToolPath(Context, path, separator, message);

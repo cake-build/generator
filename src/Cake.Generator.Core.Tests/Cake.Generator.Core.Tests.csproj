@@ -26,12 +26,12 @@
     <PackageReference Include="Verify.SourceGenerators" />
     <PackageReference Include="Verify.TUnit" />
 
-    <None Include="$(PkgCake_Core)\lib\net10.0\Cake.Core.xml" Visible="false">
+    <None Include="$(PkgCake_Core)\lib\$(TargetFramework)\Cake.Core.xml" Visible="false">
       <Link>%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 
-    <None Include="$(PkgCake_Common)\lib\net10.0\Cake.Common.xml" Visible="false">
+    <None Include="$(PkgCake_Common)\lib\$(TargetFramework)\Cake.Common.xml" Visible="false">
       <Link>%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

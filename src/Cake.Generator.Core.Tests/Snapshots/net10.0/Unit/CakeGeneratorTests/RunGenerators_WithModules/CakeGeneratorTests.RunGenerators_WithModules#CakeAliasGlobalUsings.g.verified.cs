@@ -78,6 +78,7 @@ global using global::Cake.Common.Tools.DotNet.Package.Add;
 global using global::Cake.Common.Tools.DotNet.Package.List;
 global using global::Cake.Common.Tools.DotNet.Package.Remove;
 global using global::Cake.Common.Tools.DotNet.Package.Search;
+global using global::Cake.Common.Tools.DotNet.Package.Update;
 global using global::Cake.Common.Tools.DotNet.Publish;
 global using global::Cake.Common.Tools.DotNet.Reference.Add;
 global using global::Cake.Common.Tools.DotNet.Reference.List;

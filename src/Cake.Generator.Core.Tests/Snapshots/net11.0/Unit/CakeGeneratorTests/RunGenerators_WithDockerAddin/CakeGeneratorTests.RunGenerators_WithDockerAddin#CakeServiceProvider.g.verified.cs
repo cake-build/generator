@@ -1,0 +1,58 @@
+﻿//HintName: CakeServiceProvider.g.cs
+
+/// <summary>
+/// Main program class for Cake.Sdk bootstrap and generated aliases.
+/// </summary>
+public static partial class Program
+{
+    private static partial class Helper
+    {
+        private static object _providerLock = new object();
+        private static global::Microsoft.Extensions.DependencyInjection.ServiceProvider? _serviceProvider;
+
+        /// <summary>
+        /// Gets the configured service provider instance.
+        /// </summary>
+        private static global::Microsoft.Extensions.DependencyInjection.ServiceProvider ServiceProvider
+        {
+            get
+            {
+                lock(_providerLock)
+                {
+                    return _serviceProvider ??= GetServiceProvider();
+                }
+            }
+        }
+
+        private static global::Microsoft.Extensions.DependencyInjection.ServiceProvider GetServiceProvider()
+        {
+            RegisterExceptionHandlers();
+
+            var services = new ServiceCollection();
+
+            AddCakeCore(services);
+            AddCakeCli(services);
+            AddCakeGenerator(services);
+            RegisterModules(services);
+            RegisterServices(services);
+
+            var provider = services.BuildServiceProvider();
+
+            PostBuildServiceProvider(provider);
+
+            return provider;
+        }
+
+        /// <summary>
+        /// Partial method to register Cake modules.
+        /// </summary>
+        /// <param name="services">The service collection to add modules to.</param>
+        static partial void RegisterModules(IServiceCollection services);
+    }
+
+    /// <summary>
+    /// Partial method to register additional services.
+    /// </summary>
+    /// <param name="services">The service collection to add services to.</param>
+    static partial void RegisterServices(IServiceCollection services);
+}

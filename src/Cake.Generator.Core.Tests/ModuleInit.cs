@@ -18,6 +18,17 @@ internal static class ModuleInit
         // Initialize source generator support
         VerifySourceGenerators.Initialize();
 
+        Verifier.DerivePathInfo((sourceFile, projectDirectory, type, method) =>
+        {
+            var relative = Path.GetRelativePath(
+                projectDirectory,
+                Path.GetDirectoryName(sourceFile)!);
+            return new PathInfo(
+                directory: Path.Combine(projectDirectory, "Snapshots", TargetFrameworkMoniker, relative, type.Name, method.Name),
+                typeName: type.Name,
+                methodName: method.Name);
+        });
+
         // Set default scrubbers for generated code
         VerifierSettings.ScrubLinesContaining("GeneratedCodeAttribute");
         VerifierSettings.ScrubLinesContaining("CompilerGeneratedAttribute");
@@ -43,4 +54,10 @@ internal static class ModuleInit
         // Add custom scrubbers for timestamp-like content
         VerifierSettings.AddScrubber(builder => builder.Replace(@"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", "TIMESTAMP"));
     }
+
+#if NET11_0
+    private const string TargetFrameworkMoniker = "net11.0";
+#else
+    private const string TargetFrameworkMoniker = "net10.0";
+#endif
 }

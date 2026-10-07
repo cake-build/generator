@@ -78,6 +78,7 @@ global using global::Cake.Common.Tools.DotNet.Package.Add;
 global using global::Cake.Common.Tools.DotNet.Package.List;
 global using global::Cake.Common.Tools.DotNet.Package.Remove;
 global using global::Cake.Common.Tools.DotNet.Package.Search;
+global using global::Cake.Common.Tools.DotNet.Package.Update;
 global using global::Cake.Common.Tools.DotNet.Publish;
 global using global::Cake.Common.Tools.DotNet.Reference.Add;
 global using global::Cake.Common.Tools.DotNet.Reference.List;
@@ -164,7 +165,6 @@ global using global::Cake.Core.Packaging;
 global using global::Cake.Core.Reflection;
 global using global::Cake.Core.Scripting;
 global using global::Cake.Core.Tooling;
-global using global::Cake.Docker;
 global using global::Spectre.Console;
 global using global::System;
 global using global::System.Collections.Concurrent;
@@ -184,4 +184,3 @@ global using static global::Microsoft.Extensions.DependencyInjection.ServiceProv
 global using static global::Program;
 // Global static usings for generated Cake alias classes
 global using static global::Program.Cake_Common;
-global using static global::Program.Cake_Docker;
