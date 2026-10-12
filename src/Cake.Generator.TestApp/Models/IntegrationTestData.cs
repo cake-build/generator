@@ -15,6 +15,9 @@ public record IntegrationTestData(
     public FilePath CakeSdkProjectCsproj { get; } = BaseDirectory.Combine("cake.sdk").CombineWithFilePath("cake.csproj");
     public FilePath CakeSdkProjectProgramCs { get; } = BaseDirectory.Combine("cake.sdk").CombineWithFilePath("Program.cs");
 
+    public DirectoryPath CakeSdkConverted { get; } = BaseDirectory.Combine("cake.sdk.convert");
+    public FilePath CakeSdkConvertedCsproj { get; } = BaseDirectory.Combine("cake.sdk.convert").CombineWithFilePath("cake.sdk.csproj");
+
     public DirectoryPath CakeSdkCpmProject { get; } = BaseDirectory.Combine("cake.cpm");
     public FilePath CakeSdkCpmPackagesProps { get; } = BaseDirectory.Combine("cake.cpm").CombineWithFilePath("Directory.Packages.props");
     public FilePath CakeSdkCpmProjectCsproj { get; } = BaseDirectory.Combine("cake.cpm").CombineWithFilePath("cake.csproj");
@@ -53,6 +56,7 @@ public record IntegrationTestData(
             CakeSdkCs,
             CakeSdkProjectCsproj,
             CakeSdkCpmProjectCsproj,
+            CakeSdkConvertedCsproj,
             CakeTemplateBuildCs,
             CakeTemplateBuildCsproj,
             CakeTemplateBuildMultiCs,

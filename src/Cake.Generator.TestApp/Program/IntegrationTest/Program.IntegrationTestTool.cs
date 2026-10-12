@@ -25,7 +25,7 @@
                 break;
 
             case (PlatformFamily.Linux, System.Runtime.InteropServices.Architecture.Arm64):
-                bicepToolPaths = InstallTool("nuget:?package=Azure.Bicep.CommandLine.linux-arm64=0.41.2&include=/**/bicep");
+                bicepToolPaths = InstallTool("nuget:?package=Azure.Bicep.CommandLine.linux-arm64&version=0.41.2&include=/**/bicep");
                 break;
 
             case (PlatformFamily.OSX, System.Runtime.InteropServices.Architecture.X64):

@@ -22,8 +22,24 @@ public static partial class Program
         // Create manual example project structure for comparison (existing behavior)
         data.DotNet($"new sln --name Example --output {data.IntegrationTest.CakeTemplateSrc}");
         data.DotNet($"new classlib --name Example --output {data.IntegrationTest.CakeTemplateSrc.Combine("Example")}");
-        data.DotNet($"sln {data.IntegrationTest.CakeTemplateSrc} add {data.IntegrationTest.CakeTemplateSrc.Combine("Example")}");
         data.DotNet($"new xunit --name Example.Tests --output {data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests")}");
-        data.DotNet($"sln {data.IntegrationTest.CakeTemplateSrc} add {data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests")}");
+
+        var slnAddSettings = data.IsolatedDotNetSettings(new DotNetSlnAddSettings());
+        var solution = GetFiles(data.IntegrationTest.CakeTemplateSrc.CombineWithFilePath("Example.sln*").FullPath).FirstOrDefault()
+                       ?? throw new CakeException($"Failed to find Example solution in {data.IntegrationTest.CakeTemplateSrc}");
+
+        DotNetSlnAdd(
+            solution,
+            [
+                data.IntegrationTest.CakeTemplateSrc.Combine("Example").CombineWithFilePath("Example.csproj")
+            ],
+            slnAddSettings);
+
+        DotNetSlnAdd(
+            solution,
+            [
+                data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests").CombineWithFilePath("Example.Tests.csproj")
+            ],
+            slnAddSettings);
     }
 }

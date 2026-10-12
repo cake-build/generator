@@ -68,6 +68,12 @@ Task("IntegrationTest-Execute")
         Verbosity.Diagnostic,
         IntegrationTestExecute);
 
+Task("IntegrationTest-RunCode")
+    .IsDependentOn("IntegrationTest-UploadTestCases-Artifacts")
+    .Does<BuildData>(
+        Verbosity.Diagnostic,
+        IntegrationTestRunCode);
+
 Task("IntegrationTest-Verbosity")
     .IsDependentOn("IntegrationTest-UploadTestCases-Artifacts")
     .Does<BuildData>(
@@ -84,7 +90,8 @@ Task("IntegrationTest")
     .IsDependentOn("IntegrationTest-IoC")
     .IsDependentOn("IntegrationTest-Tool")
     .IsDependentOn("IntegrationTest-Verbosity")
-    .IsDependentOn("IntegrationTest-Execute");
+    .IsDependentOn("IntegrationTest-Execute")
+    .IsDependentOn("IntegrationTest-RunCode");
 
 TaskOf<BuildData>("Auth-NuGet-Feeds")
     .WithCriteria(static (context, data) => data.ShouldPushNuGet, nameof(BuildData.ShouldPushNuGet))

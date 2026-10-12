@@ -28,19 +28,8 @@ public static partial class Program
                     "dotnet.exe"
                 ],
             WorkingDirectory = toolSettings.WorkingDirectory,
-            EnvironmentVariables =
-            {
-                { "NUGET_CLI_LANGUAGE", "en-US" },
-                { "NUGET_RESTORE_MSBUILD_VERBOSITY", "minimal" },
-                { "NUGET_PACKAGES", toolSettings.ArtifactDirectory.Combine("NuGet").Combine("Packages").FullPath },
-                { "NUGET_HTTP_CACHE_PATH", toolSettings.ArtifactDirectory.Combine("NuGet").Combine("HttpCache").FullPath }
-            }
+            EnvironmentVariables = IsolatedNuGetEnvironment(toolSettings, environmentVariables)
         };
-
-        foreach (var environmentVariable in environmentVariables)
-        {
-            dotnet.EnvironmentVariables[environmentVariable.Key] = environmentVariable.Value;
-        }
 
         var args = new ProcessArgumentBuilder();
 
@@ -87,6 +76,52 @@ public static partial class Program
                                                     => path.FullPath.Quote(),
                                                 _ => FormattableString.Invariant($"{value}")
                                             })));
+
+    /// <summary>
+    /// Isolated NuGet cache and CLI language for integration-test <c>dotnet</c> invocations.
+    /// </summary>
+    public static Dictionary<string, string> IsolatedNuGetEnvironment(
+        this IToolSettings toolSettings,
+        IReadOnlyDictionary<string, string>? extra = null)
+    {
+        var environmentVariables = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["NUGET_CLI_LANGUAGE"] = "en-US",
+            ["NUGET_RESTORE_MSBUILD_VERBOSITY"] = "minimal",
+            ["NUGET_PACKAGES"] = toolSettings.ArtifactDirectory.Combine("NuGet").Combine("Packages").FullPath,
+            ["NUGET_HTTP_CACHE_PATH"] = toolSettings.ArtifactDirectory.Combine("NuGet").Combine("HttpCache").FullPath
+        };
+
+        if (extra is not null)
+        {
+            foreach (var environmentVariable in extra)
+            {
+                environmentVariables[environmentVariable.Key] = environmentVariable.Value;
+            }
+        }
+
+        return environmentVariables;
+    }
+
+    /// <summary>
+    /// Applies isolated NuGet environment and working directory to Cake <see cref="DotNetSettings"/>.
+    /// </summary>
+    public static T IsolatedDotNetSettings<T>(
+        this IToolSettings toolSettings,
+        T settings,
+        IReadOnlyDictionary<string, string>? extra = null)
+        where T : DotNetSettings
+    {
+        settings.WorkingDirectory = toolSettings.WorkingDirectory;
+        settings.EnvironmentVariables = IsolatedNuGetEnvironment(toolSettings, extra);
+        return settings;
+    }
+
+    /// <summary>
+    /// Writes text to a path using Cake <c>TransformText</c>.
+    /// </summary>
+    public static void WriteText(FilePath path, string content)
+        => TransformText(content).Save(path);
 
     /// <summary>
     /// Executes an action with a specific verbosity level, restoring the original verbosity afterwards.

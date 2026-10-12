@@ -3,7 +3,7 @@
   <packageSources>
     <clear />
     <add key="nuget" value="https://api.nuget.org/v3/index.json" />
-    <add key="local" value="LOCAL_SOURCE_PATH" />
+    <add key="local" value="<%LOCAL_SOURCE_PATH%>" />
     <add key="cake" value="https://pkgs.dev.azure.com/cake-build/Cake/_packaging/cake/nuget/v3/index.json" />
   </packageSources>
   <packageSourceMapping>

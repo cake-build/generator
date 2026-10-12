@@ -9,13 +9,24 @@ public static partial class Program
                 file,
                 System.IO.File.ReadAllText(file.FullPath));
 
-            var mode = file.GetExtension() == ".csproj" ? "run --project " : string.Empty;
-            DotNet(
-                data with
-                {
-                    WorkingDirectory = file.GetDirectory()
-                },
-                $"{mode}{file} -p:TreatWarningsAsErrors=true -- --integration-test-version={data.Version}");
+            var working = data with
+            {
+                WorkingDirectory = file.GetDirectory()
+            };
+
+            if (file.GetExtension() == ".csproj")
+            {
+                var settings = working.IsolatedDotNetSettings(new DotNetRunSettings());
+                settings.ArgumentCustomization = args => args.Append("-p:TreatWarningsAsErrors=true");
+
+                DotNetRun(
+                    file.FullPath,
+                    $"--integration-test-version={data.Version}",
+                    settings);
+                continue;
+            }
+
+            working.DotNet($"{file} -p:TreatWarningsAsErrors=true -- --integration-test-version={data.Version}");
         }
     }
 }
