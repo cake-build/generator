@@ -4,12 +4,12 @@ public static partial class Program
     {
         CleanDirectory(data.IntegrationTest.CakeSdkProject);
 
-        System.IO.File.WriteAllText(
-            data.IntegrationTest.CakeSdkProjectCsproj.FullPath,
+        WriteText(
+            data.IntegrationTest.CakeSdkProjectCsproj,
             data.IntegrationTest.CakeSdkProjectCsprojCode);
 
-        System.IO.File.WriteAllText(
-            data.IntegrationTest.CakeSdkProjectProgramCs.FullPath,
+        WriteText(
+            data.IntegrationTest.CakeSdkProjectProgramCs,
             data.IntegrationTest.BaseCode);
 
         if (DirectoryExists(data.IntegrationTest.CakeSdkCpmProject))
@@ -23,16 +23,51 @@ public static partial class Program
             data.IntegrationTest.CakeSdkProject,
             data.IntegrationTest.CakeSdkCpmProject);
 
-        System.IO.File.WriteAllText(
-            data.IntegrationTest.CakeSdkCpmPackagesProps.FullPath,
+        WriteText(
+            data.IntegrationTest.CakeSdkCpmPackagesProps,
             data.IntegrationTest.CakeSdkCpmPackagesPropsCode);
 
-        data.DotNet($"restore --verbosity minimal {data.IntegrationTest.CakeSdkProjectCsproj}");
+        DotNetRestore(
+            data.IntegrationTest.CakeSdkProjectCsproj.FullPath,
+            data.IsolatedDotNetSettings(new DotNetRestoreSettings
+            {
+                Verbosity = DotNetVerbosity.Minimal
+            }));
 
-        data.DotNet($"restore --verbosity minimal {data.IntegrationTest.CakeSdkCpmProjectCsproj}");
+        DotNetRestore(
+            data.IntegrationTest.CakeSdkCpmProjectCsproj.FullPath,
+            data.IsolatedDotNetSettings(new DotNetRestoreSettings
+            {
+                Verbosity = DotNetVerbosity.Minimal
+            }));
 
-        data.DotNet($"add package {data.IntegrationTest.XunitAssertPackage} --project {data.IntegrationTest.CakeSdkProjectCsproj}");
+        var addPackageSettings = data.IsolatedDotNetSettings(new DotNetPackageAddSettings
+        {
+            Version = "2"
+        });
 
-        data.DotNet($"add package {data.IntegrationTest.XunitAssertPackage} --project {data.IntegrationTest.CakeSdkCpmProjectCsproj}");
+        DotNetAddPackage(
+            "xunit.v3.assert",
+            data.IntegrationTest.CakeSdkProjectCsproj.FullPath,
+            addPackageSettings);
+
+        DotNetAddPackage(
+            "xunit.v3.assert",
+            data.IntegrationTest.CakeSdkCpmProjectCsproj.FullPath,
+            addPackageSettings);
+
+        if (DirectoryExists(data.IntegrationTest.CakeSdkConverted))
+        {
+            DeleteDirectory(
+                data.IntegrationTest.CakeSdkConverted,
+                new DeleteDirectorySettings { Recursive = true });
+        }
+
+        DotNetProjectConvert(
+            data.IntegrationTest.CakeSdkCs,
+            data.IsolatedDotNetSettings(new DotNetProjectConvertSettings
+            {
+                Output = data.IntegrationTest.CakeSdkConverted
+            }));
     }
 }
