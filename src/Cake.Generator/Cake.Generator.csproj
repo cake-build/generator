@@ -20,7 +20,6 @@
     <PackageReference Include="Cake.Common" />
     <PackageReference Include="Cake.DotNetTool.Module" />
     <PackageReference Include="Cake.NuGet" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
 
   <!-- Reference the core source generator project -->
