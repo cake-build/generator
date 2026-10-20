@@ -22,7 +22,9 @@ public static partial class Program
         // Create manual example project structure for comparison (existing behavior)
         data.DotNet($"new sln --name Example --output {data.IntegrationTest.CakeTemplateSrc}");
         data.DotNet($"new classlib --name Example --output {data.IntegrationTest.CakeTemplateSrc.Combine("Example")}");
-        data.DotNet($"new xunit --name Example.Tests --output {data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests")}");
+        CopyDirectory(
+            data.IntegrationTest.CakeTemplateWithExampleSrc.Combine("Example.Tests"),
+            data.IntegrationTest.CakeTemplateSrc.Combine("Example.Tests"));
 
         var slnAddSettings = data.IsolatedDotNetSettings(new DotNetSlnAddSettings());
         var solution = GetFiles(data.IntegrationTest.CakeTemplateSrc.CombineWithFilePath("Example.sln*").FullPath).FirstOrDefault()

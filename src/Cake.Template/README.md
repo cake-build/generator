@@ -15,7 +15,7 @@ This package contains templates for creating Cake build scripts and projects usi
 - **Usage**: `dotnet new cakefile`
 - **Parameters**:
   - `--name` or `-n`: The name for the generated cake.cs file. Default: folder name
-  - `--IncludeExampleProject`: Include example project structure with solution, main project and test project. Default: false
+  - `--IncludeExampleProject`: Include example project structure with solution, main project and xunit v3 test project on Microsoft.Testing.Platform (pair with `cakeglobaljson`, which sets the test runner). Default: false
 
 ### Cake SDK Multi-file File-based (Requires .NET 10)
 - **Short name**: `cakemultifile`

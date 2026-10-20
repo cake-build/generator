@@ -33,6 +33,7 @@ Task("Test")
     {
         Configuration = configuration,
         NoBuild = true,
+        PathType = DotNetTestPathType.Solution,
     });
 });
 
