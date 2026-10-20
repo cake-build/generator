@@ -8,11 +8,11 @@
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
     <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
-    <PackageVersion Include="Cake.Core" Version="7.0.0-alpha0150" />
-    <PackageVersion Include="Cake.Common" Version="7.0.0-alpha0150" />
-    <PackageVersion Include="Cake.Cli" Version="7.0.0-alpha0150" />
-    <PackageVersion Include="Cake.DotNetTool.Module" Version="7.0.0-alpha0150" />
-    <PackageVersion Include="Cake.NuGet" Version="7.0.0-alpha0150" />
+    <PackageVersion Include="Cake.Core" Version="7.0.0-alpha0172" />
+    <PackageVersion Include="Cake.Common" Version="7.0.0-alpha0172" />
+    <PackageVersion Include="Cake.Cli" Version="7.0.0-alpha0172" />
+    <PackageVersion Include="Cake.DotNetTool.Module" Version="7.0.0-alpha0172" />
+    <PackageVersion Include="Cake.NuGet" Version="7.0.0-alpha0172" />
     <PackageVersion Include="Cake.Twitter" Version="6.0.0" />
     <PackageVersion Include="Cake.BuildSystems.Module" Version="9.0.0" />
     <PackageVersion Include="Cake.Docker" Version="1.5.0" />
@@ -27,11 +27,5 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
     <PackageVersion Include="Verify.SourceGenerators" Version="2.5.0" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net11.0'">
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0-rc.1.26425.128" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
   </ItemGroup>
 </Project>
