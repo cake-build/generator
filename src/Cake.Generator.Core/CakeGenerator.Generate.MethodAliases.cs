@@ -38,27 +38,22 @@ public partial class CakeGenerator
         var parameters = method.Parameters.Skip(1); // Skip context parameter
 
         // Handle naming conflicts where method name equals containing class name
-        var methodName = method.Name;
+        var methodName = EscapeIdentifier(method.Name);
         var containingTypeName = method.ContainingType.Name;
-        if (methodName == containingTypeName)
+        if (method.Name == containingTypeName)
         {
             methodName = $"{method.Name}Method";
         }
 
-        sb.Append($"{indent}public static {returnType} {methodName}");
+        var typeArguments = method.TypeParameters.Length > 0
+            ? $"<{string.Join(", ", method.TypeParameters.Select(tp => EscapeIdentifier(tp.Name)))}>"
+            : string.Empty;
 
-        if (method.TypeParameters.Length > 0)
-        {
-            sb.Append("<");
-            sb.Append(string.Join(", ", method.TypeParameters.Select(tp => tp.Name)));
-            sb.Append(">");
-        }
-
-        sb.Append("(");
+        sb.Append($"{indent}public static {returnType} {methodName}{typeArguments}(");
         sb.Append(string.Join(", ", parameters.Select(p =>
         {
             var paramType = FormatParameterType(p);
-            var paramName = p.Name;
+            var paramName = EscapeIdentifier(p.Name);
 
             var result = new StringBuilder();
 
@@ -74,6 +69,9 @@ public partial class CakeGenerator
                 case RefKind.In:
                     result.Append("in ");
                     break;
+                case RefKind.RefReadOnlyParameter:
+                    result.Append("ref readonly ");
+                    break;
             }
 
             // Handle params modifier
@@ -82,8 +80,8 @@ public partial class CakeGenerator
                 result.Append("params ");
             }
 
-            // Check if parameter has null default value and make it nullable
-            if (p.HasExplicitDefaultValue && p.ExplicitDefaultValue == null && !paramType.EndsWith("?"))
+            // Check if reference type parameter has null default value and make it nullable
+            if (p.HasExplicitDefaultValue && p.ExplicitDefaultValue == null && p.Type.IsReferenceType && !paramType.EndsWith("?"))
             {
                 paramType += "?";
             }
@@ -93,25 +91,26 @@ public partial class CakeGenerator
             if (p.HasExplicitDefaultValue)
             {
                 result.Append(" = ");
-                result.Append(FormatExplicitDefaultValue(p.ExplicitDefaultValue));
+                result.Append(FormatExplicitDefaultValue(p));
             }
 
             return result.ToString();
         })));
         sb.AppendLine(")");
 
-        // Method body
-        var containingType = method.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-        sb.Append($"{indent}    => {containingType}.{method.Name}");
-
-        if (method.TypeParameters.Length > 0)
+        // Generic constraints, required for the forwarding call to satisfy the target method's constraints
+        foreach (var typeParameter in method.TypeParameters)
         {
-            sb.Append("<");
-            sb.Append(string.Join(", ", method.TypeParameters.Select(tp => tp.Name)));
-            sb.Append(">");
+            var constraints = GetGenericConstraints(typeParameter);
+            if (constraints.Length > 0)
+            {
+                sb.AppendLine($"{indent}    where {EscapeIdentifier(typeParameter.Name)} : {constraints}");
+            }
         }
 
-        sb.Append("(Context");
+        // Method body
+        var containingType = method.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+        sb.Append($"{indent}    => {containingType}.{EscapeIdentifier(method.Name)}{typeArguments}(Context");
 
         // Add remaining parameters with proper modifiers
         foreach (var param in parameters)
@@ -127,12 +126,13 @@ public partial class CakeGenerator
             {
                 sb.Append("ref ");
             }
-            else if (param.RefKind == RefKind.In)
+            else if (param.RefKind is RefKind.In or RefKind.RefReadOnlyParameter)
             {
+                // A ref readonly parameter is a readonly reference, so in forwards it without a copy
                 sb.Append("in ");
             }
 
-            sb.Append(param.Name);
+            sb.Append(EscapeIdentifier(param.Name));
         }
 
         sb.AppendLine(");");

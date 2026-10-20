@@ -1,0 +1,6 @@
+﻿    public static partial class Cake_Fake_Refs
+    {
+        public static void Refs(ref readonly int value, in int other, ref int changed, out int result)
+            => global::Cake.Fake.Refs.RefAliases.Refs(Context, in value, in other, ref changed, out result);
+
+    }

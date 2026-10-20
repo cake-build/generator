@@ -80,7 +80,7 @@ public partial class CakeGenerator
         sb.StringBuilder.AppendLine("// Global static usings for generated Cake alias classes");
         foreach (var assemblyName in assemblyNames.OrderBy(x => x))
         {
-            var flatClassName = assemblyName.Replace(".", "_");
+            var flatClassName = GetAssemblyClassName(assemblyName);
             sb.StringBuilder.AppendLine($"global using static global::Program.{flatClassName};");
         }
 

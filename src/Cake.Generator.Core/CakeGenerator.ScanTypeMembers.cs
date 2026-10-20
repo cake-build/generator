@@ -11,10 +11,13 @@ public partial class CakeGenerator
         INamedTypeSymbol? cakeMethodAliasAttributeSymbol,
         INamedTypeSymbol? cakePropertyAliasAttributeSymbol,
         INamedTypeSymbol? cakeNamespaceImportAttributeSymbol,
-        INamedTypeSymbol iCakeContextSymbol)
+        INamedTypeSymbol iCakeContextSymbol,
+        INamespaceSymbol? compilationGlobalNamespace = null,
+        List<Diagnostic>? diagnostics = null)
     {
         var validMethods = new List<MethodInfo>();
-        ScanNamespaceMembers(namespaceSymbol, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods);
+        var scanContext = new ScanContext(compilationGlobalNamespace, diagnostics);
+        ScanNamespaceMembers(namespaceSymbol, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods, scanContext);
         return validMethods.Count == 0 ? [] : [.. validMethods];
     }
 
@@ -28,19 +31,20 @@ public partial class CakeGenerator
         INamedTypeSymbol? cakePropertyAliasAttributeSymbol,
         INamedTypeSymbol? cakeNamespaceImportAttributeSymbol,
         INamedTypeSymbol iCakeContextSymbol,
-        List<MethodInfo> validMethods)
+        List<MethodInfo> validMethods,
+        ScanContext scanContext)
     {
         foreach (var member in namespaceSymbol.GetMembers())
         {
             if (member is INamedTypeSymbol typeSymbol)
             {
                 ScanTypeMembers(typeSymbol, cakeMethodAliasAttributeSymbol,
-                              cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods);
+                              cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods, scanContext);
             }
             else if (member is INamespaceSymbol nestedNamespace)
             {
                 ScanNamespaceMembers(nestedNamespace, cakeMethodAliasAttributeSymbol,
-                                   cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods);
+                                   cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods, scanContext);
             }
         }
     }
@@ -55,7 +59,8 @@ public partial class CakeGenerator
         INamedTypeSymbol? cakePropertyAliasAttributeSymbol,
         INamedTypeSymbol? cakeNamespaceImportAttributeSymbol,
         INamedTypeSymbol iCakeContextSymbol,
-        List<MethodInfo> validMethods)
+        List<MethodInfo> validMethods,
+        ScanContext scanContext)
     {
         foreach (var member in typeSymbol.GetMembers())
         {
@@ -63,7 +68,7 @@ public partial class CakeGenerator
                 && methodSymbol.IsStatic
                 && methodSymbol.MethodKind == MethodKind.Ordinary)
             {
-                var methodInfo = GetValidCakeMethod(methodSymbol, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol);
+                var methodInfo = GetValidCakeMethod(methodSymbol, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, scanContext);
                 if (methodInfo != null)
                 {
                     validMethods.Add(methodInfo);
@@ -73,7 +78,7 @@ public partial class CakeGenerator
 
         foreach (var nestedType in typeSymbol.GetTypeMembers())
         {
-            ScanTypeMembers(nestedType, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods);
+            ScanTypeMembers(nestedType, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, validMethods, scanContext);
         }
     }
 
@@ -85,7 +90,8 @@ public partial class CakeGenerator
         INamedTypeSymbol? cakeMethodAliasAttributeSymbol,
         INamedTypeSymbol? cakePropertyAliasAttributeSymbol,
         INamedTypeSymbol? cakeNamespaceImportAttributeSymbol,
-        INamedTypeSymbol iCakeContextSymbol)
+        INamedTypeSymbol iCakeContextSymbol,
+        ScanContext scanContext)
     {
         // Only call GetAttributes() once and reuse the result
         var attributes = methodSymbol.GetAttributes();
@@ -128,6 +134,18 @@ public partial class CakeGenerator
             return null;
         }
 
+        // Skip aliases referencing types from assemblies that are not referenced, i.e. an addin missing a dependency
+        if (FindUnresolvedType(methodSymbol) is { } unresolvedType)
+        {
+            scanContext.Diagnostics?.Add(Diagnostic.Create(
+                UnresolvedAliasTypeDescriptor,
+                Location.None,
+                methodSymbol.ToDisplayString(),
+                unresolvedType.ToDisplayString(),
+                methodSymbol.ContainingAssembly.Name));
+            return null;
+        }
+
         // Determine if this is a property alias and if it's cached
         bool isPropertyAlias = cakePropertyAttribute != null;
         bool isCached = false;
@@ -144,30 +162,164 @@ public partial class CakeGenerator
             }
         }
 
-        // Extract namespace imports from CakeNamespaceImportAttribute
-        ImmutableArray<string>? namespaceImports = null;
+        // Extract namespace imports from CakeNamespaceImportAttribute on the method, its type and its assembly
+        var namespaceImports = ImmutableArray<string>.Empty;
         if (cakeNamespaceImportAttributeSymbol != null)
         {
-            List<string>? imports = null;
-            for (int i = 0; i < attributes.Length; i++)
+            namespaceImports =
+            [
+                .. GetNamespaceImports(attributes, methodSymbol.ContainingAssembly, cakeNamespaceImportAttributeSymbol, scanContext),
+                .. GetCachedNamespaceImports(methodSymbol.ContainingType, methodSymbol.ContainingAssembly, cakeNamespaceImportAttributeSymbol, scanContext),
+                .. GetCachedNamespaceImports(methodSymbol.ContainingAssembly, methodSymbol.ContainingAssembly, cakeNamespaceImportAttributeSymbol, scanContext)
+            ];
+        }
+
+        return new MethodInfo(methodSymbol, isPropertyAlias, isCached, namespaceImports);
+    }
+
+    /// <summary>
+    /// Gets the namespace imports declared on a type or assembly, reading and validating them once per scan.
+    /// </summary>
+    private static ImmutableArray<string> GetCachedNamespaceImports(
+        ISymbol symbol,
+        IAssemblySymbol assembly,
+        INamedTypeSymbol cakeNamespaceImportAttributeSymbol,
+        ScanContext scanContext)
+    {
+        if (!scanContext.NamespaceImportCache.TryGetValue(symbol, out var imports))
+        {
+            imports = GetNamespaceImports(symbol.GetAttributes(), assembly, cakeNamespaceImportAttributeSymbol, scanContext);
+            scanContext.NamespaceImportCache[symbol] = imports;
+        }
+
+        return imports;
+    }
+
+    /// <summary>
+    /// Gets the namespaces from <c>CakeNamespaceImport</c> attributes, skipping values that are not a namespace
+    /// known to the compilation.
+    /// </summary>
+    private static ImmutableArray<string> GetNamespaceImports(
+        ImmutableArray<AttributeData> attributes,
+        IAssemblySymbol assembly,
+        INamedTypeSymbol cakeNamespaceImportAttributeSymbol,
+        ScanContext scanContext)
+    {
+        List<string>? imports = null;
+        foreach (var attr in attributes)
+        {
+            if (!SymbolEqualityComparer.Default.Equals(attr.AttributeClass, cakeNamespaceImportAttributeSymbol)
+                || attr.ConstructorArguments.Length == 0
+                || attr.ConstructorArguments[0].Value is not string namespaceValue
+                || string.IsNullOrWhiteSpace(namespaceValue))
             {
-                var attr = attributes[i];
-                if (SymbolEqualityComparer.Default.Equals(attr.AttributeClass, cakeNamespaceImportAttributeSymbol))
-                {
-                    if (attr.ConstructorArguments.Length > 0 &&
-                        attr.ConstructorArguments[0].Value is string namespaceValue &&
-                        !string.IsNullOrWhiteSpace(namespaceValue))
-                    {
-                        (imports ??= []).Add(namespaceValue);
-                    }
-                }
+                continue;
             }
-            if (imports != null)
+
+            if (scanContext.CompilationGlobalNamespace is { } globalNamespace
+                && !NamespaceExists(globalNamespace, namespaceValue))
             {
-                namespaceImports = [.. imports];
+                scanContext.Diagnostics?.Add(Diagnostic.Create(
+                    UnresolvedNamespaceImportDescriptor,
+                    Location.None,
+                    namespaceValue,
+                    assembly.Name));
+                continue;
+            }
+
+            (imports ??= []).Add(namespaceValue);
+        }
+
+        return imports == null ? [] : [.. imports];
+    }
+
+    /// <summary>
+    /// Finds the first type in a method signature that could not be resolved, e.g. because the assembly
+    /// defining it is not referenced.
+    /// </summary>
+    private static ITypeSymbol? FindUnresolvedType(IMethodSymbol methodSymbol)
+    {
+        if (FindUnresolvedType(methodSymbol.ReturnType) is { } returnType)
+        {
+            return returnType;
+        }
+
+        foreach (var parameter in methodSymbol.Parameters)
+        {
+            if (FindUnresolvedType(parameter.Type) is { } parameterType)
+            {
+                return parameterType;
             }
         }
 
-        return new MethodInfo(methodSymbol, isPropertyAlias, isCached, namespaceImports ?? []);
+        foreach (var typeParameter in methodSymbol.TypeParameters)
+        {
+            foreach (var constraintType in typeParameter.ConstraintTypes)
+            {
+                if (FindUnresolvedType(constraintType) is { } unresolvedConstraintType)
+                {
+                    return unresolvedConstraintType;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private static ITypeSymbol? FindUnresolvedType(ITypeSymbol typeSymbol)
+    {
+        switch (typeSymbol)
+        {
+            case IErrorTypeSymbol:
+                return typeSymbol;
+            case IArrayTypeSymbol arrayType:
+                return FindUnresolvedType(arrayType.ElementType);
+            case IPointerTypeSymbol pointerType:
+                return FindUnresolvedType(pointerType.PointedAtType);
+            case INamedTypeSymbol namedType:
+                foreach (var typeArgument in namedType.TypeArguments)
+                {
+                    if (FindUnresolvedType(typeArgument) is { } unresolvedTypeArgument)
+                    {
+                        return unresolvedTypeArgument;
+                    }
+                }
+
+                return namedType.ContainingType is { } containingType ? FindUnresolvedType(containingType) : null;
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Checks that a <c>CakeNamespaceImport</c> value is a namespace known to the compilation.
+    /// </summary>
+    private static bool NamespaceExists(INamespaceSymbol globalNamespace, string namespaceName)
+    {
+        var current = globalNamespace;
+        foreach (var part in namespaceName.Split('.'))
+        {
+            current = current.GetNamespaceMembers().FirstOrDefault(ns => ns.Name == part.Trim());
+            if (current == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Shared state for a scan of referenced assemblies.
+    /// </summary>
+    /// <param name="compilationGlobalNamespace">The compilation's global namespace, used to validate namespace imports.</param>
+    /// <param name="diagnostics">Collects diagnostics for skipped aliases and namespace imports.</param>
+    private sealed class ScanContext(INamespaceSymbol? compilationGlobalNamespace, List<Diagnostic>? diagnostics)
+    {
+        public INamespaceSymbol? CompilationGlobalNamespace { get; } = compilationGlobalNamespace;
+
+        public List<Diagnostic>? Diagnostics { get; } = diagnostics;
+
+        public Dictionary<ISymbol, ImmutableArray<string>> NamespaceImportCache { get; } = new(SymbolEqualityComparer.Default);
     }
 }

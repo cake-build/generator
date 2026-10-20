@@ -1,0 +1,15 @@
+﻿    public static partial class Cake_Fake_Defaults
+    {
+        public static void EnumDefaults(global::Cake.Fake.Defaults.Mode mode = global::Cake.Fake.Defaults.Mode.Remote, global::Cake.Fake.Defaults.Criteria criteria = global::Cake.Fake.Defaults.Criteria.Time | global::Cake.Fake.Defaults.Criteria.Hash, global::Cake.Fake.Defaults.Criteria all = global::Cake.Fake.Defaults.Criteria.All, global::Cake.Fake.Defaults.Criteria unknownFlag = (global::Cake.Fake.Defaults.Criteria)8, global::Cake.Fake.Defaults.Criteria partial = (global::Cake.Fake.Defaults.Criteria)9, global::Cake.Fake.Defaults.Mode? nullableMode = global::Cake.Fake.Defaults.Mode.Local, global::Cake.Fake.Defaults.Mode? nullableNone = null, global::Cake.Fake.Defaults.Mode negative = global::Cake.Fake.Defaults.Mode.Negative, global::Cake.Fake.Defaults.Mode zero = global::Cake.Fake.Defaults.Mode.None, global::Cake.Fake.Defaults.Mode undefined = (global::Cake.Fake.Defaults.Mode)5)
+            => global::Cake.Fake.Defaults.DefaultAliases.EnumDefaults(Context, mode, criteria, all, unknownFlag, partial, nullableMode, nullableNone, negative, zero, undefined);
+
+        public static void NumericDefaults(decimal amount = 1.5m, decimal maxAmount = 79228162514264337593543950335m, float ratio = 0.1f, float maxRatio = 3.4028235E+38f, double precise = 0.1d, double huge = 1E+300d, double nan = double.NaN, double positiveInfinity = double.PositiveInfinity, float negativeInfinity = float.NegativeInfinity, long min = -9223372036854775808, ulong max = 18446744073709551615, int? nullableInt = 42)
+            => global::Cake.Fake.Defaults.DefaultAliases.NumericDefaults(Context, amount, maxAmount, ratio, maxRatio, precise, huge, nan, positiveInfinity, negativeInfinity, min, max, nullableInt);
+
+        public static void StructDefaults(global::System.Threading.CancellationToken cancellationToken = default, global::System.DateTime? when = null, string? text = null)
+            => global::Cake.Fake.Defaults.DefaultAliases.StructDefaults(Context, cancellationToken, when, text);
+
+        public static void GenericDefault<T>(T value = default)
+            => global::Cake.Fake.Defaults.DefaultAliases.GenericDefault<T>(Context, value);
+
+    }
