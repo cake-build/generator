@@ -19,7 +19,6 @@ public partial class CakeGenerator
     /// <summary>
     /// Generates constants including the version of Cake.Generator.Core.
     /// </summary>
-    /// <param name="compilation">The compilation context.</param>
     /// <returns>The generated constants source code.</returns>
     private static string GenerateConstants()
         =>

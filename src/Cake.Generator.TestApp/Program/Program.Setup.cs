@@ -89,7 +89,7 @@ public static partial class Program
         }
         finally
         {
-            /// <summary>Returns Spectre.Console markup for a boolean (green ✓ or red ✗).</summary>
+            // Returns Spectre.Console markup for a boolean (green ✓ or red ✗).
             static string ToCheckmark(bool? value) => value.HasValue ? (value.Value ? "[green]✓[/]" : "[red]✗[/]") : "[yellow]?[/]";
 
             AnsiConsole.Write(

@@ -3,8 +3,12 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <CodeAnalysisRuleSet Condition="$(IsCakeTestProject) == ''">$(MSBuildThisFileDirectory)Cake.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="$(IsCakeTestProject) == 'true'">$(MSBuildThisFileDirectory)Test.ruleset</CodeAnalysisRuleSet>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>Default</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!-- Required for IDE0005 in build; CS1591 is silenced in Cake.globalconfig. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <!-- Shared NuGet Package Metadata -->
     <PackageId>$(AssemblyName)</PackageId>
@@ -17,6 +21,14 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>cake-medium.png</PackageIcon>
     <PackageProjectUrl>https://cakebuild.net</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)Cake.globalconfig" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <!-- IntegrationTest configuration (copies from Release) -->

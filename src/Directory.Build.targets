@@ -1,0 +1,6 @@
+<Project>
+  <!-- IsCakeTestProject is set in the csproj after Directory.Build.props. -->
+  <PropertyGroup Condition="'$(IsCakeTestProject)' == 'true'">
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+</Project>
