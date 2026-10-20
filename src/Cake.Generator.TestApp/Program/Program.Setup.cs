@@ -17,9 +17,9 @@ public static partial class Program
         var baseVersion = typeof(ICakeContext).Assembly.GetName().Version?.ToString(3) ?? "1.0.0";
 
         var assertedVersions = GitVersion(new GitVersionSettings
-            {
-                OutputType = GitVersionOutput.Json
-            });
+        {
+            OutputType = GitVersionOutput.Json
+        });
         var branchName = assertedVersions.BranchName;
         var isMain = StringComparer.OrdinalIgnoreCase.Equals("main", branchName);
         var isDevelopment = StringComparer.OrdinalIgnoreCase.Equals("develop", branchName);

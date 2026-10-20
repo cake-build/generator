@@ -1,12 +1,11 @@
 using BenchmarkDotNet.Running;
 
-namespace Cake.Generator.Core.BenchmarkSuite
+namespace Cake.Generator.Core.BenchmarkSuite;
+
+internal class Program
 {
-    internal class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
-        }
+        var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
     }
 }

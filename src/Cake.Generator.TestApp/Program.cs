@@ -1,4 +1,4 @@
-﻿var targets = Arguments(
+var targets = Arguments(
                 "target",
                 [
                     "Default"
