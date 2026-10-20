@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Globalization;
+
 namespace Cake.Generator;
 
 /// <summary>
@@ -30,7 +32,7 @@ public partial class CakeGenerator : IIncrementalGenerator
     {
         // Use the incremental generator pattern, but scan referenced assemblies as before
         var compilationProvider = context.CompilationProvider
-            .Select((compilation, cancellationToken) =>
+            .Select((Compilation Compilation, ImmutableArray<MethodInfo>? Methods, ImmutableArray<ModuleInfo>? Modules, ImmutableArray<Diagnostic> Diagnostics) (compilation, cancellationToken) =>
             {
                 // OCE: Gather all required symbols for Cake alias/module discovery
                 var extensionAttributeSymbol = compilation.GetTypeByMetadataName(ExtensionAttributeFullName);
@@ -47,23 +49,24 @@ public partial class CakeGenerator : IIncrementalGenerator
                     (cakeMethodAliasAttributeSymbol == null && cakePropertyAliasAttributeSymbol == null) ||
                     iCakeContextSymbol == null)
                 {
-                    return (compilation, null as ImmutableArray<MethodInfo>?, null as ImmutableArray<ModuleInfo>?);
+                    return (compilation, null as ImmutableArray<MethodInfo>?, null as ImmutableArray<ModuleInfo>?, []);
                 }
 
                 // Defensive: If no references, skip generation
                 if (!compilation.References.Any())
                 {
-                    return (compilation, null as ImmutableArray<MethodInfo>?, null as ImmutableArray<ModuleInfo>?);
+                    return (compilation, null as ImmutableArray<MethodInfo>?, null as ImmutableArray<ModuleInfo>?, []);
                 }
 
                 // OCE: Scan all referenced assemblies for Cake aliases and modules
                 var allMethods = new List<MethodInfo>();
                 var allModules = new List<ModuleInfo>();
+                var diagnostics = new List<Diagnostic>();
                 foreach (var assembly in compilation.References)
                 {
                     if (compilation.GetAssemblyOrModuleSymbol(assembly) is IAssemblySymbol assemblySymbol)
                     {
-                        var foundMethods = ScanTypeMembers(assemblySymbol.GlobalNamespace, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol);
+                        var foundMethods = ScanTypeMembers(assemblySymbol.GlobalNamespace, cakeMethodAliasAttributeSymbol, cakePropertyAliasAttributeSymbol, cakeNamespaceImportAttributeSymbol, iCakeContextSymbol, compilation.GlobalNamespace, diagnostics);
                         allMethods.AddRange(foundMethods);
 
                         if (cakeModuleAttributeSymbol != null && iCakeModuleSymbol != null)
@@ -76,13 +79,20 @@ public partial class CakeGenerator : IIncrementalGenerator
 
                 return (compilation,
                     allMethods.Count > 0 ? allMethods.ToImmutableArray() : null,
-                    allModules.Count > 0 ? allModules.ToImmutableArray() : null);
+                    allModules.Count > 0 ? allModules.ToImmutableArray() : null,
+                    [.. diagnostics]);
             });
 
         // OCE: Output all generated sources for Cake proxying and helpers
         context.RegisterSourceOutput(compilationProvider, (sourceProductionContext, data) =>
         {
-            var (compilation, methods, modules) = data;
+            var (compilation, methods, modules, diagnostics) = data;
+
+            // Report skipped aliases and namespace imports, once per distinct message
+            foreach (var diagnostic in diagnostics.GroupBy(d => d.GetMessage(CultureInfo.InvariantCulture)).Select(g => g.First()))
+            {
+                sourceProductionContext.ReportDiagnostic(diagnostic);
+            }
 
             // Generate constants always (independent of methods)
             var constants = GenerateConstants();

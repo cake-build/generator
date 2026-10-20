@@ -33,7 +33,7 @@ public partial class CakeGenerator
 
         // Property signature
         var returnType = FormatReturnType(method);
-        sb.AppendLine($"{indent}public static {returnType} {method.Name}");
+        sb.AppendLine($"{indent}public static {returnType} {EscapeIdentifier(method.Name)}");
 
         // Property body
         var containingType = method.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
@@ -42,12 +42,12 @@ public partial class CakeGenerator
         {
             // Generate cached property with backing field
             var fieldName = $"_{method.Name}";
-            sb.AppendLine($"{indent}    => {fieldName} ??= {containingType}.{method.Name}(Context);");
+            sb.AppendLine($"{indent}    => {fieldName} ??= {containingType}.{EscapeIdentifier(method.Name)}(Context);");
         }
         else
         {
             // Generate non-cached property
-            sb.AppendLine($"{indent}    => {containingType}.{method.Name}(Context);");
+            sb.AppendLine($"{indent}    => {containingType}.{EscapeIdentifier(method.Name)}(Context);");
         }
 
         sb.AppendLine();

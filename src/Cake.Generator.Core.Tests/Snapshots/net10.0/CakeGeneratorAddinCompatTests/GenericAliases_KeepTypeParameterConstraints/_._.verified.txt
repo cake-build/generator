@@ -1,0 +1,16 @@
+﻿    public static partial class Cake_Fake_Generics
+    {
+        public static global::System.IDisposable WithSettings<T>(T settings)
+            where T : global::Cake.Fake.Generics.FakeSettings
+            => global::Cake.Fake.Generics.GenericAliases.WithSettings<T>(Context, settings);
+
+        public static void Constrained<TClass, TStruct, TUnmanaged, TNotNull, TNullableClass, TNullableBase>()
+            where TClass : class, global::System.IDisposable, new()
+            where TStruct : struct
+            where TUnmanaged : unmanaged
+            where TNotNull : notnull
+            where TNullableClass : class?
+            where TNullableBase : global::Cake.Fake.Generics.FakeSettings?
+            => global::Cake.Fake.Generics.GenericAliases.Constrained<TClass, TStruct, TUnmanaged, TNotNull, TNullableClass, TNullableBase>(Context);
+
+    }

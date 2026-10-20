@@ -36,6 +36,14 @@ public partial class CakeGenerator
             FullyQualifiedFormatWithNullableReferenceTypes);
 
     /// <summary>
+    /// Escapes an identifier that is a C# keyword, e.g. <c>object</c> becomes <c>@object</c>.
+    /// </summary>
+    /// <param name="name">The identifier.</param>
+    /// <returns>The identifier, prefixed with <c>@</c> when it is a keyword.</returns>
+    private static string EscapeIdentifier(string name)
+        => SyntaxFacts.GetKeywordKind(name) != SyntaxKind.None ? $"@{name}" : name;
+
+    /// <summary>
     /// Formats a cached property backing field type, ensuring it is nullable without double-applying modifiers.
     /// </summary>
     /// <param name="method">The property alias method symbol.</param>

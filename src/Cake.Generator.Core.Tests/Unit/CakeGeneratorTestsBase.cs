@@ -10,6 +10,22 @@ namespace Cake.Generator.Core.Tests.Unit;
 public static class CakeGeneratorTestsBase
 {
     /// <summary>
+    /// Gets references to all assemblies in the shared framework the tests run on, so that
+    /// types used in alias signatures resolve as they would in a script project.
+    /// </summary>
+    public static readonly Lazy<ImmutableArray<MetadataReference>> FrameworkReferences = new(() =>
+    {
+        var frameworkDirectory = Path.GetDirectoryName(typeof(object).Assembly.Location);
+        return
+        [
+            .. ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+                .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
+                .Where(path => string.Equals(Path.GetDirectoryName(path), frameworkDirectory, StringComparison.OrdinalIgnoreCase))
+                .Select(path => MetadataReference.CreateFromFile(path))
+        ];
+    });
+
+    /// <summary>
     /// Creates a basic compilation with common references needed for Cake source generation.
     /// </summary>
     /// <param name="source">The source code to compile.</param>
@@ -20,15 +36,12 @@ public static class CakeGeneratorTestsBase
         var syntaxTree = CSharpSyntaxTree.ParseText(source);
         var cakeCoreLocation = typeof(Cake.Core.Annotations.CakeMethodAliasAttribute).Assembly.Location;
         var cakeCommonLocation = typeof(Cake.Common.Diagnostics.LoggingAliases).Assembly.Location;
-        var references = new List<MetadataReference>
+        var references = new List<MetadataReference>(FrameworkReferences.Value)
         {
-            MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(System.Runtime.AssemblyTargetedPatchBandAttribute).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(Component).Assembly.Location),
             MetadataReference.CreateFromFile(cakeCoreLocation, documentation: XmlDocumentationProvider.CreateFromFile(Path.ChangeExtension(cakeCoreLocation, ".xml"))),
-            MetadataReference.CreateFromFile(cakeCommonLocation, documentation: XmlDocumentationProvider.CreateFromFile(Path.ChangeExtension(cakeCommonLocation, ".xml")))
+            MetadataReference.CreateFromFile(cakeCommonLocation, documentation: XmlDocumentationProvider.CreateFromFile(Path.ChangeExtension(cakeCommonLocation, ".xml"))),
+            MetadataReference.CreateFromFile(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions).Assembly.Location)
         };
 
         references.AddRange(additionalReferences);

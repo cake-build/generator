@@ -3129,7 +3129,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
-        public static (global::Cake.Core.Packaging.PackageReference, global::Cake.Core.IO.FilePath[])[] InstallTools(params global::Cake.Core.Packaging.PackageReference[] tools)
+        public static (global::Cake.Core.Packaging.PackageReference Tool, global::Cake.Core.IO.FilePath[] Paths)[] InstallTools(params global::Cake.Core.Packaging.PackageReference[] tools)
             => global::Cake.Common.Tools.ToolAliases.InstallTools(Context, tools);
 
         /// <member name="M:Cake.Common.Tools.ToolAliases.InstallTools(Cake.Core.ICakeContext,System.String[])">
@@ -3150,7 +3150,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
-        public static (global::Cake.Core.Packaging.PackageReference, global::Cake.Core.IO.FilePath[])[] InstallTools(params string[] tools)
+        public static (global::Cake.Core.Packaging.PackageReference Tool, global::Cake.Core.IO.FilePath[] Paths)[] InstallTools(params string[] tools)
             => global::Cake.Common.Tools.ToolAliases.InstallTools(Context, tools);
 
         /// <member name="M:Cake.Common.Tools.Cake.CakeAliases.CakeExecuteScript(Cake.Core.ICakeContext,Cake.Core.IO.FilePath)">

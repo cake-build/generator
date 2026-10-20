@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Cake.Core" GeneratePathProperty="true" />
     <PackageReference Include="Cake.Common" GeneratePathProperty="true" />
+    <PackageReference Include="Cake.Cli" />
     <PackageReference Include="Cake.BuildSystems.Module" GeneratePathProperty="true" />
     <PackageReference Include="Cake.NuGet" GeneratePathProperty="true" />
     <PackageReference Include="Cake.DotNetTool.Module" GeneratePathProperty="true" />

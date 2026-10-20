@@ -237,19 +237,38 @@ public partial class CakeGenerator
 
         if (typeParameter.HasReferenceTypeConstraint)
         {
-            constraints.Add("class");
+            constraints.Add(typeParameter.ReferenceTypeConstraintNullableAnnotation == NullableAnnotation.Annotated ? "class?" : "class");
         }
-
-        if (typeParameter.HasValueTypeConstraint)
+        else if (typeParameter.HasUnmanagedTypeConstraint)
+        {
+            // unmanaged implies struct, which must not be repeated.
+            constraints.Add("unmanaged");
+        }
+        else if (typeParameter.HasValueTypeConstraint)
         {
             constraints.Add("struct");
         }
+        else if (typeParameter.HasNotNullConstraint)
+        {
+            constraints.Add("notnull");
+        }
 
-        constraints.AddRange(typeParameter.ConstraintTypes.Select(ct => ct.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));
+        for (var i = 0; i < typeParameter.ConstraintTypes.Length; i++)
+        {
+            constraints.Add(SymbolDisplay.ToDisplayString(
+                typeParameter.ConstraintTypes[i],
+                typeParameter.ConstraintNullableAnnotations[i],
+                FullyQualifiedFormatWithNullableReferenceTypes));
+        }
 
         if (typeParameter.HasConstructorConstraint)
         {
             constraints.Add("new()");
+        }
+
+        if (typeParameter.AllowsRefLikeType)
+        {
+            constraints.Add("allows ref struct");
         }
 
         return string.Join(", ", constraints);
