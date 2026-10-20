@@ -1,7 +1,5 @@
 namespace Cake.Generator;
 
-using System.Collections.Immutable;
-
 public partial class CakeGenerator
 {
     /// <summary>
@@ -166,7 +164,7 @@ public partial class CakeGenerator
             }
             if (imports != null)
             {
-                namespaceImports = [..imports];
+                namespaceImports = [.. imports];
             }
         }
 

@@ -33,13 +33,11 @@ public static class CakeGeneratorTestsBase
 
         references.AddRange(additionalReferences);
 
-#pragma warning disable SA1010 // Opening square brackets should be spaced correctly
         return CSharpCompilation.Create(
             assemblyName: "TestAssembly",
             syntaxTrees: [syntaxTree],
             references: references,
             options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
     }
 
     /// <summary>

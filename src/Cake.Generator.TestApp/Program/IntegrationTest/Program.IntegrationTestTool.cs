@@ -1,4 +1,4 @@
-﻿public static partial class Program
+public static partial class Program
 {
     private static void IntegrationTestTool(ICakeContext ctx, BuildData data)
     {

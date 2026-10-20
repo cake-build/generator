@@ -1,0 +1,4 @@
+# Commits to skip in git blame (git config blame.ignoreRevsFile .git-blame-ignore-revs)
+#
+# (GH-243) Apply native analyzer code style
+75c7acc4e9c668f6f2e14038f3b1326749fc342d

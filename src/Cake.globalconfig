@@ -1,0 +1,6 @@
+is_global = true
+
+# XML docs are generated so IDE0005 runs in build, but are not required (SA1600 was off).
+# Global config so it also covers source-generated trees, which .editorconfig sections
+# do not match, and is not overridden by a NoWarn global property.
+dotnet_diagnostic.CS1591.severity = none

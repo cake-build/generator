@@ -1,7 +1,5 @@
 namespace Cake.Generator.TestApp.Models;
 
-#pragma warning disable SA1011 // Closing square brackets should be spaced correctly
-#pragma warning disable SA1313 // Parameter names should begin with lower-case letter
 public record IntegrationTestData(
     string Version,
     DirectoryPath BaseDirectory)

@@ -17,9 +17,9 @@ public static partial class Program
         var baseVersion = typeof(ICakeContext).Assembly.GetName().Version?.ToString(3) ?? "1.0.0";
 
         var assertedVersions = GitVersion(new GitVersionSettings
-            {
-                OutputType = GitVersionOutput.Json
-            });
+        {
+            OutputType = GitVersionOutput.Json
+        });
         var branchName = assertedVersions.BranchName;
         var isMain = StringComparer.OrdinalIgnoreCase.Equals("main", branchName);
         var isDevelopment = StringComparer.OrdinalIgnoreCase.Equals("develop", branchName);
@@ -89,7 +89,7 @@ public static partial class Program
         }
         finally
         {
-            /// <summary>Returns Spectre.Console markup for a boolean (green ✓ or red ✗).</summary>
+            // Returns Spectre.Console markup for a boolean (green ✓ or red ✗).
             static string ToCheckmark(bool? value) => value.HasValue ? (value.Value ? "[green]✓[/]" : "[red]✗[/]") : "[yellow]?[/]";
 
             AnsiConsole.Write(

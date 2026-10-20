@@ -6,8 +6,6 @@
     <Verify_SponsorshipExemptionUntil>$([System.DateTime]::UtcNow.AddMonths(6).ToString('yyyy-MM'))</Verify_SponsorshipExemptionUntil>
   </PropertyGroup>
   <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
-    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
     <PackageVersion Include="Cake.Core" Version="7.0.0-alpha0172" />
     <PackageVersion Include="Cake.Common" Version="7.0.0-alpha0172" />
     <PackageVersion Include="Cake.Cli" Version="7.0.0-alpha0172" />
