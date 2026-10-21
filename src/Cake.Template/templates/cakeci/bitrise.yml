@@ -1,0 +1,79 @@
+format_version: "13"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: other
+#if (!IsMacOS)
+
+containers:
+  dotnet:
+    type: execution
+    image: mcr.microsoft.com/dotnet/sdk:DOTNET_VERSION-resolute-aot
+#endif
+
+trigger_map:
+#if (IsMatrix)
+  - push_branch: develop
+    pipeline: build
+  - push_branch: main
+    pipeline: build
+  - pull_request_source_branch: "*"
+    pipeline: build
+#elif (IsMacOS)
+  - push_branch: develop
+    workflow: build-macos
+  - push_branch: main
+    workflow: build-macos
+  - pull_request_source_branch: "*"
+    workflow: build-macos
+#else
+  - push_branch: develop
+    workflow: build-linux
+  - push_branch: main
+    workflow: build-linux
+  - pull_request_source_branch: "*"
+    workflow: build-linux
+#endif
+#if (IsMatrix)
+
+pipelines:
+  build:
+    workflows:
+      build-linux: {}
+      build-macos: {}
+#endif
+
+workflows:
+#if (!IsMacOS)
+  build-linux:
+    meta:
+      bitrise.io:
+        stack: ubuntu-noble-24.04-bitrise-2025-android
+    steps:
+      - git-clone@8:
+          inputs:
+            - fetch_depth: "0"
+      - script@1:
+          title: Run Cake
+          execution_container: dotnet
+          inputs:
+            - content: dotnet cake.cs
+#endif
+#if (IsMacOS || IsMatrix)
+  build-macos:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-27.1.x
+    steps:
+      - git-clone@8:
+          inputs:
+            - fetch_depth: "0"
+      - script@1:
+          title: Run Cake
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -euo pipefail
+                curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --jsonfile global.json --install-dir "$HOME/.dotnet"
+                export DOTNET_ROOT="$HOME/.dotnet"
+                export PATH="$DOTNET_ROOT:$PATH"
+                dotnet cake.cs
+#endif

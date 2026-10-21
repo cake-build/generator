@@ -1,0 +1,34 @@
+#if (IsMatrix)
+image:
+  - Visual Studio 2026
+  - Ubuntu2404
+#elif (IsWindows)
+image: Visual Studio 2026
+#else
+image: Ubuntu2404
+#endif
+
+branches:
+  only:
+    - develop
+    - main
+
+install:
+  - pwsh: |
+      $dotnetDir = Join-Path $HOME '.dotnet'
+      if ($IsLinux) {
+        $installScript = Join-Path ([IO.Path]::GetTempPath()) 'dotnet-install.sh'
+        Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.sh' -OutFile $installScript
+        bash $installScript --jsonfile global.json --install-dir $dotnetDir
+      } else {
+        $installScript = Join-Path ([IO.Path]::GetTempPath()) 'dotnet-install.ps1'
+        Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile $installScript
+        & $installScript -JsonFile global.json -InstallDir $dotnetDir
+      }
+      $env:DOTNET_ROOT = $dotnetDir
+      $env:PATH = "$dotnetDir$([IO.Path]::PathSeparator)$env:PATH"
+
+build_script:
+  - pwsh: dotnet cake.cs
+
+test: off

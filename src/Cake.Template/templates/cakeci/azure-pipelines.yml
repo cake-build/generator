@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - main
+
+pr:
+  branches:
+    include:
+      - '*'
+
+#if (IsMatrix)
+strategy:
+  matrix:
+    linux:
+      imageName: ubuntu-latest
+    mac:
+      imageName: macOS-latest
+    windows:
+      imageName: windows-latest
+
+pool:
+  vmImage: $(imageName)
+#else
+pool:
+  vmImage: AZURE_VM_IMAGE
+#endif
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: UseDotNet@2
+    displayName: Install .NET SDK (global.json)
+    inputs:
+      useGlobalJson: true
+
+  - script: dotnet cake.cs
+    displayName: Run Cake

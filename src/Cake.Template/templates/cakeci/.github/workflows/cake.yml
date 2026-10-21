@@ -1,0 +1,34 @@
+name: Build
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+jobs:
+  build:
+    name: Build
+#if (IsMatrix)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+#else
+    runs-on: RUNNER_OS
+#endif
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET SDK (global.json)
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Run Cake
+        uses: cake-build/cake-action@master
+        with:
+          file-path: cake.cs

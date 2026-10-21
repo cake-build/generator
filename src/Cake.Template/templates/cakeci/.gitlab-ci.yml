@@ -1,0 +1,10 @@
+variables:
+  GIT_DEPTH: 0
+
+build:
+  image: mcr.microsoft.com/dotnet/sdk:DOTNET_VERSION-resolute-aot
+  script:
+    - dotnet cake.cs
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "main"

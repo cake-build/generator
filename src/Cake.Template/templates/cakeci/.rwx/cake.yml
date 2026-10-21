@@ -1,0 +1,37 @@
+on:
+  github:
+    pull_request:
+      init:
+        repository: ${{ event.github.pull_request.repository.clone_url }}
+        commit-sha: ${{ event.git.sha }}
+    push:
+      - if: ${{ event.git.branch == 'develop' || event.git.branch == 'main' }}
+        init:
+          repository: ${{ event.github.push.repository.clone_url }}
+          commit-sha: ${{ event.git.sha }}
+
+base:
+  image: ubuntu:26.04
+  config: rwx/base 1.1.1
+
+tasks:
+  - key: code
+    call: git/clone 2.0.7
+    with:
+      repository: ${{ init.repository }}
+      ref: ${{ init.commit-sha }}
+      github-token: ${{ github.token }}
+      fetch-full-depth: true
+      preserve-git-dir: true
+
+  - key: install-dotnet
+    use: code
+    call: dotnet/install 1.0.0
+    with:
+      global-json-file: global.json
+    filter:
+      - global.json
+
+  - key: build
+    use: [code, install-dotnet]
+    run: dotnet cake.cs
