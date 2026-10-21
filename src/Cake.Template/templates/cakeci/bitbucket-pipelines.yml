@@ -1,0 +1,19 @@
+image: mcr.microsoft.com/dotnet/sdk:DOTNET_VERSION-resolute-aot
+
+clone:
+  depth: full
+
+definitions:
+  steps:
+    - step: &build
+        name: Build
+        script:
+          - dotnet cake.cs
+
+pipelines:
+  branches:
+    '{develop,main}':
+      - step: *build
+  pull-requests:
+    '**':
+      - step: *build

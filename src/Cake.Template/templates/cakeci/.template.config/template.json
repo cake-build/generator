@@ -1,0 +1,291 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Cake Contributors",
+  "classifications": [
+    "Config",
+    "Cake",
+    "Build",
+    "CI"
+  ],
+  "name": "Cake SDK CI Pipeline",
+  "description": "A minimal CI pipeline running a Cake file-based build script using Cake.Sdk",
+  "identity": "Cake.Sdk.CI",
+  "groupIdentity": "Cake.Sdk.CI",
+  "shortName": "cakeci",
+  "tags": {
+    "language": "YAML",
+    "type": "item"
+  },
+  "preferNameDirectory": false,
+  "symbols": {
+    "Provider": {
+      "type": "parameter",
+      "description": "The CI provider to create a pipeline for",
+      "datatype": "choice",
+      "isRequired": true,
+      "choices": [
+        {
+          "choice": "github",
+          "description": "GitHub Actions (.github/workflows/cake.yml)"
+        },
+        {
+          "choice": "azuredevops",
+          "description": "Azure DevOps Pipelines (azure-pipelines.yml)"
+        },
+        {
+          "choice": "bitbucket",
+          "description": "Bitbucket Pipelines (bitbucket-pipelines.yml)"
+        },
+        {
+          "choice": "gitlab",
+          "description": "GitLab CI/CD (.gitlab-ci.yml)"
+        },
+        {
+          "choice": "appveyor",
+          "description": "AppVeyor (appveyor.yml)"
+        },
+        {
+          "choice": "woodpecker",
+          "description": "Woodpecker CI (.woodpecker/cake.yml)"
+        },
+        {
+          "choice": "rwx",
+          "description": "RWX (.rwx/cake.yml)"
+        },
+        {
+          "choice": "bitrise",
+          "description": "Bitrise (bitrise.yml)"
+        }
+      ]
+    },
+    "CakeFile": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "The Cake file-based build script to run",
+      "defaultValue": "cake.cs",
+      "replaces": "cake.cs"
+    },
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework, selects the .NET SDK container image for container based providers",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "net10.0",
+          "description": "Target .NET 10.0"
+        },
+        {
+          "choice": "net11.0",
+          "description": "Target .NET 11.0"
+        }
+      ],
+      "defaultValue": "net11.0"
+    },
+    "OS": {
+      "type": "parameter",
+      "description": "The runner OS for github, azuredevops, appveyor and bitrise, or matrix for ubuntu, macos and windows",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "ubuntu-latest" },
+        { "choice": "ubuntu-26.04" },
+        { "choice": "ubuntu-26.04-arm" },
+        { "choice": "ubuntu-24.04" },
+        { "choice": "ubuntu-24.04-arm" },
+        { "choice": "ubuntu-22.04" },
+        { "choice": "ubuntu-22.04-arm" },
+        { "choice": "ubuntu-slim" },
+        { "choice": "macos-latest" },
+        { "choice": "macos-latest-large" },
+        { "choice": "macos-26" },
+        { "choice": "macos-26-intel" },
+        { "choice": "macos-26-large" },
+        { "choice": "macos-26-xlarge" },
+        { "choice": "macos-15" },
+        { "choice": "macos-15-intel" },
+        { "choice": "macos-15-large" },
+        { "choice": "macos-15-xlarge" },
+        { "choice": "macos-14" },
+        { "choice": "macos-14-large" },
+        { "choice": "macos-14-xlarge" },
+        { "choice": "windows-latest" },
+        { "choice": "windows-2025" },
+        { "choice": "windows-2025-vs2026" },
+        { "choice": "windows-2022" },
+        { "choice": "windows-11-arm" },
+        { "choice": "windows-11-vs2026-arm" },
+        {
+          "choice": "matrix",
+          "description": "ubuntu-latest, macos-latest and windows-latest"
+        }
+      ],
+      "defaultValue": "ubuntu-latest",
+      "replaces": "RUNNER_OS"
+    },
+    "IsMatrix": {
+      "type": "computed",
+      "value": "(OS == 'matrix')"
+    },
+    "IsWindows": {
+      "type": "computed",
+      "value": "(OS == 'windows-latest' || OS == 'windows-2025' || OS == 'windows-2025-vs2026' || OS == 'windows-2022' || OS == 'windows-11-arm' || OS == 'windows-11-vs2026-arm')"
+    },
+    "IsMacOS": {
+      "type": "computed",
+      "value": "(OS == 'macos-latest' || OS == 'macos-latest-large' || OS == 'macos-26' || OS == 'macos-26-intel' || OS == 'macos-26-large' || OS == 'macos-26-xlarge' || OS == 'macos-15' || OS == 'macos-15-intel' || OS == 'macos-15-large' || OS == 'macos-15-xlarge' || OS == 'macos-14' || OS == 'macos-14-large' || OS == 'macos-14-xlarge')"
+    },
+    "AzureVmImage": {
+      "type": "generated",
+      "generator": "switch",
+      "replaces": "AZURE_VM_IMAGE",
+      "parameters": {
+        "evaluator": "C++",
+        "datatype": "string",
+        "cases": [
+          {
+            "condition": "(OS == 'ubuntu-24.04')",
+            "value": "ubuntu-24.04"
+          },
+          {
+            "condition": "(OS == 'ubuntu-22.04')",
+            "value": "ubuntu-22.04"
+          },
+          {
+            "condition": "(OS == 'windows-2025')",
+            "value": "windows-2025"
+          },
+          {
+            "condition": "(OS == 'windows-2022')",
+            "value": "windows-2022"
+          },
+          {
+            "condition": "(OS == 'macos-15')",
+            "value": "macOS-15"
+          },
+          {
+            "condition": "(OS == 'macos-14')",
+            "value": "macOS-14"
+          },
+          {
+            "condition": "(IsWindows)",
+            "value": "windows-latest"
+          },
+          {
+            "condition": "(IsMacOS)",
+            "value": "macOS-latest"
+          },
+          {
+            "condition": "(true)",
+            "value": "ubuntu-latest"
+          }
+        ]
+      }
+    },
+    "DotNetVersion": {
+      "type": "generated",
+      "generator": "switch",
+      "replaces": "DOTNET_VERSION",
+      "parameters": {
+        "evaluator": "C++",
+        "datatype": "string",
+        "cases": [
+          {
+            "condition": "(Framework == 'net10.0')",
+            "value": "10.0"
+          },
+          {
+            "condition": "(Framework == 'net11.0')",
+            "value": "11.0"
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(Provider != 'github')",
+          "exclude": [
+            ".github/**/*"
+          ]
+        },
+        {
+          "condition": "(Provider != 'azuredevops')",
+          "exclude": [
+            "azure-pipelines.yml"
+          ]
+        },
+        {
+          "condition": "(Provider != 'bitbucket')",
+          "exclude": [
+            "bitbucket-pipelines.yml"
+          ]
+        },
+        {
+          "condition": "(Provider != 'gitlab')",
+          "exclude": [
+            ".gitlab-ci.yml"
+          ]
+        },
+        {
+          "condition": "(Provider != 'appveyor')",
+          "exclude": [
+            "appveyor.yml"
+          ]
+        },
+        {
+          "condition": "(Provider != 'woodpecker')",
+          "exclude": [
+            ".woodpecker/**/*"
+          ]
+        },
+        {
+          "condition": "(Provider != 'rwx')",
+          "exclude": [
+            ".rwx/**/*"
+          ]
+        },
+        {
+          "condition": "(Provider != 'bitrise')",
+          "exclude": [
+            "bitrise.yml"
+          ]
+        }
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "condition": "(Provider == 'github')",
+      "path": ".github/workflows/cake.yml"
+    },
+    {
+      "condition": "(Provider == 'azuredevops')",
+      "path": "azure-pipelines.yml"
+    },
+    {
+      "condition": "(Provider == 'bitbucket')",
+      "path": "bitbucket-pipelines.yml"
+    },
+    {
+      "condition": "(Provider == 'gitlab')",
+      "path": ".gitlab-ci.yml"
+    },
+    {
+      "condition": "(Provider == 'appveyor')",
+      "path": "appveyor.yml"
+    },
+    {
+      "condition": "(Provider == 'woodpecker')",
+      "path": ".woodpecker/cake.yml"
+    },
+    {
+      "condition": "(Provider == 'rwx')",
+      "path": ".rwx/cake.yml"
+    },
+    {
+      "condition": "(Provider == 'bitrise')",
+      "path": "bitrise.yml"
+    }
+  ]
+}
