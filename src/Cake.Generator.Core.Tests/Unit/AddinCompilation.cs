@@ -13,6 +13,7 @@ public static class AddinCompilation
     private const string MethodAliasesHintName = "CakeMethodAliases.g.cs";
     private const string GlobalUsingsHintName = "CakeAliasGlobalUsings.g.cs";
     private const string PropertyAliasesHintName = "CakePropertyAliases.g.cs";
+    private const string ScriptFileName = "Script.cs";
 
     private static readonly Lazy<ImmutableArray<MetadataReference>> BaseReferences = new(CreateBaseReferences);
 
@@ -49,10 +50,24 @@ public static class AddinCompilation
     /// <param name="addinReferences">The addin references.</param>
     /// <returns>The generator outcome.</returns>
     public static GeneratorOutcome Run(params MetadataReference[] addinReferences)
+        => RunScript(string.Empty, addinReferences);
+
+    /// <summary>
+    /// Creates a script-like compilation with <paramref name="scriptSource"/> referencing the given addins,
+    /// runs the generator and returns the outcome, including compile errors in the script source.
+    /// </summary>
+    /// <param name="scriptSource">The script source using the generated aliases.</param>
+    /// <param name="addinReferences">The addin references.</param>
+    /// <returns>The generator outcome.</returns>
+    public static GeneratorOutcome RunScript(string scriptSource, params MetadataReference[] addinReferences)
     {
+        SyntaxTree[] syntaxTrees = string.IsNullOrEmpty(scriptSource)
+            ? [CSharpSyntaxTree.ParseText("public static partial class Program { }")]
+            : [CSharpSyntaxTree.ParseText("public static partial class Program { }"), CSharpSyntaxTree.ParseText(scriptSource, path: ScriptFileName)];
+
         var compilation = CSharpCompilation.Create(
             "Script",
-            [CSharpSyntaxTree.ParseText("public static partial class Program { }")],
+            syntaxTrees,
             [.. BaseReferences.Value, .. addinReferences],
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Enable));
 
@@ -63,7 +78,7 @@ public static class AddinCompilation
         var errors = outputCompilation.GetDiagnostics()
             .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error
                 && diagnostic.Location.SourceTree is { } tree
-                && Path.GetFileName(tree.FilePath) is MethodAliasesHintName or GlobalUsingsHintName or PropertyAliasesHintName)
+                && Path.GetFileName(tree.FilePath) is MethodAliasesHintName or GlobalUsingsHintName or PropertyAliasesHintName or ScriptFileName)
             .Select(diagnostic => diagnostic.ToString())
             .ToImmutableArray();
 
