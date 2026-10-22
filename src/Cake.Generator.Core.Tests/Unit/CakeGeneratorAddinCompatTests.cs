@@ -421,4 +421,58 @@ public sealed class CakeGeneratorAddinCompatTests
         await Assert.That(outcome.Errors).IsEmpty();
         await Verify(outcome.GetAliasClass("Cake_Fake_Refs"));
     }
+
+    [Test]
+    public async Task OverloadResolutionPriority_IsKeptOnWrappers()
+    {
+        // Given
+        var addin = AddinCompilation.CreateReference(
+            "Cake.Fake.Priority",
+            """
+            using System;
+            using System.Runtime.CompilerServices;
+            using Cake.Core;
+            using Cake.Core.Annotations;
+
+            namespace Cake.Fake.Priority;
+
+            public static class PriorityAliases
+            {
+                [CakeMethodAlias]
+                public static string Log(this ICakeContext context, string value) => value;
+
+                [CakeMethodAlias]
+                [OverloadResolutionPriority(1)]
+                public static int Log(this ICakeContext context, FormattableString formattable) => formattable.ArgumentCount;
+
+                [CakeMethodAlias]
+                [OverloadResolutionPriority(-1)]
+                public static void Deprioritized(this ICakeContext context, string value)
+                {
+                }
+
+                [CakeMethodAlias]
+                [OverloadResolutionPriority(0)]
+                public static void DefaultPriority(this ICakeContext context, string value)
+                {
+                }
+            }
+            """);
+
+        // When, the interpolated string only compiles as int when it binds to the FormattableString wrapper
+        var outcome = AddinCompilation.RunScript(
+            """
+            public static class ScriptBody
+            {
+                public static int Run(string name) => Log($"Hello {name}");
+
+                public static string RunString(string name) => Log("Hello " + name);
+            }
+            """,
+            addin);
+
+        // Then
+        await Assert.That(outcome.Errors).IsEmpty();
+        await Verify(outcome.GetAliasClass("Cake_Fake_Priority"));
+    }
 }

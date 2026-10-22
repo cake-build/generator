@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Globalization;
+
 namespace Cake.Generator;
 
 public partial class CakeGenerator
@@ -48,6 +50,12 @@ public partial class CakeGenerator
         var typeArguments = method.TypeParameters.Length > 0
             ? $"<{string.Join(", ", method.TypeParameters.Select(tp => EscapeIdentifier(tp.Name)))}>"
             : string.Empty;
+
+        // Overload resolution priority, so the wrappers resolve the same way as the alias methods
+        if (GetOverloadResolutionPriority(method) is { } priority)
+        {
+            sb.AppendLine($"{indent}[global::System.Runtime.CompilerServices.OverloadResolutionPriority({priority.ToString(CultureInfo.InvariantCulture)})]");
+        }
 
         sb.Append($"{indent}public static {returnType} {methodName}{typeArguments}(");
         sb.Append(string.Join(", ", parameters.Select(p =>
@@ -137,5 +145,21 @@ public partial class CakeGenerator
 
         sb.AppendLine(");");
         sb.AppendLine();
+    }
+
+    private static int? GetOverloadResolutionPriority(IMethodSymbol method)
+    {
+        foreach (var attribute in method.GetAttributes())
+        {
+            if (attribute.AttributeClass?.ToDisplayString() == "System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute"
+                && attribute.ConstructorArguments.Length == 1
+                && attribute.ConstructorArguments[0].Value is int priority
+                && priority != 0)
+            {
+                return priority;
+            }
+        }
+
+        return null;
     }
 }

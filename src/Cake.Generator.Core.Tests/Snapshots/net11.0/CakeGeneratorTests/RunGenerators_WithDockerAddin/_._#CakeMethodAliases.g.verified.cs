@@ -1083,6 +1083,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
         public static void Error(global::System.FormattableString formattable)
             => global::Cake.Common.Diagnostics.LoggingAliases.Error(Context, formattable);
 
@@ -1097,6 +1098,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
         public static void Warning(global::System.FormattableString formattable)
             => global::Cake.Common.Diagnostics.LoggingAliases.Warning(Context, formattable);
 
@@ -1111,6 +1113,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
         public static void Information(global::System.FormattableString formattable)
             => global::Cake.Common.Diagnostics.LoggingAliases.Information(Context, formattable);
 
@@ -1125,6 +1128,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
         public static void Verbose(global::System.FormattableString formattable)
             => global::Cake.Common.Diagnostics.LoggingAliases.Verbose(Context, formattable);
 
@@ -1139,6 +1143,7 @@ public static partial class Program
         /// </code>
         /// </example>
         /// </member>
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
         public static void Debug(global::System.FormattableString formattable)
             => global::Cake.Common.Diagnostics.LoggingAliases.Debug(Context, formattable);
 

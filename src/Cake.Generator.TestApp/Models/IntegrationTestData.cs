@@ -90,8 +90,26 @@ public record IntegrationTestData(
                         Assert.Equal("2025.6.11.205+f9d70966eb517e4cc0e0177aecfa1416e6374998", standardOutput);
                     });
 
+            Task("Assert-InterpolatedLogging")
+                .Does(() =>
+                    {
+                        // Interpolated strings should bind to the prioritized FormattableString logging aliases
+                        var name = "World";
+                        System.Linq.Expressions.Expression<Action> expression = () => Information($"Hello {name}");
+                        var method = ((System.Linq.Expressions.MethodCallExpression)expression.Body).Method;
+                        Assert.Equal(typeof(FormattableString), Assert.Single(method.GetParameters()).ParameterType);
+
+                        var now = DateTime.Now;
+                        var value = 42.5m;
+                        object? nothing = null;
+                        Information($"Interpolated {now:HH:mm:ss} [{value,8:N2}] [{value,-8}] {name} {nothing}");
+                        Verbose($"Interpolated {now:HH:mm:ss} [{value,8:N2}] [{value,-8}] {name} {nothing}");
+                        Debug($"Interpolated {now:HH:mm:ss} [{value,8:N2}] [{value,-8}] {name} {nothing}");
+                    });
+
             Task("Assert-Version")
                 .IsDependentOn("Install-Tool")
+                .IsDependentOn("Assert-InterpolatedLogging")
                 .Does<BuildData>((ctx, data) =>
                     {
                         Information("Expected: {0}", data.ExpectedVersion);

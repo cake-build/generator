@@ -1,0 +1,17 @@
+﻿    public static partial class Cake_Fake_Priority
+    {
+        public static string Log(string value)
+            => global::Cake.Fake.Priority.PriorityAliases.Log(Context, value);
+
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(1)]
+        public static int Log(global::System.FormattableString formattable)
+            => global::Cake.Fake.Priority.PriorityAliases.Log(Context, formattable);
+
+        [global::System.Runtime.CompilerServices.OverloadResolutionPriority(-1)]
+        public static void Deprioritized(string value)
+            => global::Cake.Fake.Priority.PriorityAliases.Deprioritized(Context, value);
+
+        public static void DefaultPriority(string value)
+            => global::Cake.Fake.Priority.PriorityAliases.DefaultPriority(Context, value);
+
+    }
