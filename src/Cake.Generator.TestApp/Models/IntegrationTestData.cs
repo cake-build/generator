@@ -107,9 +107,24 @@ public record IntegrationTestData(
                         Debug($"Interpolated {now:HH:mm:ss} [{value,8:N2}] [{value,-8}] {name} {nothing}");
                     });
 
+            Task("Assert-BuildProvider")
+                .Does(() =>
+                    {
+                        // Types in alias namespaces excluded from global usings should still resolve, without clashing with the BuildSystem alias
+                        var provider = BuildSystem.Provider switch
+                        {
+                            BuildProvider.GitHubActions => "GitHubActions",
+                            BuildProvider.AzurePipelines => "AzurePipelines",
+                            _ => "Default",
+                        };
+                        Information("Build provider: {0}", provider);
+                        Assert.Equal(typeof(global::Cake.Common.Build.BuildProvider), typeof(BuildProvider));
+                    });
+
             Task("Assert-Version")
                 .IsDependentOn("Install-Tool")
                 .IsDependentOn("Assert-InterpolatedLogging")
+                .IsDependentOn("Assert-BuildProvider")
                 .Does<BuildData>((ctx, data) =>
                     {
                         Information("Expected: {0}", data.ExpectedVersion);

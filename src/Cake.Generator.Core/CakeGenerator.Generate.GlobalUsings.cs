@@ -39,11 +39,22 @@ public partial class CakeGenerator
 
         // Get unique assembly names from methods to generate static usings
         var assemblyNames = new HashSet<string>();
+        var aliasNames = new HashSet<string>(StringComparer.Ordinal);
+        var aliasContainingTypes = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        var excludedAliasNamespaces = new Dictionary<string, INamespaceSymbol>(StringComparer.Ordinal);
         foreach (var method in methods)
         {
             var assemblyName = method.Symbol.ContainingAssembly.Name;
             assemblyNames.Add(assemblyName);
-            foundNamespaces.Add(method.Symbol.ContainingNamespace.ToDisplayString());
+            aliasNames.Add(method.Symbol.Name);
+            aliasContainingTypes.Add(method.Symbol.ContainingType);
+
+            var containingNamespace = method.Symbol.ContainingNamespace.ToDisplayString();
+            foundNamespaces.Add(containingNamespace);
+            if (excludedNamespaces.Contains(containingNamespace))
+            {
+                excludedAliasNamespaces[containingNamespace] = method.Symbol.ContainingNamespace;
+            }
 
             // Add namespaces from CakeNamespaceImportAttribute
             foreach (var namespaceImport in method.NamespaceImports)
@@ -66,6 +77,24 @@ public partial class CakeGenerator
                                     .Select(ns => $"global using global::{ns};"));
         sb.StringBuilder.AppendLine(globalUsings);
         sb.StringBuilder.AppendLine();
+
+        // Alias the types of excluded alias namespaces that don't collide with an alias (i.e. BuildProvider but not BuildSystem)
+        var typeAliases = excludedAliasNamespaces
+                            .OrderBy(x => x.Key, StringComparer.Ordinal)
+                            .SelectMany(x => x.Value
+                                .GetTypeMembers()
+                                .Where(type => type.DeclaredAccessibility == Accessibility.Public
+                                            && type.Arity == 0
+                                            && !aliasNames.Contains(type.Name)
+                                            && !aliasContainingTypes.Contains(type))
+                                .OrderBy(type => type.Name, StringComparer.Ordinal)
+                                .Select(type => $"global using {type.Name} = global::{x.Key}.{type.Name};"))
+                            .ToArray();
+        if (typeAliases.Length > 0)
+        {
+            sb.StringBuilder.AppendLine(string.Join("\n", typeAliases));
+            sb.StringBuilder.AppendLine();
+        }
 
         sb.StringBuilder.AppendLine("global using IServiceCollection = global::Microsoft.Extensions.DependencyInjection.IServiceCollection;");
         sb.StringBuilder.AppendLine("global using ServiceCollection = global::Microsoft.Extensions.DependencyInjection.ServiceCollection;");

@@ -181,6 +181,9 @@ global using global::System.Text;
 global using global::System.Text.Json;
 global using global::System.Threading.Tasks;
 
+global using BuildProvider = global::Cake.Common.Build.BuildProvider;
+global using IBuildSystemServiceMessageWriter = global::Cake.Common.Build.IBuildSystemServiceMessageWriter;
+
 global using IServiceCollection = global::Microsoft.Extensions.DependencyInjection.IServiceCollection;
 global using ServiceCollection = global::Microsoft.Extensions.DependencyInjection.ServiceCollection;
 global using static global::Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions;
