@@ -63,11 +63,14 @@ public static partial class Program
                 new DeleteDirectorySettings { Recursive = true });
         }
 
+        Information("Converting project {0} to {1}", data.IntegrationTest.CakeSdkCs, data.IntegrationTest.CakeSdkConverted);
         DotNetProjectConvert(
             data.IntegrationTest.CakeSdkCs,
             data.IsolatedDotNetSettings(new DotNetProjectConvertSettings
             {
-                Output = data.IntegrationTest.CakeSdkConverted
+                Output = data.IntegrationTest.CakeSdkConverted,
+                DeleteSource = false,
+                Interactive = false
             }));
     }
 }
