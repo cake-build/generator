@@ -213,6 +213,7 @@ The Cake.Sdk automatically configures the following properties:
 - `LangVersion`: latest
 - `PublishAot`: false 
 - `JsonSerializerIsReflectionEnabledByDefault`: true
+- `Features`: `runtime-async=on` when `TargetFramework` is `net11.0` (net10.0 stays on compiler state machines)
 
 ## Requirements
 
