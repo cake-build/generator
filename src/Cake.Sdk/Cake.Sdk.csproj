@@ -43,6 +43,11 @@
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
 
+  <!-- Runtime async IL requires the .NET 11 runtime. Keep the net10.0 build on compiler state machines. -->
+  <PropertyGroup Condition="'__TargetFramework__' == 'net11.0'">
+    <Features>__Features__;runtime-async=on</Features>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Cake.Generator" VersionOverride="__VERSION__" />
   </ItemGroup>
@@ -63,7 +68,7 @@
           <!-- Replace placeholders with actual values and MSBuild properties -->
       <PropertyGroup>
         <DollarSign>$</DollarSign>
-        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)').Replace('__IncludeAdditionalFiles__', '$(DollarSign)(IncludeAdditionalFiles)').Replace('__ExcludeAdditionalFiles__', '$(DollarSign)(ExcludeAdditionalFiles)').Replace('__MSBuildThisFileDirectory__', '$(DollarSign)(MSBuildThisFileDirectory)'))</SdkPropsContentWithVersion>
+        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)').Replace('__IncludeAdditionalFiles__', '$(DollarSign)(IncludeAdditionalFiles)').Replace('__ExcludeAdditionalFiles__', '$(DollarSign)(ExcludeAdditionalFiles)').Replace('__MSBuildThisFileDirectory__', '$(DollarSign)(MSBuildThisFileDirectory)').Replace('__TargetFramework__', '$(DollarSign)(TargetFramework)').Replace('__Features__', '$(DollarSign)(Features)'))</SdkPropsContentWithVersion>
       </PropertyGroup>
     
     <!-- Ensure directories exist -->
