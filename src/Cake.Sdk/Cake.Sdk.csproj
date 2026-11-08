@@ -43,11 +43,6 @@
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
 
-  <!-- Runtime async IL requires the .NET 11 runtime. Keep the net10.0 build on compiler state machines. -->
-  <PropertyGroup Condition="'__TargetFramework__' == 'net11.0'">
-    <Features>__Features__;runtime-async=on</Features>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Cake.Generator" VersionOverride="__VERSION__" />
   </ItemGroup>
@@ -61,6 +56,15 @@
   </ItemGroup>
 </Project>]]></SdkPropsContent>
       <SdkTargetsContent><![CDATA[<Project>
+  <!--
+    Runtime async IL requires the .NET 11 runtime. Keep the net10.0 build on compiler state machines.
+    Evaluated in targets (not props) so TargetFramework is the project's final value; file-based apps
+    on the .NET 11 SDK default TargetFramework to net11.0 before Sdk.props and #:property overrides it later.
+  -->
+  <PropertyGroup Condition="'__TargetFramework__' == 'net11.0'">
+    <Features>__Features__;runtime-async=on</Features>
+  </PropertyGroup>
+
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
 </Project>]]></SdkTargetsContent>
     </PropertyGroup>
@@ -68,7 +72,8 @@
           <!-- Replace placeholders with actual values and MSBuild properties -->
       <PropertyGroup>
         <DollarSign>$</DollarSign>
-        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)').Replace('__IncludeAdditionalFiles__', '$(DollarSign)(IncludeAdditionalFiles)').Replace('__ExcludeAdditionalFiles__', '$(DollarSign)(ExcludeAdditionalFiles)').Replace('__MSBuildThisFileDirectory__', '$(DollarSign)(MSBuildThisFileDirectory)').Replace('__TargetFramework__', '$(DollarSign)(TargetFramework)').Replace('__Features__', '$(DollarSign)(Features)'))</SdkPropsContentWithVersion>
+        <SdkPropsContentWithVersion>$([System.String]::Copy('$(SdkPropsContent)').Replace('__VERSION__', '$(Version)').Replace('__IncludeAdditionalFiles__', '$(DollarSign)(IncludeAdditionalFiles)').Replace('__ExcludeAdditionalFiles__', '$(DollarSign)(ExcludeAdditionalFiles)').Replace('__MSBuildThisFileDirectory__', '$(DollarSign)(MSBuildThisFileDirectory)'))</SdkPropsContentWithVersion>
+        <SdkTargetsContentWithProperties>$([System.String]::Copy('$(SdkTargetsContent)').Replace('__TargetFramework__', '$(DollarSign)(TargetFramework)').Replace('__Features__', '$(DollarSign)(Features)'))</SdkTargetsContentWithProperties>
       </PropertyGroup>
     
     <!-- Ensure directories exist -->
@@ -77,9 +82,9 @@
     
     <!-- Write generated files -->
     <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/Sdk/Sdk.props" Lines="$(SdkPropsContentWithVersion)" Overwrite="true" />
-    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/Sdk/Sdk.targets" Lines="$(SdkTargetsContent)" Overwrite="true" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/Sdk/Sdk.targets" Lines="$(SdkTargetsContentWithProperties)" Overwrite="true" />
     <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/build/Cake.Sdk.props" Lines="$(SdkPropsContentWithVersion)" Overwrite="true" />
-    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/build/Cake.Sdk.targets" Lines="$(SdkTargetsContent)" Overwrite="true" />
+    <WriteLinesToFile File="$(MSBuildProjectDirectory)/Generated/build/Cake.Sdk.targets" Lines="$(SdkTargetsContentWithProperties)" Overwrite="true" />
   </Target>
 
   <!-- Include generated SDK files -->
